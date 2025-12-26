@@ -10,7 +10,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/((?!tour).*)', 
+        source: '/strawberry',
+        destination: 'https://releeze.com/en/collections/naomi-jon',
+        permanent: true,
+      },
+      {
+        source: '/((?!tour|strawberry).*)', 
         destination: 'https://linktr.ee/naomijonhq',
         permanent: true,
       },
