@@ -17,12 +17,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/((?!tour|strawberry).*)', 
+        source: '/((?!tour|strawberry).*)',
         destination: 'https://linktr.ee/naomijonhq',
         permanent: true,
       },
-    ]
-  }
+    ];
+  },
 };
 
 export default nextConfig;
