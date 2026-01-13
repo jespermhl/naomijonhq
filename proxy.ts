@@ -17,8 +17,7 @@ export default async function proxy(req: NextRequest) {
     pathname.startsWith('/admin') || 
     pathname.startsWith('/api') || 
     pathname.startsWith('/_next') ||
-    pathname.includes('.') ||
-    pathname === '/'
+    pathname.includes('.')
   ) {
     return NextResponse.next();
   }
