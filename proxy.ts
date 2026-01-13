@@ -33,14 +33,13 @@ export default async function proxy(req: NextRequest) {
         found.permanent ? 301 : 302
       );
     }
-
-    // 3. Global fallback to Linktree
-    return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
-    
   } catch (e) {
     console.error('Edge Redirect Error:', e);
-    return NextResponse.next();
+    // If there is an error, use the fallback
   }
+
+  // 3. Global fallback to Linktree (if no specific redirect is found)
+  return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
 }
 
 export const config = {
