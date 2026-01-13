@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   compress: true,
   
   async redirects() {
-    return [
+    const specificRedirects = [
       {
         source: '/tour',
         destination: 'https://www.ticketmaster.de/artist/naomi-jon-tickets/1272323?language=en-us',
@@ -17,7 +17,20 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/((?!tour|strawberry).*)',
+        source: '/shop',
+        destination: 'https://linktr.ee/naomijonhq/shop',
+        permanent: true,
+      }
+    ];
+
+    const excludedPaths = specificRedirects
+      .map(r => r.source.replace(/^\//, ''))
+      .join('|');
+
+    return [
+      ...specificRedirects,
+      {
+        source: excludedPaths ? `/((?!${excludedPaths}).*)` : '/:path*',
         destination: 'https://linktr.ee/naomijonhq',
         permanent: true,
       },
