@@ -14,8 +14,8 @@ export default async function proxy(req: NextRequest) {
 
   // 1. Ignore static paths & admin
   if (
-    pathname.startsWith('/admin') || 
-    pathname.startsWith('/api') || 
+    pathname.startsWith('/admin') ||
+    pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
     pathname.includes('.')
   ) {
@@ -24,19 +24,24 @@ export default async function proxy(req: NextRequest) {
 
   try {
     // 2. Query Sanity
-    const query = `*[_type == "redirect" && source == $path][0]{destination, permanent}`;
+    const query = `*[_type == "redirect" && source == $path][0]{destination, permanent, noRedirect}`;
     const found = await client.fetch(query, { path: pathname });
+
+    // Explicitly allow /newsletter or if noRedirect is set in Sanity
+    if (found?.noRedirect === true) {
+      return NextResponse.next();
+    }
 
     if (found?.destination) {
       return NextResponse.redirect(
-        new URL(found.destination, req.url), 
+        new URL(found.destination, req.url),
         found.permanent ? 301 : 302
       );
     }
 
     // 3. Global fallback to Linktree
     return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
-    
+
   } catch (e) {
     console.error('Edge Redirect Error:', e);
     return NextResponse.next();
