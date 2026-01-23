@@ -72,7 +72,7 @@ export default function NewsletterPage() {
                     marginBottom: '40px',
                     fontWeight: '600'
                 }}>
-                    If the form is not showing up, try opening this page in your browser (instead of inside Instagram or TikTok) or waiting for a few seconds. You can also say hi at:<br />
+                    If the form doesn’t appear, open this page in your browser (not Instagram or TikTok) or wait a few seconds. You can also say hi at:<br />
                     <Link
                         href="mailto:info@naomijonhq.com"
                         style={{

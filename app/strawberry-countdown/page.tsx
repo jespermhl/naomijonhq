@@ -84,14 +84,42 @@ export default function StrawberryCountdownPage() {
                     {isFinished ? 'OUT NOW!' : 'COMING SOON'}
                 </div>
 
-                <div className="strawberry-emoji" style={{
-                    fontSize: isFinished ? '120px' : '100px',
-                    marginBottom: '24px',
-                    animation: isFinished ? 'celebrate 1s ease-in-out infinite' : 'wobble 4s ease-in-out infinite',
+                <div className="cover-container" style={{
+                    marginBottom: '32px',
+                    position: 'relative',
                     display: 'inline-block',
-                    filter: 'drop-shadow(4px 4px 0px #e53e3e)'
+                    animation: isFinished ? 'celebrate 1s ease-in-out infinite' : 'wobble 4s ease-in-out infinite'
                 }}>
-                    🍓
+                    <div style={{
+                        width: isFinished ? '320px' : '280px',
+                        height: isFinished ? '320px' : '280px',
+                        backgroundColor: '#ffffff',
+                        border: '8px solid #e53e3e',
+                        borderRadius: '24px',
+                        overflow: 'hidden',
+                        boxShadow: '12px 12px 0px #e53e3e',
+                        transition: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                    }}>
+                        <img
+                            src="/images/strawberry-cover.jpg"
+                            alt="Strawberry Album Cover"
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover'
+                            }}
+                        />
+                    </div>
+                    {/* Tiny Floating Strawberry Emoji for extra flavor */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '-15px',
+                        right: '-15px',
+                        fontSize: '48px',
+                        filter: 'drop-shadow(3px 3px 0px #e53e3e)'
+                    }}>
+                        🍓
+                    </div>
                 </div>
 
                 <h1 className="countdown-title" style={{
@@ -140,7 +168,7 @@ export default function StrawberryCountdownPage() {
                 )}
 
                 <a
-                    href={isFinished ? '#' : 'https://releeze.com/products/strawberry-album'}
+                    href={isFinished ? '#' : 'https://releeze.com/en/products/strawberry-album'}
                     className="cta-btn"
                     style={{
                         display: 'inline-block',
@@ -212,6 +240,11 @@ export default function StrawberryCountdownPage() {
                     .cta-btn {
                         font-size: 20px !important;
                         padding: 16px 28px !important;
+                    }
+                    .cover-container div:first-child {
+                        width: 220px !important;
+                        height: 220px !important;
+                        border-width: 6px !important;
                     }
                 }
             `}} />
