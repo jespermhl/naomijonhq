@@ -67,7 +67,6 @@ export default function StrawberryCountdownPage() {
                 position: 'relative',
                 zIndex: 10
             }}>
-                {/* Decorative Sticker Detail */}
                 <div className="soon-sticker" style={{
                     position: 'absolute',
                     top: '-25px',
@@ -113,7 +112,7 @@ export default function StrawberryCountdownPage() {
                     textTransform: 'uppercase',
                     letterSpacing: '0.1em'
                 }}>
-                    The Album
+                    Naomi’s Sophomore Album
                 </p>
 
                 {!isFinished ? (
@@ -141,7 +140,7 @@ export default function StrawberryCountdownPage() {
                 )}
 
                 <a
-                    href="#"
+                    href={isFinished ? '#' : 'https://releeze.com/products/strawberry-album'}
                     className="cta-btn"
                     style={{
                         display: 'inline-block',
