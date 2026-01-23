@@ -21,6 +21,32 @@ export default defineConfig({
           { name: 'noRedirect', type: 'boolean', title: 'Nicht weiterleiten? (Seite wird lokal gerendert)', initialValue: false },
         ],
       },
+      {
+        name: 'social',
+        type: 'document',
+        title: 'Socials',
+        fields: [
+          { name: 'name', type: 'string', title: 'Name (z.B. Instagram)' },
+          { name: 'url', type: 'string', title: 'URL' },
+          {
+            name: 'platform',
+            type: 'string',
+            title: 'Platform',
+            options: {
+              list: [
+                { title: 'Instagram', value: 'instagram' },
+                { title: 'TikTok', value: 'tiktok' },
+                { title: 'YouTube', value: 'youtube' },
+                { title: 'Spotify', value: 'spotify' },
+                { title: 'Discord', value: 'discord' },
+                { title: 'WhatsApp', value: 'whatsapp' },
+                { title: 'Other', value: 'other' },
+              ],
+            },
+          },
+          { name: 'order', type: 'number', title: 'Order', initialValue: 0 },
+        ],
+      },
     ],
   },
 });
