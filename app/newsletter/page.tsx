@@ -72,7 +72,7 @@ export default function NewsletterPage() {
                     marginBottom: '40px',
                     fontWeight: '600'
                 }}>
-                    If the form is not showing up, subscribe later or say hi at:<br />
+                    If the form is not showing up, try refreshing the page, waiting for a few seconds, or subscribing later. You can also say hi at:<br />
                     <Link
                         href="mailto:info@naomijonhq.com"
                         style={{
