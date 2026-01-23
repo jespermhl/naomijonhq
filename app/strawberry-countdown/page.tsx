@@ -10,11 +10,13 @@ export default function StrawberryCountdownPage() {
         minutes: number;
         seconds: number;
     }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const [isFinished, setIsFinished] = useState(false);
 
     useEffect(() => {
-        const targetDate = new Date('2026-03-20T00:00:00+01:00').getTime();
+        // Target date: March 30, 2026, 0:00 MEZ (Central European Time)
+        const targetDate = new Date('2026-03-30T00:00:00+02:00').getTime();
 
-        const timer = setInterval(() => {
+        const updateTimer = () => {
             const now = new Date().getTime();
             const difference = targetDate - now;
 
@@ -25,11 +27,15 @@ export default function StrawberryCountdownPage() {
                     minutes: Math.floor((difference / 1000 / 60) % 60),
                     seconds: Math.floor((difference / 1000) % 60)
                 });
+                setIsFinished(false);
             } else {
                 setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-                clearInterval(timer);
+                setIsFinished(true);
             }
-        }, 1000);
+        };
+
+        updateTimer();
+        const timer = setInterval(updateTimer, 1000);
 
         return () => clearInterval(timer);
     }, []);
@@ -43,8 +49,12 @@ export default function StrawberryCountdownPage() {
             backgroundColor: '#fff5f5',
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 10c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zm30 30c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM25 45c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM50 15c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4z' fill='%23e53e3e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
             fontFamily: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-            padding: '24px'
+            padding: '24px',
+            overflow: 'hidden',
+            position: 'relative'
         }}>
+            {isFinished && <BurstAnimation />}
+
             <div className="countdown-card" style={{
                 maxWidth: '600px',
                 width: '100%',
@@ -55,13 +65,15 @@ export default function StrawberryCountdownPage() {
                 textAlign: 'center',
                 boxShadow: '12px 12px 0px #e53e3e',
                 transform: 'rotate(1deg)',
-                position: 'relative'
+                position: 'relative',
+                zIndex: 10
             }}>
+                {/* Decorative Sticker Detail */}
                 <div className="soon-sticker" style={{
                     position: 'absolute',
                     top: '-25px',
                     left: '30px',
-                    backgroundColor: '#feb2b2',
+                    backgroundColor: isFinished ? '#f6ad55' : '#feb2b2',
                     padding: '10px 20px',
                     borderRadius: '12px',
                     border: '3px solid #e53e3e',
@@ -71,13 +83,13 @@ export default function StrawberryCountdownPage() {
                     transform: 'rotate(-5deg)',
                     boxShadow: '4px 4px 0px #e53e3e'
                 }}>
-                    COMING SOON
+                    {isFinished ? 'OUT NOW!' : 'COMING SOON'}
                 </div>
 
                 <div className="strawberry-emoji" style={{
-                    fontSize: '100px',
+                    fontSize: isFinished ? '120px' : '100px',
                     marginBottom: '24px',
-                    animation: 'wobble 4s ease-in-out infinite',
+                    animation: isFinished ? 'celebrate 1s ease-in-out infinite' : 'wobble 4s ease-in-out infinite',
                     display: 'inline-block',
                     filter: 'drop-shadow(4px 4px 0px #e53e3e)'
                 }}>
@@ -102,24 +114,36 @@ export default function StrawberryCountdownPage() {
                     textTransform: 'uppercase',
                     letterSpacing: '0.1em'
                 }}>
-                    Naomi’s Sophomore Album
+                    The Album
                 </p>
 
-                <div className="time-grid" style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '12px',
-                    marginBottom: '48px'
-                }}>
-                    <TimeSticker value={timeLeft.days} label="Days" />
-                    <TimeSticker value={timeLeft.hours} label="Hours" />
-                    <TimeSticker value={timeLeft.minutes} label="Mins" />
-                    <TimeSticker value={timeLeft.seconds} label="Secs" />
-                </div>
+                {!isFinished ? (
+                    <div className="time-grid" style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(4, 1fr)',
+                        gap: '12px',
+                        marginBottom: '48px'
+                    }}>
+                        <TimeSticker value={timeLeft.days} label="Days" />
+                        <TimeSticker value={timeLeft.hours} label="Hours" />
+                        <TimeSticker value={timeLeft.minutes} label="Mins" />
+                        <TimeSticker value={timeLeft.seconds} label="Secs" />
+                    </div>
+                ) : (
+                    <div style={{
+                        fontSize: '28px',
+                        fontWeight: '900',
+                        color: '#e53e3e',
+                        marginBottom: '40px',
+                        animation: 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                    }}>
+                        IT'S FINALLY HERE! 🎉
+                    </div>
+                )}
 
                 <a
                     href="#"
-                    className="pre-order-btn"
+                    className="cta-btn"
                     style={{
                         display: 'inline-block',
                         backgroundColor: '#e53e3e',
@@ -143,7 +167,7 @@ export default function StrawberryCountdownPage() {
                         e.currentTarget.style.boxShadow = '6px 6px 0px #feb2b2';
                     }}
                 >
-                    PRE-ORDER NOW
+                    {isFinished ? 'STREAM / BUY NOW' : 'PRE-ORDER NOW'}
                 </a>
             </div>
 
@@ -155,6 +179,20 @@ export default function StrawberryCountdownPage() {
                     50% { transform: scale(1) rotate(-3deg); }
                     75% { transform: scale(1.05) rotate(2deg); }
                     100% { transform: scale(1) rotate(0deg); }
+                }
+                @keyframes celebrate {
+                    0% { transform: scale(1) rotate(0deg); }
+                    50% { transform: scale(1.2) rotate(10deg); }
+                    100% { transform: scale(1) rotate(0deg); }
+                }
+                @keyframes popIn {
+                    0% { transform: scale(0); opacity: 0; }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+                @keyframes burst {
+                    0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
+                    50% { opacity: 1; }
+                    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--tr)); opacity: 0; }
                 }
                 body {
                     margin: 0;
@@ -173,13 +211,51 @@ export default function StrawberryCountdownPage() {
                         grid-template-columns: repeat(2, 1fr) !important;
                         gap: 16px !important;
                     }
-                    .pre-order-btn {
+                    .cta-btn {
                         font-size: 20px !important;
                         padding: 16px 28px !important;
                     }
                 }
             `}} />
         </main>
+    );
+}
+
+function BurstAnimation() {
+    const particles = Array.from({ length: 20 });
+    return (
+        <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
+            zIndex: 5
+        }}>
+            {particles.map((_, i) => {
+                const angle = (i / particles.length) * 360;
+                const distance = 200 + Math.random() * 300;
+                const tx = Math.cos((angle * Math.PI) / 180) * distance;
+                const ty = Math.sin((angle * Math.PI) / 180) * distance;
+                const tr = Math.random() * 360;
+                return (
+                    <div
+                        key={i}
+                        style={{
+                            position: 'absolute',
+                            fontSize: '40px',
+                            animation: 'burst 2s ease-out infinite',
+                            animationDelay: `${Math.random() * 2}s`,
+                            '--tx': `${tx}px`,
+                            '--ty': `${ty}px`,
+                            '--tr': `${tr}deg`
+                        } as any}
+                    >
+                        🍓
+                    </div>
+                );
+            })}
+        </div>
     );
 }
 
