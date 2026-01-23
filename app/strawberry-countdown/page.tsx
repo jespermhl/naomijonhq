@@ -136,11 +136,24 @@ export default function StrawberryCountdownPage() {
                     fontSize: '20px',
                     fontWeight: '800',
                     color: '#feb2b2',
-                    marginBottom: '40px',
+                    marginBottom: '8px',
                     textTransform: 'uppercase',
                     letterSpacing: '0.1em'
                 }}>
                     Naomi’s Sophomore Album
+                </p>
+                <p style={{
+                    fontSize: '16px',
+                    fontWeight: '700',
+                    color: '#e53e3e',
+                    marginBottom: '40px',
+                    backgroundColor: '#fff5f5',
+                    display: 'inline-block',
+                    padding: '4px 12px',
+                    borderRadius: '8px',
+                    border: '2px solid #e53e3e'
+                }}>
+                    March 20, 2026
                 </p>
 
                 {!isFinished ? (
