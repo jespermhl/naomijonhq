@@ -13,8 +13,7 @@ export default function StrawberryCountdownPage() {
     const [isFinished, setIsFinished] = useState(false);
 
     useEffect(() => {
-        // Target date: March 30, 2026, 0:00 MEZ (Central European Time)
-        const targetDate = new Date('2026-03-30T00:00:00+02:00').getTime();
+        const targetDate = new Date('2026-03-20T00:00:00+01:00').getTime();
 
         const updateTimer = () => {
             const now = new Date().getTime();
