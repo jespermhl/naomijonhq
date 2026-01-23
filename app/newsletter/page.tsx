@@ -44,7 +44,7 @@ export default function NewsletterPage() {
                     WebkitTextFillColor: 'transparent',
                     lineHeight: '1.2'
                 }}>
-                    Form is taking a break.
+                    Naomi Jon HQ Newsletter
                 </h1>
 
                 <p style={{
@@ -54,7 +54,7 @@ export default function NewsletterPage() {
                     marginBottom: '32px',
                     fontWeight: '500'
                 }}>
-                    Subscribe later or say hi at:<br />
+                    If the form is not showing up, subscribe later or say hi at:<br />
                     <Link
                         href="mailto:info@naomijonhq.com"
                         style={{ color: '#e53e3e', textDecoration: 'none', fontWeight: '700' }}
