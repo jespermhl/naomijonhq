@@ -29,7 +29,8 @@ function formatDate(dateStr: string) {
     return new Intl.DateTimeFormat('en-GB', {
         day: '2-digit',
         month: '2-digit',
-        year: 'numeric'
+        year: 'numeric',
+        timeZone: 'Europe/Berlin'
     }).format(date);
 }
 
@@ -37,7 +38,8 @@ function formatTime(dateStr: string) {
     const date = new Date(dateStr);
     return new Intl.DateTimeFormat('en-GB', {
         hour: '2-digit',
-        minute: '2-digit'
+        minute: '2-digit',
+        timeZone: 'Europe/Berlin'
     }).format(date);
 }
 
