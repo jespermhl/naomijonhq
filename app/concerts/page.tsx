@@ -12,42 +12,6 @@ async function getConcerts() {
     }));
 }
 
-const cityTimezones: Record<string, string> = {
-    'Berlin': 'Europe/Berlin',
-    'Hamburg': 'Europe/Berlin',
-    'Munich': 'Europe/Berlin',
-    'München': 'Europe/Berlin',
-    'Cologne': 'Europe/Berlin',
-    'Köln': 'Europe/Berlin',
-    'Frankfurt': 'Europe/Berlin',
-    'Düsseldorf': 'Europe/Berlin',
-    'Stuttgart': 'Europe/Berlin',
-    'Leipzig': 'Europe/Berlin',
-    'Dortmund': 'Europe/Berlin',
-    'Essen': 'Europe/Berlin',
-    'Bremen': 'Europe/Berlin',
-    'Hannover': 'Europe/Berlin',
-    'Vienna': 'Europe/Vienna',
-    'Wien': 'Europe/Vienna',
-    'Zurich': 'Europe/Zurich',
-    'Zürich': 'Europe/Zurich',
-    'London': 'Europe/London',
-    'Manchester': 'Europe/London',
-    'Birmingham': 'Europe/London',
-    'Paris': 'Europe/Paris',
-    'Madrid': 'Europe/Madrid',
-    'Barcelona': 'Europe/Madrid',
-    'Rome': 'Europe/Rome',
-    'Amsterdam': 'Europe/Amsterdam',
-    'Brussels': 'Europe/Brussels',
-    'Prague': 'Europe/Prague',
-    'Warsaw': 'Europe/Warsaw',
-};
-
-function getTimezoneForCity(city: string) {
-    return cityTimezones[city] || 'Europe/Berlin';
-}
-
 function calculateDaysUntil(dateStr: string) {
     const target = new Date(dateStr);
     const now = new Date();
@@ -64,7 +28,7 @@ function formatDate(dateStr: string, city: string) {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
-        timeZone: getTimezoneForCity(city)
+        timeZone: 'Europe/Berlin'
     }).format(date);
 }
 
@@ -73,7 +37,7 @@ function formatTime(dateStr: string, city: string) {
     return new Intl.DateTimeFormat('en-GB', {
         hour: '2-digit',
         minute: '2-digit',
-        timeZone: getTimezoneForCity(city)
+        timeZone: 'Europe/Berlin'
     }).format(date);
 }
 
