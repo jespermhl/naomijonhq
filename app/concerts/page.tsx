@@ -12,69 +12,31 @@ async function getConcerts() {
     }));
 }
 
-const cityTimezones: Record<string, string> = {
-    'Berlin': 'Europe/Berlin',
-    'Hamburg': 'Europe/Berlin',
-    'Munich': 'Europe/Berlin',
-    'München': 'Europe/Berlin',
-    'Cologne': 'Europe/Berlin',
-    'Köln': 'Europe/Berlin',
-    'Frankfurt': 'Europe/Berlin',
-    'Düsseldorf': 'Europe/Berlin',
-    'Stuttgart': 'Europe/Berlin',
-    'Leipzig': 'Europe/Berlin',
-    'Dortmund': 'Europe/Berlin',
-    'Essen': 'Europe/Berlin',
-    'Bremen': 'Europe/Berlin',
-    'Hannover': 'Europe/Berlin',
-    'Vienna': 'Europe/Vienna',
-    'Wien': 'Europe/Vienna',
-    'Zurich': 'Europe/Zurich',
-    'Zürich': 'Europe/Zurich',
-    'London': 'Europe/London',
-    'Manchester': 'Europe/London',
-    'Birmingham': 'Europe/London',
-    'Paris': 'Europe/Paris',
-    'Madrid': 'Europe/Madrid',
-    'Barcelona': 'Europe/Madrid',
-    'Rome': 'Europe/Rome',
-    'Amsterdam': 'Europe/Amsterdam',
-    'Brussels': 'Europe/Brussels',
-    'Prague': 'Europe/Prague',
-    'Warsaw': 'Europe/Warsaw',
-};
-
-function getTimezoneForCity(city: string) {
-    return cityTimezones[city] || 'Europe/Berlin';
-}
-
 function calculateDaysUntil(dateStr: string) {
-    const target = new Date(dateStr);
+    // Extract date parts manually to avoid timezone shifts
+    const year = parseInt(dateStr.substring(0, 4));
+    const month = parseInt(dateStr.substring(5, 7)) - 1;
+    const day = parseInt(dateStr.substring(8, 10));
+
+    const target = new Date(year, month, day);
     const now = new Date();
-    const t = new Date(target.getFullYear(), target.getMonth(), target.getDate());
     const n = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const diffTime = t.getTime() - n.getTime();
+    const diffTime = target.getTime() - n.getTime();
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
 }
 
-function formatDate(dateStr: string, city: string) {
-    const date = new Date(dateStr);
-    return new Intl.DateTimeFormat('en-GB', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        timeZone: getTimezoneForCity(city)
-    }).format(date);
+function formatDate(dateStr: string) {
+    const year = dateStr.substring(0, 4);
+    const month = dateStr.substring(5, 7);
+    const day = dateStr.substring(8, 10);
+    return `${day}/${month}/${year}`;
 }
 
-function formatTime(dateStr: string, city: string) {
-    const date = new Date(dateStr);
-    return new Intl.DateTimeFormat('en-GB', {
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: getTimezoneForCity(city)
-    }).format(date);
+function formatTime(dateStr: string) {
+    if (!dateStr.includes('T')) return "00:00";
+    const timePart = dateStr.split('T')[1];
+    return timePart.substring(0, 5);
 }
 
 export default async function ConcertsPage() {
@@ -92,7 +54,8 @@ export default async function ConcertsPage() {
             backgroundColor: '#fff5f5',
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 10c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zm30 30c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM25 45c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM50 15c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4z' fill='%23e53e3e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
             fontFamily: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-            padding: '40px 24px'
+            padding: '80px 24px',
+            boxSizing: 'border-box'
         }}>
             <div className="tour-card" style={{
                 maxWidth: '800px',
@@ -104,9 +67,7 @@ export default async function ConcertsPage() {
                 textAlign: 'center',
                 boxShadow: '12px 12px 0px #e53e3e',
                 transform: 'rotate(0.5deg)',
-                position: 'relative',
-                marginTop: 'auto',
-                marginBottom: 'auto'
+                position: 'relative'
             }}>
                 <div className="hey-sticker" style={{
                     position: 'absolute',
@@ -170,10 +131,10 @@ export default async function ConcertsPage() {
                                 }}>
                                     <div className="concert-date-box" style={{ textAlign: 'center' }}>
                                         <div style={{ fontSize: '20px', fontWeight: '900', color: '#e53e3e' }}>
-                                            {formatDate(concert.date, concert.city)}
+                                            {formatDate(concert.date)}
                                         </div>
                                         <div style={{ fontSize: '14px', fontWeight: '700', color: '#feb2b2' }}>
-                                            {formatTime(concert.date, concert.city)}
+                                            {formatTime(concert.date)}
                                         </div>
                                     </div>
 
@@ -263,7 +224,7 @@ export default async function ConcertsPage() {
                                     padding: '8px 16px',
                                     borderBottom: '2px dashed #feb2b2'
                                 }}>
-                                    <span>{formatDate(concert.date, concert.city)} - {concert.city}</span>
+                                    <span>{formatDate(concert.date)} - {concert.city}</span>
                                     <span>{concert.location}</span>
                                 </div>
                             ))}
