@@ -47,6 +47,19 @@ export default defineConfig({
           { name: 'order', type: 'number', title: 'Order', initialValue: 0 },
         ],
       },
+      {
+        name: 'concert',
+        type: 'document',
+        title: 'Concerts',
+        fields: [
+          { name: 'date', type: 'datetime', title: 'Date & Time', validation: (Rule: any) => Rule.required() },
+          { name: 'city', type: 'string', title: 'City', validation: (Rule: any) => Rule.required() },
+          { name: 'location', type: 'string', title: 'Location (Venue)', validation: (Rule: any) => Rule.required() },
+          { name: 'country', type: 'string', title: 'Country (e.g. Germany)' },
+          { name: 'buyUrl', type: 'url', title: 'Buy Tickets URL' },
+          { name: 'isSoldOut', type: 'boolean', title: 'Sold Out?', initialValue: false },
+        ],
+      },
     ],
   },
 });
