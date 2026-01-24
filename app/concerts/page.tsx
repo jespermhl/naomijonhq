@@ -12,43 +12,69 @@ async function getConcerts() {
     }));
 }
 
-function getNaiveDate(dateStr: string) {
-    // Sanity date strings are usually ISO: 2026-06-15T20:00:00.000Z
-    // We extract literal values to guarantee "wall clock" time.
-    const year = parseInt(dateStr.substring(0, 4));
-    const month = parseInt(dateStr.substring(5, 7)) - 1;
-    const day = parseInt(dateStr.substring(8, 10));
-    const hour = parseInt(dateStr.substring(11, 13));
-    const minute = parseInt(dateStr.substring(14, 16));
+const cityTimezones: Record<string, string> = {
+    'Berlin': 'Europe/Berlin',
+    'Hamburg': 'Europe/Berlin',
+    'Munich': 'Europe/Berlin',
+    'München': 'Europe/Berlin',
+    'Cologne': 'Europe/Berlin',
+    'Köln': 'Europe/Berlin',
+    'Frankfurt': 'Europe/Berlin',
+    'Düsseldorf': 'Europe/Berlin',
+    'Stuttgart': 'Europe/Berlin',
+    'Leipzig': 'Europe/Berlin',
+    'Dortmund': 'Europe/Berlin',
+    'Essen': 'Europe/Berlin',
+    'Bremen': 'Europe/Berlin',
+    'Hannover': 'Europe/Berlin',
+    'Vienna': 'Europe/Vienna',
+    'Wien': 'Europe/Vienna',
+    'Zurich': 'Europe/Zurich',
+    'Zürich': 'Europe/Zurich',
+    'London': 'Europe/London',
+    'Manchester': 'Europe/London',
+    'Birmingham': 'Europe/London',
+    'Paris': 'Europe/Paris',
+    'Madrid': 'Europe/Madrid',
+    'Barcelona': 'Europe/Madrid',
+    'Rome': 'Europe/Rome',
+    'Amsterdam': 'Europe/Amsterdam',
+    'Brussels': 'Europe/Brussels',
+    'Prague': 'Europe/Prague',
+    'Warsaw': 'Europe/Warsaw',
+};
 
-    return { year, month, day, hour, minute };
+function getTimezoneForCity(city: string) {
+    return cityTimezones[city] || 'Europe/Berlin';
 }
 
 function calculateDaysUntil(dateStr: string) {
-    const { year, month, day } = getNaiveDate(dateStr);
-    const target = new Date(year, month, day);
-
+    const target = new Date(dateStr);
     const now = new Date();
+    const t = new Date(target.getFullYear(), target.getMonth(), target.getDate());
     const n = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const diffTime = target.getTime() - n.getTime();
+    const diffTime = t.getTime() - n.getTime();
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
 }
 
-function formatDate(dateStr: string) {
-    const { year, month, day } = getNaiveDate(dateStr);
-    const date = new Date(Date.UTC(year, month, day));
+function formatDate(dateStr: string, city: string) {
+    const date = new Date(dateStr);
     return new Intl.DateTimeFormat('en-GB', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
-        timeZone: 'UTC'
+        timeZone: getTimezoneForCity(city)
     }).format(date);
 }
 
-function formatTime(dateStr: string) {
-    const { hour, minute } = getNaiveDate(dateStr);
-    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+function formatTime(dateStr: string, city: string) {
+    const date = new Date(dateStr);
+    return new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: getTimezoneForCity(city)
+    }).format(date);
 }
 
 export default async function ConcertsPage() {
@@ -61,8 +87,8 @@ export default async function ConcertsPage() {
         <main style={{
             minHeight: '100vh',
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
             backgroundColor: '#fff5f5',
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 10c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zm30 30c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM25 45c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM50 15c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4z' fill='%23e53e3e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
             fontFamily: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
@@ -78,7 +104,9 @@ export default async function ConcertsPage() {
                 textAlign: 'center',
                 boxShadow: '12px 12px 0px #e53e3e',
                 transform: 'rotate(0.5deg)',
-                position: 'relative'
+                position: 'relative',
+                marginTop: 'auto',
+                marginBottom: 'auto'
             }}>
                 <div className="hey-sticker" style={{
                     position: 'absolute',
@@ -142,10 +170,10 @@ export default async function ConcertsPage() {
                                 }}>
                                     <div className="concert-date-box" style={{ textAlign: 'center' }}>
                                         <div style={{ fontSize: '20px', fontWeight: '900', color: '#e53e3e' }}>
-                                            {formatDate(concert.date)}
+                                            {formatDate(concert.date, concert.city)}
                                         </div>
                                         <div style={{ fontSize: '14px', fontWeight: '700', color: '#feb2b2' }}>
-                                            {formatTime(concert.date)}
+                                            {formatTime(concert.date, concert.city)}
                                         </div>
                                     </div>
 
@@ -235,7 +263,7 @@ export default async function ConcertsPage() {
                                     padding: '8px 16px',
                                     borderBottom: '2px dashed #feb2b2'
                                 }}>
-                                    <span>{formatDate(concert.date)} - {concert.city}</span>
+                                    <span>{formatDate(concert.date, concert.city)} - {concert.city}</span>
                                     <span>{concert.location}</span>
                                 </div>
                             ))}
