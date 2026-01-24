@@ -12,35 +12,43 @@ async function getConcerts() {
     }));
 }
 
-function calculateDaysUntil(dateStr: string) {
-    const target = new Date(dateStr);
-    const now = new Date();
+function getNaiveDate(dateStr: string) {
+    // Sanity date strings are usually ISO: 2026-06-15T20:00:00.000Z
+    // We extract literal values to guarantee "wall clock" time.
+    const year = parseInt(dateStr.substring(0, 4));
+    const month = parseInt(dateStr.substring(5, 7)) - 1;
+    const day = parseInt(dateStr.substring(8, 10));
+    const hour = parseInt(dateStr.substring(11, 13));
+    const minute = parseInt(dateStr.substring(14, 16));
 
-    // Reset to start of day for accurate day counting
-    const t = new Date(target.getFullYear(), target.getMonth(), target.getDate());
+    return { year, month, day, hour, minute };
+}
+
+function calculateDaysUntil(dateStr: string) {
+    const { year, month, day } = getNaiveDate(dateStr);
+    const target = new Date(year, month, day);
+
+    const now = new Date();
     const n = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const diffTime = t.getTime() - n.getTime();
+    const diffTime = target.getTime() - n.getTime();
     return Math.floor(diffTime / (1000 * 60 * 60 * 24));
 }
 
 function formatDate(dateStr: string) {
-    const date = new Date(dateStr);
+    const { year, month, day } = getNaiveDate(dateStr);
+    const date = new Date(Date.UTC(year, month, day));
     return new Intl.DateTimeFormat('en-GB', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
-        timeZone: 'Europe/Berlin'
+        timeZone: 'UTC'
     }).format(date);
 }
 
 function formatTime(dateStr: string) {
-    const date = new Date(dateStr);
-    return new Intl.DateTimeFormat('en-GB', {
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: 'Europe/Berlin'
-    }).format(date);
+    const { hour, minute } = getNaiveDate(dateStr);
+    return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
 }
 
 export default async function ConcertsPage() {
