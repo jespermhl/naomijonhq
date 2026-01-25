@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 
 export default function StrawberryCountdownPage() {
     const [timeLeft, setTimeLeft] = useState<{
@@ -98,14 +98,14 @@ export default function StrawberryCountdownPage() {
                         borderRadius: '24px',
                         overflow: 'hidden',
                         boxShadow: '12px 12px 0px #e53e3e',
-                        transition: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                        transition: 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                        position: 'relative'
                     }}>
-                        <img
+                        <Image
                             src="/images/strawberry-cover.jpg"
                             alt="Strawberry Album Cover"
+                            fill
                             style={{
-                                width: '100%',
-                                height: '100%',
                                 objectFit: 'cover'
                             }}
                         />
@@ -140,7 +140,7 @@ export default function StrawberryCountdownPage() {
                     textTransform: 'uppercase',
                     letterSpacing: '0.1em'
                 }}>
-                    Naomi’s Sophomore Album
+                    Naomi&apos;s Sophomore Album
                 </p>
                 <p style={{
                     fontSize: '16px',
@@ -163,10 +163,10 @@ export default function StrawberryCountdownPage() {
                         gap: '12px',
                         marginBottom: '48px'
                     }}>
-                        <TimeSticker value={timeLeft.days} label="Days" />
-                        <TimeSticker value={timeLeft.hours} label="Hours" />
-                        <TimeSticker value={timeLeft.minutes} label="Mins" />
-                        <TimeSticker value={timeLeft.seconds} label="Secs" />
+                        <TimeSticker value={timeLeft.days} label="Days" rotate="-1deg" />
+                        <TimeSticker value={timeLeft.hours} label="Hours" rotate="1.5deg" />
+                        <TimeSticker value={timeLeft.minutes} label="Mins" rotate="-0.5deg" />
+                        <TimeSticker value={timeLeft.seconds} label="Secs" rotate="2deg" />
                     </div>
                 ) : (
                     <div style={{
@@ -176,7 +176,7 @@ export default function StrawberryCountdownPage() {
                         marginBottom: '40px',
                         animation: 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
                     }}>
-                        IT'S FINALLY HERE! 🎉
+                        IT&apos;S FINALLY HERE! 🎉
                     </div>
                 )}
 
@@ -266,7 +266,21 @@ export default function StrawberryCountdownPage() {
 }
 
 function BurstAnimation() {
-    const particles = Array.from({ length: 20 });
+    const [particles] = useState(() => {
+        return Array.from({ length: 20 }).map((_, i) => {
+            const angle = (i / 20) * 360;
+            const distance = 200 + Math.random() * 300;
+            return {
+                tx: Math.cos((angle * Math.PI) / 180) * distance,
+                ty: Math.sin((angle * Math.PI) / 180) * distance,
+                tr: Math.random() * 360,
+                delay: Math.random() * 2
+            };
+        });
+    });
+
+    if (particles.length === 0) return null;
+
     return (
         <div style={{
             position: 'absolute',
@@ -276,34 +290,27 @@ function BurstAnimation() {
             pointerEvents: 'none',
             zIndex: 5
         }}>
-            {particles.map((_, i) => {
-                const angle = (i / particles.length) * 360;
-                const distance = 200 + Math.random() * 300;
-                const tx = Math.cos((angle * Math.PI) / 180) * distance;
-                const ty = Math.sin((angle * Math.PI) / 180) * distance;
-                const tr = Math.random() * 360;
-                return (
-                    <div
-                        key={i}
-                        style={{
-                            position: 'absolute',
-                            fontSize: '40px',
-                            animation: 'burst 2s ease-out infinite',
-                            animationDelay: `${Math.random() * 2}s`,
-                            '--tx': `${tx}px`,
-                            '--ty': `${ty}px`,
-                            '--tr': `${tr}deg`
-                        } as any}
-                    >
-                        🍓
-                    </div>
-                );
-            })}
+            {particles.map((p, i) => (
+                <div
+                    key={i}
+                    style={{
+                        position: 'absolute',
+                        fontSize: '40px',
+                        animation: 'burst 2s ease-out infinite',
+                        animationDelay: `${p.delay}s`,
+                        '--tx': `${p.tx}px`,
+                        '--ty': `${p.ty}px`,
+                        '--tr': `${p.tr}deg`
+                    } as React.CSSProperties}
+                >
+                    🍓
+                </div>
+            ))}
         </div>
     );
 }
 
-function TimeSticker({ value, label }: { value: number; label: string }) {
+function TimeSticker({ value, label, rotate }: { value: number; label: string; rotate: string }) {
     return (
         <div className="time-sticker" style={{
             backgroundColor: '#ffffff',
@@ -311,7 +318,7 @@ function TimeSticker({ value, label }: { value: number; label: string }) {
             borderRadius: '20px',
             padding: '16px 8px',
             boxShadow: '4px 4px 0px #e53e3e',
-            transform: `rotate(${Math.random() * 4 - 2}deg)`
+            transform: `rotate(${rotate})`
         }}>
             <div style={{
                 fontSize: '28px',

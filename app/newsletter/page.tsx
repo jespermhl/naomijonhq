@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { getSanitySocials } from "@/lib/sanity/socials";
+import { Card } from "@/components/ui/Card";
+import { Sticker } from "@/components/ui/Sticker";
+import { SocialSticker } from "@/components/ui/SocialSticker";
 
 const PLATFORM_ICONS: Record<string, React.ReactNode> = {
     instagram: <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />,
@@ -25,79 +28,24 @@ export default async function NewsletterPage() {
     const socials = await getSocials();
 
     return (
-        <main style={{
-            minHeight: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#fff5f5',
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 10c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zm30 30c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM25 45c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM50 15c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4z' fill='%23e53e3e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-            fontFamily: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-            padding: '24px'
-        }}>
-            <div className="newsletter-card" style={{
-                maxWidth: '460px',
-                width: '100%',
-                backgroundColor: '#ffffff',
-                border: '6px solid #e53e3e',
-                borderRadius: '32px',
-                padding: '56px 40px',
-                textAlign: 'center',
-                boxShadow: '12px 12px 0px #e53e3e',
-                transform: 'rotate(-1deg)',
-                position: 'relative'
-            }}>
-                {/* Decorative Sticker Detail */}
-                <div className="hey-sticker" style={{
-                    position: 'absolute',
-                    top: '-20px',
-                    right: '20px',
-                    backgroundColor: '#feb2b2',
-                    padding: '8px 16px',
-                    borderRadius: '12px',
-                    border: '3px solid #e53e3e',
-                    fontWeight: '800',
-                    fontSize: '14px',
-                    color: '#e53e3e',
-                    transform: 'rotate(5deg)',
-                    boxShadow: '4px 4px 0px #e53e3e'
-                }}>
-                    HEY!
-                </div>
+        <main className="concerts-container bg-pattern" style={{ justifyContent: 'center', padding: '24px' }}>
+            <Card className="newsletter-card" rotate="-1deg">
+                <Sticker className="hey-sticker">HEY!</Sticker>
 
-                <div className="strawberry-emoji" style={{
-                    fontSize: '92px',
-                    marginBottom: '16px',
-                    animation: 'wobble 4s ease-in-out infinite',
-                    display: 'inline-block',
-                    filter: 'drop-shadow(4px 4px 0px #e53e3e)'
-                }}>
+                <div className="strawberry-emoji wobble" style={{ fontSize: '92px' }}>
                     🍓
                 </div>
 
-                <h1 className="newsletter-title" style={{
-                    fontSize: '32px',
-                    fontWeight: '900',
-                    marginBottom: '16px',
-                    color: '#e53e3e',
-                    lineHeight: '1.2',
-                    letterSpacing: '-0.02em'
-                }}>
+                <h1 className="newsletter-title">
                     Naomi Jon HQ<br />Newsletter
                 </h1>
 
-                <p className="newsletter-p" style={{
-                    color: '#4a5568',
-                    fontSize: '17px',
-                    lineHeight: '1.5',
-                    marginBottom: '40px',
-                    fontWeight: '600'
-                }}>
+                <p className="newsletter-p">
                     If the form doesn’t appear, open this page in your browser (not Instagram or TikTok) or wait a few seconds. You can also say hi at:<br />
                     <Link
                         href="mailto:info@naomijonhq.com"
                         style={{
-                            color: '#e53e3e',
+                            color: 'var(--brand-red)',
                             textDecoration: 'underline',
                             fontWeight: '800',
                             textUnderlineOffset: '4px'
@@ -107,14 +55,8 @@ export default async function NewsletterPage() {
                     </Link>
                 </p>
 
-                <div className="social-grid" style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '16px',
-                    justifyItems: 'center',
-                    marginBottom: '12px'
-                }}>
-                    {socials.map((social: any) => (
+                <div className="social-grid">
+                    {socials.map((social) => (
                         <SocialSticker
                             key={social.url}
                             href={social.url}
@@ -123,98 +65,7 @@ export default async function NewsletterPage() {
                         />
                     ))}
                 </div>
-            </div>
-
-            <style dangerouslySetInnerHTML={{
-                __html: `
-                @keyframes wobble {
-                    0% { transform: scale(1) rotate(0deg); }
-                    25% { transform: scale(1.1) rotate(5deg); }
-                    50% { transform: scale(1) rotate(-5deg); }
-                    75% { transform: scale(1.1) rotate(3deg); }
-                    100% { transform: scale(1) rotate(0deg); }
-                }
-                body {
-                    margin: 0;
-                    overflow: auto !important;
-                }
-                
-                .social-sticker {
-                    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-                }
-
-                .social-sticker:hover {
-                    transform: translateY(-4px) rotate(-8deg) !important;
-                    background-color: #feb2b2 !important;
-                    box-shadow: 8px 8px 0px #e53e3e !important;
-                }
-
-                /* Responsive Overrides */
-                @media (max-width: 480px) {
-                    .newsletter-card {
-                        padding: 40px 24px !important;
-                        border-width: 4px !important;
-                        box-shadow: 8px 8px 0px #e53e3e !important;
-                    }
-                    .strawberry-emoji {
-                        font-size: 72px !important;
-                    }
-                    .newsletter-title {
-                        font-size: 24px !important;
-                    }
-                    .newsletter-p {
-                        font-size: 15px !important;
-                        margin-bottom: 32px !important;
-                    }
-                    .social-sticker {
-                        width: 48px !important;
-                        height: 48px !important;
-                        border-width: 3px !important;
-                    }
-                    .social-sticker svg {
-                        width: 22px !important;
-                        height: 22px !important;
-                    }
-                    .hey-sticker {
-                        font-size: 11px !important;
-                        padding: 6px 12px !important;
-                        top: -15px !important;
-                        right: 15px !important;
-                    }
-                }
-            `}} />
+            </Card>
         </main>
-    );
-}
-
-function SocialSticker({ href, name, icon }: { href: string; name: string; icon: React.ReactNode }) {
-    return (
-        <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={name}
-            className="social-sticker"
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '56px',
-                height: '56px',
-                backgroundColor: '#ffffff',
-                border: '4px solid #e53e3e',
-                borderRadius: '16px',
-                color: '#e53e3e',
-                boxShadow: '4px 4px 0px #e53e3e'
-            }}
-        >
-            <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                style={{ width: '28px', height: '28px' }}
-            >
-                {icon}
-            </svg>
-        </a>
     );
 }

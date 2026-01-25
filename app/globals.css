@@ -1,3 +1,17 @@
+:root {
+  --bg-primary: #fff5f5;
+  --brand-red: #e53e3e;
+  --brand-pink: #feb2b2;
+  --text-dark: #4a5568;
+  --text-light: #ffffff;
+  --border-width: 6px;
+  --border-width-sm: 4px;
+  --border-width-xs: 3px;
+  --shadow-color: var(--brand-red);
+  --shadow-color-alt: #000000;
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +24,9 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100%;
+  background-color: var(--bg-primary);
+  font-family: var(--font-family);
+  overflow-x: hidden;
 }
 
 #__next {
@@ -17,3 +34,334 @@ body {
   height: 100%;
 }
 
+@keyframes wobble {
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  25% {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  50% {
+    transform: scale(1) rotate(-5deg);
+  }
+
+  75% {
+    transform: scale(1.1) rotate(3deg);
+  }
+}
+
+.wobble {
+  animation: wobble 4s ease-in-out infinite;
+  display: inline-block;
+}
+
+.bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 10c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zm30 30c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM25 45c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM50 15c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4z' fill='%23e53e3e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.concerts-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px;
+}
+
+.tour-card {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  border: var(--border-width) solid var(--brand-red);
+  border-radius: 32px;
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: 12px 12px 0px var(--brand-red);
+  transform: rotate(var(--rotate, 0.5deg));
+  position: relative;
+}
+
+.tour-sticker {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  background: var(--brand-pink);
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: var(--border-width-xs) solid var(--brand-red);
+  font-weight: 800;
+  color: var(--brand-red);
+  transform: rotate(var(--rotate, 5deg));
+  box-shadow: 4px 4px 0px var(--brand-red);
+  z-index: 10;
+}
+
+.buy-btn {
+  display: inline-block;
+  background: var(--brand-red);
+  color: var(--text-light);
+  padding: 12px 24px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 900;
+  text-decoration: none;
+  border: var(--border-width-xs) solid var(--shadow-color-alt);
+  box-shadow: 4px 4px 0px var(--shadow-color-alt);
+  transform: rotate(var(--rotate, -2deg));
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.buy-btn:hover {
+  transform: translateY(-2px) rotate(0deg) scale(1.05);
+  box-shadow: 6px 6px 0px var(--shadow-color-alt);
+}
+
+.social-sticker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: var(--text-light);
+  border: var(--border-width-sm) solid var(--brand-red);
+  border-radius: 16px;
+  color: var(--brand-red);
+  box-shadow: 4px 4px 0px var(--brand-red);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-sticker svg {
+  width: 28px;
+  height: 28px;
+}
+
+.social-sticker:hover {
+  transform: translateY(-4px) rotate(-8deg);
+  background-color: var(--brand-pink);
+  box-shadow: 8px 8px 0px var(--brand-red);
+}
+
+/* Base Styles */
+.strawberry-emoji {
+  font-size: 72px;
+  margin-bottom: 16px;
+  filter: drop-shadow(4px 4px 0px var(--brand-red));
+}
+
+.tour-title {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 32px;
+  color: var(--brand-red);
+  line-height: 1;
+}
+
+.concert-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.concert-item {
+  display: grid;
+  grid-template-columns: 120px 1fr 140px;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: var(--bg-primary);
+  border: var(--border-width-sm) solid var(--brand-red);
+  border-radius: 24px;
+  box-shadow: 6px 6px 0px var(--brand-red);
+  text-align: left;
+}
+
+.date-box {
+  text-align: center;
+}
+
+.date {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--brand-red);
+}
+
+.time {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand-pink);
+}
+
+.location {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--brand-red);
+  margin-bottom: 4px;
+}
+
+.venue {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.countdown {
+  display: inline-block;
+  margin-top: 8px;
+  background: var(--brand-red);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+
+.status-label {
+  background: var(--text-dark);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 900;
+  transform: rotate(-3deg);
+  display: inline-block;
+}
+
+.no-concerts {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.past-section {
+  margin-top: 56px;
+  opacity: 0.7;
+}
+
+.past-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--brand-pink);
+  margin-bottom: 24px;
+}
+
+.past-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.past-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  padding: 8px 12px;
+  border-bottom: 2px dashed var(--brand-pink);
+}
+
+/* Newsletter Styles */
+.newsletter-card {
+  max-width: 460px;
+  padding: 56px 40px;
+}
+
+.newsletter-title {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 16px;
+  color: var(--brand-red);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.newsletter-p {
+  color: var(--text-dark);
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  justify-items: center;
+  margin-bottom: 12px;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .concerts-container {
+    padding: 40px 16px;
+  }
+
+  .tour-card {
+    padding: 40px 16px;
+    border-width: var(--border-width-sm);
+    border-radius: 24px;
+  }
+
+  .strawberry-emoji {
+    font-size: 56px;
+  }
+
+  .tour-title {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+
+  .concert-item {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .location {
+    font-size: 18px;
+  }
+
+  .past-item {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .past-venue {
+    font-size: 13px;
+    opacity: 0.8;
+  }
+
+  .newsletter-card {
+    padding: 40px 24px;
+    border-width: var(--border-width-sm);
+    box-shadow: 8px 8px 0px var(--brand-red);
+  }
+
+  .social-sticker {
+    width: 48px;
+    height: 48px;
+    border-width: var(--border-width-xs);
+  }
+
+  .social-sticker svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hey-sticker {
+    font-size: 11px;
+    padding: 6px 12px;
+    top: -15px;
+    right: 15px;
+  }
+}
