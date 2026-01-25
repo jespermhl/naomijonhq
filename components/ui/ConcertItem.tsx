@@ -32,7 +32,7 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
                 <div className="location">{city}, {country}</div>
                 <div className="venue">{location}</div>
                 <div className="countdown">
-                    {days === 0 ? 'TODAY!' : days === 1 ? 'TOMORROW!' : `${days} DAYS TO GO`}
+                    {days < 0 ? 'EVENT PASSED' : days === 0 ? 'TODAY!' : days === 1 ? 'TOMORROW!' : `${days} DAYS TO GO`}
                 </div>
             </div>
 
