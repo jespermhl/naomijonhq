@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { getSanitySocials } from "@/lib/sanity/socials";
 import { Card } from "@/components/ui/Card";
@@ -23,6 +24,11 @@ async function getSocials() {
         platform: social.platform
     }));
 }
+
+export const metadata: Metadata = {
+    title: "Newsletter",
+    description: "Stay updated with Naomi Jon's latest news and exclusive content by subscribing to the newsletter.",
+};
 
 export default async function NewsletterPage() {
     const socials = await getSocials();
