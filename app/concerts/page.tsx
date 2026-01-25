@@ -65,8 +65,6 @@ export default async function ConcertsPage() {
                                     days={days}
                                     isSoldOut={concert.isSoldOut}
                                     buyUrl={concert.buyUrl}
-                                    formatDate={formatDate}
-                                    formatTime={formatTime}
                                 />
                             );
                         })

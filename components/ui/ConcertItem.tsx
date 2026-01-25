@@ -9,8 +9,6 @@ interface ConcertItemProps {
     days: number;
     isSoldOut: boolean;
     buyUrl?: string;
-    formatDate: (date: string) => string;
-    formatTime: (date: string) => string;
 }
 
 export const ConcertItem: React.FC<ConcertItemProps> = ({

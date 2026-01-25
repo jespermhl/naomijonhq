@@ -1,13 +1,14 @@
 import React from 'react';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    href?: string;
-    target?: string;
-    rel?: string;
-    children: React.ReactNode;
-    className?: string;
-    rotate?: string;
-}
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+    React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+        href?: string;
+        target?: string;
+        rel?: string;
+        children: React.ReactNode;
+        className?: string;
+        rotate?: string;
+    };
 
 export const Button: React.FC<ButtonProps> = ({
     href,
@@ -33,6 +34,7 @@ export const Button: React.FC<ButtonProps> = ({
                 rel={rel || 'noopener noreferrer'}
                 className={combinedClassName}
                 style={styles}
+                {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
             >
                 {children}
             </a>
@@ -40,7 +42,12 @@ export const Button: React.FC<ButtonProps> = ({
     }
 
     return (
-        <button className={combinedClassName} style={styles} {...props}>
+        <button
+            type={(props.type as any) ?? 'button'}
+            className={combinedClassName}
+            style={styles}
+            {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+        >
             {children}
         </button>
     );
