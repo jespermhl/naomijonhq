@@ -1,4 +1,4 @@
-import { defineConfig } from 'sanity';
+import { defineConfig, type Rule } from 'sanity';
 import { structureTool } from 'sanity/structure';
 
 export default defineConfig({
@@ -52,9 +52,9 @@ export default defineConfig({
         type: 'document',
         title: 'Concerts',
         fields: [
-          { name: 'date', type: 'datetime', title: 'Date & Time', validation: (Rule: any) => Rule.required() },
-          { name: 'city', type: 'string', title: 'City', validation: (Rule: any) => Rule.required() },
-          { name: 'location', type: 'string', title: 'Location (Venue)', validation: (Rule: any) => Rule.required() },
+          { name: 'date', type: 'datetime', title: 'Date & Time', validation: (Rule: Rule) => Rule.required() },
+          { name: 'city', type: 'string', title: 'City', validation: (Rule: Rule) => Rule.required() },
+          { name: 'location', type: 'string', title: 'Location (Venue)', validation: (Rule: Rule) => Rule.required() },
           { name: 'country', type: 'string', title: 'Country (e.g. Germany)' },
           { name: 'buyUrl', type: 'url', title: 'Buy Tickets URL' },
           { name: 'isSoldOut', type: 'boolean', title: 'Sold Out?', initialValue: false },
