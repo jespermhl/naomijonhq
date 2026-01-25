@@ -3,6 +3,10 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+/**
+ * The Strawberry Countdown page component.
+ * Displays a live countdown to the album release date with animations.
+ */
 export default function StrawberryCountdownPage() {
     const [timeLeft, setTimeLeft] = useState<{
         days: number;
@@ -265,6 +269,10 @@ export default function StrawberryCountdownPage() {
     );
 }
 
+/**
+ * A burst animation component that displays animated strawberry emojis.
+ * Used when the countdown reaches zero.
+ */
 function BurstAnimation() {
     const [particles] = useState(() => {
         return Array.from({ length: 20 }).map((_, i) => {
@@ -310,6 +318,14 @@ function BurstAnimation() {
     );
 }
 
+/**
+ * A time sticker component that displays a countdown unit (days, hours, minutes, seconds).
+ * 
+ * @param props - Component props.
+ * @param props.value - The numeric value to display.
+ * @param props.label - The label for the time unit.
+ * @param props.rotate - CSS rotation value for the sticker.
+ */
 function TimeSticker({ value, label, rotate }: { value: number; label: string; rotate: string }) {
     return (
         <div className="time-sticker" style={{

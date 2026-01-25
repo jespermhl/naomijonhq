@@ -15,6 +15,11 @@ const PLATFORM_ICONS: Record<string, React.ReactNode> = {
     other: <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
 };
 
+/**
+ * Fetches and maps social media links from Sanity for the UI.
+ * 
+ * @returns A promise that resolves to an array of mapped social objects.
+ */
 async function getSocials() {
     const socials = await getSanitySocials();
 
@@ -30,6 +35,10 @@ export const metadata: Metadata = {
     description: "Stay updated with Naomi Jon's latest news and exclusive content by subscribing to the newsletter.",
 };
 
+/**
+ * The Newsletter page component.
+ * Displays a newsletter signup form and social media links.
+ */
 export default async function NewsletterPage() {
     const socials = await getSocials();
 

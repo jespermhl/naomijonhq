@@ -37,6 +37,13 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The root layout component for the entire application.
+ * Providers horizontal hydration warning suppression and globally active scripts.
+ * 
+ * @param props - Component props containing children.
+ * @returns The HTML structure for all pages.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

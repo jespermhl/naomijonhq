@@ -13,6 +13,11 @@ interface Concert {
     isSoldOut: boolean;
 }
 
+/**
+ * Fetches and maps concert data from Sanity for the UI.
+ * 
+ * @returns A promise that resolves to an array of mapped Concert objects.
+ */
 async function getConcerts(): Promise<Concert[]> {
     const events = await getSanityConcerts();
     return events.map(event => ({
@@ -25,6 +30,12 @@ async function getConcerts(): Promise<Concert[]> {
     }));
 }
 
+/**
+ * Calculates the number of days between a target date and today.
+ * 
+ * @param dateStr - The target date string.
+ * @returns The number of days (can be negative for past dates).
+ */
 function calculateDaysUntil(dateStr: string) {
     const t = new Date(dateStr);
     const n = new Date();
@@ -44,6 +55,10 @@ export const metadata: Metadata = {
     description: "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.",
 };
 
+/**
+ * The Concerts page component.
+ * Displays upcoming and past tour dates in a styled card layout.
+ */
 export default async function ConcertsPage() {
     const concerts = await getConcerts();
     const upcoming = concerts.filter(c => calculateDaysUntil(c.date) >= 0);

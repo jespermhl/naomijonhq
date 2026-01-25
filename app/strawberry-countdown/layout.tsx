@@ -10,6 +10,13 @@ export const metadata: Metadata = {
     },
 };
 
+/**
+ * Layout component for the Strawberry Countdown page.
+ * Provides metadata for SEO and social sharing.
+ * 
+ * @param props - Component props containing children.
+ * @returns The layout wrapper for the countdown page.
+ */
 export default function StrawberryCountdownLayout({
     children,
 }: {

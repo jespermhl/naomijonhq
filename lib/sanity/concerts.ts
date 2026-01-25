@@ -1,5 +1,8 @@
 import { client } from '@/sanity/client';
 
+/**
+ * Represents a concert object fetched from Sanity CMS.
+ */
 export interface SanityConcert {
     _id: string;
     date: string;
@@ -10,6 +13,12 @@ export interface SanityConcert {
     isSoldOut?: boolean;
 }
 
+/**
+ * Fetches all concert events from Sanity CMS, ordered by date ascending.
+ * Includes a 60-second revalidation cache.
+ * 
+ * @returns A promise that resolves to an array of SanityConcert objects.
+ */
 export async function getSanityConcerts(): Promise<SanityConcert[]> {
     const query = `*[_type == "concert"] | order(date asc)`;
 

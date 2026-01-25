@@ -1,15 +1,28 @@
 import React from 'react';
 
+/**
+ * Props for the Button component. Supports both button and anchor (link) attributes.
+ */
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
     React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+        /** The URL to link to. If provided, the component renders as an <a> tag. */
         href?: string;
+        /** The target attribute for the link. */
         target?: string;
+        /** The rel attribute for the link. Defaults to 'noopener noreferrer' if target is provided. */
         rel?: string;
+        /** The content of the button. */
         children: React.ReactNode;
+        /** Optional CSS class name. */
         className?: string;
+        /** CSS rotation value (e.g., '-2deg'). */
         rotate?: string;
     };
 
+/**
+ * A styled button component that can also act as a link if an `href` is provided.
+ * Features a custom rotation/sticker aesthetic.
+ */
 export const Button: React.FC<ButtonProps> = ({
     href,
     target,

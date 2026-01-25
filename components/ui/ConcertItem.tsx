@@ -1,16 +1,31 @@
 import React from 'react';
 
+/**
+ * Props for the ConcertItem component.
+ */
 interface ConcertItemProps {
+    /** The formatted date of the concert. */
     date: string;
+    /** The formatted time of the concert. */
     time: string;
+    /** The city where the concert is held. */
     city: string;
+    /** The country where the concert is held. */
     country: string;
+    /** The name of the venue or location. */
     location: string;
+    /** Number of days until the concert for the countdown. */
     days: number;
+    /** Whether the concert is sold out. */
     isSoldOut: boolean;
+    /** Optional URL to buy tickets. */
     buyUrl?: string;
 }
 
+/**
+ * A component that displays information about a single concert event,
+ * including date, location, countdown, and ticket status.
+ */
 export const ConcertItem: React.FC<ConcertItemProps> = ({
     date,
     time,
