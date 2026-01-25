@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
@@ -37,6 +38,11 @@ const formatDate = (dateStr: string) =>
 
 const formatTime = (dateStr: string) =>
     new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }).format(new Date(dateStr));
+
+export const metadata: Metadata = {
+    title: "Strawberry Tour",
+    description: "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.",
+};
 
 export default async function ConcertsPage() {
     const concerts = await getConcerts();
