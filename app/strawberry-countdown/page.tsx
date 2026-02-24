@@ -186,8 +186,9 @@ export default function StrawberryCountdownPage() {
 
                 <div className="cta-container" style={{
                     display: 'flex',
-                    flexDirection: 'column',
-                    gap: '20px',
+                    flexDirection: 'row',
+                    gap: '16px',
+                    justifyContent: 'center',
                     alignItems: 'center',
                     width: '100%'
                 }}>
@@ -197,20 +198,20 @@ export default function StrawberryCountdownPage() {
                         rel="noopener noreferrer"
                         className="cta-btn secondary"
                         style={{
-                            display: 'inline-block',
+                            flex: 1,
                             backgroundColor: '#ffffff',
                             color: '#e53e3e',
-                            padding: '18px 36px',
-                            borderRadius: '20px',
-                            fontSize: '24px',
+                            padding: '16px 20px',
+                            borderRadius: '16px',
+                            fontSize: '20px',
                             fontWeight: '900',
                             textDecoration: 'none',
                             border: '4px solid #e53e3e',
                             boxShadow: '6px 6px 0px #feb2b2',
                             transition: 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                             transform: 'rotate(1deg)',
-                            width: '100%',
-                            maxWidth: '320px'
+                            textAlign: 'center',
+                            maxWidth: '240px'
                         }}
                         onMouseOver={(e) => {
                             e.currentTarget.style.transform = 'translateY(-4px) rotate(0deg) scale(1.05)';
@@ -230,20 +231,20 @@ export default function StrawberryCountdownPage() {
                         rel="noopener noreferrer"
                         className="cta-btn primary"
                         style={{
-                            display: 'inline-block',
+                            flex: 1,
                             backgroundColor: '#e53e3e',
                             color: '#ffffff',
-                            padding: '18px 36px',
-                            borderRadius: '20px',
-                            fontSize: '24px',
+                            padding: '16px 20px',
+                            borderRadius: '16px',
+                            fontSize: '20px',
                             fontWeight: '900',
                             textDecoration: 'none',
                             border: '4px solid #ffffff',
                             boxShadow: '6px 6px 0px #feb2b2',
                             transition: 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                             transform: 'rotate(-2deg)',
-                            width: '100%',
-                            maxWidth: '320px'
+                            textAlign: 'center',
+                            maxWidth: '240px'
                         }}
                         onMouseOver={(e) => {
                             e.currentTarget.style.transform = 'translateY(-4px) rotate(0deg) scale(1.05)';
@@ -332,14 +333,16 @@ export default function StrawberryCountdownPage() {
                         font-size: 9px !important;
                     }
                     .cta-container {
-                        gap: 12px !important;
+                        gap: 8px !important;
+                        flex-direction: row !important;
                     }
                     .cta-btn {
-                        font-size: 16px !important;
-                        padding: 12px 20px !important;
-                        border-width: 3px !important;
+                        font-size: 14px !important;
+                        padding: 10px 4px !important;
+                        border-width: 2px !important;
                         min-width: unset !important;
                         width: 100% !important;
+                        border-radius: 12px !important;
                     }
                     .cover-container {
                         margin-bottom: 16px !important;
