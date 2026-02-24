@@ -52,8 +52,8 @@ export default function StrawberryCountdownPage() {
             backgroundColor: '#fff5f5',
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 10c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zm30 30c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM25 45c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM50 15c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4z' fill='%23e53e3e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
             fontFamily: '"Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-            padding: '24px',
-            overflow: 'hidden',
+            padding: '40px 24px',
+            overflowY: 'auto',
             position: 'relative'
         }}>
             {isFinished && <BurstAnimation />}
@@ -136,7 +136,7 @@ export default function StrawberryCountdownPage() {
                 }}>
                     STRAWBERRY
                 </h1>
-                <p style={{
+                <p className="countdown-subtitle" style={{
                     fontSize: '20px',
                     fontWeight: '800',
                     color: '#feb2b2',
@@ -146,7 +146,7 @@ export default function StrawberryCountdownPage() {
                 }}>
                     Naomi&apos;s Sophomore Album
                 </p>
-                <p style={{
+                <p className="date-pill" style={{
                     fontSize: '16px',
                     fontWeight: '700',
                     color: '#e53e3e',
@@ -184,34 +184,79 @@ export default function StrawberryCountdownPage() {
                     </div>
                 )}
 
-                <a
-                    href={isFinished ? '#' : 'https://releeze.com/en/products/strawberry-album'}
-                    className="cta-btn"
-                    style={{
-                        display: 'inline-block',
-                        backgroundColor: '#e53e3e',
-                        color: '#ffffff',
-                        padding: '18px 36px',
-                        borderRadius: '20px',
-                        fontSize: '24px',
-                        fontWeight: '900',
-                        textDecoration: 'none',
-                        border: '4px solid #ffffff',
-                        boxShadow: '6px 6px 0px #feb2b2',
-                        transition: 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                        transform: 'rotate(-2deg)'
-                    }}
-                    onMouseOver={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-4px) rotate(0deg) scale(1.05)';
-                        e.currentTarget.style.boxShadow = '10px 10px 0px #feb2b2';
-                    }}
-                    onMouseOut={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0px) rotate(-2deg) scale(1)';
-                        e.currentTarget.style.boxShadow = '6px 6px 0px #feb2b2';
-                    }}
-                >
-                    {isFinished ? 'STREAM / BUY NOW' : 'PRE-ORDER NOW'}
-                </a>
+                <div className="cta-container" style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '20px',
+                    alignItems: 'center',
+                    width: '100%'
+                }}>
+                    <a
+                        href="https://open.spotify.com/prerelease/2DaNG0z6noDTCZ00laRSLh"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cta-btn secondary"
+                        style={{
+                            display: 'inline-block',
+                            backgroundColor: '#ffffff',
+                            color: '#e53e3e',
+                            padding: '18px 36px',
+                            borderRadius: '20px',
+                            fontSize: '24px',
+                            fontWeight: '900',
+                            textDecoration: 'none',
+                            border: '4px solid #e53e3e',
+                            boxShadow: '6px 6px 0px #feb2b2',
+                            transition: 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                            transform: 'rotate(1deg)',
+                            width: '100%',
+                            maxWidth: '320px'
+                        }}
+                        onMouseOver={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-4px) rotate(0deg) scale(1.05)';
+                            e.currentTarget.style.boxShadow = '10px 10px 0px #feb2b2';
+                        }}
+                        onMouseOut={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0px) rotate(1deg) scale(1)';
+                            e.currentTarget.style.boxShadow = '6px 6px 0px #feb2b2';
+                        }}
+                    >
+                        {isFinished ? 'STREAM' : 'PRE-SAVE'}
+                    </a>
+
+                    <a
+                        href="https://releeze.com/en/collections/naomi-jon"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cta-btn primary"
+                        style={{
+                            display: 'inline-block',
+                            backgroundColor: '#e53e3e',
+                            color: '#ffffff',
+                            padding: '18px 36px',
+                            borderRadius: '20px',
+                            fontSize: '24px',
+                            fontWeight: '900',
+                            textDecoration: 'none',
+                            border: '4px solid #ffffff',
+                            boxShadow: '6px 6px 0px #feb2b2',
+                            transition: 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                            transform: 'rotate(-2deg)',
+                            width: '100%',
+                            maxWidth: '320px'
+                        }}
+                        onMouseOver={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-4px) rotate(0deg) scale(1.05)';
+                            e.currentTarget.style.boxShadow = '10px 10px 0px #feb2b2';
+                        }}
+                        onMouseOut={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0px) rotate(-2deg) scale(1)';
+                            e.currentTarget.style.boxShadow = '6px 6px 0px #feb2b2';
+                        }}
+                    >
+                        {isFinished ? 'ORDER' : 'PRE-ORDER'}
+                    </a>
+                </div>
             </div>
 
             <style dangerouslySetInnerHTML={{
@@ -243,25 +288,74 @@ export default function StrawberryCountdownPage() {
                 }
                 
                 @media (max-width: 640px) {
+                    .countdown-main {
+                        padding: 16px !important;
+                        align-items: center !important;
+                        overflow-y: auto !important;
+                    }
                     .countdown-card {
-                        padding: 48px 24px !important;
-                        margin: 20px;
+                        padding: 32px 16px 24px !important;
+                        margin: 0 !important;
+                        border-width: 4px !important;
+                        border-radius: 20px !important;
+                        box-shadow: 6px 6px 0px #e53e3e !important;
                     }
                     .countdown-title {
-                        font-size: 32px !important;
+                        font-size: 28px !important;
+                        margin-bottom: 2px !important;
+                    }
+                    .countdown-subtitle {
+                        font-size: 14px !important;
+                        margin-bottom: 4px !important;
+                        letter-spacing: 0.05em !important;
+                    }
+                    .date-pill {
+                        font-size: 13px !important;
+                        padding: 2px 8px !important;
+                        margin-bottom: 20px !important;
                     }
                     .time-grid {
-                        grid-template-columns: repeat(2, 1fr) !important;
-                        gap: 16px !important;
+                        grid-template-columns: repeat(4, 1fr) !important;
+                        gap: 8px !important;
+                        margin-bottom: 24px !important;
+                    }
+                    .time-sticker {
+                        padding: 8px 2px !important;
+                        border-width: 2px !important;
+                        border-radius: 12px !important;
+                        box-shadow: 3px 3px 0px #e53e3e !important;
+                    }
+                    .time-sticker div:first-child {
+                        font-size: 18px !important;
+                    }
+                    .time-sticker div:last-child {
+                        font-size: 9px !important;
+                    }
+                    .cta-container {
+                        gap: 12px !important;
                     }
                     .cta-btn {
-                        font-size: 20px !important;
-                        padding: 16px 28px !important;
+                        font-size: 16px !important;
+                        padding: 12px 20px !important;
+                        border-width: 3px !important;
+                        min-width: unset !important;
+                        width: 100% !important;
+                    }
+                    .cover-container {
+                        margin-bottom: 16px !important;
                     }
                     .cover-container div:first-child {
-                        width: 220px !important;
-                        height: 220px !important;
-                        border-width: 6px !important;
+                        width: 140px !important;
+                        height: 140px !important;
+                        border-width: 4px !important;
+                        box-shadow: 6px 6px 0px #e53e3e !important;
+                    }
+                    .soon-sticker {
+                        top: -12px !important;
+                        left: 15px !important;
+                        font-size: 12px !important;
+                        padding: 6px 12px !important;
+                        border-width: 2px !important;
                     }
                 }
             `}} />
