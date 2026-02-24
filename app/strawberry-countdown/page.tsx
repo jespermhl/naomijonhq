@@ -196,17 +196,17 @@ export default function StrawberryCountdownPage() {
                         href="https://open.spotify.com/prerelease/2DaNG0z6noDTCZ00laRSLh"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="cta-btn secondary"
+                        className="cta-btn primary"
                         style={{
                             flex: 1,
-                            backgroundColor: '#ffffff',
-                            color: '#e53e3e',
+                            backgroundColor: '#e53e3e',
+                            color: '#ffffff',
                             padding: '16px 20px',
                             borderRadius: '16px',
                             fontSize: '20px',
                             fontWeight: '900',
                             textDecoration: 'none',
-                            border: '4px solid #e53e3e',
+                            border: '4px solid #ffffff',
                             boxShadow: '6px 6px 0px #feb2b2',
                             transition: 'all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                             transform: 'rotate(1deg)',
