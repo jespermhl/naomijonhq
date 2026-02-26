@@ -44,9 +44,25 @@ function calculateDaysUntil(dateStr: string) {
     return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
-const formatDate = (dateStr: string) =>
-    new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'Europe/Berlin' }).format(new Date(dateStr));
+/**
+ * Formats a date string into "MMM DD" format (e.g., "MAY 24").
+ * 
+ * @param dateStr - The date string to format.
+ * @returns The formatted date string.
+ */
+const formatDate = (dateStr: string) => {
+    const d = new Date(dateStr);
+    const month = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+    const day = d.getDate().toString().padStart(2, '0');
+    return `${month} ${day}`;
+};
 
+/**
+ * Formats a date string into "HH:MM" format.
+ * 
+ * @param dateStr - The date string to format.
+ * @returns The formatted time string.
+ */
 const formatTime = (dateStr: string) =>
     new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin' }).format(new Date(dateStr));
 

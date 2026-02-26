@@ -4,7 +4,7 @@ import React from 'react';
  * Props for the ConcertItem component.
  */
 interface ConcertItemProps {
-    /** The formatted date of the concert. */
+    /** The formatted date of the concert. Expected format: "MMM DD" (e.g., "MAY 24"). */
     date: string;
     /** The formatted time of the concert. */
     time: string;
@@ -37,17 +37,25 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
     buyUrl,
 }) => {
     // Split date into month and day if possible (e.g., "MAY 24")
-    const dateParts = date.split(' ');
-    const month = dateParts[0];
-    const day = dateParts[1];
+    // Sanitization: trim whitespace and split by space
+    const sanitizedDate = date.trim();
+    const dateParts = sanitizedDate.split(/\s+/);
+
+    // Attempt to extract month and numeric day
+    // We expect month as the first part and day as the second part
+    let month = dateParts[0];
+    let day = dateParts[1];
+
+    // Lightweight validation: check if we have two parts and day looks numeric-ish
+    const isValidSplit = dateParts.length >= 2 && /^\d+/.test(day);
 
     return (
         <div className="concert-item">
             <div className="date-section">
-                {day ? (
+                {isValidSplit ? (
                     <>
-                        <span className="month">{month}</span>
-                        <span className="day">{day}</span>
+                        <span className="month">{month.toUpperCase()}</span>
+                        <span className="day">{day.replace(/\D/g, '')}</span>
                     </>
                 ) : (
                     <span className="full-date">{date}</span>
