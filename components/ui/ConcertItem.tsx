@@ -64,7 +64,7 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
 
             <div className="info-section">
                 <div className="location-group">
-                    <h3 className="city">{city}, {country}</h3>
+                    <h3 className="city">{country ? `${city}, ${country}` : city}</h3>
                     <p className="venue">{location} <span className="time-at">@ {time}</span></p>
                 </div>
                 {days >= 0 && (
