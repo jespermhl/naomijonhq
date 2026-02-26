@@ -36,26 +36,43 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
     isSoldOut,
     buyUrl,
 }) => {
+    // Split date into month and day if possible (e.g., "MAY 24")
+    const dateParts = date.split(' ');
+    const month = dateParts[0];
+    const day = dateParts[1];
+
     return (
         <div className="concert-item">
-            <div className="date-box">
-                <div className="date">{date}</div>
-                <div className="time">{time}</div>
+            <div className="date-section">
+                {day ? (
+                    <>
+                        <span className="month">{month}</span>
+                        <span className="day">{day}</span>
+                    </>
+                ) : (
+                    <span className="full-date">{date}</span>
+                )}
             </div>
 
-            <div className="info-box">
-                <div className="location">{city}, {country}</div>
-                <div className="venue">{location}</div>
-                <div className="countdown">
-                    {days < 0 ? 'EVENT PASSED' : days === 0 ? 'TODAY!' : days === 1 ? 'TOMORROW!' : `${days} DAYS TO GO`}
+            <div className="info-section">
+                <div className="location-group">
+                    <h3 className="city">{city}, {country}</h3>
+                    <p className="venue">{location} <span className="time-at">@ {time}</span></p>
                 </div>
+                {days >= 0 && (
+                    <div className="countdown-tag">
+                        {days === 0 ? 'LIVE TODAY!' : days === 1 ? 'LIVE TOMORROW!' : `${days} DAYS TO GO`}
+                    </div>
+                )}
             </div>
 
-            <div className="action-box">
+            <div className="action-section">
                 {isSoldOut ? (
                     <div className="status-label sold-out">SOLD OUT</div>
                 ) : buyUrl ? (
-                    <a href={buyUrl} target="_blank" rel="noopener noreferrer" className="buy-btn">TICKETS</a>
+                    <a href={buyUrl} target="_blank" rel="noopener noreferrer" className="buy-btn">
+                        TICKETS
+                    </a>
                 ) : null}
             </div>
         </div>
