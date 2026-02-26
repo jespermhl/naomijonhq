@@ -370,7 +370,7 @@ body {
 /* Responsive */
 @media (max-width: 640px) {
   .concerts-container {
-    padding: 16px 16px 64px;
+    padding: 40px 16px 64px;
   }
 
   .tour-card {
