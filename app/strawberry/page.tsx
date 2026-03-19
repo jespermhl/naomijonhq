@@ -177,6 +177,12 @@ function StrawberryCountdownContent() {
  * Used when the countdown reaches zero.
  */
 function BurstAnimation() {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const [particles] = useState(() => {
     return Array.from({ length: 20 }).map((_, i) => {
       const angle = (i / 20) * 360;
@@ -189,6 +195,8 @@ function BurstAnimation() {
       };
     });
   });
+
+  if (!isMounted) return null;
 
   return (
     <div className={styles.burstWrapper}>
