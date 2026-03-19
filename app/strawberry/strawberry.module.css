@@ -1,0 +1,289 @@
+.countdownMain {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff5f5;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 10c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zm30 30c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM25 45c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4zM50 15c0-2-2-4-2-4s-2 2-2 4 2 4 2 4 2-2 2-4z' fill='%23e53e3e' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 40px 24px;
+    overflow-y: auto;
+    position: relative;
+    margin: 0;
+}
+
+.countdownCard {
+    max-width: 600px;
+    width: 100%;
+    background-color: #ffffff;
+    border: 6px solid #e53e3e;
+    border-radius: 32px;
+    padding: 64px 40px;
+    text-align: center;
+    box-shadow: 12px 12px 0px #e53e3e;
+    transform: rotate(1deg);
+    position: relative;
+    z-index: 10;
+}
+
+.soonSticker {
+    position: absolute;
+    top: -25px;
+    left: 30px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 3px solid #e53e3e;
+    font-weight: 800;
+    font-size: 16px;
+    color: #e53e3e;
+    transform: rotate(-5deg);
+    box-shadow: 4px 4px 0px #e53e3e;
+}
+
+.stickerNotFinished {
+    background-color: #feb2b2;
+}
+
+.stickerFinished {
+    background-color: #f6ad55;
+}
+
+.coverContainer {
+    margin-bottom: 32px;
+    position: relative;
+    display: inline-block;
+}
+
+.coverContainerWobble {
+    animation: wobble 4s ease-in-out infinite;
+}
+
+.coverContainerCelebrate {
+    animation: celebrate 1s ease-in-out infinite;
+}
+
+.coverImageWrapper {
+    width: 280px;
+    height: 280px;
+    background-color: #ffffff;
+    border: 8px solid #e53e3e;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 12px 12px 0px #e53e3e;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.coverImageWrapperFinished {
+    width: 320px;
+    height: 320px;
+}
+
+.strawberryIcon {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    font-size: 48px;
+    filter: drop-shadow(3px 3px 0px #e53e3e);
+}
+
+.countdownTitle {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    color: #e53e3e;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.countdownSubtitle {
+    font-size: 20px;
+    font-weight: 800;
+    color: #feb2b2;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.datePill {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e53e3e;
+    margin-bottom: 40px;
+    background-color: #fff5f5;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 8px;
+    border: 2px solid #e53e3e;
+}
+
+.timeGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 48px;
+}
+
+.finishedMessage {
+    font-size: 28px;
+    font-weight: 900;
+    color: #e53e3e;
+    margin-bottom: 40px;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ctaContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.ctaBtn {
+    flex: 1;
+    background-color: #e53e3e;
+    color: #ffffff;
+    padding: 16px 20px;
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: 900;
+    text-decoration: none;
+    border: 4px solid #ffffff;
+    box-shadow: 6px 6px 0px #feb2b2;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    max-width: 240px;
+    display: block;
+}
+
+.ctaBtn1 { transform: rotate(1deg); }
+.ctaBtn2 { transform: rotate(-2deg); }
+
+.ctaBtn:hover {
+    transform: translateY(-4px) rotate(0deg) scale(1.05) !important;
+    box-shadow: 10px 10px 0px #feb2b2 !important;
+}
+
+/* Animations */
+@keyframes wobble {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.02) rotate(1deg); }
+    50% { transform: scale(1) rotate(-1deg); }
+    75% { transform: scale(1.02) rotate(0.5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes celebrate {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.08) rotate(3deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes burst {
+    0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--tr)); opacity: 0; }
+}
+
+.burstWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.particle {
+    position: absolute;
+    font-size: 40px;
+    animation: burst 2s ease-out infinite;
+}
+
+.timeSticker {
+    background-color: #ffffff;
+    border: 4px solid #e53e3e;
+    border-radius: 20px;
+    padding: 16px 8px;
+    box-shadow: 4px 4px 0px #e53e3e;
+}
+
+.timeValue {
+    font-size: 28px;
+    font-weight: 900;
+    color: #e53e3e;
+    line-height: 1;
+}
+
+.timeLabel {
+    font-size: 12px;
+    font-weight: 700;
+    color: #feb2b2;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .countdownMain {
+        padding: 16px !important;
+    }
+    .countdownCard {
+        padding: 32px 16px 24px !important;
+        border-width: 4px !important;
+        border-radius: 20px !important;
+        box-shadow: 6px 6px 0px #e53e3e !important;
+    }
+    .soonSticker {
+        top: -12px !important;
+        left: 15px !important;
+        font-size: 12px !important;
+        padding: 6px 12px !important;
+        border-width: 2px !important;
+    }
+    .coverContainer {
+        margin-bottom: 16px !important;
+    }
+    .coverImageWrapper {
+        width: 140px !important;
+        height: 140px !important;
+        border-width: 4px !important;
+        box-shadow: 6px 6px 0px #e53e3e !important;
+    }
+    .countdownTitle {
+        font-size: 28px !important;
+    }
+    .countdownSubtitle {
+        font-size: 14px !important;
+    }
+    .datePill {
+        font-size: 13px !important;
+    }
+    .timeGrid {
+        gap: 8px !important;
+        margin-bottom: 24px !important;
+    }
+    .timeSticker {
+        padding: 8px 2px !important;
+        border-width: 2px !important;
+        border-radius: 12px !important;
+        box-shadow: 3px 3px 0px #e53e3e !important;
+    }
+    .timeValue { font-size: 18px !important; }
+    .timeLabel { font-size: 9px !important; }
+    .ctaContainer { gap: 8px !important; }
+    .ctaBtn {
+        font-size: 14px !important;
+        padding: 10px 4px !important;
+        border-width: 2px !important;
+        border-radius: 12px !important;
+        max-width: none !important;
+    }
+}
