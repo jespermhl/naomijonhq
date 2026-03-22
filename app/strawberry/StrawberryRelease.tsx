@@ -1,6 +1,11 @@
 import Image from "next/image";
-import { BurstAnimation } from "./BurstAnimation";
+import dynamic from "next/dynamic";
 import styles from "./strawberry.module.css";
+
+const BurstAnimation = dynamic(
+  () => import("./BurstAnimation").then((m) => m.BurstAnimation),
+  { ssr: false }
+);
 
 interface StrawberryReleaseProps {
   showVideo?: boolean;

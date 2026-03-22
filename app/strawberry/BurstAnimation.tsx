@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "./strawberry.module.css";
 
 /**
@@ -8,12 +8,8 @@ import styles from "./strawberry.module.css";
  * Used for festive background effects.
  */
 export function BurstAnimation() {
-  const [particles, setParticles] = useState<
-    { tx: number; ty: number; tr: number; delay: number }[]
-  >([]);
-
-  useEffect(() => {
-    const newParticles = Array.from({ length: 24 }).map((_, i) => {
+  const [particles] = useState(() => {
+    return Array.from({ length: 24 }).map((_, i) => {
       const angle = (i / 24) * 360;
       const distance = 300 + Math.random() * 400;
       return {
@@ -23,13 +19,10 @@ export function BurstAnimation() {
         delay: Math.random() * 4,
       };
     });
-    setParticles(newParticles);
-  }, []);
-
-  if (particles.length === 0) return null;
+  });
 
   return (
-    <div className={styles.burstWrapper}>
+    <div className={styles.burstWrapper} aria-hidden="true">
       {particles.map((p, i) => (
         <div
           key={i}
