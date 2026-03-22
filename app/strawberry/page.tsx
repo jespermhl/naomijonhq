@@ -1,86 +1,8 @@
-import Image from "next/image";
-import styles from "./strawberry.module.css";
+import { StrawberryRelease } from "./StrawberryRelease";
 
 /**
- * The Strawberry Release page component.
- * Displays the album release with official video and links.
+ * The Strawberry Release page component (Includes MV).
  */
 export default function StrawberryPage() {
-  const displayDateStr = "March 20, 2026";
-
-  return (
-    <main className={styles.countdownMain}>
-      <div className={styles.countdownCard}>
-        <div className={`${styles.soonSticker} ${styles.stickerFinished}`}>
-          OUT NOW!
-        </div>
-
-        <div className={`${styles.coverContainer} ${styles.coverContainerCelebrate}`}>
-          <div className={`${styles.coverImageWrapper} ${styles.coverImageWrapperFinished}`}>
-            <Image
-              src="/images/strawberry-cover.jpg"
-              alt="Strawberry Album Cover"
-              fill
-              style={{ objectFit: "cover" }}
-              priority
-            />
-          </div>
-          <div className={styles.strawberryIcon}>🍓</div>
-        </div>
-
-        <h1 className={styles.countdownTitle}>STRAWBERRY</h1>
-        <p className={styles.countdownSubtitle}>Naomi&apos;s Sophomore Album</p>
-        <p className={styles.datePill}>{displayDateStr}</p>
-
-        <div className={styles.finishedMessage}>IT&apos;S FINALLY HERE! 🎉</div>
-
-        <div className={styles.ctaContainer}>
-          <a
-            href="https://lnk.site/strawberrythealbum"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${styles.ctaBtn} ${styles.ctaBtn1}`}
-          >
-            STREAM
-          </a>
-
-          <a
-            href="https://releeze.com/en/collections/naomi-jon"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${styles.ctaBtn} ${styles.ctaBtn2}`}
-          >
-            ORDER
-          </a>
-        </div>
-
-        <div className={styles.videoSection}>
-          <a
-            href="https://www.youtube.com/watch?v=Bx4ksscVii4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.videoLink}
-          >
-            <div className={styles.videoContainer}>
-              <Image
-                src="https://img.youtube.com/vi/Bx4ksscVii4/maxresdefault.jpg"
-                alt="Strawberry Music Video Thumbnail"
-                fill
-                className={styles.videoThumbnail}
-                unoptimized
-              />
-              <div className={styles.videoTag}>Watch Music Video</div>
-              <div className={styles.playOverlay}>
-                <div className={styles.playIcon} />
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div className={styles.credits}>
-          Made with 🍓 by <a href="https://jespermhl.de" target="_blank" rel="noopener noreferrer">Jesper</a> for Naomi Jon HQ
-        </div>
-      </div>
-    </main>
-  );
+  return <StrawberryRelease showVideo={true} />;
 }
