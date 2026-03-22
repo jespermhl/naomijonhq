@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
@@ -48,7 +49,7 @@ function calculateDaysUntil(dateStr: string) {
 /**
  * Formats a date string into "MMM DD" format (e.g., "MAY 24").
  *
- * @param dateStr - The date string to format.
+ * @param dateStr - The target date string to format.
  * @returns The formatted date string.
  */
 const formatDate = (dateStr: string) => {
@@ -61,7 +62,7 @@ const formatDate = (dateStr: string) => {
 /**
  * Formats a date string into "HH:MM" format.
  *
- * @param dateStr - The date string to format.
+ * @param dateStr - The target date string to format.
  * @returns The formatted time string.
  */
 const formatTime = (dateStr: string) =>
@@ -90,7 +91,52 @@ export default async function ConcertsPage() {
     <main className="concerts-container bg-pattern">
       <Card className="tour-card">
         <Sticker className="tour-sticker">TOUR!</Sticker>
-        <div className="strawberry-emoji wobble">🍓</div>
+
+        <div
+          className="tour-image-container"
+          style={{
+            marginBottom: "40px",
+            position: "relative",
+            display: "inline-block",
+          }}
+        >
+          <div
+            style={{
+              width: "280px",
+              height: "280px",
+              backgroundColor: "#ffffff",
+              border: "8px solid var(--brand-red)",
+              borderRadius: "24px",
+              overflow: "hidden",
+              boxShadow: "12px 12px 0px var(--brand-red)",
+              position: "relative",
+              zIndex: 2,
+            }}
+          >
+            <Image
+              src="/images/strawberry-tour.png"
+              alt="Strawberry Tour"
+              fill
+              style={{
+                objectFit: "cover",
+              }}
+            />
+          </div>
+          {/* Floating Strawberry Emoji */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-20px",
+              right: "-20px",
+              fontSize: "64px",
+              filter: "drop-shadow(4px 4px 0px var(--brand-red))",
+              zIndex: 3,
+            }}
+          >
+            🍓
+          </div>
+        </div>
+
         <h1 className="tour-title">Strawberry Tour</h1>
 
         <div className="concert-grid">
@@ -144,6 +190,30 @@ export default async function ConcertsPage() {
           for Naomi Jon HQ
         </div>
       </Card>
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+                @media (max-width: 640px) {
+                    .tour-image-container {
+                        margin-bottom: 24px !important;
+                    }
+                    .tour-image-container .wobble {
+                        width: 180px !important;
+                        height: 180px !important;
+                        border-width: 6px !important;
+                        box-shadow: 8px 8px 0px var(--brand-red) !important;
+                    }
+                    .tour-image-container div:last-child {
+                        font-size: 48px !important;
+                        bottom: -15px !important;
+                        right: -15px !important;
+                        z-index: 10 !important;
+                    }
+                }
+            `,
+        }}
+      />
     </main>
   );
 }
