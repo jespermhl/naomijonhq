@@ -6,6 +6,7 @@ import { Sticker } from "@/components/ui/Sticker";
 import { ConcertItem } from "@/components/ui/ConcertItem";
 
 interface Concert {
+  id: string;
   date: string;
   city: string;
   location: string;
@@ -22,6 +23,7 @@ interface Concert {
 async function getConcerts(): Promise<Concert[]> {
   const events = await getSanityConcerts();
   return events.map((event) => ({
+    id: event._id,
     date: event.date,
     city: event.city,
     location: event.location,
@@ -141,11 +143,11 @@ export default async function ConcertsPage() {
 
         <div className="concert-grid">
           {upcoming.length > 0 ? (
-            upcoming.map((concert, i) => {
+            upcoming.map((concert) => {
               const days = calculateDaysUntil(concert.date);
               return (
                 <ConcertItem
-                  key={i}
+                  key={concert.id}
                   date={formatDate(concert.date)}
                   time={formatTime(concert.date)}
                   city={concert.city}
@@ -166,8 +168,8 @@ export default async function ConcertsPage() {
           <div className="past-section">
             <h2 className="past-title">Past Dates</h2>
             <div className="past-list">
-              {past.map((c, i) => (
-                <div key={i} className="past-item">
+              {past.map((c) => (
+                <div key={c.id} className="past-item">
                   <span className="past-info">
                     {formatDate(c.date)} - {c.city}
                   </span>
