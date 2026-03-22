@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BurstAnimation } from "./BurstAnimation";
 import styles from "./strawberry.module.css";
 
 interface StrawberryReleaseProps {
@@ -7,22 +8,29 @@ interface StrawberryReleaseProps {
 
 /**
  * Shared content for the Strawberry release pages.
- * 
+ *
  * @param props - Component props.
  * @param props.showVideo - Whether to display the YouTube music video embed.
  */
-export function StrawberryRelease({ showVideo = true }: StrawberryReleaseProps) {
+export function StrawberryRelease({
+  showVideo = true,
+}: StrawberryReleaseProps) {
   const displayDateStr = "March 20, 2026";
 
   return (
     <main className={styles.countdownMain}>
+      <BurstAnimation />
       <div className={styles.countdownCard}>
         <div className={`${styles.soonSticker} ${styles.stickerFinished}`}>
           OUT NOW!
         </div>
 
-        <div className={`${styles.coverContainer} ${styles.coverContainerCelebrate}`}>
-          <div className={`${styles.coverImageWrapper} ${styles.coverImageWrapperFinished}`}>
+        <div
+          className={`${styles.coverContainer} ${styles.coverContainerCelebrate}`}
+        >
+          <div
+            className={`${styles.coverImageWrapper} ${styles.coverImageWrapperFinished}`}
+          >
             <Image
               src="/images/strawberry-cover.jpg"
               alt="Strawberry Album Cover"
