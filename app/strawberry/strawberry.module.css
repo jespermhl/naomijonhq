@@ -1,6 +1,7 @@
 .countdownMain {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: #fff5f5;
@@ -117,13 +118,6 @@
     border: 2px solid #e53e3e;
 }
 
-.timeGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 48px;
-}
-
 .finishedMessage {
     font-size: 28px;
     font-weight: 900;
@@ -186,50 +180,6 @@
     100% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes burst {
-    0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--tr)); opacity: 0; }
-}
-
-.burstWrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 5;
-}
-
-.particle {
-    position: absolute;
-    font-size: 40px;
-    animation: burst 2s ease-out infinite;
-}
-
-.timeSticker {
-    background-color: #ffffff;
-    border: 4px solid #e53e3e;
-    border-radius: 20px;
-    padding: 16px 8px;
-    box-shadow: 4px 4px 0px #e53e3e;
-}
-
-.timeValue {
-    font-size: 28px;
-    font-weight: 900;
-    color: #e53e3e;
-    line-height: 1;
-}
-
-.timeLabel {
-    font-size: 12px;
-    font-weight: 700;
-    color: #feb2b2;
-    margin-top: 4px;
-    text-transform: uppercase;
-}
-
 /* Mobile */
 @media (max-width: 640px) {
     .countdownMain {
@@ -266,18 +216,6 @@
     .datePill {
         font-size: 13px !important;
     }
-    .timeGrid {
-        gap: 8px !important;
-        margin-bottom: 24px !important;
-    }
-    .timeSticker {
-        padding: 8px 2px !important;
-        border-width: 2px !important;
-        border-radius: 12px !important;
-        box-shadow: 3px 3px 0px #e53e3e !important;
-    }
-    .timeValue { font-size: 18px !important; }
-    .timeLabel { font-size: 9px !important; }
     .ctaContainer { gap: 8px !important; }
     .ctaBtn {
         font-size: 14px !important;
@@ -285,5 +223,135 @@
         border-width: 2px !important;
         border-radius: 12px !important;
         max-width: none !important;
+    }
+}
+
+.credits {
+    margin-top: 64px;
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--brand-pink);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+.credits a {
+    color: #e53e3e;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.credits a:hover {
+    border-bottom-color: #e53e3e;
+    opacity: 0.8;
+}
+
+.videoSection {
+    margin-top: 48px;
+    width: 100%;
+    z-index: 10;
+}
+
+.videoLink {
+    text-decoration: none;
+    display: block;
+}
+
+.videoContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    border: 5px solid #e53e3e;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 10px 10px 0px #feb2b2;
+    transform: rotate(-1.5deg);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.videoLink:hover .videoContainer {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 15px 15px 0px #feb2b2 !important;
+}
+
+.videoThumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.videoLink:hover .videoThumbnail {
+    transform: scale(1.1);
+}
+
+.playOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(229, 62, 62, 0.9);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.videoLink:hover .playOverlay {
+    background-color: #e53e3e;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.playIcon {
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid #ffffff;
+    margin-left: 6px;
+}
+
+.videoTag {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background-color: #fff;
+    color: #e53e3e;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: 900;
+    font-size: 12px;
+    text-transform: uppercase;
+    border: 2px solid #e53e3e;
+    box-shadow: 3px 3px 0px #e53e3e;
+    z-index: 5;
+}
+
+@media (max-width: 640px) {
+    .videoSection {
+        margin-top: 32px;
+    }
+    .videoContainer {
+        border-width: 3px;
+        box-shadow: 6px 6px 0px #feb2b2;
+        border-radius: 12px;
+    }
+    .playOverlay {
+        width: 48px;
+        height: 48px;
+    }
+    .playIcon {
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-left: 14px solid #ffffff;
     }
 }

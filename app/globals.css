@@ -495,3 +495,25 @@ body {
     transform: none !important;
   }
 }
+.credits {
+  margin-top: 48px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-pink);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.credits a {
+  color: var(--brand-red);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.credits a:hover {
+  border-bottom-color: var(--brand-red);
+  opacity: 0.8;
+}
