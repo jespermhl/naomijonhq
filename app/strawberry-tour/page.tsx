@@ -35,17 +35,28 @@ async function getConcerts(): Promise<Concert[]> {
 
 /**
  * Calculates the number of days between a target date and today.
+ * Using UTC-based calculation to avoid timezone and DST shift issues.
  *
  * @param dateStr - The target date string.
  * @returns The number of days (can be negative for past dates).
  */
 function calculateDaysUntil(dateStr: string) {
-  const t = new Date(dateStr);
-  const n = new Date();
-  const diff =
-    new Date(t.getFullYear(), t.getMonth(), t.getDate()).getTime() -
-    new Date(n.getFullYear(), n.getMonth(), n.getDate()).getTime();
-  return Math.floor(diff / (1000 * 60 * 60 * 24));
+  const target = new Date(dateStr);
+  const now = new Date();
+
+  const targetUtc = Date.UTC(
+    target.getUTCFullYear(),
+    target.getUTCMonth(),
+    target.getUTCDate(),
+  );
+  const nowUtc = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+  );
+
+  const diff = targetUtc - nowUtc;
+  return Math.round(diff / (1000 * 60 * 60 * 24));
 }
 
 /**
@@ -56,8 +67,10 @@ function calculateDaysUntil(dateStr: string) {
  */
 const formatDate = (dateStr: string) => {
   const d = new Date(dateStr);
-  const month = d.toLocaleString("en-US", { month: "short" }).toUpperCase();
-  const day = d.getDate().toString().padStart(2, "0");
+  const month = d
+    .toLocaleString("en-US", { month: "short", timeZone: "UTC" })
+    .toUpperCase();
+  const day = d.getUTCDate().toString().padStart(2, "0");
   return `${month} ${day}`;
 };
 
@@ -79,6 +92,9 @@ export const metadata: Metadata = {
   description:
     "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.",
 };
+
+// Force the page to be dynamic so the countdown is always accurate to the current day
+export const dynamic = "force-dynamic";
 
 /**
  * The Concerts page component.
