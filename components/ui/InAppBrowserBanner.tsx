@@ -6,24 +6,39 @@ import { useEffect, useState } from "react";
  * A banner that appears only when the page is opened in an in-app browser
  * like Instagram, TikTok, or Facebook, suggesting to open in a system browser.
  */
+/**
+ * Helper function to detect if the current environment is a mobile in-app browser.
+ * Uses a safe check for the legacy window.opera property and types.
+ */
+function detectInApp(): boolean {
+  if (typeof window === "undefined") return false;
+
+  const win = window as Window & { opera?: string };
+  const ua = navigator.userAgent || navigator.vendor || win.opera || "";
+
+  return (
+    ua.includes("Instagram") ||
+    ua.includes("TikTok") ||
+    ua.includes("FBAN") ||
+    ua.includes("FBAV")
+  );
+}
+
+/**
+ * A banner that appears only when the page is opened in an in-app browser
+ * like Instagram, TikTok, or Facebook, suggesting to open in a system browser.
+ */
 export function InAppBrowserBanner() {
-  const [isInApp, setIsInApp] = useState(false);
+  const [isInApp] = useState(() => detectInApp());
 
   useEffect(() => {
-    const ua = navigator.userAgent || navigator.vendor || (window as any).opera;
-    const isInstagram = ua.indexOf("Instagram") > -1;
-    const isTikTok = ua.indexOf("TikTok") > -1;
-    const isFB = ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1;
-
-    if (isInstagram || isTikTok || isFB) {
-      setIsInApp(true);
-      document.body.classList.add('has-in-app-banner');
+    if (isInApp) {
+      document.body.classList.add("has-in-app-banner");
+      return () => {
+        document.body.classList.remove("has-in-app-banner");
+      };
     }
-
-    return () => {
-      document.body.classList.remove('has-in-app-banner');
-    }
-  }, []);
+  }, [isInApp]);
 
   if (!isInApp) return null;
 
