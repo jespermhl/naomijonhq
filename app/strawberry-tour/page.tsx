@@ -93,8 +93,7 @@ export const metadata: Metadata = {
     "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.",
 };
 
-// Force the page to be dynamic so the countdown is always accurate to the current day
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 /**
  * The Concerts page component.
