@@ -45,7 +45,9 @@ export function InAppBrowserBanner() {
   return (
     <div className="in-app-banner">
       <div className="in-app-content">
-        <span className="banner-text">Open in system browser for the best experience!</span>
+        <span className="banner-text">
+          Open in system browser if form doesn’t appear
+        </span>
         <div className="arrow-container">
           <svg
             viewBox="0 0 24 24"
@@ -56,8 +58,8 @@ export function InAppBrowserBanner() {
             strokeLinejoin="round"
             className="arrow-icon"
           >
-            <line x1="7" y1="17" x2="17" y2="7"></line>
-            <polyline points="7 7 17 7 17 17"></polyline>
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
           </svg>
         </div>
       </div>

@@ -564,10 +564,10 @@ body {
 
 @keyframes banner-arrow-bounce {
   0%, 100% {
-    transform: translate(0, 0);
+    transform: translateY(0);
   }
   50% {
-    transform: translate(6px, -6px);
+    transform: translateY(-8px);
   }
 }
 
