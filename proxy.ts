@@ -37,8 +37,8 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.next();
   }
 
-  // Extract anonymous analytics data
-  const country = req.headers.get('x-vercel-ip-country') || 'Unknown';
+  // Extract analytics data
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0] || req.headers.get('x-real-ip') || '';
   const referer = req.headers.get('referer');
   let source = searchParams.get('utm_source');
   
@@ -57,10 +57,10 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
       trackPostHogEvent('$pageview', {
         $current_url: `https://naomijonhq.com${pathname}`, // Fake a full URL for the dashboard
         $pathname: pathname,
-        $geoip_country_code: country === 'Unknown' ? null : country, // Maps to the standard map widget
+        $ip: ip, // Forward user IP so PostHog handles location automatically
         $referrer: referer || null,
         destination: found.destination,
-        source: source, // Custom property
+        source: source,
       })
     );
 
@@ -75,7 +75,7 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     trackPostHogEvent('$pageview', {
       $current_url: `https://naomijonhq.com${pathname}`,
       $pathname: pathname,
-      $geoip_country_code: country === 'Unknown' ? null : country,
+      $ip: ip,
       $referrer: referer || null,
       destination: 'Linktree Fallback',
       source: source,

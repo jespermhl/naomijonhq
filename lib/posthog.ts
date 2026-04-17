@@ -22,8 +22,7 @@ export async function trackPostHogEvent(
   const timeoutId = setTimeout(() => controller.abort(), 3000);
 
   try {
-    // We do NOT include the user's IP address.
-    // PostHog will use the Vercel server's IP, meaning the user remains 100% anonymous.
+    // We forward the $ip property in the event payload so PostHog can handle location automatically.
     const response = await fetch(`${host}/capture/`, {
       method: 'POST',
       headers: {
