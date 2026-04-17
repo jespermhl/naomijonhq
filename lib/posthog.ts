@@ -4,7 +4,7 @@
  */
 export async function trackPostHogEvent(
   eventName: string,
-  properties: Record<string, string | number | boolean | null>
+  properties: Record<string, unknown>
 ) {
   const apiKey = process.env.POSTHOG_PROJECT_API_KEY;
   // Use EU cloud by default for better privacy compliance
@@ -18,10 +18,13 @@ export async function trackPostHogEvent(
     return;
   }
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 3000);
+
   try {
     // We do NOT include the user's IP address.
     // PostHog will use the Vercel server's IP, meaning the user remains 100% anonymous.
-    await fetch(`${host}/capture/`, {
+    const response = await fetch(`${host}/capture/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,8 +39,15 @@ export async function trackPostHogEvent(
           $lib: 'server-side-fetch',
         },
       }),
+      signal: controller.signal,
     });
+    
+    if (!response.ok) {
+      console.error(`PostHog event failed: ${response.status} ${response.statusText}`);
+    }
   } catch (error) {
     console.error('Failed to send event to PostHog:', error);
+  } finally {
+    clearTimeout(timeoutId);
   }
 }

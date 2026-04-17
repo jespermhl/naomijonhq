@@ -23,62 +23,61 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.next();
   }
 
+  // 2. Query Sanity
+  let found: any = null;
   try {
-    // 2. Query Sanity
     const query = `*[_type == "redirect" && source == $path][0]{destination, permanent, noRedirect}`;
-    const found = await client.fetch(query, { path: pathname });
+    found = await client.fetch(query, { path: pathname });
+  } catch (e) {
+    console.error('Edge Redirect Sanity Fetch Error:', e);
+  }
 
-    // Explicitly allow /newsletter or if noRedirect is set in Sanity
-    if (found?.noRedirect === true) {
-      return NextResponse.next();
+  // Explicitly allow /newsletter or if noRedirect is set in Sanity
+  if (found?.noRedirect === true) {
+    return NextResponse.next();
+  }
+
+  // Extract anonymous analytics data
+  const country = req.headers.get('x-vercel-ip-country') || 'Unknown';
+  const referer = req.headers.get('referer');
+  let source = searchParams.get('utm_source');
+  
+  if (!source && referer) {
+    try {
+      source = new URL(referer).hostname;
+    } catch (e) {
+      source = 'Invalid Referer';
     }
+  }
+  if (!source) source = 'Direct';
 
-    // Extract anonymous analytics data
-    const country = req.headers.get('x-vercel-ip-country') || 'Unknown';
-    const referer = req.headers.get('referer');
-    let source = searchParams.get('utm_source');
-    
-    if (!source && referer) {
-      try {
-        source = new URL(referer).hostname;
-      } catch (e) {
-        source = 'Invalid Referer';
-      }
-    }
-    if (!source) source = 'Direct';
-
-    if (found?.destination) {
-      // Fire analytics event in the background without blocking the redirect
-      event.waitUntil(
-        trackPostHogEvent('Redirect Clicked', {
-          url: pathname,
-          destination: found.destination,
-          country,
-          source,
-        })
-      );
-
-      return NextResponse.redirect(
-        new URL(found.destination, req.url),
-        found.permanent ? 301 : 302
-      );
-    }
-
-    // 3. Global fallback to Linktree
+  if (found?.destination) {
+    // Fire analytics event in the background without blocking the redirect
     event.waitUntil(
       trackPostHogEvent('Redirect Clicked', {
         url: pathname,
-        destination: 'Linktree Fallback',
+        destination: found.destination,
         country,
         source,
       })
     );
-    return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
 
-  } catch (e) {
-    console.error('Edge Redirect Error:', e);
-    return NextResponse.next();
+    return NextResponse.redirect(
+      new URL(found.destination, req.url),
+      found.permanent ? 301 : 302
+    );
   }
+
+  // 3. Global fallback to Linktree
+  event.waitUntil(
+    trackPostHogEvent('Redirect Clicked', {
+      url: pathname,
+      destination: 'Linktree Fallback',
+      country,
+      source,
+    })
+  );
+  return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
 }
 
 export const config = {
