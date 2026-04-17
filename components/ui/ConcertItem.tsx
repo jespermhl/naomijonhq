@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import posthog from 'posthog-js';
 
 /**
  * Props for the ConcertItem component.
@@ -43,8 +46,8 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
 
     // Attempt to extract month and numeric day
     // We expect month as the first part and day as the second part
-    let month = dateParts[0];
-    let day = dateParts[1];
+    const month = dateParts[0];
+    const day = dateParts[1];
 
     // Lightweight validation: check if we have two parts and day looks numeric-ish
     const isValidSplit = dateParts.length >= 2 && /^\d+/.test(day);
@@ -78,7 +81,13 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
                 {isSoldOut ? (
                     <div className="status-label sold-out">SOLD OUT</div>
                 ) : buyUrl ? (
-                    <a href={buyUrl} target="_blank" rel="noopener noreferrer" className="buy-btn">
+                    <a
+                        href={buyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="buy-btn"
+                        onClick={() => posthog.capture("ticket_link_clicked", { city, country, venue: location, date })}
+                    >
                         TICKETS
                     </a>
                 ) : null}

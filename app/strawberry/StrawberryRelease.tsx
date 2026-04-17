@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import posthog from "posthog-js";
 import styles from "./strawberry.module.css";
 
 const BurstAnimation = dynamic(
@@ -61,6 +62,7 @@ export function StrawberryRelease({
             target="_blank"
             rel="noopener noreferrer"
             className={`${styles.ctaBtn} ${styles.ctaBtn1}`}
+            onClick={() => posthog.capture("stream_clicked", { album: "Strawberry" })}
           >
             STREAM
           </a>
@@ -70,6 +72,7 @@ export function StrawberryRelease({
             target="_blank"
             rel="noopener noreferrer"
             className={`${styles.ctaBtn} ${styles.ctaBtn2}`}
+            onClick={() => posthog.capture("order_clicked", { album: "Strawberry" })}
           >
             ORDER
           </a>
@@ -82,6 +85,7 @@ export function StrawberryRelease({
               target="_blank"
               rel="noopener noreferrer"
               className={styles.videoLink}
+              onClick={() => posthog.capture("music_video_clicked", { album: "Strawberry", video_id: "Bx4ksscVii4" })}
             >
               <div className={styles.videoContainer}>
                 <Image
