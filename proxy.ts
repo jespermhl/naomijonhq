@@ -54,11 +54,13 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
   if (found?.destination) {
     // Fire analytics event in the background without blocking the redirect
     event.waitUntil(
-      trackPostHogEvent('Redirect Clicked', {
-        url: pathname,
+      trackPostHogEvent('$pageview', {
+        $current_url: `https://naomijonhq.com${pathname}`, // Fake a full URL for the dashboard
+        $pathname: pathname,
+        $geoip_country_code: country === 'Unknown' ? null : country, // Maps to the standard map widget
+        $referrer: referer || null,
         destination: found.destination,
-        country,
-        source,
+        source: source, // Custom property
       })
     );
 
@@ -70,11 +72,13 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
 
   // 3. Global fallback to Linktree
   event.waitUntil(
-    trackPostHogEvent('Redirect Clicked', {
-      url: pathname,
+    trackPostHogEvent('$pageview', {
+      $current_url: `https://naomijonhq.com${pathname}`,
+      $pathname: pathname,
+      $geoip_country_code: country === 'Unknown' ? null : country,
+      $referrer: referer || null,
       destination: 'Linktree Fallback',
-      country,
-      source,
+      source: source,
     })
   );
   return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
