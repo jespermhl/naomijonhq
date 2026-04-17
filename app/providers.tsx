@@ -1,24 +1,25 @@
 'use client'
-import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import { Suspense } from 'react'
 
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
-    person_profiles: 'identified_only',
-    capture_pageview: true, // Automatisches Tracking aktivieren
-    capture_pageleave: true, 
-    capture_performance: true, 
-    persistence: 'memory', 
-  })
+const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
+const apiHost = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com'
+const options = {
+  api_host: apiHost,
+  person_profiles: 'identified_only' as const,
+  capture_pageview: true,
+  capture_pageleave: true,
+  capture_performance: true,
+  persistence: 'memory' as const,
 }
 
-export function CSPostHogProvider({ children }: { children: React.ReactNode }) {
-  return <PostHogProvider client={posthog}>{children}</PostHogProvider>
-}
+export function PostHogProviders({ children }: { children: React.ReactNode }) {
+  if (!apiKey) {
+    return <>{children}</>
+  }
 
-export function Analytics() {
-  // Komponente bleibt vorerst leer/als Dummy, um layout.tsx nicht anzufassen
-  return null
+  return (
+    <PostHogProvider apiKey={apiKey} options={options}>
+      {children}
+    </PostHogProvider>
+  )
 }
