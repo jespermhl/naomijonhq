@@ -3,6 +3,48 @@ import type { NextRequest, NextFetchEvent } from 'next/server';
 import { createClient } from '@sanity/client';
 import { trackPostHogEvent } from './lib/posthog';
 
+type RedirectConfig = {
+  destination?: string;
+  permanent?: boolean;
+  noRedirect?: boolean;
+};
+
+const CAMPAIGN_PARAM_KEYS = [
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_content',
+  'utm_term',
+  'gad_source',
+  'mc_cid',
+  'gclid',
+  'gclsrc',
+  'dclid',
+  'gbraid',
+  'wbraid',
+  'fbclid',
+  'msclkid',
+  'twclid',
+  'li_fat_id',
+  'igshid',
+  'ttclid',
+  'rdt_cid',
+  'epik',
+  'qclid',
+  'sccid',
+  'irclid',
+  '_kx',
+] as const;
+
+function getCampaignProperties(searchParams: URLSearchParams) {
+  return Object.fromEntries(
+    CAMPAIGN_PARAM_KEYS.flatMap((key) => {
+      const value = searchParams.get(key);
+      return value ? [[key, value]] : [];
+    })
+  );
+}
+
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -12,6 +54,8 @@ const client = createClient({
 
 export default async function proxy(req: NextRequest, event: NextFetchEvent) {
   const { pathname, searchParams } = req.nextUrl;
+  const campaignProperties = getCampaignProperties(searchParams);
+  const currentUrl = `https://naomijonhq.com${pathname}${req.nextUrl.search}`;
 
   // 1. Ignore static paths & admin
   if (
@@ -24,12 +68,12 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
   }
 
   // 2. Query Sanity
-  let found: any = null;
+  let found: RedirectConfig | null = null;
   try {
     const query = `*[_type == "redirect" && source == $path][0]{destination, permanent, noRedirect}`;
     found = await client.fetch(query, { path: pathname });
-  } catch (e) {
-    console.error('Edge Redirect Sanity Fetch Error:', e);
+  } catch (error) {
+    console.error('Edge Redirect Sanity Fetch Error:', error);
   }
 
   // Explicitly allow /newsletter or if noRedirect is set in Sanity
@@ -45,7 +89,7 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
   if (!source && referer) {
     try {
       source = new URL(referer).hostname;
-    } catch (e) {
+    } catch {
       source = 'Invalid Referer';
     }
   }
@@ -55,12 +99,13 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     // Fire analytics event in the background without blocking the redirect
     event.waitUntil(
       trackPostHogEvent('$pageview', {
-        $current_url: `https://naomijonhq.com${pathname}`, // Fake a full URL for the dashboard
+        $current_url: currentUrl,
         $pathname: pathname,
         $ip: ip, // Forward user IP so PostHog handles location automatically
         $referrer: referer || null,
         destination: found.destination,
         source: source,
+        ...campaignProperties,
       })
     );
 
@@ -73,12 +118,13 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
   // 3. Global fallback to Linktree
   event.waitUntil(
     trackPostHogEvent('$pageview', {
-      $current_url: `https://naomijonhq.com${pathname}`,
+      $current_url: currentUrl,
       $pathname: pathname,
       $ip: ip,
       $referrer: referer || null,
       destination: 'Linktree Fallback',
       source: source,
+      ...campaignProperties,
     })
   );
   return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
