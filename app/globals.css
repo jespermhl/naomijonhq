@@ -319,21 +319,91 @@ body {
   flex-direction: column;
   gap: 16px;
   align-items: center;
+  width: 100%;
 }
 
 .past-item {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 20px 24px;
   width: 100%;
-  max-width: 600px;
-  transition: opacity 0.2s;
+  max-width: 660px;
+  background: #ffffff;
+  border: 3px solid var(--brand-pink);
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  filter: grayscale(0.5);
+  gap: 20px;
+}
+
+.past-item:hover {
+  opacity: 1;
+  filter: grayscale(0);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--brand-pink);
+}
+
+.past-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.past-month {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--brand-pink);
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.past-day {
+  font-size: 32px;
+  font-weight: 950;
+  color: var(--brand-pink);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.past-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   text-align: left;
 }
 
-.past-item:not(:last-child) {
-  border-bottom: 2px dashed rgba(255, 105, 180, 0.2);
+.past-city {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-dark);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.past-venue {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.past-label {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--brand-pink);
+  letter-spacing: 0.05em;
+  background: var(--bg-primary);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--brand-pink);
+  transform: rotate(2deg);
+  display: inline-block;
 }
 
 /* Newsletter Styles */
@@ -478,7 +548,13 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 16px 0;
+    padding: 24px 20px;
+    gap: 16px;
+  }
+  
+  .past-details {
+    align-items: center;
+    text-align: center;
   }
 
   .newsletter-card {

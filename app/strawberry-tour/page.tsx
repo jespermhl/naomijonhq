@@ -183,14 +183,26 @@ export default async function ConcertsPage() {
           <div className="past-section">
             <h2 className="past-title">Past Dates</h2>
             <div className="past-list">
-              {past.map((c) => (
-                <div key={c.id} className="past-item">
-                  <span className="past-info">
-                    {formatDate(c.date)} - {c.city}
-                  </span>
-                  <span className="past-venue">{c.location}</span>
-                </div>
-              ))}
+              {past.map((c) => {
+                const d = new Date(c.date);
+                const month = d.toLocaleString("en-US", { month: "short", timeZone: "UTC" }).toUpperCase();
+                const day = d.getUTCDate().toString().padStart(2, "0");
+                return (
+                  <div key={c.id} className="past-item">
+                    <div className="past-date">
+                      <span className="past-month">{month}</span>
+                      <span className="past-day">{day}</span>
+                    </div>
+                    <div className="past-details">
+                      <span className="past-city">{c.city}</span>
+                      <span className="past-venue">{c.location}</span>
+                    </div>
+                    <div className="past-status">
+                      <span className="past-label">Played</span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
