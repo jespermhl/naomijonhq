@@ -1,6 +1,7 @@
 import posthog from "posthog-js";
 
 const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+// This host should point at our reverse proxy, not the raw PostHog ingest host.
 const posthogHost =
   process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://z.naomijonhq.com";
 

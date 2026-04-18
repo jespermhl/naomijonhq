@@ -7,10 +7,11 @@ export async function trackPostHogEvent(
   properties: Record<string, unknown>
 ) {
   const apiKey = process.env.POSTHOG_PROJECT_API_KEY || process.env.NEXT_PUBLIC_POSTHOG_KEY;
+  // Keep server-side capture on the same proxy host the browser SDK uses.
   const host = (
     process.env.POSTHOG_HOST ||
     process.env.NEXT_PUBLIC_POSTHOG_HOST ||
-    'https://eu.i.posthog.com'
+    'https://z.naomijonhq.com'
   ).replace(/\/+$/, '');
 
   if (!apiKey) {
