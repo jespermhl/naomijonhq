@@ -1,0 +1,107 @@
+.pastItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  width: 100%;
+  max-width: 660px;
+  background: #ffffff;
+  border: 3px solid var(--brand-pink);
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+  filter: grayscale(0.2);
+  gap: 20px;
+  outline: none;
+}
+
+.pastItem:hover,
+.pastItem:focus-within {
+  opacity: 1;
+  filter: grayscale(0);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--brand-pink);
+}
+
+@media (hover: none) {
+  .pastItem {
+    opacity: 1;
+    filter: grayscale(0);
+  }
+}
+
+.pastDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 60px;
+}
+
+.pastMonth {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--brand-pink);
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.pastDay {
+  font-size: 32px;
+  font-weight: 950;
+  color: var(--brand-pink);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.pastDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.pastCity {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--text-dark);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.pastVenue {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.pastLabel {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--brand-pink);
+  letter-spacing: 0.05em;
+  background: var(--bg-primary);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--brand-pink);
+  transform: rotate(2deg);
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  .pastItem {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 20px;
+    gap: 16px;
+  }
+
+  .pastDetails {
+    align-items: center;
+    text-align: center;
+  }
+}

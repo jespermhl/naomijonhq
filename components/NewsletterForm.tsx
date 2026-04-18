@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { subscribeToNewsletter } from "@/lib/actions/klaviyo";
 import { Button } from "./ui/Button";
+import styles from "./newsletter-form.module.css";
 
 /**
  * A custom-designed newsletter signup form component.
@@ -10,7 +11,9 @@ import { Button } from "./ui/Button";
  */
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
   const [message, setMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -31,6 +34,7 @@ export function NewsletterForm() {
         setMessage(result.error || "Something went wrong. Please try again.");
       }
     } catch (err) {
+      console.error("Subscription error:", err);
       setStatus("error");
       setMessage("An unexpected error occurred.");
     }
@@ -40,7 +44,7 @@ export function NewsletterForm() {
     return (
       <div
         id="newsletter-success"
-        className="newsletter-status success-state wobble"
+        className={`${styles.status} ${styles.successState} wobble`}
         role="status"
         aria-live="polite"
       >
@@ -50,9 +54,9 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className="newsletter-form-container">
-      <form onSubmit={handleSubmit} className="newsletter-form">
-        <div className="input-wrapper">
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.inputWrapper}>
           <input
             id="newsletter-email"
             type="email"
@@ -61,15 +65,17 @@ export function NewsletterForm() {
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading"}
             required
-            className="newsletter-input"
+            className={styles.input}
             aria-label="Email address for newsletter"
-            aria-describedby={status === "error" ? "newsletter-error" : undefined}
+            aria-describedby={
+              status === "error" ? "newsletter-error" : undefined
+            }
             aria-invalid={status === "error"}
           />
           {status === "error" && (
             <p
               id="newsletter-error"
-              className="error-message"
+              className={styles.errorMessage}
               role="status"
               aria-live="assertive"
             >
@@ -81,15 +87,16 @@ export function NewsletterForm() {
         <Button
           type="submit"
           disabled={status === "loading"}
-          className="newsletter-submit-btn"
+          className={styles.submitBtn}
           rotate="0deg"
+          size="large"
         >
           {status === "loading" ? "Joining..." : "Join the Newsletter"}
         </Button>
 
-        <p className="newsletter-disclaimer">
-          By signing up, you agree to receive marketing emails from Naomi Jon HQ.
-          You can unsubscribe at any time.
+        <p className={styles.disclaimer}>
+          By signing up, you agree to receive marketing emails from Naomi Jon
+          HQ. You can unsubscribe at any time.
         </p>
       </form>
     </div>

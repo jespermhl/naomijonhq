@@ -1,0 +1,183 @@
+.concertItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 0;
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.concertItem:not(:last-child) {
+  border-bottom: 2px dashed var(--brand-pink);
+}
+
+.dateSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  text-align: center;
+}
+
+.month {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--brand-pink);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.day {
+  font-size: 32px;
+  font-weight: 950;
+  color: var(--brand-red);
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.fullDate {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--brand-red);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.infoSection {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 20px;
+}
+
+.city {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--brand-red);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.venue {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.timeAt {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--brand-pink);
+  margin-left: 6px;
+  opacity: 0.9;
+}
+
+.countdownTag {
+  font-size: 10px;
+  font-weight: 900;
+  color: white;
+  background: var(--brand-red);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.actionSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px;
+  min-height: 70px;
+}
+
+.statusLabel {
+  background: var(--bg-primary);
+  color: #718096;
+  padding: 12px 32px;
+  border: 3px solid #cbd5e0;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transform: rotate(2deg);
+}
+
+.soldOut {
+  border-color: var(--brand-red);
+  color: var(--brand-red);
+  background: white;
+}
+
+@media (max-width: 640px) {
+  .concertItem {
+    flex-direction: row;
+    padding: 24px 0;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .statusLabel {
+    transform: none;
+  }
+
+  .dateSection {
+    min-width: 45px;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .month {
+    font-size: 10px;
+  }
+
+  .day {
+    font-size: 26px;
+  }
+
+  .infoSection {
+    padding: 0 8px;
+    align-items: flex-start;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  .city {
+    font-size: 18px;
+  }
+
+  .venue {
+    font-size: 13px;
+  }
+
+  .timeAt {
+    display: block;
+    margin-left: 0;
+    margin-top: 2px;
+    font-size: 11px;
+  }
+
+  .countdownTag {
+    font-size: 8px;
+    padding: 2px 8px;
+  }
+
+  .actionSection {
+    padding-left: 4px;
+    min-height: auto;
+    width: auto;
+    justify-content: flex-end;
+  }
+}

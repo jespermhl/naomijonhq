@@ -1,0 +1,42 @@
+.redirectPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px;
+}
+
+.redirectCard {
+  max-width: 500px;
+}
+
+.loadingDots {
+  font-size: 48px;
+  color: var(--brand-red);
+  font-weight: 900;
+}
+
+.loadingDots span {
+  animation: dot-pulse 1.5s infinite;
+  display: inline-block;
+}
+
+.loadingDots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loadingDots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+}

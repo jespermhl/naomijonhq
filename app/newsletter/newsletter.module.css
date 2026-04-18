@@ -1,0 +1,35 @@
+.newsletterPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px;
+}
+
+.newsletterCard {
+  max-width: 460px;
+  padding: 56px 40px;
+}
+
+.newsletterTitle {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 16px;
+  color: var(--brand-red);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.newsletterP {
+  color: var(--text-dark);
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .newsletterCard {
+    padding: 48px 20px;
+  }
+}

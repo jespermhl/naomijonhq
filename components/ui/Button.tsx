@@ -1,67 +1,90 @@
-import React from 'react';
+import React from "react";
+import styles from "./button.module.css";
 
 /**
- * Props for the Button component. Supports both button and anchor (link) attributes.
+ * Custom properties unique to our Button component.
+ * We don't include standard HTML attributes like 'children' or 'className' 
+ * here because they are inherited from standard React types.
  */
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-    React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-        /** The URL to link to. If provided, the component renders as an <a> tag. */
-        href?: string;
-        /** The target attribute for the link. */
-        target?: string;
-        /** The rel attribute for the link. Defaults to 'noopener noreferrer' if target is provided. */
-        rel?: string;
-        /** The content of the button. */
-        children: React.ReactNode;
-        /** Optional CSS class name. */
-        className?: string;
-        /** CSS rotation value (e.g., '-2deg'). */
-        rotate?: string;
-    };
+interface ButtonCustomProps {
+  /** CSS rotation value (e.g., '-2deg'). */
+  rotate?: string;
+  /** Size variant of the button. */
+  size?: "small" | "medium" | "large";
+}
+
+/** Props specifically for link-style buttons. */
+interface AnchorButtonProps extends ButtonCustomProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /** Required href renders the component as an <a> tag. */
+  href: string;
+}
+
+/** Props specifically for native button elements. */
+interface NativeButtonProps extends ButtonCustomProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Ensures href is not allowed on a native button. */
+  href?: never;
+}
+
+/** Discriminated union to ensure type safety between <a> and <button> attributes. */
+export type ButtonProps = AnchorButtonProps | NativeButtonProps;
 
 /**
  * A styled button component that can also act as a link if an `href` is provided.
- * Features a custom rotation/sticker aesthetic.
+ * Features a custom rotation/sticker aesthetic and support for different sizes.
  */
 export const Button: React.FC<ButtonProps> = ({
-    href,
-    target,
-    rel,
-    children,
-    className = '',
-    rotate = '-2deg',
-    ...props
+  children,
+  className = "",
+  rotate = "-2deg",
+  size = "medium",
+  ...props
 }) => {
-    const baseClass = 'buy-btn';
-    const combinedClassName = `${baseClass} ${className}`;
+  const combinedClassName = `${styles.button} ${styles[size]} ${className}`;
 
-    const styles = {
-        '--rotate': rotate,
-    } as React.CSSProperties;
+  const inlineStyles = {
+    "--rotate": rotate,
+  } as React.CSSProperties;
 
-    if (href) {
-        return (
-            <a
-                href={href}
-                target={target || '_blank'}
-                rel={rel || 'noopener noreferrer'}
-                className={combinedClassName}
-                style={styles}
-                {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
-            >
-                {children}
-            </a>
-        );
-    }
+  // Pattern match for href to determine if it's an anchor or button
+  if ("href" in props && props.href !== undefined) {
+    const isExternal = props.href.startsWith("http://") || 
+                     props.href.startsWith("https://") || 
+                     props.href.startsWith("//");
+    
+    // Extract style from props to merge it properly
+    const { target, rel, href, style: userStyle, ...anchorProps } = props as AnchorButtonProps;
+    const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
+    
+    const resolvedTarget = target ?? (isExternal ? "_blank" : undefined);
+    const resolvedRel = rel ?? (resolvedTarget === "_blank" ? "noopener noreferrer" : undefined);
 
     return (
-        <button
-            type={(props.type as any) ?? 'button'}
-            className={combinedClassName}
-            style={styles}
-            {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
-        >
-            {children}
-        </button>
+      <a
+        href={href}
+        className={combinedClassName}
+        style={mergedStyles}
+        target={resolvedTarget}
+        rel={resolvedRel}
+        {...anchorProps}
+      >
+        {children}
+      </a>
     );
+  }
+
+  // Handle native button behavior
+  // Extract style from props to merge it properly
+  const { type, style: userStyle, ...buttonProps } = props as NativeButtonProps;
+  const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
+
+  return (
+    <button
+      type={type ?? "button"}
+      className={combinedClassName}
+      style={mergedStyles}
+      {...(buttonProps as React.ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
+      {children}
+    </button>
+  );
 };
