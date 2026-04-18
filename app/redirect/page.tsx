@@ -20,6 +20,12 @@ function RedirectContent() {
   const [target, setTarget] = useState<string>(FALLBACK_URL);
   const [isValidating, setIsValidating] = useState(true);
 
+  interface SanityEntry {
+    destination?: string;
+    url?: string;
+    buyUrl?: string;
+  }
+
   useEffect(() => {
     async function validateAndRedirect() {
       if (!rawTarget) {
@@ -28,11 +34,25 @@ function RedirectContent() {
         return;
       }
 
+      // Explicitly reject protocol-relative URLs early
+      if (rawTarget.startsWith("//")) {
+        setTarget(FALLBACK_URL);
+        setIsValidating(false);
+        return;
+      }
+
+      // Handle safe single-root relative paths early
+      if (rawTarget.startsWith("/") && !rawTarget.startsWith("//")) {
+        setTarget(rawTarget);
+        setIsValidating(false);
+        return;
+      }
+
       try {
         const url = new URL(rawTarget);
-        
-        // 1. Basic safety check
-        if (url.protocol !== "https:" && !rawTarget.startsWith("/")) {
+
+        // 1. Basic safety check - only allow HTTPS
+        if (url.protocol !== "https:") {
           setTarget(FALLBACK_URL);
           setIsValidating(false);
           return;
@@ -41,25 +61,42 @@ function RedirectContent() {
         const hostname = url.hostname;
 
         // 2. Check static allowlist
-        if (STATIC_ALLOWED_HOSTS.some(h => hostname === h || hostname.endsWith(`.${h}`))) {
+        if (
+          STATIC_ALLOWED_HOSTS.some(
+            (h) => hostname === h || hostname.endsWith(`.${h}`),
+          )
+        ) {
           setTarget(rawTarget);
           setIsValidating(false);
           return;
         }
 
         // 3. Check Sanity for this host
-        // We look for any entry in 'redirect', 'social', or 'concert' types that contains this host
-        const query = `*[_type in ["redirect", "social", "concert"] && (destination match $host || url match $host || buyUrl match $host)][0]`;
-        const found = await client.fetch(query, { host: `*${hostname}*` });
+        // We fetch entries that match the hostname as a token and then verify the parsed hostname in JS
+        const query = `*[_type in ["redirect", "social", "concert"] && (destination match $host || url match $host || buyUrl match $host)]`;
+        const results = await client.fetch(query, { host: hostname });
 
-        if (found) {
+        const isFound = results.some((doc: SanityEntry) => {
+          const possibleUrls = [doc.destination, doc.url, doc.buyUrl].filter(
+            Boolean,
+          );
+          return possibleUrls.some((u) => {
+            try {
+              return new URL(u).hostname === hostname;
+            } catch {
+              return false;
+            }
+          });
+        });
+
+        if (isFound) {
           setTarget(rawTarget);
         } else {
           setTarget(FALLBACK_URL);
         }
       } catch {
-        // Handle relative paths
-        if (rawTarget.startsWith("/")) {
+        // Only allow safe single-root relative paths if URL parsing fails
+        if (rawTarget.startsWith("/") && !rawTarget.startsWith("//")) {
           setTarget(rawTarget);
         } else {
           setTarget(FALLBACK_URL);
@@ -89,8 +126,8 @@ function RedirectContent() {
           {isValidating ? "Verifying..." : "Redirecting..."}
         </h1>
         <p className="page-subtitle">
-          {isValidating 
-            ? "Checking destination safety..." 
+          {isValidating
+            ? "Checking destination safety..."
             : "Taking you to your destination. Hold on!"}
         </p>
         <div className={styles.loadingDots}>

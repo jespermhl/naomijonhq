@@ -51,16 +51,18 @@ export const Button: React.FC<ButtonProps> = ({
                      props.href.startsWith("https://") || 
                      props.href.startsWith("//");
     
-    const { target, rel, href, ...anchorProps } = props as AnchorButtonProps;
+    // Extract style from props to merge it properly
+    const { target, rel, href, style: userStyle, ...anchorProps } = props as AnchorButtonProps;
+    const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
     
     return (
       <a
         href={href}
-        {...anchorProps}
         className={combinedClassName}
-        style={inlineStyles}
+        style={mergedStyles}
         target={target ?? (isExternal ? "_blank" : undefined)}
         rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
+        {...anchorProps}
       >
         {children}
       </a>
@@ -68,13 +70,15 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   // Handle native button behavior
-  const { type, ...buttonProps } = props as NativeButtonProps;
+  // Extract style from props to merge it properly
+  const { type, style: userStyle, ...buttonProps } = props as NativeButtonProps;
+  const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
 
   return (
     <button
       type={type ?? "button"}
       className={combinedClassName}
-      style={inlineStyles}
+      style={mergedStyles}
       {...(buttonProps as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {children}

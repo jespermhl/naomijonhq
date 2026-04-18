@@ -4,41 +4,63 @@
  * @param dateStr - The target date string.
  * @returns An object containing the month (short, uppercase) and zero-padded day.
  */
-export function getDateParts(dateStr: string): { month: string; day: string } {
-  const d = new Date(dateStr);
+/**
+ * Extracts year, month, and day parts from a date string or Date object in the specified timezone.
+ * Defaults to "Europe/Berlin".
+ * 
+ * @param date - The target date string or Date object.
+ * @param timeZone - The IANA timezone identifier.
+ * @returns An object containing the month (short), zero-padded day, year, and numeric components.
+ */
+export function getDateParts(date: string | Date, timeZone: string = "Europe/Berlin") {
+  const d = typeof date === "string" ? new Date(date) : date;
+  
   const formatter = new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "2-digit",
-    timeZone: "Europe/Berlin",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    timeZone,
   });
   
   const parts = formatter.formatToParts(d);
-  const month = parts.find(p => p.type === "month")?.value.toUpperCase() || "";
-  const day = parts.find(p => p.type === "day")?.value || "";
+  const getPart = (type: string) => parts.find(p => p.type === type)?.value || "0";
   
-  return { month, day };
+  const year = parseInt(getPart("year"), 10);
+  const monthNum = parseInt(getPart("month"), 10);
+  const dayNum = parseInt(getPart("day"), 10);
+
+  const monthName = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    timeZone,
+  }).format(d).toUpperCase();
+
+  const dayStr = dayNum.toString().padStart(2, "0");
+
+  return { 
+    month: monthName, 
+    day: dayStr, 
+    year, 
+    monthNum, 
+    dayNum 
+  };
 }
 
 /**
  * Calculates the number of days between a target date and today,
- * normalizing both to Europe/Berlin local midnight.
+ * normalizing both to Europe/Berlin local midnight using UTC midnights for comparison.
  *
  * @param dateStr - The target date string.
  * @returns The number of days (can be negative for past dates).
  */
 export function calculateDaysUntil(dateStr: string): number {
-  const target = new Date(dateStr);
-  const now = new Date();
+  const targetParts = getDateParts(dateStr, "Europe/Berlin");
+  const nowParts = getDateParts(new Date(), "Europe/Berlin");
 
-  // Berlin is UTC+2 in summer (April), UTC+1 in winter. 
-  // A safer way to normalize to midnight in Berlin:
-  const targetNormalized = new Date(target.toLocaleString("en-US", { timeZone: "Europe/Berlin" }));
-  targetNormalized.setHours(0, 0, 0, 0);
-  
-  const nowNormalized = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Berlin" }));
-  nowNormalized.setHours(0, 0, 0, 0);
+  // Create UTC timestamps for midnights in the specified timezone
+  const targetUtc = Date.UTC(targetParts.year, targetParts.monthNum - 1, targetParts.dayNum);
+  const nowUtc = Date.UTC(nowParts.year, nowParts.monthNum - 1, nowParts.dayNum);
 
-  const diff = targetNormalized.getTime() - nowNormalized.getTime();
+  const diff = targetUtc - nowUtc;
   return Math.round(diff / (1000 * 60 * 60 * 24));
 }
 
