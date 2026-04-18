@@ -78,7 +78,7 @@ function RedirectContent() {
 
         const isFound = results.some((doc: SanityEntry) => {
           const possibleUrls = [doc.destination, doc.url, doc.buyUrl].filter(
-            Boolean,
+            (u): u is string => Boolean(u),
           );
           return possibleUrls.some((u) => {
             try {
