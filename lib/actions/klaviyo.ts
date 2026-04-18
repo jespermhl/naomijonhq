@@ -82,14 +82,12 @@ export async function subscribeToNewsletter(email: string) {
     });
 
     if (!response.ok) {
-      // Log sanitized status, do not log raw payload to avoid PII exposure
       console.error(`Klaviyo API error: status ${response.status}`);
       return { success: false, error: "Failed to subscribe to newsletter. Please try again later." };
     }
 
     return { success: true };
   } catch (error) {
-    // Log generic error message server-side
     console.error("Klaviyo subscription exception occurred.");
     return { success: false, error: "An unexpected error occurred. Please try again later." };
   }

@@ -18,7 +18,7 @@ export function NewsletterForm() {
     if (!email) return;
 
     setStatus("loading");
-    
+
     try {
       const result = await subscribeToNewsletter(email);
 
@@ -38,13 +38,12 @@ export function NewsletterForm() {
 
   if (status === "success") {
     return (
-      <div 
+      <div
         id="newsletter-success"
         className="newsletter-status success-state wobble"
         role="status"
         aria-live="polite"
       >
-        <div className="status-icon">🍓</div>
         <p>{message}</p>
       </div>
     );
@@ -68,7 +67,7 @@ export function NewsletterForm() {
             aria-invalid={status === "error"}
           />
           {status === "error" && (
-            <p 
+            <p
               id="newsletter-error"
               className="error-message"
               role="status"
@@ -78,7 +77,7 @@ export function NewsletterForm() {
             </p>
           )}
         </div>
-        
+
         <Button
           type="submit"
           disabled={status === "loading"}
@@ -89,7 +88,7 @@ export function NewsletterForm() {
         </Button>
 
         <p className="newsletter-disclaimer">
-          By signing up, you agree to receive marketing emails from Naomi Jon HQ. 
+          By signing up, you agree to receive marketing emails from Naomi Jon HQ.
           You can unsubscribe at any time.
         </p>
       </form>

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
-import { InAppBrowserBanner } from "@/components/ui/InAppBrowserBanner";
 import { NewsletterForm } from "@/components/NewsletterForm";
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default async function NewsletterPage() {
       className="concerts-container bg-pattern"
       style={{ justifyContent: "center", padding: "24px" }}
     >
-      <InAppBrowserBanner />
       <Card className="newsletter-card">
         <Sticker className="hey-sticker" rotate="-3deg">HEY!</Sticker>
 
