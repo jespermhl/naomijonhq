@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest, NextFetchEvent } from 'next/server';
 import { createClient } from '@sanity/client';
+import { vemetric } from "./lib/vemetric";
 
 type RedirectConfig = {
   destination?: string;
@@ -23,6 +24,7 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     pathname.startsWith('/admin') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
+    pathname.startsWith('/redirect') ||
     pathname.includes('.')
   ) {
     return NextResponse.next();
@@ -43,14 +45,16 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
   }
 
   if (found?.destination) {
-    return NextResponse.redirect(
-      new URL(found.destination, req.url),
-      found.permanent ? 301 : 302
-    );
+    const dest = new URL(found.destination, req.url).toString();
+    const redirectUrl = new URL('/redirect', req.url);
+    redirectUrl.searchParams.set('to', dest);
+    return NextResponse.rewrite(redirectUrl);
   }
 
   // 3. Global fallback to Linktree
-  return NextResponse.redirect(new URL('https://linktr.ee/naomijonhq', req.url), 301);
+  const fallbackUrl = new URL('/redirect', req.url);
+  fallbackUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');
+  return NextResponse.rewrite(fallbackUrl);
 }
 
 export const config = {
