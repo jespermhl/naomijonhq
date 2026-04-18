@@ -254,6 +254,14 @@
         border-radius: 12px !important;
         max-width: none !important;
     }
+    .coverImageWrapperFinished {
+        width: 160px !important;
+        height: 160px !important;
+    }
+    .finishedMessage {
+        font-size: 18px !important;
+        margin-bottom: 14px !important;
+    }
 }
 
 .videoSection {

@@ -37,6 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { NewsletterPromotion } from "@/components/NewsletterPromotion";
+
 /**
  * The root layout component for the entire application.
  * Providers horizontal hydration warning suppression and globally active scripts.
@@ -53,6 +55,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         {children}
+        <NewsletterPromotion />
       </body>
     </html>
   );
