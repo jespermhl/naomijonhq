@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest, NextFetchEvent } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { createClient } from '@sanity/client';
 
 type RedirectConfig = {
@@ -15,7 +15,7 @@ const client = createClient({
   useCdn: true,
 });
 
-export default async function proxy(req: NextRequest, event: NextFetchEvent) {
+export default async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // 1. Ignore static paths & admin
@@ -52,9 +52,8 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.rewrite(redirectUrl);
   }
 
-  // 3. Fallback logic: Ensure no 404s
-  // If we are at the root, or if Sanity found nothing, redirect to Linktree hub
-  if (pathname === '/' || !found?.destination) {
+  // 3. Fallback logic: Rewrite root only
+  if (pathname === '/') {
     const hubUrl = new URL('/redirect', req.url);
     hubUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');
     return NextResponse.rewrite(hubUrl);

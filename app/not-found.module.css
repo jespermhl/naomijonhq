@@ -1,3 +1,11 @@
+.notFoundMain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
 .notFoundCard {
   text-align: center;
   padding: 60px 40px;

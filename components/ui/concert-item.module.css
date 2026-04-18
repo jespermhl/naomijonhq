@@ -125,7 +125,10 @@
     padding: 24px 0;
     gap: 12px;
     text-align: left;
-    transform: none !important;
+  }
+
+  .statusLabel {
+    transform: none;
   }
 
   .dateSection {

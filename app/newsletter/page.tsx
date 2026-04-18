@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function NewsletterPage() {
   return (
     <main className={`${styles.newsletterPage} bg-pattern`}>
-      <Card className={styles.newsletterCard} maxWidth="460px">
+      <Card className={styles.newsletterCard} maxWidth="460px" rotated={false}>
         <Sticker rotate="-3deg">
           HEY!
         </Sticker>

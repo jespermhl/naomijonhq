@@ -14,7 +14,24 @@
   transform: rotate(var(--rotate, 1deg));
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
+}
+
+.small {
+  padding: 8px 16px;
+  font-size: 12px;
+  min-width: auto;
+}
+
+.medium {
+  padding: 10px 20px;
+  font-size: 14px;
   min-width: 100px;
+}
+
+.large {
+  padding: 16px 32px;
+  font-size: 18px;
+  min-width: 140px;
 }
 
 .button:hover {

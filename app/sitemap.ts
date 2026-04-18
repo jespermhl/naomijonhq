@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://naomijonhq.com'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://naomijonhq.com'
 
   const routes = [
+    '',
     '/strawberry',
     '/strawberry-album',
     '/strawberry-tour',
@@ -12,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'daily' as const,
-    priority: 0.8,
+    priority: route === '' ? 1.0 : 0.8,
   }))
 
   return routes

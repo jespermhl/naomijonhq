@@ -34,6 +34,7 @@ export function NewsletterForm() {
         setMessage(result.error || "Something went wrong. Please try again.");
       }
     } catch (err) {
+      console.error("Subscription error:", err);
       setStatus("error");
       setMessage("An unexpected error occurred.");
     }
@@ -88,6 +89,7 @@ export function NewsletterForm() {
           disabled={status === "loading"}
           className={styles.submitBtn}
           rotate="0deg"
+          size="large"
         >
           {status === "loading" ? "Joining..." : "Join the Newsletter"}
         </Button>

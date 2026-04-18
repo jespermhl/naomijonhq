@@ -9,7 +9,9 @@
   border-radius: 16px;
   color: var(--brand-red);
   box-shadow: 4px 4px 0px var(--brand-red);
-  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background-color 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .socialSticker svg {

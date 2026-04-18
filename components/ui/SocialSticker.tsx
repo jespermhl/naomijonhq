@@ -32,7 +32,7 @@ export const SocialSticker: React.FC<SocialStickerProps> = ({
       aria-label={name}
       className={`${styles.socialSticker} ${className}`}
     >
-      <svg viewBox="0 0 24 24" fill="currentColor">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
         {icon}
       </svg>
     </a>

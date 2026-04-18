@@ -87,7 +87,7 @@ export async function subscribeToNewsletter(email: string) {
     }
 
     return { success: true };
-  } catch (error) {
+  } catch {
     console.error("Klaviyo subscription exception occurred.");
     return { success: false, error: "An unexpected error occurred. Please try again later." };
   }

@@ -11,6 +11,8 @@ interface CardProps {
   className?: string;
   /** CSS rotation value (e.g., '0.5deg'). */
   rotate?: string;
+  /** Whether the card should be rotated. Defaults to true. */
+  rotated?: boolean;
   /** Optional maximum width of the card. */
   maxWidth?: string;
   /** Unique ID for the card. */
@@ -25,18 +27,19 @@ export const Card: React.FC<CardProps> = ({
   children,
   className = "",
   rotate = "0.5deg",
+  rotated = true,
   maxWidth,
   id,
 }) => {
   const inlineStyles = {
-    "--rotate": rotate,
+    "--rotate": rotated ? rotate : "0deg",
     ...(maxWidth ? { maxWidth } : {}),
   } as React.CSSProperties;
 
   return (
     <div
       id={id}
-      className={`${styles.card} ${className}`}
+      className={`${styles.card} ${!rotated ? styles.noTransform : ""} ${className}`}
       style={inlineStyles}
     >
       {children}

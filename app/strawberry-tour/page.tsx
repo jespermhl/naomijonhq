@@ -10,6 +10,7 @@ import {
   calculateDaysUntil,
   formatDate,
   formatTime,
+  getDateParts,
 } from "@/lib/utils/date";
 import styles from "./tour.module.css";
 
@@ -107,14 +108,11 @@ export default async function ConcertsPage() {
             <h2 className={styles.pastTitle}>Past Dates</h2>
             <div className={styles.pastList}>
               {past.map((c) => {
-                const dateParts = formatDate(c.date).split(" ");
+                const dateParts = getDateParts(c.date);
                 return (
                   <PastConcertItem
                     key={c.id}
-                    date={{
-                      month: dateParts[0],
-                      day: dateParts[1],
-                    }}
+                    date={dateParts}
                     city={c.city}
                     location={c.location}
                   />

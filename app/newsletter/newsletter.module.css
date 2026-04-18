@@ -31,6 +31,5 @@
 @media (max-width: 640px) {
   .newsletterCard {
     padding: 48px 20px;
-    transform: none !important;
   }
 }
