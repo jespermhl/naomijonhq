@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import posthog from 'posthog-js/dist/module.full';
 
 /**
  * Props for the SocialSticker component.
@@ -33,7 +32,6 @@ export const SocialSticker: React.FC<SocialStickerProps> = ({
             rel="noopener noreferrer"
             aria-label={name}
             className={`social-sticker ${className}`}
-            onClick={() => posthog.capture("social_link_clicked", { platform: name, href })}
         >
             <svg viewBox="0 0 24 24" fill="currentColor">
                 {icon}
