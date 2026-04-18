@@ -1,10 +1,10 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { getSanitySocials } from "@/lib/sanity/socials";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
 import { SocialSticker } from "@/components/ui/SocialSticker";
 import { InAppBrowserBanner } from "@/components/ui/InAppBrowserBanner";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 const PLATFORM_ICONS: Record<string, React.ReactNode> = {
   instagram: (
@@ -48,12 +48,12 @@ async function getSocials() {
 export const metadata: Metadata = {
   title: "Newsletter",
   description:
-    "Stay updated with Naomi Jon's latest news and exclusive content by subscribing to the newsletter.",
+    "Join Naomi Jon's newsletter for the latest updates, exclusive content, and more!",
 };
 
 /**
  * The Newsletter page component.
- * Displays a newsletter signup form and social media links.
+ * Displays a custom newsletter signup form and social media links.
  */
 export default async function NewsletterPage() {
   const socials = await getSocials();
@@ -64,8 +64,8 @@ export default async function NewsletterPage() {
       style={{ justifyContent: "center", padding: "24px" }}
     >
       <InAppBrowserBanner />
-      <Card className="newsletter-card" rotate="-1deg">
-        <Sticker className="hey-sticker">HEY!</Sticker>
+      <Card className="newsletter-card">
+        <Sticker className="hey-sticker" rotate="-3deg">HEY!</Sticker>
 
         <div className="strawberry-emoji wobble" style={{ fontSize: "92px" }}>
           🍓
@@ -77,9 +77,13 @@ export default async function NewsletterPage() {
           Newsletter
         </h1>
 
-        <p className="newsletter-p">Meanwhile follow me on my socials:</p>
+        <p className="newsletter-p">
+          Stay updated with new music, concert dates, and news from Naomi Jon.
+        </p>
 
-        <div className="social-grid">
+        <NewsletterForm />
+
+        {/*<div className="social-grid">
           {socials.map((social) => (
             <SocialSticker
               key={social.url}
@@ -88,7 +92,7 @@ export default async function NewsletterPage() {
               icon={PLATFORM_ICONS[social.platform] || PLATFORM_ICONS.other}
             />
           ))}
-        </div>
+        </div>*/}
       </Card>
     </main>
   );
