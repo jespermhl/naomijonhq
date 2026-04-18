@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import posthog from 'posthog-js/dist/module.full';
 
 /**
  * Props for the ConcertItem component.
@@ -86,7 +85,6 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
                         target="_blank"
                         rel="noopener noreferrer"
                         className="buy-btn"
-                        onClick={() => posthog.capture("ticket_link_clicked", { city, country, venue: location, date })}
                     >
                         TICKETS
                     </a>
