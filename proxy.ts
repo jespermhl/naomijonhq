@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest, NextFetchEvent } from 'next/server';
 import { createClient } from '@sanity/client';
-import { vemetric } from "./lib/vemetric";
 
 type RedirectConfig = {
   destination?: string;
