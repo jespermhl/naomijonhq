@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import posthog from "posthog-js";
+import posthog from "posthog-js/dist/module.full";
 import styles from "./strawberry.module.css";
 
 const BurstAnimation = dynamic(

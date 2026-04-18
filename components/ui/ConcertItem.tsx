@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import posthog from 'posthog-js';
+import posthog from 'posthog-js/dist/module.full';
 
 /**
  * Props for the ConcertItem component.

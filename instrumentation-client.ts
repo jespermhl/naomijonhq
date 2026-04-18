@@ -1,4 +1,4 @@
-import posthog from "posthog-js";
+import posthog from "posthog-js/dist/module.full";
 
 const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 // This host should point at our reverse proxy, not the raw PostHog ingest host.
