@@ -46,7 +46,7 @@ export const Button: React.FC<ButtonProps> = ({
   } as React.CSSProperties;
 
   // Pattern match for href to determine if it's an anchor or button
-  if ("href" in props && props.href) {
+  if ("href" in props && props.href !== undefined) {
     const isExternal = props.href.startsWith("http://") || 
                      props.href.startsWith("https://") || 
                      props.href.startsWith("//");
@@ -55,13 +55,16 @@ export const Button: React.FC<ButtonProps> = ({
     const { target, rel, href, style: userStyle, ...anchorProps } = props as AnchorButtonProps;
     const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
     
+    const resolvedTarget = target ?? (isExternal ? "_blank" : undefined);
+    const resolvedRel = rel ?? (resolvedTarget === "_blank" ? "noopener noreferrer" : undefined);
+
     return (
       <a
         href={href}
         className={combinedClassName}
         style={mergedStyles}
-        target={target ?? (isExternal ? "_blank" : undefined)}
-        rel={rel ?? (isExternal ? "noopener noreferrer" : undefined)}
+        target={resolvedTarget}
+        rel={resolvedRel}
         {...anchorProps}
       >
         {children}

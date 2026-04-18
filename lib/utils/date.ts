@@ -1,10 +1,4 @@
 /**
- * Extracts month and day parts from a date string in Europe/Berlin timezone.
- * 
- * @param dateStr - The target date string.
- * @returns An object containing the month (short, uppercase) and zero-padded day.
- */
-/**
  * Extracts year, month, and day parts from a date string or Date object in the specified timezone.
  * Defaults to "Europe/Berlin".
  * 

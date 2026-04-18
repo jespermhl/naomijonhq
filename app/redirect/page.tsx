@@ -14,17 +14,17 @@ const STATIC_ALLOWED_HOSTS = [
 
 const FALLBACK_URL = "https://linktr.ee/naomijonhq";
 
+interface SanityEntry {
+  destination?: string;
+  url?: string;
+  buyUrl?: string;
+}
+
 function RedirectContent() {
   const searchParams = useSearchParams();
   const rawTarget = searchParams.get("to");
   const [target, setTarget] = useState<string>(FALLBACK_URL);
   const [isValidating, setIsValidating] = useState(true);
-
-  interface SanityEntry {
-    destination?: string;
-    url?: string;
-    buyUrl?: string;
-  }
 
   useEffect(() => {
     async function validateAndRedirect() {
@@ -41,8 +41,11 @@ function RedirectContent() {
         return;
       }
 
-      // Handle safe single-root relative paths early
-      if (rawTarget.startsWith("/") && !rawTarget.startsWith("//")) {
+      // Handle safe single-root relative paths early.
+      // Explicitly reject backslashes and any multi-root forms to prevent bypasses (e.g. /\evil.com)
+      if (rawTarget.includes("\\")) {
+        // Continue to strict parsing
+      } else if (rawTarget.startsWith("/") && !rawTarget.startsWith("//")) {
         setTarget(rawTarget);
         setIsValidating(false);
         return;
@@ -72,11 +75,11 @@ function RedirectContent() {
         }
 
         // 3. Check Sanity for this host
-        // We fetch entries that match the hostname as a token and then verify the parsed hostname in JS
-        const query = `*[_type in ["redirect", "social", "concert"] && (destination match $host || url match $host || buyUrl match $host)]`;
-        const results = await client.fetch(query, { host: hostname });
+        // We fetch entries that match the hostname token looseley and then verify the exact parsed hostname in JS
+        const query = `*[_type in ["redirect", "social", "concert"] && (destination match "*" + $host + "*" || url match "*" + $host + "*" || buyUrl match "*" + $host + "*")]`;
+        const results = await client.fetch<SanityEntry[]>(query, { host: hostname });
 
-        const isFound = results.some((doc: SanityEntry) => {
+        const isFound = results.some((doc) => {
           const possibleUrls = [doc.destination, doc.url, doc.buyUrl].filter(
             (u): u is string => Boolean(u),
           );
@@ -95,12 +98,8 @@ function RedirectContent() {
           setTarget(FALLBACK_URL);
         }
       } catch {
-        // Only allow safe single-root relative paths if URL parsing fails
-        if (rawTarget.startsWith("/") && !rawTarget.startsWith("//")) {
-          setTarget(rawTarget);
-        } else {
-          setTarget(FALLBACK_URL);
-        }
+        // Unconditionally fall back if parsing failed and it wasn't a safe relative path
+        setTarget(FALLBACK_URL);
       } finally {
         setIsValidating(false);
       }
