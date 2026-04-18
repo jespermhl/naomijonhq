@@ -67,8 +67,6 @@ export function NewsletterPromotion() {
           ✕
         </button>
 
-        <div className={styles.iconLarge} aria-hidden="true">🍓</div>
-
         <div className={styles.text}>
           <h3 className={styles.title}>Don't miss out!</h3>
           <p className={styles.description}>
