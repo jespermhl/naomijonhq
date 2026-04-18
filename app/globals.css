@@ -694,6 +694,11 @@ body {
   box-shadow: 4px 4px 0px var(--brand-pink);
 }
 
+.newsletter-input:focus-visible {
+  outline: 3px solid var(--brand-red) !important;
+  outline-offset: 2px;
+}
+
 .newsletter-input:focus {
   transform: translateY(-1px);
   box-shadow: 6px 6px 0px var(--brand-pink);

@@ -18,11 +18,9 @@ export function NewsletterForm() {
     if (!email) return;
 
     setStatus("loading");
-    console.log("Submitting email:", email);
-
+    
     try {
       const result = await subscribeToNewsletter(email);
-      console.log("Subscription result:", result);
 
       if (result.success) {
         setStatus("success");
@@ -40,7 +38,12 @@ export function NewsletterForm() {
 
   if (status === "success") {
     return (
-      <div className="newsletter-status success-state wobble">
+      <div 
+        id="newsletter-success"
+        className="newsletter-status success-state wobble"
+        role="status"
+        aria-live="polite"
+      >
         <div className="status-icon">🍓</div>
         <p>{message}</p>
       </div>
@@ -52,6 +55,7 @@ export function NewsletterForm() {
       <form onSubmit={handleSubmit} className="newsletter-form">
         <div className="input-wrapper">
           <input
+            id="newsletter-email"
             type="email"
             placeholder="Your email address..."
             value={email}
@@ -59,14 +63,22 @@ export function NewsletterForm() {
             disabled={status === "loading"}
             required
             className="newsletter-input"
+            aria-label="Email address for newsletter"
+            aria-describedby={status === "error" ? "newsletter-error" : undefined}
+            aria-invalid={status === "error"}
           />
           {status === "error" && (
-            <p className="error-message">
+            <p 
+              id="newsletter-error"
+              className="error-message"
+              role="status"
+              aria-live="assertive"
+            >
               <span>⚠️</span> {message}
             </p>
           )}
         </div>
-
+        
         <Button
           type="submit"
           disabled={status === "loading"}
@@ -77,7 +89,7 @@ export function NewsletterForm() {
         </Button>
 
         <p className="newsletter-disclaimer">
-          By signing up, you agree to receive marketing emails from Naomi Jon HQ.
+          By signing up, you agree to receive marketing emails from Naomi Jon HQ. 
           You can unsubscribe at any time.
         </p>
       </form>

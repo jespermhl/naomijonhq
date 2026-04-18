@@ -1,6 +1,21 @@
 "use server";
 
 /**
+ * Normalizes an email address by trimming whitespace and converting to lowercase.
+ */
+function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
+/**
+ * Validates an email address using a robust regex.
+ */
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+}
+
+/**
  * Subscribes a user to the Klaviyo newsletter list.
  * Uses the Bulk Subscribe Profiles endpoint as per Klaviyo API v2026-04-15.
  * 
@@ -12,8 +27,14 @@ export async function subscribeToNewsletter(email: string) {
   const listId = process.env.KLAVIYO_LIST_ID;
 
   if (!apiKey || !listId) {
-    console.error("KLAVIYO_PRIVATE_API_KEY or KLAVIYO_LIST_ID is not defined.");
-    return { success: false, error: "Configuration Error" };
+    console.error("Configuration Error: Klaviyo API key or List ID missing.");
+    return { success: false, error: "Configuration Error. Please contact support." };
+  }
+
+  const normalizedEmail = normalizeEmail(email);
+
+  if (!isValidEmail(normalizedEmail)) {
+    return { success: false, error: "Please provide a valid email address." };
   }
 
   try {
@@ -35,7 +56,7 @@ export async function subscribeToNewsletter(email: string) {
                 {
                   type: "profile",
                   attributes: {
-                    email: email,
+                    email: normalizedEmail,
                     subscriptions: {
                       email: {
                         marketing: {
@@ -61,20 +82,15 @@ export async function subscribeToNewsletter(email: string) {
     });
 
     if (!response.ok) {
-      const text = await response.text();
-      let errorData;
-      try {
-        errorData = JSON.parse(text);
-      } catch (e) {
-        errorData = { errors: [{ detail: text }] };
-      }
-      console.error("Klaviyo API error:", errorData);
-      return { success: false, error: errorData.errors?.[0]?.detail || "Failed to subscribe" };
+      // Log sanitized status, do not log raw payload to avoid PII exposure
+      console.error(`Klaviyo API error: status ${response.status}`);
+      return { success: false, error: "Failed to subscribe to newsletter. Please try again later." };
     }
 
     return { success: true };
   } catch (error) {
-    console.error("Newsletter subscription exception:", error);
-    return { success: false, error: "An unexpected error occurred." };
+    // Log generic error message server-side
+    console.error("Klaviyo subscription exception occurred.");
+    return { success: false, error: "An unexpected error occurred. Please try again later." };
   }
 }
