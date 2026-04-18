@@ -1,0 +1,14 @@
+.sticker {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  background: var(--brand-pink);
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: var(--border-width-xs) solid var(--brand-red);
+  font-weight: 800;
+  color: var(--brand-red);
+  transform: rotate(var(--rotate, 5deg));
+  box-shadow: 4px 4px 0px var(--brand-red);
+  z-index: 10;
+}

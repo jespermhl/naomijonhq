@@ -1,0 +1,118 @@
+.tourContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 24px;
+}
+
+.tourImageContainer {
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+
+.tourImageWrapper {
+  width: 280px;
+  height: 280px;
+  background-color: #ffffff;
+  border: 8px solid var(--brand-red);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 12px 12px 0px var(--brand-red);
+  position: relative;
+  z-index: 2;
+}
+
+.floatingStrawberry {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-size: 64px;
+  filter: drop-shadow(4px 4px 0px var(--brand-red));
+  z-index: 3;
+}
+
+.tourTitle {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 32px;
+  color: var(--brand-red);
+  line-height: 1;
+}
+
+.concertGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.noConcerts {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.pastSection {
+  margin-top: 64px;
+  border-top: 4px dashed var(--brand-pink);
+  padding-top: 48px;
+  text-align: center;
+}
+
+.pastTitle {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--brand-red);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pastList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .tourContainer {
+    padding: 40px 16px 64px;
+  }
+
+  .tourTitle {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  .concertGrid {
+    gap: 0;
+  }
+
+  .pastSection {
+    margin-top: 48px;
+    padding-top: 40px;
+  }
+
+  .tourImageContainer {
+    margin-bottom: 24px;
+    transform: none !important;
+  }
+
+  .tourImageWrapper {
+    width: 180px;
+    height: 180px;
+    border-width: 6px;
+    box-shadow: 8px 8px 0px var(--brand-red);
+  }
+
+  .floatingStrawberry {
+    font-size: 48px;
+    bottom: -15px;
+    right: -15px;
+    z-index: 10;
+  }
+}

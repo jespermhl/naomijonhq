@@ -2,6 +2,8 @@
 
 import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { Card } from "@/components/ui/Card";
+import styles from "./redirect.module.css";
 
 function RedirectContent() {
   const searchParams = useSearchParams();
@@ -16,51 +18,37 @@ function RedirectContent() {
   }, [target]);
 
   return (
-    <main className="concerts-container bg-pattern">
-      <div className="tour-card" style={{ maxWidth: '500px' }}>
+    <main className={`${styles.redirectPage} bg-pattern`}>
+      <Card className={styles.redirectCard} maxWidth="500px">
         <div className="strawberry-emoji wobble">🍓</div>
-        <h1 className="tour-title">Redirecting...</h1>
-        <p className="newsletter-p">
-          Taking you to your destination.<br />
+        <h1 className="page-title">Redirecting...</h1>
+        <p className="page-subtitle">
+          Taking you to your destination.
+          <br />
           Hold on a second!
         </p>
-        <div className="loading-dots">
-          <span>.</span><span>.</span><span>.</span>
+        <div className={styles.loadingDots}>
+          <span>.</span>
+          <span>.</span>
+          <span>.</span>
         </div>
-      </div>
-
-      <style jsx>{`
-        .loading-dots {
-          font-size: 48px;
-          color: var(--brand-red);
-          font-weight: 900;
-        }
-        .loading-dots span {
-          animation: dot-pulse 1.5s infinite;
-          display: inline-block;
-        }
-        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
-        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes dot-pulse {
-          0%, 100% { opacity: 0.2; transform: translateY(0); }
-          50% { opacity: 1; transform: translateY(-10px); }
-        }
-      `}</style>
+      </Card>
     </main>
   );
 }
 
 export default function RedirectPage() {
   return (
-    <Suspense fallback={
-      <main className="concerts-container bg-pattern">
-        <div className="tour-card">
-          <div className="strawberry-emoji wobble">🍓</div>
-          <h1 className="tour-title">Loading...</h1>
-        </div>
-      </main>
-    }>
+    <Suspense
+      fallback={
+        <main className={`${styles.redirectPage} bg-pattern`}>
+          <Card maxWidth="500px">
+            <div className="strawberry-emoji wobble">🍓</div>
+            <h1 className="page-title">Loading...</h1>
+          </Card>
+        </main>
+      }
+    >
       <RedirectContent />
     </Suspense>
   );

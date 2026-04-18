@@ -256,29 +256,6 @@
     }
 }
 
-.credits {
-    margin-top: 40px;
-    margin-bottom: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--brand-pink);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: center;
-}
-
-.credits a {
-    color: #e53e3e;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: all 0.2s ease;
-}
-
-.credits a:hover {
-    border-bottom-color: #e53e3e;
-    opacity: 0.8;
-}
-
 .videoSection {
     margin-top: 32px;
     width: 100%;

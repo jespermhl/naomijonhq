@@ -1,0 +1,31 @@
+.socialSticker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: var(--text-light);
+  border: var(--border-width-sm) solid var(--brand-red);
+  border-radius: 16px;
+  color: var(--brand-red);
+  box-shadow: 4px 4px 0px var(--brand-red);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.socialSticker svg {
+  width: 28px;
+  height: 28px;
+}
+
+.socialSticker:hover {
+  transform: translateY(-4px) rotate(-8deg);
+  background-color: var(--brand-pink);
+  box-shadow: 8px 8px 0px var(--brand-red);
+}
+
+@media (max-width: 640px) {
+  .socialSticker {
+    transform: none !important;
+    box-shadow: 4px 4px 0px var(--brand-red) !important;
+  }
+}

@@ -24,6 +24,8 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/redirect') ||
+    pathname.startsWith('/strawberry') ||
+    pathname.startsWith('/newsletter') ||
     pathname.includes('.')
   ) {
     return NextResponse.next();
@@ -50,10 +52,15 @@ export default async function proxy(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.rewrite(redirectUrl);
   }
 
-  // 3. Global fallback to Linktree
-  const fallbackUrl = new URL('/redirect', req.url);
-  fallbackUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');
-  return NextResponse.rewrite(fallbackUrl);
+  // 3. Fallback logic: Ensure no 404s
+  // If we are at the root, or if Sanity found nothing, redirect to Linktree hub
+  if (pathname === '/' || !found?.destination) {
+    const hubUrl = new URL('/redirect', req.url);
+    hubUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');
+    return NextResponse.rewrite(hubUrl);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
