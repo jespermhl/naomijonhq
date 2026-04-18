@@ -42,15 +42,15 @@ body {
   }
 
   25% {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.03) rotate(2deg);
   }
 
   50% {
-    transform: scale(1) rotate(-5deg);
+    transform: scale(1) rotate(-2deg);
   }
 
   75% {
-    transform: scale(1.1) rotate(3deg);
+    transform: scale(1.03) rotate(1deg);
   }
 }
 
@@ -551,7 +551,7 @@ body {
     padding: 24px 20px;
     gap: 16px;
   }
-  
+
   .past-details {
     align-items: center;
     text-align: center;
@@ -571,6 +571,7 @@ body {
     transform: none !important;
   }
 }
+
 .credits {
   margin-top: 48px;
   margin-bottom: 8px;
@@ -639,9 +640,12 @@ body {
 }
 
 @keyframes banner-arrow-bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -655,4 +659,106 @@ body {
   .has-in-app-banner .concerts-container {
     padding-top: 100px;
   }
+}
+
+/* New Newsletter Form Styles */
+.newsletter-form-container {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.newsletter-input {
+  width: 100%;
+  padding: 16px 24px;
+  border: var(--border-width-sm) solid var(--brand-red);
+  border-radius: 16px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  background: white;
+  transition: all 0.2s ease;
+  outline: none;
+  box-shadow: 4px 4px 0px var(--brand-pink);
+}
+
+.newsletter-input:focus-visible {
+  outline: 3px solid var(--brand-red) !important;
+  outline-offset: 2px;
+}
+
+.newsletter-input:focus {
+  transform: translateY(-1px);
+  box-shadow: 6px 6px 0px var(--brand-pink);
+  border-color: var(--brand-red);
+}
+
+.newsletter-input::placeholder {
+  color: #cbd5e0;
+}
+
+.newsletter-submit-btn {
+  width: 100%;
+  padding: 16px !important;
+  font-size: 18px !important;
+}
+
+.newsletter-disclaimer {
+  font-size: 11px;
+  color: #a0aec0;
+  line-height: 1.4;
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.error-message {
+  color: var(--brand-red);
+  font-size: 12px;
+  font-weight: 800;
+  margin-top: 8px;
+  text-align: left;
+  padding-left: 4px;
+}
+
+.newsletter-status {
+  padding: 32px;
+  background: white;
+  border: var(--border-width-sm) solid var(--brand-red);
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 6px 6px 0px var(--brand-pink);
+}
+
+.success-state {
+  border-color: #48bb78;
+  box-shadow: 6px 6px 0px #c6f6d5;
+}
+
+.status-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.newsletter-status p {
+  font-weight: 900;
+  color: var(--text-dark);
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.mt-4 {
+  margin-top: 16px;
 }
