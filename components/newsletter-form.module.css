@@ -74,6 +74,10 @@
   border-radius: 24px;
   text-align: center;
   box-shadow: 6px 6px 0px var(--brand-pink);
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
 }
 
 .successState {

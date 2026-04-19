@@ -76,8 +76,16 @@ function RedirectContent() {
 
         // 3. Check Sanity for this host
         // We fetch entries that match the hostname token looseley and then verify the exact parsed hostname in JS
-        const query = `*[_type in ["redirect", "social", "concert"] && (destination match "*" + $host + "*" || url match "*" + $host + "*" || buyUrl match "*" + $host + "*")]`;
-        const results = await client.fetch<SanityEntry[]>(query, { host: hostname });
+        // Use string::startsWith to match full hostnames reliably.
+        // GROQ's `match` tokenises on hyphens/dots, so subdomains like
+        // "naomijonhq-ndguaj.filedrop.me" would never match.
+        const httpsHost = `https://${hostname}`;
+        const query = `*[_type in ["redirect", "social", "concert"] && (
+          string::startsWith(destination, $httpsHost) ||
+          string::startsWith(url, $httpsHost) ||
+          string::startsWith(buyUrl, $httpsHost)
+        )]`;
+        const results = await client.fetch<SanityEntry[]>(query, { httpsHost });
 
         const isFound = results.some((doc) => {
           const possibleUrls = [doc.destination, doc.url, doc.buyUrl].filter(
