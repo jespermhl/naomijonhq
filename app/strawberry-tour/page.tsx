@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { getRedirectMeta } from "@/lib/sanity/redirects";
 import Image from "next/image";
 import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
@@ -42,11 +43,44 @@ async function getConcerts(): Promise<Concert[]> {
   }));
 }
 
-export const metadata: Metadata = {
-  title: "Strawberry Tour",
-  description:
-    "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.",
-};
+const SOURCE = "/strawberry-tour";
+
+const DEFAULT_TITLE = "Strawberry Tour";
+const DEFAULT_DESCRIPTION =
+  "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.";
+const DEFAULT_IMAGE = "/images/strawberry-tour.png";
+const DEFAULT_THEME_COLOR = "#a54c88";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const meta = await getRedirectMeta(SOURCE);
+
+  const title = meta.metaTitle?.trim() || DEFAULT_TITLE;
+  const description = meta.metaDescription?.trim() || DEFAULT_DESCRIPTION;
+  const image = meta.metaImage?.trim() || DEFAULT_IMAGE;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
+
+export async function generateViewport(): Promise<Viewport> {
+  const meta = await getRedirectMeta(SOURCE);
+  return {
+    themeColor: meta.themeColor?.trim() || DEFAULT_THEME_COLOR,
+  };
+}
 
 export const revalidate = 3600;
 
@@ -126,4 +160,3 @@ export default async function ConcertsPage() {
     </main>
   );
 }
-
