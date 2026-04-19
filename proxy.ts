@@ -8,39 +8,56 @@ type RedirectConfig = {
   noRedirect?: boolean;
 };
 
-const client = createClient({
+// Fresh reads: short links must work as soon as they are published in Sanity (no CDN lag).
+const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2024-01-13',
-  useCdn: true,
+  useCdn: false,
 });
 
-export default async function proxy(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-
-  // 1. Ignore static paths & admin
+function isReservedAppPath(pathname: string): boolean {
   if (
     pathname.startsWith('/admin') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
-    pathname.startsWith('/redirect') ||
-    pathname.startsWith('/strawberry') ||
-    pathname.startsWith('/newsletter') ||
-    pathname.includes('.')
+    pathname.startsWith('/redirect')
   ) {
+    return true;
+  }
+  if (pathname === '/newsletter' || pathname.startsWith('/newsletter/')) {
+    return true;
+  }
+  // Only real app routes — not every path that begins with "/strawberry" (e.g. /strawberry-mv short links).
+  if (
+    pathname === '/strawberry' ||
+    pathname.startsWith('/strawberry/') ||
+    pathname === '/strawberry-tour' ||
+    pathname.startsWith('/strawberry-tour/') ||
+    pathname === '/strawberry-album' ||
+    pathname.startsWith('/strawberry-album/')
+  ) {
+    return true;
+  }
+  return false;
+}
+
+export default async function proxy(req: NextRequest) {
+  const { pathname } = req.nextUrl;
+
+  // Skip paths that are handled directly by Next.js routes or contain file extensions
+  if (isReservedAppPath(pathname) || pathname.includes('.')) {
     return NextResponse.next();
   }
 
-  // 2. Query Sanity
   let found: RedirectConfig | null = null;
   try {
     const query = `*[_type == "redirect" && source == $path][0]{destination, permanent, noRedirect}`;
-    found = await client.fetch(query, { path: pathname });
+    found = await sanityClient.fetch(query, { path: pathname });
   } catch (error) {
     console.error('Edge Redirect Sanity Fetch Error:', error);
   }
 
-  // Explicitly allow /newsletter or if noRedirect is set in Sanity
   if (found?.noRedirect === true) {
     return NextResponse.next();
   }
@@ -49,11 +66,12 @@ export default async function proxy(req: NextRequest) {
     const dest = new URL(found.destination, req.url).toString();
     const redirectUrl = new URL('/redirect', req.url);
     redirectUrl.searchParams.set('to', dest);
-    redirectUrl.searchParams.set('source', pathname); // lets the redirect page verify by re-fetching from Sanity
+    // Pass the source path so the redirect page can re-verify the destination against Sanity
+    redirectUrl.searchParams.set('source', pathname);
     return NextResponse.redirect(redirectUrl, { status: found.permanent ? 301 : 302 });
   }
 
-  // 3. Fallback logic: Rewrite root only
+  // Rewrite the root to the Linktree hub
   if (pathname === '/') {
     const hubUrl = new URL('/redirect', req.url);
     hubUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');

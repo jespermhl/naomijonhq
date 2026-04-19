@@ -38,7 +38,6 @@ export const ConcertItem: React.FC<ConcertItemProps> = ({
   isSoldOut,
   buyUrl,
 }) => {
-  // Split date into month and day if possible (e.g., "MAY 24")
   const sanitizedDate = date.trim();
   const dateParts = sanitizedDate.split(/\s+/);
 

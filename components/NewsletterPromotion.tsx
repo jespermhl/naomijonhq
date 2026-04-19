@@ -11,22 +11,19 @@ import styles from "./newsletter-promotion.module.css";
  */
 export function NewsletterPromotion() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(true); // Default to true to prevent flash
+  const [isDismissed, setIsDismissed] = useState(true); // true by default prevents a flash on mount
   const pathname = usePathname();
 
   useEffect(() => {
-    // Don't show on the newsletter page itself
     if (pathname === "/newsletter") {
       setIsDismissed(true);
       return;
     }
 
-    // Check if user has already dismissed the promotion
     const dismissed = localStorage.getItem("newsletter-promo-dismissed");
     if (!dismissed) {
       setIsDismissed(false);
 
-      // Show after a delay
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, 5000);
@@ -38,7 +35,6 @@ export function NewsletterPromotion() {
   const handleDismiss = () => {
     setIsVisible(false);
     localStorage.setItem("newsletter-promo-dismissed", "true");
-    // Remove from DOM after transition
     setTimeout(() => setIsDismissed(true), 600);
   };
 

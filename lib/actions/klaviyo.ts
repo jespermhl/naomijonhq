@@ -1,15 +1,9 @@
 "use server";
 
-/**
- * Normalizes an email address by trimming whitespace and converting to lowercase.
- */
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
-/**
- * Validates an email address using a robust regex.
- */
 function isValidEmail(email: string): boolean {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return emailRegex.test(email);

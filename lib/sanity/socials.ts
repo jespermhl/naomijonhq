@@ -20,7 +20,7 @@ export async function getSanitySocials(): Promise<SanitySocials[]> {
 
     try {
         const socials = await client.fetch(query, {}, {
-            next: { revalidate: 60 } // Cache for 1 Minute
+            next: { revalidate: 60 } // Cache for 1 minute
         })
         return socials;
     } catch (error) {

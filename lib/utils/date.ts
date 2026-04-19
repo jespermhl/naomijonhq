@@ -50,7 +50,6 @@ export function calculateDaysUntil(dateStr: string): number {
   const targetParts = getDateParts(dateStr, "Europe/Berlin");
   const nowParts = getDateParts(new Date(), "Europe/Berlin");
 
-  // Create UTC timestamps for midnights in the specified timezone
   const targetUtc = Date.UTC(targetParts.year, targetParts.monthNum - 1, targetParts.dayNum);
   const nowUtc = Date.UTC(nowParts.year, nowParts.monthNum - 1, nowParts.dayNum);
 

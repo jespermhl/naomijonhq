@@ -75,7 +75,6 @@ export default async function ConcertsPage() {
               }}
             />
           </div>
-          {/* Floating Strawberry Emoji */}
           <div className={styles.floatingStrawberry}>🍓</div>
         </div>
 

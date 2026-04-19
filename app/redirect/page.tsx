@@ -35,15 +35,12 @@ function RedirectContent() {
         return;
       }
 
-      // Explicitly reject protocol-relative URLs early
       if (rawTarget.startsWith("//")) {
         setTarget(FALLBACK_URL);
         setIsValidating(false);
         return;
       }
 
-      // Handle safe single-root relative paths early.
-      // Explicitly reject backslashes and any multi-root forms to prevent bypasses (e.g. /\evil.com)
       if (rawTarget.includes("\\")) {
         // Continue to strict parsing
       } else if (rawTarget.startsWith("/") && !rawTarget.startsWith("//")) {
@@ -127,7 +124,6 @@ function RedirectContent() {
           setTarget(FALLBACK_URL);
         }
       } catch {
-        // Unconditionally fall back if parsing failed and it wasn't a safe relative path
         setTarget(FALLBACK_URL);
       } finally {
         setIsValidating(false);

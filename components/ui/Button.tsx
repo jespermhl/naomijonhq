@@ -2,9 +2,7 @@ import React from "react";
 import styles from "./button.module.css";
 
 /**
- * Custom properties unique to our Button component.
- * We don't include standard HTML attributes like 'children' or 'className' 
- * here because they are inherited from standard React types.
+ * Custom properties for the Button component.
  */
 interface ButtonCustomProps {
   /** CSS rotation value (e.g., '-2deg'). */
@@ -51,7 +49,6 @@ export const Button: React.FC<ButtonProps> = ({
                      props.href.startsWith("https://") || 
                      props.href.startsWith("//");
     
-    // Extract style from props to merge it properly
     const { target, rel, href, style: userStyle, ...anchorProps } = props as AnchorButtonProps;
     const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
     
@@ -72,8 +69,6 @@ export const Button: React.FC<ButtonProps> = ({
     );
   }
 
-  // Handle native button behavior
-  // Extract style from props to merge it properly
   const { type, style: userStyle, ...buttonProps } = props as NativeButtonProps;
   const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
 
