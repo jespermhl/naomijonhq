@@ -49,7 +49,8 @@ export default async function proxy(req: NextRequest) {
     const dest = new URL(found.destination, req.url).toString();
     const redirectUrl = new URL('/redirect', req.url);
     redirectUrl.searchParams.set('to', dest);
-    return NextResponse.rewrite(redirectUrl);
+    redirectUrl.searchParams.set('source', pathname); // lets the redirect page verify by re-fetching from Sanity
+    return NextResponse.redirect(redirectUrl, { status: found.permanent ? 301 : 302 });
   }
 
   // 3. Fallback logic: Rewrite root only

@@ -23,6 +23,7 @@ interface SanityEntry {
 function RedirectContent() {
   const searchParams = useSearchParams();
   const rawTarget = searchParams.get("to");
+  const source = searchParams.get("source"); // set by proxy.ts for Sanity-managed redirects
   const [target, setTarget] = useState<string>(FALLBACK_URL);
   const [isValidating, setIsValidating] = useState(true);
 
@@ -51,6 +52,30 @@ function RedirectContent() {
         return;
       }
 
+      // --- Fast path: proxy.ts already looked this up in Sanity ---
+      // Re-fetch the redirect document by source path and verify the destination
+      // matches what we received. This is secure (attacker can't forge source→dest)
+      // and works for ANY domain stored in Sanity without hardcoding.
+      if (source) {
+        try {
+          const entry = await client.fetch<{ destination?: string }>(
+            `*[_type == "redirect" && source == $source][0]{destination}`,
+            { source },
+          );
+          if (entry?.destination) {
+            const sanityDest = new URL(entry.destination).toString();
+            if (sanityDest === new URL(rawTarget).toString()) {
+              setTarget(rawTarget);
+              setIsValidating(false);
+              return;
+            }
+          }
+        } catch {
+          // fall through to static/hostname checks below
+        }
+      }
+
+      // --- Fallback path: direct /redirect?to= links without a source ---
       try {
         const url = new URL(rawTarget);
 
@@ -74,11 +99,7 @@ function RedirectContent() {
           return;
         }
 
-        // 3. Check Sanity for this host
-        // We fetch entries that match the hostname token looseley and then verify the exact parsed hostname in JS
-        // Use string::startsWith to match full hostnames reliably.
-        // GROQ's `match` tokenises on hyphens/dots, so subdomains like
-        // "naomijonhq-ndguaj.filedrop.me" would never match.
+        // 3. Check Sanity for this host via string::startsWith
         const httpsHost = `https://${hostname}`;
         const query = `*[_type in ["redirect", "social", "concert"] && (
           string::startsWith(destination, $httpsHost) ||
@@ -114,7 +135,7 @@ function RedirectContent() {
     }
 
     validateAndRedirect();
-  }, [rawTarget]);
+  }, [rawTarget, source]);
 
   useEffect(() => {
     if (!isValidating) {
