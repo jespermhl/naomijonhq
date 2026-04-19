@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { ogImagesForVariant } from "@/lib/opengraph";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
 import { NewsletterForm } from "@/components/NewsletterForm";
@@ -9,6 +10,12 @@ export const metadata: Metadata = {
   title: "Newsletter",
   description:
     "Join Naomi Jon's newsletter for the latest updates, exclusive content, and more!",
+  openGraph: {
+    images: ogImagesForVariant("newsletter", "Newsletter | Naomi Jon HQ"),
+  },
+  twitter: {
+    images: ogImagesForVariant("newsletter", "Newsletter | Naomi Jon HQ"),
+  },
 };
 
 /**

@@ -1,12 +1,16 @@
 import { Metadata } from "next";
+import { ogImagesForVariant } from "@/lib/opengraph";
 
 export const metadata: Metadata = {
   title: "Strawberry - New Album",
-  description: "Naomi Jon's album 'Strawberry'. Out now!",
+  description: "Naomi Jon's album Strawberry — out now.",
   openGraph: {
     title: "Strawberry - New Album",
-    description: "Naomi Jon's album 'Strawberry'. Out now!",
-    images: ["/images/strawberry-cover.jpg"],
+    description: "Naomi Jon's album Strawberry — out now.",
+    images: ogImagesForVariant("strawberry", "Strawberry — Naomi Jon"),
+  },
+  twitter: {
+    images: ogImagesForVariant("strawberry", "Strawberry — Naomi Jon"),
   },
 };
 

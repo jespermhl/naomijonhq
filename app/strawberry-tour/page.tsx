@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import { ogImagesForVariant } from "@/lib/opengraph";
 import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
@@ -46,6 +47,12 @@ export const metadata: Metadata = {
   title: "Strawberry Tour",
   description:
     "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.",
+  openGraph: {
+    images: ogImagesForVariant("strawberry-tour", "Strawberry Tour | Naomi Jon HQ"),
+  },
+  twitter: {
+    images: ogImagesForVariant("strawberry-tour", "Strawberry Tour | Naomi Jon HQ"),
+  },
 };
 
 export const revalidate = 3600;
