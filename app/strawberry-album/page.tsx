@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
-import { StrawberryRelease } from "../../components/StrawberryRelease";
+import { StrawberryRelease } from "@/components/StrawberryRelease";
 
 const SOURCE = "/strawberry-album";
 const DEFAULTS = {
