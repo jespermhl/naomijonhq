@@ -1,4 +1,4 @@
-import { StrawberryRelease } from "./StrawberryRelease";
+import { StrawberryRelease } from "../../components/StrawberryRelease";
 
 /**
  * The Strawberry Release page component (Includes MV).

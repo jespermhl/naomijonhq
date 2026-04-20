@@ -1,43 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { getRedirectMeta } from "@/lib/sanity/redirects";
-import { StrawberryRelease } from "../strawberry/StrawberryRelease";
+import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { StrawberryRelease } from "../../components/StrawberryRelease";
 
 const SOURCE = "/strawberry-album";
-
-const DEFAULT_TITLE = "Strawberry - New Album";
-const DEFAULT_DESCRIPTION = "Naomi Jon's album 'Strawberry'. Out now!";
-const DEFAULT_IMAGE = "/images/strawberry-cover.jpg";
-const DEFAULT_THEME_COLOR = "#a54c88";
+const DEFAULTS = {
+  title: "Strawberry - New Album",
+  description: "Naomi Jon's album 'Strawberry'. Out now!",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
-  const meta = await getRedirectMeta(SOURCE);
-
-  const title = meta.metaTitle?.trim() || DEFAULT_TITLE;
-  const description = meta.metaDescription?.trim() || DEFAULT_DESCRIPTION;
-  const image = meta.metaImage?.trim() || DEFAULT_IMAGE;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: [image],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [image],
-    },
-  };
+  return buildPageMetadata(SOURCE, DEFAULTS);
 }
 
 export async function generateViewport(): Promise<Viewport> {
-  const meta = await getRedirectMeta(SOURCE);
-  return {
-    themeColor: meta.themeColor?.trim() || DEFAULT_THEME_COLOR,
-  };
+  return buildPageViewport(SOURCE);
 }
 
 /**
