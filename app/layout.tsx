@@ -19,7 +19,6 @@ export const metadata: Metadata = {
     description:
       "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
     url: "https://naomijonhq.com",
-    siteName: "Naomi Jon HQ",
     images: [
       {
         url: "/images/strawberry-cover.jpg",

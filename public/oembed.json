@@ -1,10 +1,9 @@
 {
   "version": "1.0",
   "type": "link",
-  "provider_name": "Naomi Jon HQ",
-  "provider_url": "https://naomijonhq.com",
   "author_name": "Naomi Jon HQ",
   "author_url": "https://naomijonhq.com",
+  "author_icon_url": "https://naomijonhq.com/icon.png",
   "thumbnail_url": "https://naomijonhq.com/icon.png",
   "thumbnail_width": 160,
   "thumbnail_height": 160
