@@ -31,11 +31,11 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Naomi Jon HQ",
     description:
       "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
-    images: ["/images/strawberry-cover.jpg"],
+    images: ["https://naomijonhq.com/icon.png"],
   },
   robots: {
     index: true,
