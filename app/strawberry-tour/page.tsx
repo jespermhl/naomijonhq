@@ -1,18 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
 import Image from "next/image";
+import Link from "next/link";
 import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
-import { ConcertItem } from "@/components/ui/ConcertItem";
 import { PastConcertItem } from "@/components/ui/PastConcertItem";
 import { Credits } from "@/components/ui/Credits";
-import {
-  calculateDaysUntil,
-  formatDate,
-  formatTime,
-  getDateParts,
-} from "@/lib/utils/date";
+import { getDateParts } from "@/lib/utils/date";
 import styles from "./tour.module.css";
 
 interface Concert {
@@ -47,7 +42,7 @@ const SOURCE = "/strawberry-tour";
 const DEFAULTS = {
   title: "Strawberry Tour",
   description:
-    "Join Naomi Jon on the Strawberry Tour! Check out upcoming concert dates and get your tickets now.",
+    "The Strawberry Tour is a wrap! Relive the memories and stream the album now.",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -66,13 +61,11 @@ export const revalidate = 3600;
  */
 export default async function ConcertsPage() {
   const concerts = await getConcerts();
-  const upcoming = concerts.filter((c) => calculateDaysUntil(c.date) >= 0);
-  const past = concerts.filter((c) => calculateDaysUntil(c.date) < 0);
 
   return (
     <main className={`${styles.tourContainer} bg-pattern`}>
       <Card>
-        <Sticker>TOUR!</Sticker>
+        <Sticker>IT&apos;S A WRAP!</Sticker>
 
         <div className={styles.tourImageContainer}>
           <div className={styles.tourImageWrapper}>
@@ -90,33 +83,22 @@ export default async function ConcertsPage() {
 
         <h1 className="page-title">Strawberry Tour</h1>
 
-        <div className={styles.concertGrid}>
-          {upcoming.length > 0 ? (
-            upcoming.map((concert) => (
-              <ConcertItem
-                key={concert.id}
-                date={formatDate(concert.date)}
-                time={formatTime(concert.date)}
-                city={concert.city}
-                country={concert.country}
-                location={concert.location}
-                days={calculateDaysUntil(concert.date)}
-                isSoldOut={concert.isSoldOut}
-                buyUrl={concert.buyUrl}
-              />
-            ))
-          ) : (
-            <p className={styles.noConcerts}>
-              New dates coming soon! Stay tuned 🍓
-            </p>
-          )}
+        <div className={styles.tourOverBox}>
+          <p className={styles.tourOverEmoji}>🍓🎤✨</p>
+          <p className={styles.tourOverText}>
+            The Strawberry Tour is officially a wrap — thank you to every single
+            one of you who came out and sang along. It was absolutely magical!
+          </p>
+          <Link href="/strawberry-album" className={styles.albumBtn}>
+            🍓 Listen to Strawberry
+          </Link>
         </div>
 
-        {past.length > 0 && (
+        {concerts.length > 0 && (
           <div className={styles.pastSection}>
-            <h2 className={styles.pastTitle}>Past Dates</h2>
+            <h2 className={styles.pastTitle}>Tour Dates</h2>
             <div className={styles.pastList}>
-              {past.map((c) => {
+              {concerts.map((c) => {
                 const dateParts = getDateParts(c.date);
                 return (
                   <PastConcertItem
