@@ -10,7 +10,10 @@ export const metadata: Metadata = {
   },
   description:
     "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
-
+  icons: {
+    icon: "https://naomijonhq.com/icon.png",
+    apple: "https://naomijonhq.com/icon.png",
+  },
   openGraph: {
     title: "Naomi Jon HQ",
     description:
@@ -51,6 +54,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <link
+          rel="alternate"
+          type="application/json+oembed"
+          href="https://naomijonhq.com/oembed.json"
+        />
         {children}
         <NewsletterPromotion />
       </body>
