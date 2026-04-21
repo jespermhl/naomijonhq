@@ -10,10 +10,7 @@ export const metadata: Metadata = {
   },
   description:
     "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
-  icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
-  },
+
   openGraph: {
     title: "Naomi Jon HQ",
     description:
