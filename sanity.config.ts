@@ -53,6 +53,56 @@ export default defineConfig({
             title: "Meta Image",
             initialValue: "",
           },
+          {
+            name: "customMeta",
+            type: "array",
+            title: "Custom Meta Tags",
+            description:
+              "Optional extra <meta> tags, e.g. music:musician, article:author",
+            of: [
+              {
+                type: "object",
+                title: "Meta Tag",
+                fields: [
+                  {
+                    name: "key",
+                    type: "string",
+                    title: "Name",
+                    description: 'e.g. "music:musician" or "og:video"',
+                    validation: (Rule: Rule) =>
+                      Rule.custom((key: string) => {
+                        const reserved = [
+                          "og:title",
+                          "og:description",
+                          "og:image",
+                          "og:site_name",
+                          "twitter:title",
+                          "twitter:description",
+                          "twitter:image",
+                          "twitter:card",
+                          "theme-color",
+                          "title",
+                          "description",
+                        ];
+                        if (!key) return true;
+                        if (reserved.includes(key.toLowerCase().trim())) {
+                          return `"${key}" is already handled by the dedicated fields above — use those instead.`;
+                        }
+                        return true;
+                      }),
+                  },
+                  {
+                    name: "content",
+                    type: "string",
+                    title: "Content",
+                  },
+                ],
+                preview: {
+                  select: { title: "key", subtitle: "content" },
+                },
+              },
+            ],
+          },
         ],
       },
       {

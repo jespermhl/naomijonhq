@@ -10,11 +10,17 @@ const client = createClient({
 
 const DEFAULT_THEME_COLOR = "#a54c88";
 
+interface CustomMetaEntry {
+  key?: string;
+  content?: string;
+}
+
 interface RedirectMeta {
   themeColor?: string;
   metaTitle?: string;
   metaDescription?: string;
   metaImage?: string;
+  customMeta?: CustomMetaEntry[];
 }
 
 interface PageDefaults {
@@ -36,7 +42,8 @@ async function getRedirectMeta(source: string): Promise<RedirectMeta> {
         themeColor,
         metaTitle,
         metaDescription,
-        metaImage
+        metaImage,
+        customMeta
       }`,
       { source },
       { next: { revalidate: 60 } },
@@ -67,7 +74,18 @@ export async function buildPageMetadata(
   const description = meta.metaDescription?.trim() || defaults?.description;
   const image = meta.metaImage?.trim() || undefined;
 
-  if (!title && !description && !image) return {};
+  const other = meta.customMeta?.reduce<Record<string, string>>(
+    (acc, entry) => {
+      if (entry.key?.trim() && entry.content?.trim()) {
+        acc[entry.key.trim()] = entry.content.trim();
+      }
+      return acc;
+    },
+    {},
+  );
+
+  const hasOther = other !== undefined && Object.keys(other).length > 0;
+  if (!title && !description && !image && !hasOther) return {};
 
   return {
     ...(title && { title }),
@@ -84,6 +102,7 @@ export async function buildPageMetadata(
       ...(description && { description }),
       ...(image && { images: [image] }),
     },
+    ...(other && Object.keys(other).length > 0 && { other }),
   };
 }
 
