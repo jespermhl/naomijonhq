@@ -73,6 +73,7 @@ export async function buildPageMetadata(
     ...(title && { title }),
     ...(description && { description }),
     openGraph: {
+      siteName: "Naomi Jon HQ",
       ...(title && { title }),
       ...(description && { description }),
       ...(image && { images: [image] }),
