@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 
 const SOURCE = "/strawberry";
 const DEFAULTS = {
@@ -20,5 +21,10 @@ export default function StrawberryCountdownLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <PropertyMetaTags source={SOURCE} />
+      {children}
+    </>
+  );
 }

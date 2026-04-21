@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { StrawberryRelease } from "@/components/StrawberryRelease";
 
 const SOURCE = "/strawberry-album";
@@ -20,5 +21,10 @@ export async function generateViewport(): Promise<Viewport> {
  * The Strawberry Album landing page (Doesn't include MV).
  */
 export default function StrawberryAlbumPage() {
-  return <StrawberryRelease showVideo={false} />;
+  return (
+    <>
+      <PropertyMetaTags source={SOURCE} />
+      <StrawberryRelease showVideo={false} />
+    </>
+  );
 }

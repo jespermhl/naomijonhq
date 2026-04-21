@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { getSanityConcerts } from "@/lib/sanity/concerts";
@@ -63,57 +64,60 @@ export default async function ConcertsPage() {
   const concerts = await getConcerts();
 
   return (
-    <main className={`${styles.tourContainer} bg-pattern`}>
-      <Card>
-        <Sticker>IT&apos;S A WRAP!</Sticker>
+    <>
+      <PropertyMetaTags source={SOURCE} />
+      <main className={`${styles.tourContainer} bg-pattern`}>
+        <Card>
+          <Sticker>IT&apos;S A WRAP!</Sticker>
 
-        <div className={styles.tourImageContainer}>
-          <div className={styles.tourImageWrapper}>
-            <Image
-              src="/images/strawberry-tour.png"
-              alt="Strawberry Tour"
-              fill
-              style={{
-                objectFit: "cover",
-              }}
-            />
-          </div>
-          <div className={styles.floatingStrawberry}>🍓</div>
-        </div>
-
-        <h1 className="page-title">Strawberry Tour</h1>
-
-        <div className={styles.tourOverBox}>
-          <p className={styles.tourOverText}>
-            The Strawberry Tour has come to an end. Stream the album and keep
-            the Strawberry era alive.
-          </p>
-          <Button href="/strawberry-album" size="large" rotate="0deg">
-            Listen to Strawberry
-          </Button>
-        </div>
-
-        {concerts.length > 0 && (
-          <div className={styles.pastSection}>
-            <h2 className={styles.pastTitle}>Tour Dates</h2>
-            <div className={styles.pastList}>
-              {concerts.map((c) => {
-                const dateParts = getDateParts(c.date);
-                return (
-                  <PastConcertItem
-                    key={c.id}
-                    date={dateParts}
-                    city={c.city}
-                    location={c.location}
-                  />
-                );
-              })}
+          <div className={styles.tourImageContainer}>
+            <div className={styles.tourImageWrapper}>
+              <Image
+                src="/images/strawberry-tour.png"
+                alt="Strawberry Tour"
+                fill
+                style={{
+                  objectFit: "cover",
+                }}
+              />
             </div>
+            <div className={styles.floatingStrawberry}>🍓</div>
           </div>
-        )}
 
-        <Credits />
-      </Card>
-    </main>
+          <h1 className="page-title">Strawberry Tour</h1>
+
+          <div className={styles.tourOverBox}>
+            <p className={styles.tourOverText}>
+              The Strawberry Tour has come to an end. Stream the album and keep
+              the Strawberry era alive.
+            </p>
+            <Button href="/strawberry-album" size="large" rotate="0deg">
+              Listen to Strawberry
+            </Button>
+          </div>
+
+          {concerts.length > 0 && (
+            <div className={styles.pastSection}>
+              <h2 className={styles.pastTitle}>Tour Dates</h2>
+              <div className={styles.pastList}>
+                {concerts.map((c) => {
+                  const dateParts = getDateParts(c.date);
+                  return (
+                    <PastConcertItem
+                      key={c.id}
+                      date={dateParts}
+                      city={c.city}
+                      location={c.location}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <Credits />
+        </Card>
+      </main>
+    </>
   );
 }
