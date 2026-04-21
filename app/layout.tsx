@@ -8,10 +8,12 @@ export const metadata: Metadata = {
     default: "Naomi Jon HQ",
     template: "%s | Naomi Jon HQ",
   },
-  description: "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
+  description:
+    "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
   openGraph: {
     title: "Naomi Jon HQ",
-    description: "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
+    description:
+      "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
     url: "https://naomijonhq.com",
     siteName: "Naomi Jon HQ",
     images: [
@@ -28,7 +30,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Naomi Jon HQ",
-    description: "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
+    description:
+      "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
     images: ["/images/strawberry-cover.jpg"],
   },
   robots: {
@@ -47,6 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <meta property="og:logo" content="https://naomijonhq.com/favicon.ico" />
         {children}
         <NewsletterPromotion />
       </body>
