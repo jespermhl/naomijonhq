@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <meta property="og:logo" content="https://naomijonhq.com/favicon.ico" />
+        <meta property="og:logo" content="https://naomijonhq.com/favicon.png" />
         {children}
         <NewsletterPromotion />
       </body>
