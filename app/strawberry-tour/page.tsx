@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
 import Image from "next/image";
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
@@ -84,14 +84,13 @@ export default async function ConcertsPage() {
         <h1 className="page-title">Strawberry Tour</h1>
 
         <div className={styles.tourOverBox}>
-          <p className={styles.tourOverEmoji}>🍓🎤✨</p>
           <p className={styles.tourOverText}>
-            The Strawberry Tour is officially a wrap — thank you to every single
-            one of you who came out and sang along. It was absolutely magical!
+            The Strawberry Tour has come to an end. Stream the album and keep
+            the Strawberry era alive.
           </p>
-          <Link href="/strawberry-album" className={styles.albumBtn}>
-            🍓 Listen to Strawberry
-          </Link>
+          <Button href="/strawberry-album" size="large" rotate="0deg">
+            Listen to Strawberry
+          </Button>
         </div>
 
         {concerts.length > 0 && (
