@@ -44,6 +44,7 @@ export const metadata: Metadata = {
 };
 
 import { NewsletterPromotion } from "@/components/NewsletterPromotion";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -59,6 +60,7 @@ export default function RootLayout({
           href="https://naomijonhq.com/oembed.json"
         />
         {children}
+        <Footer />
         <NewsletterPromotion />
       </body>
     </html>

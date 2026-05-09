@@ -201,12 +201,31 @@
 
 /* Content Area */
 .content {
-  padding: 20px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: white;
   border-top: 3px solid var(--brand-pink, #feb2b2);
+  gap: 12px;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.heartNotes {
+  font-size: 0.8rem;
+  color: #718096;
+  font-weight: 600;
+  margin: 2px 0 0 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .titleContainer {

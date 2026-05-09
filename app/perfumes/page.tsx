@@ -18,6 +18,7 @@ interface Perfume {
   image: any;
   storeLinks: any[];
   isNew?: boolean;
+  heartNotes?: string;
 }
 
 async function getPerfumes(): Promise<Perfume[]> {
@@ -27,7 +28,8 @@ async function getPerfumes(): Promise<Perfume[]> {
     "slug": slug.current,
     image,
     storeLinks,
-    isNew
+    isNew,
+    heartNotes
   }`;
   const perfumes = await client.fetch<Perfume[]>(query);
   return perfumes;
