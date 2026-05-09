@@ -14,9 +14,13 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.backLink:hover {
+.backLink:hover,
+.backLink:focus-visible {
   color: var(--brand-red, #e53e3e);
   transform: translateX(-4px);
+  outline: 2px solid var(--brand-red, #e53e3e);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 .detailCard {
@@ -122,9 +126,12 @@
   gap: 16px;
 }
 
-.storeLink:hover {
+.storeLink:hover,
+.storeLink:focus-visible {
   transform: translateX(8px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  outline: 3px solid var(--brand-red, #e53e3e);
+  outline-offset: 2px;
 }
 
 .storeIconWrapper {
@@ -165,7 +172,8 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.storeLink:hover .arrow {
+.storeLink:hover .arrow,
+.storeLink:focus-visible .arrow {
   color: var(--brand-red, #e53e3e);
   transform: translateX(4px);
 }

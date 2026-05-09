@@ -13,11 +13,19 @@ interface StoreLink {
   _key: string;
 }
 
+interface SanityImage {
+  asset: {
+    _ref: string;
+    _type: string;
+  };
+  [key: string]: any;
+}
+
 interface PerfumeCardProps {
   perfume: {
     title: string;
     slug?: string;
-    image: any;
+    image: SanityImage;
     storeLinks: StoreLink[];
   };
 }
@@ -32,6 +40,15 @@ const STORE_COLORS: Record<string, string> = {
   dm: "#004085",
   rossmann: "#e30613",
   amazon: "#ffffff",
+}
+
+function isHttpOrHttpsUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
 }
 
 export default function PerfumeCard({ perfume }: PerfumeCardProps) {
@@ -72,10 +89,10 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
 
         <div className={`${styles.linksOverlay} ${showLinks ? styles.show : ""}`}>
           <div className={styles.linksContainer}>
-            <button className={styles.closeBtn} onClick={(e) => { e.stopPropagation(); toggleLinks(); }}>×</button>
+            <button type="button" className={styles.closeBtn} onClick={(e) => { e.stopPropagation(); toggleLinks(); }} aria-label="Close">×</button>
             <h4 className={styles.overlayTitle}>Buy {perfume.title}</h4>
             <ul className={styles.linksList}>
-              {perfume.storeLinks?.map((link) => (
+              {perfume.storeLinks?.filter((link) => isHttpOrHttpsUrl(link.url)).map((link) => (
                 <li key={link._key} className={styles.linkItem}>
                   <a href={link.url} target="_blank" rel="noopener noreferrer" className={styles.storeLink}>
                     <span className={styles.storeName}>{link.store.toUpperCase()}</span>
@@ -102,11 +119,13 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
         {perfume.storeLinks && perfume.storeLinks.length > 0 && (
           <div className={styles.iconLayerBottom}>
             {perfume.storeLinks.map((link) => (
-              <div
+              <button
+                type="button"
                 key={link._key}
                 className={styles.storeIconSmall}
                 style={{ backgroundColor: STORE_COLORS[link.store] || "#333", border: link.store === 'amazon' ? '1px solid #e2e8f0' : 'none' }}
                 title={`Available at ${link.store}`}
+                aria-label={`Open store links for ${link.store}`}
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleLinks(); }}
               >
                 {STORE_ICONS[link.store] ? (
@@ -114,7 +133,7 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
                 ) : (
                   "🛒"
                 )}
-              </div>
+              </button>
             ))}
           </div>
         )}

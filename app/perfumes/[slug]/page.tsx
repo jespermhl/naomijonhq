@@ -13,6 +13,13 @@ interface PerfumeProps {
   params: Promise<{ slug: string }>;
 }
 
+interface StoreLink {
+  _key: string;
+  url: string;
+  store: string;
+  price?: string | number;
+}
+
 const STORE_ICONS: Record<string, string> = {
   dm: "/icons/dm.svg",
   rossmann: "/icons/rossmann.svg",
@@ -92,7 +99,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
           <div className={styles.linksContainer}>
             {perfume.storeLinks && perfume.storeLinks.length > 0 ? (
               <ul className={styles.linksList}>
-                {perfume.storeLinks.map((link: any) => (
+                {perfume.storeLinks.map((link: StoreLink) => (
                   <li key={link._key} className={styles.linkItem}>
                     <a
                       href={link.url}

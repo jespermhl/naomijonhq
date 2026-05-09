@@ -70,8 +70,11 @@
   overflow: hidden;
 }
 
-.storeIconSmall:hover {
+.storeIconSmall:hover,
+.storeIconSmall:focus-visible {
   transform: scale(1.15) rotate(5deg);
+  outline: 2px solid var(--brand-red, #e53e3e);
+  outline-offset: 2px;
 }
 
 /* Links Overlay (Glassmorphism) */
@@ -125,8 +128,12 @@
   padding: 4px;
 }
 
-.closeBtn:hover {
+.closeBtn:hover,
+.closeBtn:focus-visible {
   color: var(--brand-red, #e53e3e);
+  outline: 2px solid var(--brand-red, #e53e3e);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .overlayTitle {
@@ -164,11 +171,14 @@
   transition: all 0.2s ease;
 }
 
-.storeLink:hover {
+.storeLink:hover,
+.storeLink:focus-visible {
   background: var(--brand-pink, #feb2b2);
   border-color: var(--brand-red, #e53e3e);
   color: white;
   transform: translateX(4px);
+  outline: 2px solid var(--brand-red, #e53e3e);
+  outline-offset: 2px;
 }
 
 .storeName {
@@ -217,6 +227,13 @@
   text-decoration: none;
 }
 
-.titleLink:hover .title {
+.titleLink:hover .title,
+.titleLink:focus-visible .title {
   color: var(--brand-pink, #feb2b2);
+}
+
+.titleLink:focus-visible {
+  outline: 2px solid var(--brand-red, #e53e3e);
+  outline-offset: 4px;
+  border-radius: 4px;
 }

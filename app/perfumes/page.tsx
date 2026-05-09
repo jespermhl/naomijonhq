@@ -11,14 +11,23 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-async function getPerfumes() {
+interface Perfume {
+  _id: string;
+  title: string;
+  slug: string;
+  image: any;
+  storeLinks: any[];
+}
+
+async function getPerfumes(): Promise<Perfume[]> {
   const query = `*[_type == "perfume"] | order(order asc) {
+    _id,
     title,
     "slug": slug.current,
     image,
     storeLinks
   }`;
-  const perfumes = await client.fetch(query);
+  const perfumes = await client.fetch<Perfume[]>(query);
   return perfumes;
 }
 
@@ -32,8 +41,8 @@ export default async function PerfumesPage() {
 
       {perfumes.length > 0 ? (
         <div className={styles.grid}>
-          {perfumes.map((perfume: any) => (
-            <PerfumeCard key={perfume.slug || perfume.title} perfume={perfume} />
+          {perfumes.map((perfume) => (
+            <PerfumeCard key={perfume._id} perfume={perfume} />
           ))}
         </div>
       ) : (

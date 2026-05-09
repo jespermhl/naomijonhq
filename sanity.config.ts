@@ -169,7 +169,7 @@ export default defineConfig({
         type: "document",
         title: "Perfumes",
         fields: [
-          { name: "title", type: "string", title: "Perfume Name" },
+          { name: "title", type: "string", title: "Perfume Name", validation: (Rule: Rule) => Rule.required() },
           {
             name: "slug",
             type: "slug",
@@ -178,6 +178,7 @@ export default defineConfig({
               source: "title",
               maxLength: 96,
             },
+            validation: (Rule: Rule) => Rule.required(),
           },
           {
             name: "image",
@@ -205,8 +206,9 @@ export default defineConfig({
                         { title: "Amazon", value: "amazon" },
                       ],
                     },
+                    validation: (Rule: Rule) => Rule.required(),
                   },
-                  { name: "url", type: "url", title: "URL" },
+                  { name: "url", type: "url", title: "URL", validation: (Rule: Rule) => Rule.required() },
                   { name: "price", type: "string", title: "Price (e.g. 19,99 €)" },
                 ],
                 preview: {
