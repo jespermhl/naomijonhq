@@ -164,6 +164,64 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "perfume",
+        type: "document",
+        title: "Perfumes",
+        fields: [
+          { name: "title", type: "string", title: "Perfume Name", validation: (Rule: Rule) => Rule.required() },
+          {
+            name: "slug",
+            type: "slug",
+            title: "Slug",
+            options: {
+              source: "title",
+              maxLength: 96,
+            },
+            validation: (Rule: Rule) => Rule.required(),
+          },
+          {
+            name: "image",
+            type: "image",
+            title: "Perfume Image",
+            options: { hotspot: true },
+          },
+          { name: "order", type: "number", title: "Order", initialValue: 0 },
+          {
+            name: "storeLinks",
+            type: "array",
+            title: "Store Links",
+            of: [
+              {
+                type: "object",
+                fields: [
+                  {
+                    name: "store",
+                    type: "string",
+                    title: "Store Name",
+                    options: {
+                      list: [
+                        { title: "DM", value: "dm" },
+                        { title: "Rossmann", value: "rossmann" },
+                        { title: "Amazon", value: "amazon" },
+                      ],
+                    },
+                    validation: (Rule: Rule) => Rule.required(),
+                  },
+                  { name: "url", type: "url", title: "URL", validation: (Rule: Rule) => Rule.required() },
+                  { name: "price", type: "string", title: "Price (e.g. 19,99 €)" },
+                ],
+                preview: {
+                  select: {
+                    title: "store",
+                    subtitle: "price",
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 });
