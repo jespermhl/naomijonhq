@@ -1,6 +1,6 @@
-import React from "react";
 import { client } from "../../../sanity/client";
 import { urlFor } from "../../../sanity/imageUrl";
+import type { SanityImageSource } from "@sanity/image-url";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -38,9 +38,19 @@ const STORE_ICON_BG: Record<string, string> = {
   amazon: "#ffffff",
 };
 
+interface Perfume {
+  title: string;
+  image: SanityImageSource;
+  description?: string;
+  topNotes?: string;
+  heartNotes?: string;
+  baseNotes?: string;
+  storeLinks: StoreLink[];
+}
+
 export async function generateMetadata(props: PerfumeProps): Promise<Metadata> {
   const { slug } = await props.params;
-  const perfume = await client.fetch(`*[_type == "perfume" && slug.current == $slug][0]{title}`, { slug });
+  const perfume = await client.fetch(`*[_type == "perfume" && slug.current == $slug][0]{title, description}`, { slug });
 
   if (!perfume) {
     return { title: "Perfume Not Found" };
@@ -48,7 +58,7 @@ export async function generateMetadata(props: PerfumeProps): Promise<Metadata> {
 
   return {
     title: `${perfume.title} | Naomi Jon Fragrance`,
-    description: `Buy ${perfume.title} at DM, Rossmann, or Amazon.`,
+    description: perfume.description || `Buy ${perfume.title} at DM, Rossmann, or Amazon.`,
   };
 }
 
@@ -57,10 +67,14 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
   const query = `*[_type == "perfume" && slug.current == $slug][0]{
     title,
     image,
+    description,
+    topNotes,
+    heartNotes,
+    baseNotes,
     storeLinks
   }`;
 
-  const perfume = await client.fetch(query, { slug });
+  const perfume: Perfume | null = await client.fetch(query, { slug });
 
   if (!perfume) {
     notFound();
@@ -76,25 +90,59 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
 
       <div className={styles.detailCard}>
         <div className={styles.imageColumn}>
-          {imageUrl ? (
-            <div className={styles.imageWrapper}>
-              <Image
-                src={imageUrl}
-                alt={perfume.title}
-                fill
-                className={styles.perfumeImage}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
+          <div className={styles.imageContainer}>
+            {imageUrl ? (
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={imageUrl}
+                  alt={perfume.title}
+                  fill
+                  className={styles.perfumeImage}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+              </div>
+            ) : (
+              <div className={styles.placeholderImage}>No Image</div>
+            )}
+          </div>
+
+          {(perfume.topNotes || perfume.heartNotes || perfume.baseNotes) && (
+            <div className={styles.notesSection}>
+              <h2 className={styles.notesTitle}>Fragrance Notes</h2>
+              <div className={styles.notesList}>
+                {perfume.topNotes && (
+                  <div className={styles.noteItem}>
+                    <span className={styles.noteLabel}>Top Notes</span>
+                    <span className={styles.noteValue}>{perfume.topNotes}</span>
+                  </div>
+                )}
+                {perfume.heartNotes && (
+                  <div className={styles.noteItem}>
+                    <span className={styles.noteLabel}>Heart Notes</span>
+                    <span className={styles.noteValue}>{perfume.heartNotes}</span>
+                  </div>
+                )}
+                {perfume.baseNotes && (
+                  <div className={styles.noteItem}>
+                    <span className={styles.noteLabel}>Base Notes</span>
+                    <span className={styles.noteValue}>{perfume.baseNotes}</span>
+                  </div>
+                )}
+              </div>
             </div>
-          ) : (
-            <div className={styles.placeholderImage}>No Image</div>
           )}
         </div>
 
         <div className={styles.infoColumn}>
-          <h1 className={styles.title}>{perfume.title}</h1>
-          <p className={styles.subtitle}>Get it now at your favorite store.</p>
+          <div className={styles.topInfo}>
+            <h1 className={styles.title}>{perfume.title}</h1>
+            <p className={styles.subtitle}>Get it now at your favorite store.</p>
+
+            {perfume.description && (
+              <p className={styles.description}>{perfume.description}</p>
+            )}
+          </div>
 
           <div className={styles.linksContainer}>
             {perfume.storeLinks && perfume.storeLinks.length > 0 ? (

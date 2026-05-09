@@ -4,7 +4,6 @@ import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
 import { NewsletterForm } from "@/components/NewsletterForm";
-import { Credits } from "@/components/ui/Credits";
 import styles from "./newsletter.module.css";
 
 const SOURCE = "/newsletter";
@@ -53,8 +52,6 @@ export default function NewsletterPage() {
           </p>
 
           <NewsletterForm />
-
-          <Credits />
         </Card>
       </main>
     </>

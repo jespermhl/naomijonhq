@@ -3,7 +3,6 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import styles from "./strawberry.module.css";
-import { Credits } from "@/components/ui/Credits";
 
 const BurstAnimation = dynamic(
   () => import("./BurstAnimation").then((m) => m.BurstAnimation),
@@ -100,8 +99,6 @@ export function StrawberryRelease({
             </a>
           </div>
         )}
-
-        <Credits />
       </div>
     </main>
   );

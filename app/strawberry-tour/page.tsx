@@ -7,7 +7,6 @@ import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
 import { PastConcertItem } from "@/components/ui/PastConcertItem";
-import { Credits } from "@/components/ui/Credits";
 import { getDateParts } from "@/lib/utils/date";
 import styles from "./tour.module.css";
 
@@ -114,8 +113,6 @@ export default async function ConcertsPage() {
               </div>
             </div>
           )}
-
-          <Credits />
         </Card>
       </main>
     </>

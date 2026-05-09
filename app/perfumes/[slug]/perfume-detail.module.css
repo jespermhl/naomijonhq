@@ -42,8 +42,8 @@
 .imageColumn {
   flex: 1;
   background: #fdfbfb;
-  position: relative;
-  min-height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
@@ -52,9 +52,17 @@
   }
 }
 
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  min-height: 350px;
+}
+
 .imageWrapper {
   position: absolute;
   inset: 0;
+  padding: 20px;
 }
 
 .perfumeImage {
@@ -78,7 +86,12 @@
   padding: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .infoColumn {
+    justify-content: space-between;
+  }
 }
 
 .title {
@@ -181,4 +194,55 @@
 .noLinks {
   color: #a0aec0;
   font-style: italic;
+}
+
+.description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-dark, #4a5568);
+  max-width: 600px;
+}
+
+.notesSection {
+  margin: 0 24px 24px 24px;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #edf2f7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.notesTitle {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--brand-red, #e53e3e);
+  margin-bottom: 20px;
+}
+
+.notesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.noteItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.noteLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.noteValue {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark, #4a5568);
 }

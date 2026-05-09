@@ -28,6 +28,7 @@ interface PerfumeCardProps {
     image: SanityImage;
     storeLinks: StoreLink[];
     isNew?: boolean;
+    heartNotes?: string;
   };
 }
 
@@ -110,13 +111,18 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
       </div>
 
       <div className={styles.content}>
-        <div className={styles.titleContainer}>
-          {perfume.slug ? (
-            <Link href={`/perfumes/${perfume.slug}`} className={styles.titleLink}>
+        <div className={styles.infoWrapper}>
+          <div className={styles.titleContainer}>
+            {perfume.slug ? (
+              <Link href={`/perfumes/${perfume.slug}`} className={styles.titleLink}>
+                <h3 className={styles.title}>{perfume.title}</h3>
+              </Link>
+            ) : (
               <h3 className={styles.title}>{perfume.title}</h3>
-            </Link>
-          ) : (
-            <h3 className={styles.title}>{perfume.title}</h3>
+            )}
+          </div>
+          {perfume.heartNotes && (
+            <p className={styles.heartNotes}>{perfume.heartNotes}</p>
           )}
         </div>
 

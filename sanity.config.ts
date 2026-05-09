@@ -124,6 +124,7 @@ export default defineConfig({
                 { title: "Spotify", value: "spotify" },
                 { title: "Discord", value: "discord" },
                 { title: "WhatsApp", value: "whatsapp" },
+                { title: "Email", value: "email" },
                 { title: "Other", value: "other" },
               ],
             },
@@ -192,6 +193,30 @@ export default defineConfig({
             title: "Is New?",
             description: "Highlight this perfume as new with special animations.",
             initialValue: false,
+          },
+          {
+            name: "description",
+            type: "text",
+            title: "Description",
+            rows: 3,
+          },
+          {
+            name: "topNotes",
+            type: "string",
+            title: "Top Notes (Kopfnoten)",
+            description: "The initial, lighter smells of the fragrance.",
+          },
+          {
+            name: "heartNotes",
+            type: "string",
+            title: "Heart Notes (Herznoten)",
+            description: "The main body of the fragrance.",
+          },
+          {
+            name: "baseNotes",
+            type: "string",
+            title: "Base Notes (Basisnoten)",
+            description: "The long-lasting foundation of the fragrance.",
           },
           { name: "order", type: "number", title: "Order", initialValue: 0 },
           {
