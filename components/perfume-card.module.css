@@ -1,0 +1,222 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.7);
+  border: var(--border-width-sm, 4px) solid var(--brand-red, #e53e3e);
+  box-shadow: 8px 8px 0px var(--brand-pink, #feb2b2);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.cardContainer:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 12px 12px 0px var(--brand-red, #e53e3e);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 11/10;
+  background-color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.perfumeImage {
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.cardContainer:hover .perfumeImage {
+  transform: scale(1.05);
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  color: #ccc;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Store Icons Bottom */
+.iconLayerBottom {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.storeIconSmall {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+.storeIconSmall:hover {
+  transform: scale(1.15) rotate(5deg);
+}
+
+/* Links Overlay (Glassmorphism) */
+.linksOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 20;
+}
+
+.linksOverlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.linksContainer {
+  background: white;
+  padding: 24px;
+  border-radius: 20px;
+  width: 85%;
+  max-width: 300px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border: 3px solid var(--brand-pink, #feb2b2);
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.linksOverlay.show .linksContainer {
+  transform: translateY(0);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+
+.closeBtn:hover {
+  color: var(--brand-red, #e53e3e);
+}
+
+.overlayTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-dark, #4a5568);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.linksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linkItem {
+  margin: 0;
+}
+
+.storeLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  background: #f8f9fa;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 2px solid #edf2f7;
+  color: var(--text-dark, #4a5568);
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.storeLink:hover {
+  background: var(--brand-pink, #feb2b2);
+  border-color: var(--brand-red, #e53e3e);
+  color: white;
+  transform: translateX(4px);
+}
+
+.storeName {
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.storePrice {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  background: rgba(255,255,255,0.5);
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.storeLink:hover .storePrice {
+  background: rgba(0,0,0,0.1);
+  color: white;
+}
+
+/* Content Area */
+.content {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-top: 3px solid var(--brand-pink, #feb2b2);
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--brand-red, #e53e3e);
+  letter-spacing: -0.5px;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.titleLink {
+  text-decoration: none;
+}
+
+.titleLink:hover .title {
+  color: var(--brand-pink, #feb2b2);
+}
