@@ -1,7 +1,8 @@
-import React from "react";
 import { client } from "../sanity/client";
 import styles from "./footer.module.css";
 import { Credits } from "./ui/Credits";
+
+const WEBSITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://naomijonhq.com";
 
 interface SocialLink {
   _id: string;
@@ -69,7 +70,7 @@ export default async function Footer() {
       <ul className={styles.socials}>
         <li>
           <a
-            href="https://naomijonhq.com"
+            href={WEBSITE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.socialLink}
