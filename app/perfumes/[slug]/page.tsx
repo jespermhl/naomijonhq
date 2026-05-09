@@ -41,7 +41,7 @@ const STORE_ICON_BG: Record<string, string> = {
 export async function generateMetadata(props: PerfumeProps): Promise<Metadata> {
   const { slug } = await props.params;
   const perfume = await client.fetch(`*[_type == "perfume" && slug.current == $slug][0]{title}`, { slug });
-  
+
   if (!perfume) {
     return { title: "Perfume Not Found" };
   }
@@ -59,7 +59,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
     image,
     storeLinks
   }`;
-  
+
   const perfume = await client.fetch(query, { slug });
 
   if (!perfume) {
@@ -73,7 +73,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
       <Link href="/perfumes" className={styles.backLink}>
         ← Back to all perfumes
       </Link>
-      
+
       <div className={styles.detailCard}>
         <div className={styles.imageColumn}>
           {imageUrl ? (
@@ -95,7 +95,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
         <div className={styles.infoColumn}>
           <h1 className={styles.title}>{perfume.title}</h1>
           <p className={styles.subtitle}>Get it now at your favorite store.</p>
-          
+
           <div className={styles.linksContainer}>
             {perfume.storeLinks && perfume.storeLinks.length > 0 ? (
               <ul className={styles.linksList}>
@@ -110,7 +110,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
                     >
                       <span className={styles.storeIconWrapper} style={{ backgroundColor: STORE_ICON_BG[link.store] || "#333", border: link.store === 'amazon' ? '1px solid #e2e8f0' : 'none' }}>
                         {STORE_ICONS[link.store] ? (
-                          <Image src={STORE_ICONS[link.store]} alt={link.store} width={28} height={28} style={{objectFit: 'contain'}} />
+                          <Image src={STORE_ICONS[link.store]} alt={link.store} width={28} height={28} style={{ objectFit: 'contain' }} />
                         ) : (
                           "🛒"
                         )}

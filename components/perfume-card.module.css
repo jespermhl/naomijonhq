@@ -64,7 +64,7 @@
   justify-content: center;
   color: white;
   font-size: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   overflow: hidden;
@@ -104,7 +104,7 @@
   border-radius: 20px;
   width: 85%;
   max-width: 300px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border: 3px solid var(--brand-pink, #feb2b2);
   transform: translateY(20px);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -189,13 +189,13 @@
 .storePrice {
   font-size: 0.9rem;
   opacity: 0.9;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
   padding: 2px 8px;
   border-radius: 8px;
 }
 
 .storeLink:hover .storePrice {
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
   color: white;
 }
 
@@ -236,4 +236,44 @@
   outline: 2px solid var(--brand-red, #e53e3e);
   outline-offset: 4px;
   border-radius: 4px;
+}
+
+/* NEW Badge Styles */
+.newBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--brand-red, #e53e3e);
+  color: white;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  box-shadow: 0 4px 12px rgba(229, 62, 62, 0.4);
+  z-index: 30;
+  border: 2px solid white;
+  animation: floatBadge 3s ease-in-out infinite;
+}
+
+@keyframes floatBadge {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Accentuate New Card without goofy glows */
+.isNewCard {
+  border-color: var(--brand-red, #e53e3e);
+}
+
+.isNewCard:hover {
+  box-shadow: 12px 12px 0px var(--brand-red, #e53e3e);
+  transform: translateY(-8px) scale(1.02);
 }

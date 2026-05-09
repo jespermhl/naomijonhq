@@ -186,6 +186,13 @@ export default defineConfig({
             title: "Perfume Image",
             options: { hotspot: true },
           },
+          {
+            name: "isNew",
+            type: "boolean",
+            title: "Is New?",
+            description: "Highlight this perfume as new with special animations.",
+            initialValue: false,
+          },
           { name: "order", type: "number", title: "Order", initialValue: 0 },
           {
             name: "storeLinks",

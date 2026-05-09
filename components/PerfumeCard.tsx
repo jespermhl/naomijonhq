@@ -27,6 +27,7 @@ interface PerfumeCardProps {
     slug?: string;
     image: SanityImage;
     storeLinks: StoreLink[];
+    isNew?: boolean;
   };
 }
 
@@ -61,7 +62,10 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
   const imageUrl = perfume.image ? urlFor(perfume.image).url() : "";
 
   return (
-    <div className={styles.cardContainer}>
+    <div className={`${styles.cardContainer} ${perfume.isNew ? styles.isNewCard : ""}`}>
+      {perfume.isNew && (
+        <div className={styles.newBadge}>NEW</div>
+      )}
       <div className={styles.imageWrapper}>
         {imageUrl ? (
           perfume.slug ? (
