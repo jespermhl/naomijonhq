@@ -81,6 +81,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
   }
 
   const imageUrl = perfume.image ? urlFor(perfume.image).url() : "";
+  const storeLinkCount = perfume.storeLinks?.length ?? 0;
 
   return (
     <div className={styles.container}>
@@ -144,8 +145,9 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
           </div>
 
           <div className={styles.linksContainer}>
-            <h2 className={styles.subtitle}>Get it now at your favorite store{perfume.storeLinks.length > 1 ? 's' : ''}:</h2>
-
+            <h2 className={styles.subtitle}>
+              Get it now at your favorite store{storeLinkCount > 1 ? "s" : ""}:
+            </h2>
             {perfume.storeLinks && perfume.storeLinks.length > 0 ? (
               <ul className={styles.linksList}>
                 {perfume.storeLinks.map((link: StoreLink) => (
