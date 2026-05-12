@@ -1,8 +1,27 @@
-import { StrawberryRelease } from "../../components/StrawberryRelease";
+import type { Metadata, Viewport } from "next";
+import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
+import { StrawberryRelease } from "@/components/StrawberryRelease";
 
-/**
- * The Strawberry Release page component (Includes MV).
- */
-export default function StrawberryPage() {
-  return <StrawberryRelease showVideo={true} />;
+const SOURCE = "/strawberry";
+const DEFAULTS = {
+  title: "Strawberry - New Album",
+  description: "Naomi Jon's album 'Strawberry'. Out now!",
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata(SOURCE, DEFAULTS);
+}
+
+export async function generateViewport(): Promise<Viewport> {
+  return buildPageViewport(SOURCE);
+}
+
+export default function StrawberryAlbumPage() {
+  return (
+    <>
+      <PropertyMetaTags source={SOURCE} />
+      <StrawberryRelease showVideo={true} />
+    </>
+  );
 }
