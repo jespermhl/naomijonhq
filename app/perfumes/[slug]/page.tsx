@@ -137,13 +137,13 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
         <div className={styles.infoColumn}>
           <div className={styles.topInfo}>
             <h1 className={styles.title}>{perfume.title}</h1>
-            <p className={styles.subtitle}>Get it now at your favorite store.</p>
 
             {perfume.description && (
               <p className={styles.description}>{perfume.description}</p>
             )}
           </div>
 
+          <p className={styles.subtitle}>Get it now at your favorite store.</p>
           <div className={styles.linksContainer}>
             {perfume.storeLinks && perfume.storeLinks.length > 0 ? (
               <ul className={styles.linksList}>
