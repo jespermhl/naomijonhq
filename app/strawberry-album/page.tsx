@@ -17,9 +17,6 @@ export async function generateViewport(): Promise<Viewport> {
   return buildPageViewport(SOURCE);
 }
 
-/**
- * The Strawberry Album landing page (Doesn't include MV).
- */
 export default function StrawberryAlbumPage() {
   return (
     <>
