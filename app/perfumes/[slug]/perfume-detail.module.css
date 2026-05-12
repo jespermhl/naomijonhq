@@ -106,7 +106,7 @@
   font-size: 1.1rem;
   color: var(--text-dark, #4a5568);
   margin-bottom: 32px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .linksContainer {
@@ -142,7 +142,7 @@
 .storeLink:hover,
 .storeLink:focus-visible {
   transform: translateX(8px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
   outline: 3px solid var(--brand-red, #e53e3e);
   outline-offset: 2px;
 }
@@ -209,7 +209,7 @@
   padding: 20px;
   border-radius: 20px;
   border: 2px solid #edf2f7;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .notesTitle {
