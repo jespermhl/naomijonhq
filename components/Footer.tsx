@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { client } from "../sanity/client";
 import styles from "./footer.module.css";
 import { Credits } from "./ui/Credits";
@@ -113,8 +114,14 @@ export default async function Footer() {
             );
           })}
       </ul>
-      <div className={styles.credit}>
-        <Credits />
+      <div className={styles.creditContainer}>
+        <div className={styles.legalLinks}>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/imprint">Imprint</Link>
+        </div>
+        <div className={styles.credit}>
+          <Credits />
+        </div>
       </div>
     </footer>
   );
