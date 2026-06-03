@@ -8,7 +8,6 @@ import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
 import { PastConcertItem } from "@/components/ui/PastConcertItem";
 import { getDateParts } from "@/lib/utils/date";
-import styles from "./tour.module.css";
 
 interface Concert {
   id: string;
@@ -65,12 +64,12 @@ export default async function ConcertsPage() {
   return (
     <>
       <PropertyMetaTags source={SOURCE} />
-      <main className={`${styles.tourContainer} bg-pattern`}>
+      <main className="min-h-screen flex flex-col items-center px-6 py-20 max-sm:px-4 max-sm:py-10 max-sm:pb-16 bg-pattern">
         <Card>
           <Sticker>IT&apos;S A WRAP!</Sticker>
 
-          <div className={styles.tourImageContainer}>
-            <div className={styles.tourImageWrapper}>
+          <div className="mb-10 relative inline-block max-sm:mb-6 max-sm:!transform-none">
+            <div className="w-[280px] h-[280px] bg-white border-8 border-brand-red rounded-3xl overflow-hidden shadow-[12px_12px_0px_var(--color-brand-red)] relative z-2 max-sm:w-[180px] max-sm:h-[180px] max-sm:border-6 max-sm:shadow-[8px_8px_0px_var(--color-brand-red)]">
               <Image
                 src="/images/strawberry-tour.png"
                 alt="Strawberry Tour"
@@ -80,13 +79,13 @@ export default async function ConcertsPage() {
                 }}
               />
             </div>
-            <div className={styles.floatingStrawberry}>🍓</div>
+            <div className="absolute -bottom-5 -right-5 text-6xl filter drop-shadow-[4px_4px_0px_var(--color-brand-red)] z-3 max-sm:text-[48px] max-sm:-bottom-3.5 max-sm:-right-3.5 max-sm:z-10">🍓</div>
           </div>
 
           <h1 className="page-title">Strawberry Tour</h1>
 
-          <div className={styles.tourOverBox}>
-            <p className={styles.tourOverText}>
+          <div className="flex flex-col items-center gap-4 bg-[#fff0f0] border-4 border-brand-red rounded-2xl p-8 py-6 mb-2 shadow-[6px_6px_0px_var(--color-brand-red)] text-center">
+            <p className="text-[17px] font-semibold text-text-dark leading-relaxed max-w-[400px]">
               The Strawberry Tour has come to an end. Stream the album and keep
               the Strawberry era alive.
             </p>
@@ -96,9 +95,9 @@ export default async function ConcertsPage() {
           </div>
 
           {concerts.length > 0 && (
-            <div className={styles.pastSection}>
-              <h2 className={styles.pastTitle}>Tour Dates</h2>
-              <div className={styles.pastList}>
+            <div className="mt-16 border-t-4 border-dashed border-brand-pink pt-12 text-center max-sm:mt-12 max-sm:pt-10">
+              <h2 className="text-2xl font-black text-brand-red mb-6 uppercase tracking-wider">Tour Dates</h2>
+              <div className="flex flex-col gap-4 items-center w-full">
                 {concerts.map((c) => {
                   const dateParts = getDateParts(c.date);
                   return (
@@ -118,3 +117,4 @@ export default async function ConcertsPage() {
     </>
   );
 }
+

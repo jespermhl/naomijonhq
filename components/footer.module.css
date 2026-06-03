@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  background: white;
+  background: var(--footer-bg, white);
   border-top: var(--border-width-sm, 4px) solid var(--brand-pink, #feb2b2);
 }
 
@@ -27,11 +27,11 @@
   height: 40px;
   padding: 0;
   border-radius: 50%;
-  background: #fdfbfb;
-  border: 2px solid #edf2f7;
+  background: var(--social-link-bg, #fdfbfb);
+  border: 2px solid var(--border-color-light, #edf2f7);
   color: var(--text-dark, #4a5568);
   text-decoration: none;
-  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: var(--transition-smooth);
 }
 
 .socialIcon {
@@ -44,7 +44,7 @@
 .socialLink:focus-visible {
   background: var(--brand-red, #e53e3e);
   border-color: var(--brand-red, #e53e3e);
-  color: white;
+  color: var(--text-light, white);
   transform: translateY(-2px);
   outline: 2px solid var(--brand-red, #e53e3e);
   outline-offset: 4px;
@@ -52,7 +52,7 @@
 
 .credit {
   font-size: 0.85rem;
-  color: #a0aec0;
+  color: var(--text-muted, #a0aec0);
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@
   color: var(--brand-red, #e53e3e);
   text-decoration: none;
   font-weight: 700;
-  transition: color 0.2s ease;
+  transition: var(--transition-fade);
 }
 
 .creditLink:hover,
@@ -87,7 +87,7 @@
   max-width: 800px;
   margin-top: 16px;
   padding-top: 24px;
-  border-top: 1px solid #edf2f7;
+  border-top: 1px solid var(--border-color-light, #edf2f7);
 }
 
 @media (min-width: 768px) {
@@ -107,10 +107,11 @@
   font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: var(--transition-fade);
 }
 
 .legalLinks a:hover {
   color: var(--brand-red, #e53e3e);
 }
+
 

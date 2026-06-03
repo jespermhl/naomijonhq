@@ -3,6 +3,7 @@ import { client } from "../../sanity/client";
 import PerfumeCard from "../../components/PerfumeCard";
 import styles from "./perfumes.module.css";
 import { Metadata } from "next";
+import type { SanityImageSource } from "@sanity/image-url";
 
 export const metadata: Metadata = {
   title: "Naomi Jon Perfumes",
@@ -15,10 +16,17 @@ interface Perfume {
   _id: string;
   title: string;
   slug: string;
-  image: any;
-  storeLinks: any[];
+  image?: SanityImageSource | null;
+  storeLinks: StoreLink[];
   isNew?: boolean;
   heartNotes?: string;
+}
+
+interface StoreLink {
+  store: "dm" | "rossmann" | "amazon";
+  url: string;
+  price?: string;
+  _key: string;
 }
 
 async function getPerfumes(): Promise<Perfume[]> {
