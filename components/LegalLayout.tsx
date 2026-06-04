@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-type LegalFileName = "imprint.md" | "privacy.md";
+type LegalFileName = "legal-notice.md" | "privacy.md";
 
 interface LegalLayoutProps {
   fileName: LegalFileName;

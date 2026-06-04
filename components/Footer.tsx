@@ -129,10 +129,10 @@ export default async function Footer() {
         <div className="w-full border-t border-[#1f171d]/10 order-2 md:hidden" />
         <div className="flex gap-5 order-3 md:order-0 pt-2 md:pt-0">
           <Link
-            href="/imprint"
+            href="/legal-notice"
             className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
           >
-            Imprint
+            Legal Notice
           </Link>
           <Link
             href="/privacy"

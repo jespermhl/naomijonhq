@@ -1,10 +1,10 @@
 import LegalLayout from "@/components/LegalLayout";
 import { Modal } from "@/components/ui/Modal";
 
-export default function ImprintModal() {
+export default function LegalNoticeModal() {
   return (
     <Modal>
-      <LegalLayout fileName="imprint.md" />
+      <LegalLayout fileName="legal-notice.md" />
     </Modal>
   );
 }
