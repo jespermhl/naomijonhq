@@ -34,7 +34,7 @@ export function BurstAnimation() {
       {particles.map((p, i) => (
         <div
           key={i}
-          className="absolute text-[40px] animate-[burst_4s_ease-out_infinite] select-none"
+          className="absolute text-[40px] animate-burst select-none"
           style={
             {
               "--tx": `${p.tx}px`,

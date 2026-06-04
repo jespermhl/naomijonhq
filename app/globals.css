@@ -23,9 +23,9 @@
   --color-amazon: #ffffff;
 
   --animate-wobble: wobble 4s ease-in-out infinite;
-  --animate-float-badge: floatBadge 3s ease-in-out infinite;
+  --animate-float-badge: float-badge 3s ease-in-out infinite;
   --animate-celebrate: celebrate 1s ease-in-out infinite;
-  --animate-pop-in: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --animate-pop-in: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   @keyframes wobble {
 
@@ -47,7 +47,7 @@
     }
   }
 
-  @keyframes floatBadge {
+  @keyframes float-badge {
 
     0%,
     100% {
@@ -73,7 +73,7 @@
     }
   }
 
-  @keyframes popIn {
+  @keyframes pop-in {
     0% {
       transform: scale(0);
       opacity: 0;
@@ -203,4 +203,8 @@ a {
 
 .animate-sparkle-wobble {
   animation: inline-wobble 2s ease-in-out infinite;
+}
+
+.animate-burst {
+  animation: burst 4s ease-out infinite;
 }

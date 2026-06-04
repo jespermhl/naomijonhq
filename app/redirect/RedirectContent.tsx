@@ -135,7 +135,7 @@ export function RedirectContent() {
 
   return (
     <>
-      {/* Self-contained micro-animations to support wobble and dot-pulsing flawlessly */}
+      {/* Self-contained micro-animations for dot-pulsing loading indicator */}
       <style>{`
         @keyframes custom-dot-pulse {
           0%, 100% { opacity: 0.2; transform: translateY(0); }
@@ -154,7 +154,7 @@ export function RedirectContent() {
 
       <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
         <Card
-          className="w-full max-w-125 flex flex-col items-center text-center p-8 md:p-12 shadow-xl border border-neutral-100 bg-white"
+          className="w-full flex flex-col items-center text-center p-8 md:p-12 shadow-xl border border-neutral-100 bg-white"
           maxWidth="500px"
           rotated={false}
         >
