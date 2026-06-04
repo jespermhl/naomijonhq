@@ -78,16 +78,16 @@ export default async function Footer() {
       <div className="flex flex-col items-center gap-4 w-full pt-6 border-t border-[#1f171d]/10 md:flex-row md:justify-between">
         <div className="flex gap-5 order-2 md:order-0">
           <Link
-            href="/privacy"
-            className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
-          >
-            Privacy Policy
-          </Link>
-          <Link
             href="/imprint"
             className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
           >
             Imprint
+          </Link>
+          <Link
+            href="/privacy"
+            className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
+          >
+            Privacy Policy
           </Link>
         </div>
 
