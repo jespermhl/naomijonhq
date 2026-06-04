@@ -76,7 +76,7 @@ export default async function Footer() {
   return (
     <footer className="w-full px-5 py-8 mt-auto flex flex-col items-center gap-6 max-w-275 mx-auto">
       <div className="flex flex-col items-center gap-4 w-full md:flex-row md:justify-between md:border-t md:border-[#1f171d]/10 md:pt-6">
-        <ul className="flex flex-wrap justify-center gap-2 md:gap-4 list-none p-0 m-0 order-1 md:order-0 pb-4 md:pb-0 w-full md:w-auto">
+        <ul className="flex flex-wrap justify-center gap-2 md:gap-4 list-none p-0 m-0 order-1 md:order-1 pb-4 md:pb-0 w-full md:w-auto">
           <div className="flex justify-center gap-2 md:gap-4 w-full">
             <li>
               <a
@@ -141,7 +141,7 @@ export default async function Footer() {
             Privacy Policy
           </Link>
         </div>
-        <div className="text-[0.85rem] text-[#1f171d]/60 font-semibold flex items-center gap-1.5 [&_div]:mt-0 [&_a]:text-[#ff4fa8] [&_a]:font-extrabold hover:[&_a]:text-[#1f171d] [&_a]:no-underline [&_a]:transition-colors [&_a]:duration-200 order-4 md:order-none">
+        <div className="text-[0.85rem] text-[#1f171d]/60 font-semibold flex items-center gap-1.5 [&_div]:mt-0 [&_a]:text-[#ff4fa8] [&_a]:font-extrabold hover:[&_a]:text-[#1f171d] [&_a]:no-underline [&_a]:transition-colors [&_a]:duration-200 order-4 md:order-2">
           <Credits />
         </div>
       </div>
