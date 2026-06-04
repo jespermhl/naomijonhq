@@ -57,7 +57,7 @@ export default async function ConcertsPage() {
         <Card
           rotated={false}
           maxWidth="1120px"
-          className="relative px-6 py-8 text-left sm:p-10 lg:p-12All"
+          className="relative px-6 py-8 text-left sm:p-10 lg:p-12"
         >
           <Sticker>IT&apos;S A WRAP!</Sticker>
 
@@ -69,7 +69,7 @@ export default async function ConcertsPage() {
           <div className="flex flex-col gap-8 md:flex-row md:items-start lg:gap-12">
 
             {/* Left Photo & Stats Column */}
-            <div className="relative w-full max-w-[340px] shrink-0 self-center md:self-start">
+            <div className="relative w-full max-w-85 shrink-0 self-center md:self-start">
               <div className="absolute -inset-4 rounded-[36px] bg-[radial-gradient(circle_at_top_left,rgba(255,79,168,0.2),transparent_58%)] blur-2xl" />
               <div className="relative overflow-hidden rounded-[30px] border border-white/90 bg-white/85 shadow-[0_20px_50px_rgba(255,79,168,0.12)]">
                 <div className="aspect-square">
@@ -94,7 +94,7 @@ export default async function ConcertsPage() {
                     key={label}
                     className="rounded-[20px] border border-white/90 bg-white/80 px-2 py-2.5 text-center shadow-[0_10px_24px_rgba(255,79,168,0.08)]"
                   >
-                    <div className="text-xl font-black tracking-[-0.05em] text-brand-red sm:text-2xl">{value}</div>
+                    <div className="text-xl font-black tracking-tighter text-brand-red sm:text-2xl">{value}</div>
                     <div className="mt-0.5 text-[0.6rem] font-black uppercase tracking-[0.18em] text-text-dark/65 sm:text-[0.65rem]">
                       {label}
                     </div>
@@ -112,7 +112,7 @@ export default async function ConcertsPage() {
                 <h1 className="page-title leading-tight tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black">
                   Strawberry Tour
                 </h1>
-                <p className="page-subtitle max-w-[520px] text-sm sm:text-base leading-relaxed text-text-dark/80">
+                <p className="page-subtitle max-w-130 text-sm sm:text-base leading-relaxed text-text-dark/80">
                   The Strawberry Tour has come to an end. Stream the album and keep the Strawberry era alive.
                 </p>
               </div>

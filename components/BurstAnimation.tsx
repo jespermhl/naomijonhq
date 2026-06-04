@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 
+interface ParticleStyle extends React.CSSProperties {
+  "--tx": string;
+  "--ty": string;
+  "--tr": string;
+}
+
 /**
  * A client-side burst animation component that displays animated strawberry emojis.
  * Used for festive background effects.
@@ -21,7 +27,10 @@ export function BurstAnimation() {
   });
 
   return (
-    <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true">
+    <div
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      aria-hidden="true"
+    >
       {particles.map((p, i) => (
         <div
           key={i}
@@ -32,7 +41,7 @@ export function BurstAnimation() {
               "--ty": `${p.ty}px`,
               "--tr": `${p.tr}deg`,
               animationDelay: `${p.delay}s`,
-            } as React.CSSProperties
+            } as ParticleStyle
           }
         >
           🍓

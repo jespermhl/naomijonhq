@@ -42,7 +42,7 @@ export function NewsletterForm() {
       {status === "success" ? (
         <div
           id="newsletter-success"
-          className="w-full rounded-[24px] border border-white/80 bg-white/70 px-6 py-6 text-center font-sans shadow-[0_12px_30px_rgba(255,79,168,0.06)] backdrop-blur-md transition-all duration-300"
+          className="w-full rounded-3xl border border-white/80 bg-white/70 px-6 py-6 text-center font-sans shadow-[0_12px_30px_rgba(255,79,168,0.06)] backdrop-blur-md transition-all duration-300"
           role="status"
           aria-live="polite"
         >

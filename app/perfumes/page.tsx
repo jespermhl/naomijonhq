@@ -38,7 +38,7 @@ async function getPerfumes(): Promise<Perfume[]> {
     isNew,
     heartNotes
   }`;
-  return await client.fetch<Perfume[]>(query);
+  return client.fetch<Perfume[]>(query);
 }
 
 export default async function PerfumesPage() {
@@ -46,18 +46,7 @@ export default async function PerfumesPage() {
 
   return (
     <>
-      <style>{`
-        @keyframes inline-wobble {
-          0%, 100% { transform: rotate(-6deg); }
-          50% { transform: rotate(6deg); }
-        }
-        .animate-sparkle-wobble {
-          animation: inline-wobble 2s ease-in-out infinite;
-        }
-      `}</style>
-
-      {/* Container aligned to 1100px width with the footer */}
-      <div className="mx-auto max-w-[1100px] px-5 py-14 pb-18">
+      <div className="mx-auto max-w-275 px-5 py-14 pb-18">
         <h1 className="page-title">
           Perfumes{" "}
           <span className="inline-block animate-sparkle-wobble">✨</span>
@@ -74,7 +63,7 @@ export default async function PerfumesPage() {
           </div>
         ) : (
           <div
-            className="mx-auto mt-10 max-w-2xl px-6 py-14 text-center rounded-[28px] border border-white/85 bg-white/74 font-bold text-[1.05rem] text-[#22181f] shadow-[0_24px_60px_rgba(255,79,168,0.1)] backdrop-blur-sm"
+            className="mx-auto mt-10 max-w-2xl px-6 py-14 text-center rounded-[28px] border border-white/85 bg-white/74 font-bold text-[1.05rem] text-text-dark shadow-[0_24px_60px_rgba(255,79,168,0.1)] backdrop-blur-sm"
           >
             <p>New perfumes dropping soon! Stay tuned.</p>
           </div>

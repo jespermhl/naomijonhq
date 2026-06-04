@@ -28,26 +28,61 @@
   --animate-pop-in: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   @keyframes wobble {
-    0%, 100% { transform: scale(1) rotate(0deg); }
-    25% { transform: scale(1.03) rotate(2deg); }
-    50% { transform: scale(1) rotate(-2deg); }
-    75% { transform: scale(1.03) rotate(1deg); }
+
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+      transform: scale(1.03) rotate(2deg);
+    }
+
+    50% {
+      transform: scale(1) rotate(-2deg);
+    }
+
+    75% {
+      transform: scale(1.03) rotate(1deg);
+    }
   }
 
   @keyframes floatBadge {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-5px);
+    }
   }
 
   @keyframes celebrate {
-    0% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.08) rotate(3deg); }
-    100% { transform: scale(1) rotate(0deg); }
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
   }
 
   @keyframes popIn {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
 
@@ -60,7 +95,6 @@ body {
   min-height: 100vh;
   color: var(--color-text-dark);
   font-family: var(--font-body);
-  background-color: #fff9fb;
   background:
     radial-gradient(circle at 16% 12%, rgba(255, 79, 168, 0.28), transparent 18%),
     radial-gradient(circle at 84% 16%, rgba(0, 0, 0, 0.04), transparent 22%),
@@ -117,4 +151,56 @@ a {
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
+}
+
+@keyframes burst {
+  0% {
+    transform: translate(0, 0) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--tr));
+    opacity: 0;
+  }
+}
+
+@keyframes wobble-strawberry {
+
+  0%,
+  100% {
+    transform: rotate(-8deg) scale(1.05);
+  }
+
+  50% {
+    transform: rotate(8deg) scale(1.05);
+  }
+}
+
+.animate-wobble-strawberry {
+  animation: wobble-strawberry 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes inline-wobble {
+
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+.animate-sparkle-wobble {
+  animation: inline-wobble 2s ease-in-out infinite;
 }

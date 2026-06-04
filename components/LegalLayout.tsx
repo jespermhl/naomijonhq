@@ -2,13 +2,20 @@ import fs from "fs";
 import path from "path";
 import Markdown from "markdown-to-jsx";
 import { Card } from "@/components/ui/Card";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+type LegalFileName = "imprint.md" | "privacy.md";
 
 interface LegalLayoutProps {
-    fileName: string;
+    fileName: LegalFileName;
 }
 
 export default function LegalLayout({ fileName }: LegalLayoutProps) {
     const filePath = path.join(process.cwd(), "content", fileName);
+    if (!fs.existsSync(filePath)) {
+        notFound();
+    }
     const fileContent = fs.readFileSync(filePath, "utf8");
 
     return (
@@ -45,7 +52,7 @@ export default function LegalLayout({ fileName }: LegalLayoutProps) {
                                 },
                                 ul: {
                                     component: ({ children }) => (
-                                        <ul className="mb-2.5 ml-[15px] list-disc space-y-1">
+                                        <ul className="mb-2.5 ml-3.75 list-disc space-y-1">
                                             {children}
                                         </ul>
                                     ),
@@ -58,14 +65,22 @@ export default function LegalLayout({ fileName }: LegalLayoutProps) {
                                     ),
                                 },
                                 a: {
-                                    component: ({ href, children }) => (
-                                        <a
-                                            href={href}
-                                            className="text-brand-red hover:text-brand-pink font-bold underline"
-                                        >
-                                            {children}
-                                        </a>
-                                    ),
+                                    component: ({ href = "", children }) =>
+                                        href.startsWith("/") && !href.startsWith("//") ? (
+                                            <Link
+                                                href={href}
+                                                className="text-brand-red hover:text-brand-pink font-bold underline"
+                                            >
+                                                {children}
+                                            </Link>
+                                        ) : (
+                                            <a
+                                                href={href}
+                                                className="text-brand-red hover:text-brand-pink font-bold underline"
+                                            >
+                                                {children}
+                                            </a>
+                                        ),
                                 },
                             },
                         }}
