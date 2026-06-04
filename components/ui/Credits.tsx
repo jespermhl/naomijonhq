@@ -15,7 +15,6 @@ export const Credits: React.FC = () => {
       >
         Mahel Webdesign
       </a>{" "}
-      for Naomi Jon HQ
     </div>
   );
 };

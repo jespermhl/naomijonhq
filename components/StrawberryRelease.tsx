@@ -20,10 +20,11 @@ export function StrawberryRelease({
   return (
     <div className="relative w-full flex items-center justify-center px-6 py-12 max-sm:px-4 max-sm:py-8">
       <div
-        className={`relative z-10 w-full transition-all duration-500 ease-in-out ${showVideo
-          ? "grid max-w-295 grid-cols-1 items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]"
-          : "max-w-135"
-          }`}
+        className={`relative z-10 w-full transition-all duration-500 ease-in-out ${
+          showVideo
+            ? "grid max-w-295 grid-cols-1 items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]"
+            : "max-w-135"
+        }`}
       >
         <div className="glass-panel relative flex flex-col items-center rounded-[34px] px-8 py-10 text-center max-sm:px-5 max-sm:py-8 lg:px-12 lg:py-10">
           <div className="bg-brand-red absolute -top-4 left-8 rounded-full border border-white/85 px-5 py-2.5 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(255,79,168,0.18)] max-sm:-top-3 max-sm:left-6 max-sm:px-3 max-sm:py-1.5 max-sm:text-xs">
@@ -31,7 +32,7 @@ export function StrawberryRelease({
           </div>
 
           <p className="text-brand-red mb-2 text-xs font-black uppercase tracking-[0.38em] mt-2">
-            Strawberry
+            The Album
           </p>
           <h1 className="mb-2 text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-none tracking-[-0.08em] text-[#1f171d]">
             Strawberry

@@ -24,7 +24,7 @@
 
   --animate-wobble: wobble 4s ease-in-out infinite;
   --animate-float-badge: float-badge 3s ease-in-out infinite;
-  --animate-celebrate: celebrate 1s ease-in-out infinite;
+  --animate-celebrate: celebrate 5s ease-in-out infinite;
   --animate-pop-in: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
   @keyframes wobble {
