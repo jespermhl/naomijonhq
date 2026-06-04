@@ -5,6 +5,7 @@ Last Updated: June 2, 2026
 Thank you for your interest in our website. Protecting your privacy is very important to us. Below, we provide detailed information on how we handle your data.
 
 ## 1. Data Controller
+
 The data controller in terms of the General Data Protection Regulation (GDPR) is:
 
 LF Digital  
@@ -17,6 +18,7 @@ E-Mail: [info@naomijonhq.com](mailto:info@naomijonhq.com)
 Telephone: [+49 15565 829954](tel:+4915565829954)
 
 ## 2. General Information and Mandatory Information
+
 **Data Protection**  
 As the operator of this website, we take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with statutory data protection regulations and this Privacy Policy.
 
@@ -24,6 +26,7 @@ As the operator of this website, we take the protection of your personal data ve
 For security reasons and to protect the transmission of confidential content, such as inquiries or newsletter subscriptions you send to us, this website uses SSL or TLS encryption. You can recognize an encrypted connection by the fact that the address line of the browser changes from "http://" to "https://" and by the lock symbol in your browser address bar.
 
 ## 3. Data Collection on Our Website
+
 **a) Hosting via Vercel**  
 We host our website at Vercel. The provider is Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
 
@@ -36,6 +39,7 @@ We have entered into a Data Processing Addendum (DPA) with Vercel. Since Vercel 
 For more information, please refer to Vercel's Privacy Policy at: [https://vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy)
 
 ## 4. Analytics Tools
+
 **a) Vemetric Analytics**  
 To statistically evaluate visitor numbers and analyze user behavior, we use the privacy-friendly web analytics tool Vemetric on our website.
 
@@ -44,6 +48,7 @@ Vemetric is designed to work completely without using cookies or any local stora
 The data is processed on the basis of our legitimate interest in measuring reach and continuously optimizing our website in accordance with Art. 6 (1) lit. f GDPR.
 
 ## 5. Newsletter
+
 **a) Klaviyo**  
 If you subscribe to our newsletter, we use the data you enter (usually your email address) to send you regular updates.
 
@@ -58,17 +63,20 @@ We have entered into a Data Processing Addendum (DPA) with Klaviyo. The transfer
 For more information on data protection at Klaviyo, please visit: [https://www.klaviyo.com/privacy](https://www.klaviyo.com/privacy)
 
 ## 6. Your Rights as a Data Subject
+
 Under applicable legal regulations, you have the right at any time to:
-* **Access (Art. 15 GDPR):** You can request information about your personal data processed by us.
-* **Rectification (Art. 16 GDPR):** You can request the correction of incorrect data.
-* **Erasure (Art. 17 GDPR):** You can request the deletion of your data stored by us, provided that no statutory retention obligations prevent it.
-* **Restriction of processing (Art. 18 GDPR):** You can request that the processing of your data be restricted.
-* **Data portability (Art. 20 GDPR):** You have the right to receive your data in a structured, commonly used, and machine-readable format.
-* **Right to lodge a complaint (Art. 77 GDPR):** You have the right to lodge a complaint with a competent data protection supervisory authority regarding our processing of your data.
+
+- **Access (Art. 15 GDPR):** You can request information about your personal data processed by us.
+- **Rectification (Art. 16 GDPR):** You can request the correction of incorrect data.
+- **Erasure (Art. 17 GDPR):** You can request the deletion of your data stored by us, provided that no statutory retention obligations prevent it.
+- **Restriction of processing (Art. 18 GDPR):** You can request that the processing of your data be restricted.
+- **Data portability (Art. 20 GDPR):** You have the right to receive your data in a structured, commonly used, and machine-readable format.
+- **Right to lodge a complaint (Art. 77 GDPR):** You have the right to lodge a complaint with a competent data protection supervisory authority regarding our processing of your data.
 
 For these matters, or if you have any other questions regarding data protection, you can contact us at any time using the address provided in the imprint or in this policy.
 
 ## 7. Right to Object (Art. 21 GDPR)
+
 If your personal data is processed based on legitimate interests pursuant to Art. 6 (1) sentence 1 lit. f GDPR, you have the right, pursuant to Art. 21 GDPR, to object to the processing of your personal data, provided that there are reasons arising from your particular situation.
 
 If you wish to make use of your right to object, an email is sufficient: [info@naomijonhq.com](mailto:info@naomijonhq.com)
