@@ -72,8 +72,10 @@ export async function generateViewport(): Promise<Viewport> {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: ReactNode;
+  modal: ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -91,6 +93,7 @@ export default function RootLayout({
         <ClientLayout>
           <main className="relative z-10 flex-1 w-full flex flex-col justify-center min-h-screen">
             {children}
+            {modal}
           </main>
           <Footer />
         </ClientLayout>

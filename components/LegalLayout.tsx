@@ -1,11 +1,9 @@
-"use client";
-
+import path from "path";
+import fs from "fs";
 import Markdown from "markdown-to-jsx";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import path from "path";
-import fs from "fs";
 
 type LegalFileName = "imprint.md" | "privacy.md";
 
