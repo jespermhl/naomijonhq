@@ -12,6 +12,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
       dialogRef.current?.showModal();
     }
 
+    // Prevents underlying page scroll
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
@@ -24,17 +25,19 @@ export function Modal({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 md:p-10"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-0 md:p-10"
       onClick={(e) => {
         if (e.target === e.currentTarget) onDismiss();
       }}
     >
       <dialog
         ref={dialogRef}
-        className="relative w-full max-w-250 mx-auto my-auto border-none bg-transparent p-0 overflow-visible focus:outline-none flex flex-col justify-center select-none"
+        className="relative w-full h-full md:h-auto md:max-w-250 mx-auto my-auto border-none bg-transparent p-0 overflow-visible focus:outline-none flex flex-col justify-center select-none"
         onClose={onDismiss}
       >
-        <div className="relative max-h-[85vh] overflow-y-auto rounded-4xl transform-gpu will-change-transform [&>main]:min-h-0 [&>main]:p-0 [&_div]:max-w-none">
+        {/* Main Modal Card: Fullscreen on mobile, bounded on desktop */}
+        <div className="relative flex flex-col w-full h-full md:h-auto md:max-h-[85vh] bg-white md:rounded-4xl transform-gpu will-change-transform overflow-hidden">
+          {/* Close Button: Fixed relative to the modal container, never scrolls */}
           <button
             onClick={onDismiss}
             className="absolute right-6 top-6 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-[#ff4fa8] text-white font-black hover:bg-[#1f171d] transition-colors shadow-lg cursor-pointer"
@@ -43,7 +46,10 @@ export function Modal({ children }: { children: React.ReactNode }) {
             ✕
           </button>
 
-          <div className="select-text">{children}</div>
+          {/* Scrollable Content Container */}
+          <div className="w-full overflow-y-auto p-6 pt-20 md:p-10 select-text [&>main]:min-h-0 [&>main]:p-0 [&_div]:max-w-none">
+            {children}
+          </div>
         </div>
       </dialog>
     </div>
