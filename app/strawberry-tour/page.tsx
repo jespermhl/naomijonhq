@@ -7,7 +7,7 @@ import { getSanityConcerts } from "@/lib/sanity/concerts";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
 import { PastConcertItem } from "@/components/ui/PastConcertItem";
-import { getDateParts } from "@/lib/utils/date";
+import { formatDate } from "@/lib/utils/date";
 
 interface Concert {
   id: string;
@@ -19,11 +19,6 @@ interface Concert {
   isSoldOut: boolean;
 }
 
-/**
- * Fetches and maps concert data from Sanity for the UI.
- *
- * @returns A promise that resolves to an array of mapped Concert objects.
- */
 async function getConcerts(): Promise<Concert[]> {
   const events = await getSanityConcerts();
   return events.map((event) => ({
@@ -40,81 +35,124 @@ async function getConcerts(): Promise<Concert[]> {
 const SOURCE = "/strawberry-tour";
 const DEFAULTS = {
   title: "Strawberry Tour",
-  description:
-    "The Strawberry Tour is a wrap! Relive the memories and stream the album now.",
+  description: "The Strawberry Tour is a wrap! Relive the memories and stream the album now.",
 };
 
-export async function generateMetadata(): Promise<Metadata> {
-  return buildPageMetadata(SOURCE, DEFAULTS);
-}
-
-export async function generateViewport(): Promise<Viewport> {
-  return buildPageViewport(SOURCE);
-}
-
+export const generateMetadata = (): Promise<Metadata> => buildPageMetadata(SOURCE, DEFAULTS);
+export const generateViewport = (): Promise<Viewport> => buildPageViewport(SOURCE);
 export const revalidate = 3600;
 
-/**
- * The Concerts page component.
- * Displays upcoming and past tour dates in a styled card layout.
- */
 export default async function ConcertsPage() {
   const concerts = await getConcerts();
+  const stats = [
+    { label: "Shows", value: concerts.length },
+    { label: "Cities", value: new Set(concerts.map((c) => c.city)).size },
+    { label: "Countries", value: new Set(concerts.map((c) => c.country).filter(Boolean)).size },
+  ];
 
   return (
     <>
       <PropertyMetaTags source={SOURCE} />
-      <main className="min-h-screen flex flex-col items-center px-6 py-20 max-sm:px-4 max-sm:py-10 max-sm:pb-16 bg-pattern">
-        <Card>
+      <main className="flex min-h-screen flex-col items-center px-4 py-8 sm:px-6">
+        <Card
+          rotated={false}
+          maxWidth="1120px"
+          className="relative px-6 py-8 text-left sm:p-10 lg:p-12"
+        >
           <Sticker>IT&apos;S A WRAP!</Sticker>
 
-          <div className="mb-10 relative inline-block max-sm:mb-6 max-sm:!transform-none">
-            <div className="w-[280px] h-[280px] bg-white border-8 border-brand-red rounded-3xl overflow-hidden shadow-[12px_12px_0px_var(--color-brand-red)] relative z-2 max-sm:w-[180px] max-sm:h-[180px] max-sm:border-6 max-sm:shadow-[8px_8px_0px_var(--color-brand-red)]">
-              <Image
-                src="/images/strawberry-tour.png"
-                alt="Strawberry Tour"
-                fill
-                style={{
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-            <div className="absolute -bottom-5 -right-5 text-6xl filter drop-shadow-[4px_4px_0px_var(--color-brand-red)] z-3 max-sm:text-[48px] max-sm:-bottom-3.5 max-sm:-right-3.5 max-sm:z-10">🍓</div>
-          </div>
+          {/* 
+            Forced Horizontal Flexbox:
+            - flex-col on mobile, but md:flex (and md:flex-row) forces side-by-side layout.
+            - md:items-start aligns the text cleanly next to the top-half of the image.
+          */}
+          <div className="flex flex-col gap-8 md:flex-row md:items-start lg:gap-12">
 
-          <h1 className="page-title">Strawberry Tour</h1>
+            {/* Left Photo & Stats Column */}
+            <div className="relative w-full max-w-85 shrink-0 self-center md:self-start">
+              <div className="absolute -inset-4 rounded-[36px] bg-[radial-gradient(circle_at_top_left,rgba(255,79,168,0.2),transparent_58%)] blur-2xl" />
+              <div className="relative overflow-hidden rounded-[30px] border border-white/90 bg-white/85 shadow-[0_20px_50px_rgba(255,79,168,0.12)]">
+                <div className="aspect-square">
+                  <Image
+                    src="/images/strawberry-tour.png"
+                    alt="Strawberry Tour"
+                    width={720}
+                    height={720}
+                    className="h-full w-full object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -right-4 filter drop-shadow-[4px_4px_0px_rgba(255,79,168,0.28)] text-5xl max-sm:text-[40px]">
+                🍓
+              </div>
 
-          <div className="flex flex-col items-center gap-4 bg-[#fff0f0] border-4 border-brand-red rounded-2xl p-8 py-6 mb-2 shadow-[6px_6px_0px_var(--color-brand-red)] text-center">
-            <p className="text-[17px] font-semibold text-text-dark leading-relaxed max-w-[400px]">
-              The Strawberry Tour has come to an end. Stream the album and keep
-              the Strawberry era alive.
-            </p>
-            <Button href="/strawberry-album" size="large" rotate="0deg">
-              Listen to Strawberry
-            </Button>
-          </div>
-
-          {concerts.length > 0 && (
-            <div className="mt-16 border-t-4 border-dashed border-brand-pink pt-12 text-center max-sm:mt-12 max-sm:pt-10">
-              <h2 className="text-2xl font-black text-brand-red mb-6 uppercase tracking-wider">Tour Dates</h2>
-              <div className="flex flex-col gap-4 items-center w-full">
-                {concerts.map((c) => {
-                  const dateParts = getDateParts(c.date);
-                  return (
-                    <PastConcertItem
-                      key={c.id}
-                      date={dateParts}
-                      city={c.city}
-                      location={c.location}
-                    />
-                  );
-                })}
+              {/* Stats Counters */}
+              <div className="mt-4 grid grid-cols-3 gap-2.5">
+                {stats.map(({ label, value }) => (
+                  <div
+                    key={label}
+                    className="rounded-[20px] border border-white/90 bg-white/80 px-2 py-2.5 text-center shadow-[0_10px_24px_rgba(255,79,168,0.08)]"
+                  >
+                    <div className="text-xl font-black tracking-tighter text-brand-red sm:text-2xl">{value}</div>
+                    <div className="mt-0.5 text-[0.6rem] font-black uppercase tracking-[0.18em] text-text-dark/65 sm:text-[0.65rem]">
+                      {label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+
+            {/* Right Information Column */}
+            <div className="flex-1 space-y-5 pt-2 max-md:text-center max-md:flex max-md:flex-col max-md:items-center">
+              <div className="space-y-3">
+                <p className="inline-flex rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black uppercase tracking-[0.24em] text-[#c73d84] shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                  Tour Archive
+                </p>
+                <h1 className="page-title leading-tight tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-black">
+                  Strawberry Tour
+                </h1>
+                <p className="page-subtitle max-w-130 text-sm sm:text-base leading-relaxed text-text-dark/80">
+                  The Strawberry Tour has come to an end. Stream the album and keep the Strawberry era alive.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 max-md:justify-center">
+                <div className="rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black uppercase tracking-[0.22em] text-text-dark/70 shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                  All dates played
+                </div>
+                <div className="rounded-full border border-white/90 bg-[#fff2f8] px-3.5 py-1.5 text-[0.68rem] font-black uppercase tracking-[0.22em] text-[#b61e6b] shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                  Streaming now
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <Button href="/strawberry-album" size="large" rotate="0deg">
+                  Listen to Strawberry
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Concerts List Section */}
+          {concerts.length > 0 && (
+            <section className="mt-10 rounded-[28px] border border-white/75 bg-white/58 p-4 shadow-[0_15px_40px_rgba(255,79,168,0.08)] sm:p-6 lg:mt-12">
+              <h2 className="text-xl font-black tracking-[-0.04em] text-text-dark sm:text-2xl">Tour Dates</h2>
+              <div className="mt-4 grid gap-2.5">
+                {concerts.map(({ id, date, city, location, country }) => (
+                  <PastConcertItem
+                    key={id}
+                    date={formatDate(date)}
+                    city={city}
+                    location={location}
+                    country={country}
+                  />
+                ))}
+              </div>
+            </section>
           )}
         </Card>
       </main>
     </>
   );
 }
-

@@ -35,7 +35,8 @@ export const Card: React.FC<CardProps> = ({
     ...(maxWidth ? { maxWidth } : {}),
   } as React.CSSProperties;
 
-  const baseClass = "w-full max-w-[800px] bg-card-bg border-6 border-brand-red rounded-[32px] px-12 py-16 text-center shadow-[12px_12px_0px_var(--color-brand-red)] relative max-sm:px-5 max-sm:py-16 max-sm:pb-12 max-sm:border-4 max-sm:rounded-3xl max-sm:shadow-[6px_6px_0px_var(--color-brand-red)] max-sm:!transform-none";
+  const baseClass =
+    "w-full max-w-[900px] glass-panel rounded-[34px] px-12 py-16 text-text-dark relative overflow-visible max-sm:px-5 max-sm:py-12 max-sm:rounded-[26px] max-sm:!transform-none";
 
   return (
     <div
@@ -47,4 +48,3 @@ export const Card: React.FC<CardProps> = ({
     </div>
   );
 };
-

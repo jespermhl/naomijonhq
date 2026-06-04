@@ -4,7 +4,6 @@ import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { Card } from "@/components/ui/Card";
 import { Sticker } from "@/components/ui/Sticker";
 import { NewsletterForm } from "@/components/NewsletterForm";
-import styles from "./newsletter.module.css";
 
 const SOURCE = "/newsletter";
 const DEFAULTS = {
@@ -23,31 +22,32 @@ export async function generateViewport(): Promise<Viewport> {
 
 /**
  * The Newsletter page component.
- * Displays a custom newsletter signup form.
+ * Displays a custom newsletter signup form with utility styles.
  */
 export default function NewsletterPage() {
   return (
     <>
       <PropertyMetaTags source={SOURCE} />
-      <main className={`${styles.newsletterPage} bg-pattern`}>
+
+      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-9 sm:px-6 sm:py-20">
         <Card
-          className={styles.newsletterCard}
-          maxWidth="460px"
+          className="w-full max-w-140 flex flex-col items-center text-center p-5 py-12 xs:px-8 sm:p-[60px_46px]"
+          maxWidth="560px"
           rotated={false}
         >
           <Sticker rotate="-3deg">HEY!</Sticker>
 
-          <div className="strawberry-emoji wobble" style={{ fontSize: "92px" }}>
+          <div className="text-[92px] leading-none animate-wobble-strawberry select-none mb-7 filter drop-shadow mt-4">
             🍓
           </div>
 
-          <h1 className="page-title">
-            Naomi Jon HQ
+          <h1 className="page-title leading-tight mb-4">
+            Naomi&nbsp;Jon&nbsp;HQ
             <br />
             Newsletter
           </h1>
 
-          <p className="page-subtitle">
+          <p className="page-subtitle max-w-[380px] mb-8 pb-4">
             Stay updated with new music, concert dates, and news from Naomi Jon.
           </p>
 

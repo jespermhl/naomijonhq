@@ -124,7 +124,7 @@
     font-weight: 900;
     color: #e53e3e;
     margin-bottom: 20px;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .ctaContainer {
@@ -153,8 +153,13 @@
     display: block;
 }
 
-.ctaBtn1 { transform: rotate(1deg); }
-.ctaBtn2 { transform: rotate(-2deg); }
+.ctaBtn1 {
+    transform: rotate(1deg);
+}
+
+.ctaBtn2 {
+    transform: rotate(-2deg);
+}
 
 .ctaBtn:hover {
     transform: translateY(-4px) rotate(0deg) scale(1.05) !important;
@@ -163,28 +168,67 @@
 
 /* Animations */
 @keyframes wobble {
-    0% { transform: scale(1) rotate(0deg); }
-    25% { transform: scale(1.02) rotate(1deg); }
-    50% { transform: scale(1) rotate(-1deg); }
-    75% { transform: scale(1.02) rotate(0.5deg); }
-    100% { transform: scale(1) rotate(0deg); }
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: scale(1.02) rotate(1deg);
+    }
+
+    50% {
+        transform: scale(1) rotate(-1deg);
+    }
+
+    75% {
+        transform: scale(1.02) rotate(0.5deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
 }
 
 @keyframes celebrate {
-    0% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.08) rotate(3deg); }
-    100% { transform: scale(1) rotate(0deg); }
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(1.08) rotate(3deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
 }
 
-@keyframes popIn {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+@keyframes pop-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes burst {
-    0% { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--tr)); opacity: 0; }
+    0% {
+        transform: translate(0, 0) scale(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(var(--tr));
+        opacity: 0;
+    }
 }
 
 .burstWrapper {
@@ -194,13 +238,6 @@
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 1;
-}
-
-.particle {
-    position: absolute;
-    font-size: 40px;
-    animation: burst 4s ease-out infinite;
-    user-select: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -216,12 +253,14 @@
     .countdownMain {
         padding: 16px !important;
     }
+
     .countdownCard {
         padding: 32px 16px 24px !important;
         border-width: 4px !important;
         border-radius: 20px !important;
         box-shadow: 6px 6px 0px #e53e3e !important;
     }
+
     .soonSticker {
         top: -12px !important;
         left: 15px !important;
@@ -229,25 +268,34 @@
         padding: 6px 12px !important;
         border-width: 2px !important;
     }
+
     .coverContainer {
         margin-bottom: 16px !important;
     }
+
     .coverImageWrapper {
         width: 140px !important;
         height: 140px !important;
         border-width: 4px !important;
         box-shadow: 6px 6px 0px #e53e3e !important;
     }
+
     .countdownTitle {
         font-size: 28px !important;
     }
+
     .countdownSubtitle {
         font-size: 14px !important;
     }
+
     .datePill {
         font-size: 13px !important;
     }
-    .ctaContainer { gap: 8px !important; }
+
+    .ctaContainer {
+        gap: 8px !important;
+    }
+
     .ctaBtn {
         font-size: 14px !important;
         padding: 10px 4px !important;
@@ -255,10 +303,12 @@
         border-radius: 12px !important;
         max-width: none !important;
     }
+
     .coverImageWrapperFinished {
         width: 160px !important;
         height: 160px !important;
     }
+
     .finishedMessage {
         font-size: 18px !important;
         margin-bottom: 14px !important;
@@ -318,7 +368,7 @@
     align-items: center;
     justify-content: center;
     border: 3px solid #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
 
@@ -356,15 +406,18 @@
     .videoSection {
         margin-top: 32px;
     }
+
     .videoContainer {
         border-width: 3px;
         box-shadow: 6px 6px 0px #feb2b2;
         border-radius: 12px;
     }
+
     .playOverlay {
         width: 48px;
         height: 48px;
     }
+
     .playIcon {
         border-top: 8px solid transparent;
         border-bottom: 8px solid transparent;

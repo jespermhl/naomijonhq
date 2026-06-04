@@ -4,101 +4,97 @@ import { useState } from "react";
 import { subscribeToNewsletter } from "@/lib/actions/klaviyo";
 import { Button } from "./ui/Button";
 
-/**
- * A custom-designed newsletter signup form component.
- * Uses the Klaviyo server action to subscribe users.
- */
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle"
-  );
-  const [message, setMessage] = useState("");
+  const [{ status, message }, setState] = useState<{
+    status: "idle" | "loading" | "success" | "error";
+    message: string;
+  }>({ status: "idle", message: "" });
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email) return;
 
-    setStatus("loading");
+    setState({ status: "loading", message: "" });
 
     try {
       const result = await subscribeToNewsletter(email);
-
       if (result.success) {
-        setStatus("success");
-        setMessage("Yay! Check your inbox to confirm your subscription. ✨");
+        setState({
+          status: "success",
+          message: "Yay! Check your inbox to confirm your subscription. ✨",
+        });
         setEmail("");
       } else {
-        setStatus("error");
-        setMessage(result.error || "Something went wrong. Please try again.");
+        setState({
+          status: "error",
+          message: result.error || "Something went wrong. Please try again.",
+        });
       }
     } catch (err) {
       console.error("Subscription error:", err);
-      setStatus("error");
-      setMessage("An unexpected error occurred.");
+      setState({ status: "error", message: "An unexpected error occurred." });
     }
   }
 
-  if (status === "success") {
-    return (
-      <div
-        id="newsletter-success"
-        className="p-8 bg-white border-4 border-[#48bb78] rounded-3xl text-center shadow-[6px_6px_0px_#c6f6d5] font-sans text-base font-bold text-text-dark wobble"
-        role="status"
-        aria-live="polite"
-      >
-        <p>{message}</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full mb-0">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
-        <div className="relative w-full">
-          <input
-            id="newsletter-email"
-            type="email"
-            placeholder="Your email address..."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={status === "loading"}
-            required
-            className="w-full px-6 py-4 border-4 border-brand-red rounded-2xl font-sans text-base font-bold text-text-dark bg-white outline-none shadow-[4px_4px_0px_var(--color-brand-pink)] transition-all duration-200 focus-visible:outline-3 focus-visible:outline-brand-red focus-visible:outline-offset-2 focus:-translate-y-0.5 focus:shadow-[6px_6px_0px_var(--color-brand-pink)] placeholder-[#718096]"
-            aria-label="Email address for newsletter"
-            aria-describedby={
-              status === "error" ? "newsletter-error" : undefined
-            }
-            aria-invalid={status === "error"}
-          />
-          {status === "error" && (
-            <p
-              id="newsletter-error"
-              className="text-brand-red text-xs font-black mt-2 text-left pl-1"
-              role="status"
-              aria-live="assertive"
-            >
-              <span>⚠️</span> {message}
-            </p>
-          )}
-        </div>
-
-        <Button
-          type="submit"
-          disabled={status === "loading"}
-          className="w-full"
-          rotate="0deg"
-          size="large"
+    <div className="mt-0 w-full pt-1">
+      {status === "success" ? (
+        <div
+          id="newsletter-success"
+          className="w-full rounded-3xl border border-white/80 bg-white/70 px-6 py-6 text-center font-sans shadow-[0_12px_30px_rgba(255,79,168,0.06)] backdrop-blur-md transition-all duration-300"
+          role="status"
+          aria-live="polite"
         >
-          {status === "loading" ? "Joining..." : "Join the Newsletter"}
-        </Button>
+          <p className="text-base font-extrabold leading-relaxed text-text-dark">
+            {message}
+          </p>
+        </div>
+      ) : (
+        /* Tightened spacing between input, button, and legal disclaimer text */
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-3">
+          <div className="relative w-full">
+            <input
+              id="newsletter-email"
+              type="email"
+              placeholder="Your email address..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={status === "loading"}
+              required
+              className="w-full rounded-full border border-white/80 bg-white/92 px-6 py-3.5 font-sans text-base font-bold text-text-dark placeholder-[#b58a9d] outline-none shadow-[0_10px_25px_rgba(255,79,168,0.1)] transition-all duration-200 focus:-translate-y-0.5 focus:shadow-[0_14px_32px_rgba(255,79,168,0.14)] focus-visible:outline-2 focus-visible:outline-brand-red focus-visible:outline-offset-2"
+              aria-label="Email address for newsletter"
+              aria-describedby={status === "error" ? "newsletter-error" : undefined}
+              aria-invalid={status === "error"}
+            />
+            {status === "error" && (
+              <p
+                id="newsletter-error"
+                className="mt-1.5 pl-1 text-left text-xs font-black text-brand-red"
+                role="status"
+                aria-live="assertive"
+              >
+                <span>⚠️</span> {message}
+              </p>
+            )}
+          </div>
 
-        <p className="text-[11px] text-text-muted leading-relaxed text-center mt-2 font-semibold">
-          By signing up, you agree to receive marketing emails from Naomi Jon
-          HQ. You can unsubscribe at any time.
-        </p>
-      </form>
+          <Button
+            type="submit"
+            disabled={status === "loading"}
+            className="w-full"
+            rotate="0deg"
+            size="large"
+          >
+            {status === "loading" ? "Joining..." : "Join the Newsletter"}
+          </Button>
+
+          <p className="mt-1 text-center text-[10.5px] font-semibold leading-relaxed text-text-muted/80">
+            By signing up, you agree to receive marketing emails from Naomi Jon HQ.
+            You can unsubscribe at any time.
+          </p>
+        </form>
+      )}
     </div>
   );
 }
-

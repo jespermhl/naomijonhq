@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./sticker.module.css";
 
 /**
  * Props for the Sticker component.
@@ -25,8 +24,19 @@ export const Sticker: React.FC<StickerProps> = ({
     "--rotate": rotate,
   } as React.CSSProperties;
 
+  const stickerClasses = [
+    "absolute -top-4.5 right-5",
+    "bg-[rgba(255,255,255,0.82)]",
+    "px-4.5 py-2.5 rounded-[999px]",
+    "border border-solid",
+    "font-extrabold text-text-dark",
+    "transform-[rotate(var(--rotate,5deg))]",
+    "[box-shadow:0_10px_30px_rgba(255,79,168,0.14)]",
+    "z-10",
+  ].join(" ");
+
   return (
-    <div className={`${styles.sticker} ${className}`} style={inlineStyles}>
+    <div className={`${stickerClasses} ${className}`} style={inlineStyles}>
       {children}
     </div>
   );

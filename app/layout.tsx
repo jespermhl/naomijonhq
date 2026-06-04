@@ -1,16 +1,30 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import { Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
 import { NewsletterPromotion } from "@/components/NewsletterPromotion";
 import Footer from "@/components/Footer";
 import { PropertyMetaTags } from "@/components/PropertyMetaTags";
+import { ClientLayout } from "./providers-layout";
+
+const bodyFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+});
+
+const displayFont = Sora({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["600", "700", "800"],
+});
 
 const SOURCE = "/";
 const DEFAULTS = {
   title: "Naomi Jon HQ",
   description:
-    "The official Naomi Jon HQ. Get details on the Strawberry Tour, newsletter updates, and more.",
+    "The official Naomi Jon HQ. Get details on Strawberry, the tour archive, perfume links, newsletter updates, and more.",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -63,14 +77,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        className={`${bodyFont.variable} ${displayFont.variable} bg-pattern min-h-screen flex flex-col relative`}
+      >
         <link
           rel="alternate"
           type="application/json+oembed"
           href="https://naomijonhq.com/oembed.json"
         />
-        {children}
-        <Footer />
+
+        {/* ClientLayout rendert die Animation sicher auf Client-Ebene */}
+        <ClientLayout>
+          <main className="relative z-10 flex-1 w-full flex flex-col justify-center min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </ClientLayout>
+
         <PropertyMetaTags source={SOURCE} />
         <NewsletterPromotion />
       </body>

@@ -42,7 +42,8 @@ export const Button: React.FC<ButtonProps> = ({
   size = "medium",
   ...props
 }) => {
-  const baseClass = "inline-flex items-center justify-center bg-brand-red text-text-light font-black no-underline border-3 border-text-light rounded-xl cursor-pointer hover:-translate-y-1 hover:rotate-0 hover:scale-105 transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[6px_6px_0px_var(--color-brand-pink)] hover:shadow-[10px_10px_0px_var(--color-brand-pink)] max-sm:w-auto max-sm:px-4 max-sm:py-2.5 max-sm:text-[13px] max-sm:min-w-[90px] max-sm:shadow-[4px_4px_0px_var(--color-brand-pink)] max-sm:!transform-none";
+  const baseClass =
+    "inline-flex items-center justify-center rounded-full border-2 border-white/78 bg-brand-red text-white font-black no-underline cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_10px_0_rgba(255,79,168,0.24)] hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_14px_0_rgba(255,79,168,0.3)] max-sm:w-auto max-sm:px-4 max-sm:py-2.5 max-sm:text-[13px] max-sm:min-w-[90px] max-sm:!transform-none";
   const combinedClassName = `${baseClass} ${SIZE_CLASSES[size]} ${className}`;
 
   const inlineStyles = {
@@ -89,4 +90,3 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-
