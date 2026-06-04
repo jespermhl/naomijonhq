@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./strawberry.module.css";
 
 /**
  * A client-side burst animation component that displays animated strawberry emojis.
@@ -22,11 +21,11 @@ export function BurstAnimation() {
   });
 
   return (
-    <div className={styles.burstWrapper} aria-hidden="true">
+    <div className="absolute top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true">
       {particles.map((p, i) => (
         <div
           key={i}
-          className={styles.particle}
+          className="absolute text-[40px] animate-[burst_4s_ease-out_infinite] select-none"
           style={
             {
               "--tx": `${p.tx}px`,

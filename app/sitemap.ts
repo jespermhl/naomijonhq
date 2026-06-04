@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/strawberry-album',
     '/strawberry-tour',
     '/newsletter',
+    '/imprint',
+    '/privacy'
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

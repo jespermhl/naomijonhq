@@ -66,63 +66,81 @@ export default async function Footer() {
   const socials = await getSocials();
 
   return (
-    <footer className="px-5 py-10 mt-[60px] flex flex-col items-center gap-6 bg-footer-bg border-t-4 border-brand-pink">
-      <ul className="flex flex-wrap justify-center gap-4 list-none p-0 m-0">
-        <li>
-          <a
-            href={WEBSITE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-10 h-10 p-0 rounded-full bg-social-link-bg border-2 border-border-color-light text-text-dark no-underline transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-0.5 hover:bg-brand-red hover:border-brand-red hover:text-text-light hover:outline-2 hover:outline-brand-red hover:outline-offset-4 focus-visible:-translate-y-0.5 focus-visible:bg-brand-red focus-visible:border-brand-red focus-visible:text-text-light focus-visible:outline-2 focus-visible:outline-brand-red focus-visible:outline-offset-4"
-            aria-label="Visit Website"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-5 h-5 shrink-0"
-              aria-hidden="true"
+    <footer
+      className="w-full px-5 pb-10 pt-4 flex flex-col items-center mt-auto !bg-transparent !border-none !shadow-none !backdrop-filter-none"
+    >
+      <div
+        className="glass-panel mx-auto w-full max-w-[1100px] rounded-[30px] border border-white/85 bg-white/74 px-6 py-6 shadow-[0_24px_60px_rgba(255,79,168,0.1)] backdrop-blur-xl flex flex-col items-center gap-6"
+      >
+        <ul className="flex flex-wrap justify-center gap-4 list-none p-0 m-0">
+          <li>
+            <a
+              href={WEBSITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-11 h-11 p-0 rounded-full bg-white/80 border border-white/85 text-[#1f171d]/80 no-underline transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 hover:bg-[#ff4fa8] hover:border-[#ff4fa8] hover:text-white hover:shadow-[0_10px_20px_rgba(255,79,168,0.18)] focus-visible:-translate-y-1 focus-visible:bg-[#ff4fa8] focus-visible:border-[#ff4fa8] focus-visible:text-white"
+              aria-label="Visit Website"
             >
-              {PLATFORM_ICONS.website}
-            </svg>
-          </a>
-        </li>
-        {socials.length > 0 &&
-          socials.map((social) => {
-            const platform = (social.platform || "other").toLowerCase();
-            const iconContent = PLATFORM_ICONS[platform] || PLATFORM_ICONS.other;
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5 shrink-0"
+                aria-hidden="true"
+              >
+                {PLATFORM_ICONS.website}
+              </svg>
+            </a>
+          </li>
+          {socials.length > 0 &&
+            socials.map((social) => {
+              const platform = (social.platform || "other").toLowerCase();
+              const iconContent = PLATFORM_ICONS[platform] || PLATFORM_ICONS.other;
 
-            return (
-              <li key={social._id}>
-                <a
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 p-0 rounded-full bg-social-link-bg border-2 border-border-color-light text-text-dark no-underline transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-0.5 hover:bg-brand-red hover:border-brand-red hover:text-text-light hover:outline-2 hover:outline-brand-red hover:outline-offset-4 focus-visible:-translate-y-0.5 focus-visible:bg-brand-red focus-visible:border-brand-red focus-visible:text-text-light focus-visible:outline-2 focus-visible:outline-brand-red focus-visible:outline-offset-4"
-                  aria-label={`Visit our ${social.name}`}
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5 shrink-0"
-                    aria-hidden="true"
+              return (
+                <li key={social._id}>
+                  <a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-11 h-11 p-0 rounded-full bg-white/80 border border-white/85 text-[#1f171d]/80 no-underline transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 hover:bg-[#ff4fa8] hover:border-[#ff4fa8] hover:text-white hover:shadow-[0_10px_20px_rgba(255,79,168,0.18)] focus-visible:-translate-y-1 focus-visible:bg-[#ff4fa8] focus-visible:border-[#ff4fa8] focus-visible:text-white"
+                    aria-label={`Visit our ${social.name}`}
                   >
-                    {iconContent}
-                  </svg>
-                </a>
-              </li>
-            );
-          })}
-      </ul>
-      <div className="flex flex-col items-center gap-4 w-full max-w-[800px] mt-4 pt-6 border-t border-border-color-light md:flex-row md:justify-between">
-        <div className="flex gap-5">
-          <Link href="/privacy" className="text-text-dark text-[0.85rem] font-semibold no-underline transition-colors duration-200 ease-in-out hover:text-brand-red">Privacy Policy</Link>
-          <Link href="/imprint" className="text-text-dark text-[0.85rem] font-semibold no-underline transition-colors duration-200 ease-in-out hover:text-brand-red">Imprint</Link>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-5 h-5 shrink-0"
+                      aria-hidden="true"
+                    >
+                      {iconContent}
+                    </svg>
+                  </a>
+                </li>
+              );
+            })}
+        </ul>
+
+        <div className="flex flex-col items-center gap-4 w-full pt-5 border-t border-white/70 md:flex-row md:justify-between">
+          <div className="flex gap-5">
+            <Link
+              href="/privacy"
+              className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/imprint"
+              className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
+            >
+              Imprint
+            </Link>
+          </div>
+
+          <div className="text-[0.85rem] text-[#1f171d]/60 font-semibold flex items-center gap-1.5 [&_div]:mt-0 [&_a]:text-[#ff4fa8] [&_a]:font-extrabold hover:[&_a]:text-[#1f171d] [&_a]:no-underline [&_a]:transition-colors [&_a]:duration-200">
+            <Credits />
+          </div>
         </div>
-        <div className="text-[0.85rem] text-text-muted font-medium flex items-center gap-1.5 [&>div]:mt-0">
-          <Credits />
-        </div>
+
       </div>
     </footer>
   );
 }
-

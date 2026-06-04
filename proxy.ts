@@ -45,6 +45,13 @@ function isReservedAppPath(pathname: string): boolean {
 export default async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // Root always resolves to the Linktree hub.
+  if (pathname === '/') {
+    const hubUrl = new URL('/redirect', req.url);
+    hubUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');
+    return NextResponse.rewrite(hubUrl);
+  }
+
   // Skip paths that are handled directly by Next.js routes or contain file extensions
   if (isReservedAppPath(pathname) || pathname.includes('.')) {
     return NextResponse.next();
@@ -69,13 +76,6 @@ export default async function proxy(req: NextRequest) {
     // Pass the source path so the redirect page can re-verify the destination against Sanity
     redirectUrl.searchParams.set('source', pathname);
     return NextResponse.redirect(redirectUrl, { status: found.permanent ? 301 : 302 });
-  }
-
-  // Rewrite the root to the Linktree hub
-  if (pathname === '/') {
-    const hubUrl = new URL('/redirect', req.url);
-    hubUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');
-    return NextResponse.rewrite(hubUrl);
   }
 
   return NextResponse.next();

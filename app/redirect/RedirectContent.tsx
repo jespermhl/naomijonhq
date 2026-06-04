@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Card } from "@/components/ui/Card";
 import { client } from "@/sanity/client";
-import styles from "./redirect.module.css";
 
 const STATIC_ALLOWED_HOSTS = [
   "naomijonhq.com",
@@ -49,7 +48,6 @@ export function RedirectContent() {
         return;
       }
 
-      // --- Fast path: proxy.ts already looked this up in Sanity ---
       if (source) {
         try {
           const entry = await client.fetch<{ destination?: string }>(
@@ -69,7 +67,6 @@ export function RedirectContent() {
         }
       }
 
-      // --- Fallback path: direct /redirect?to= links without a source ---
       try {
         const url = new URL(rawTarget);
 
@@ -137,23 +134,68 @@ export function RedirectContent() {
   }, [target, isValidating]);
 
   return (
-    <main className={`${styles.redirectPage} bg-pattern`}>
-      <Card className={styles.redirectCard} maxWidth="500px">
-        <div className="strawberry-emoji wobble">🍓</div>
-        <h1 className="page-title">
-          {isValidating ? "Verifying..." : "Redirecting..."}
-        </h1>
-        <p className="page-subtitle">
-          {isValidating
-            ? "Checking destination safety..."
-            : "Taking you to your destination. Hold on!"}
-        </p>
-        <div className={styles.loadingDots}>
-          <span>.</span>
-          <span>.</span>
-          <span>.</span>
-        </div>
-      </Card>
-    </main>
+    <>
+      {/* Self-contained micro-animations to support wobble and dot-pulsing flawlessly */}
+      <style>{`
+        @keyframes custom-wobble {
+          0%, 100% { transform: rotate(-8deg) scale(1.1); }
+          50% { transform: rotate(8deg) scale(1.1); }
+        }
+        @keyframes custom-dot-pulse {
+          0%, 100% { opacity: 0.2; transform: translateY(0); }
+          50% { opacity: 1; transform: translateY(-8px); }
+        }
+        .animate-wobble-strawberry {
+          animation: custom-wobble 0.6s ease-in-out infinite alternate;
+        }
+        .animate-dot-pulse-1 {
+          animation: custom-dot-pulse 1.4s infinite ease-in-out;
+        }
+        .animate-dot-pulse-2 {
+          animation: custom-dot-pulse 1.4s infinite ease-in-out 0.2s;
+        }
+        .animate-dot-pulse-3 {
+          animation: custom-dot-pulse 1.4s infinite ease-in-out 0.4s;
+        }
+      `}</style>
+
+      <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
+        <Card
+          className="w-full max-w-[500px] flex flex-col items-center text-center p-8 md:p-12 shadow-xl border border-neutral-100 bg-white"
+          maxWidth="500px"
+          rotated={false}
+        >
+          {/* Strawberry emoji icon container */}
+          <div className="text-6xl md:text-7xl animate-wobble-strawberry select-none mb-8 filter drop-shadow">
+            🍓
+          </div>
+
+          {/* Heading */}
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 mb-3 uppercase leading-tight">
+            {isValidating ? "Verifying..." : "Redirecting..."}
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-sm md:text-base font-semibold text-neutral-500 max-w-[320px] mb-8 leading-snug">
+            {isValidating
+              ? "Checking destination safety..."
+              : "Taking you to your destination. Hold on!"}
+          </p>
+
+          {/* Custom pulsing loading dots */}
+          <div className="flex items-center gap-1.5 h-10 select-none">
+            <span className="text-5xl font-extrabold text-rose-500 animate-dot-pulse-1">
+              .
+            </span>
+            <span className="text-5xl font-extrabold text-rose-500 animate-dot-pulse-2">
+              .
+            </span>
+            <span className="text-5xl font-extrabold text-rose-500 animate-dot-pulse-3">
+              .
+            </span>
+          </div>
+        </Card>
+      </main>
+    </>
   );
 }

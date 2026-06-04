@@ -21,7 +21,7 @@ export default function NotFound() {
 
   return (
     <main className="flex items-center justify-center min-h-screen p-5 bg-pattern">
-      <Card maxWidth="460px" className="text-center py-15 px-10 max-sm:px-5 max-sm:py-10">
+      <Card maxWidth="460px" rotated={false} className="text-center py-15 px-10 max-sm:px-5 max-sm:py-10">
         <div className="text-7xl mb-4 inline-block animate-wobble max-sm:text-[64px] max-sm:mb-2">🍓</div>
         <h1 className="text-3xl font-black mb-8 text-brand-red leading-tight text-center">Page Not Found</h1>
         <p className="text-text-dark text-[17px] leading-relaxed mb-10 font-semibold text-center">
@@ -39,4 +39,3 @@ export default function NotFound() {
     </main>
   );
 }
-

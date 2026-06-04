@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./sticker.module.css";
 
 /**
  * Props for the Sticker component.
@@ -26,7 +25,7 @@ export const Sticker: React.FC<StickerProps> = ({
   } as React.CSSProperties;
 
   return (
-    <div className={`${styles.sticker} ${className}`} style={inlineStyles}>
+    <div className='absolute -top-[18px] right-[20px] bg-[rgba(255,_255,_255,_0.82)] px-[18px] py-[10px] rounded-[999px] border-[1px] border-[solid] border-[rgba(255,79,168,0.26)] font-extrabold text-[#22181f] [transform:rotate(var(--rotate,_5deg))] [box-shadow:0_10px_30px_rgba(255,_79,_168,_0.14)] z-10' style={inlineStyles}>
       {children}
     </div>
   );

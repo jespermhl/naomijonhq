@@ -4,7 +4,6 @@ import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
 import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { Card } from "@/components/ui/Card";
 import { RedirectContent } from "./RedirectContent";
-import styles from "./redirect.module.css";
 
 export async function generateMetadata({
   searchParams,
@@ -37,10 +36,12 @@ export default async function RedirectPage({
       {source && <PropertyMetaTags source={source} />}
       <Suspense
         fallback={
-          <main className={`${styles.redirectPage} bg-pattern`}>
-            <Card maxWidth="500px">
-              <div className="strawberry-emoji wobble">🍓</div>
-              <h1 className="page-title">Loading...</h1>
+          <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
+            <Card maxWidth="500px" rotated={false} className="w-full max-w-[500px] flex flex-col items-center p-8 text-center">
+              <div className="text-5xl animate-bounce mb-6">🍓</div>
+              <h1 className="text-2xl font-extrabold tracking-tight text-neutral-800 uppercase">
+                Loading...
+              </h1>
             </Card>
           </main>
         }

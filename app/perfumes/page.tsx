@@ -1,7 +1,6 @@
 import React from "react";
 import { client } from "../../sanity/client";
 import PerfumeCard from "../../components/PerfumeCard";
-import styles from "./perfumes.module.css";
 import { Metadata } from "next";
 import type { SanityImageSource } from "@sanity/image-url";
 
@@ -39,29 +38,48 @@ async function getPerfumes(): Promise<Perfume[]> {
     isNew,
     heartNotes
   }`;
-  const perfumes = await client.fetch<Perfume[]>(query);
-  return perfumes;
+  return await client.fetch<Perfume[]>(query);
 }
 
 export default async function PerfumesPage() {
   const perfumes = await getPerfumes();
 
   return (
-    <div className={styles.container}>
-      <h1 className="page-title">Perfumes <span className={styles.sparkle}>✨</span></h1>
-      <p className="page-subtitle">Discover all the amazing perfumes by Naomi Jon.</p>
+    <>
+      <style>{`
+        @keyframes inline-wobble {
+          0%, 100% { transform: rotate(-6deg); }
+          50% { transform: rotate(6deg); }
+        }
+        .animate-sparkle-wobble {
+          animation: inline-wobble 2s ease-in-out infinite;
+        }
+      `}</style>
 
-      {perfumes.length > 0 ? (
-        <div className={styles.grid}>
-          {perfumes.map((perfume) => (
-            <PerfumeCard key={perfume._id} perfume={perfume} />
-          ))}
-        </div>
-      ) : (
-        <div className={styles.emptyState}>
-          <p>New perfumes dropping soon! Stay tuned.</p>
-        </div>
-      )}
-    </div>
+      {/* Container aligned to 1100px width with the footer */}
+      <div className="mx-auto max-w-[1100px] px-5 py-14 pb-18">
+        <h1 className="page-title">
+          Perfumes{" "}
+          <span className="inline-block animate-sparkle-wobble">✨</span>
+        </h1>
+        <p className="page-subtitle">
+          Discover all the amazing perfumes by Naomi Jon.
+        </p>
+
+        {perfumes.length > 0 ? (
+          <div className="mt-10 grid grid-cols-1 gap-8 justify-items-stretch sm:grid-cols-2">
+            {perfumes.map((perfume) => (
+              <PerfumeCard key={perfume._id} perfume={perfume} />
+            ))}
+          </div>
+        ) : (
+          <div
+            className="mx-auto mt-10 max-w-2xl px-6 py-14 text-center rounded-[28px] border border-white/85 bg-white/74 font-bold text-[1.05rem] text-[#22181f] shadow-[0_24px_60px_rgba(255,79,168,0.1)] backdrop-blur-sm"
+          >
+            <p>New perfumes dropping soon! Stay tuned.</p>
+          </div>
+        )}
+      </div>
+    </>
   );
 }

@@ -1,12 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
-
-const BurstAnimation = dynamic(
-  () => import("./BurstAnimation").then((m) => m.BurstAnimation),
-  { ssr: false }
-);
 
 interface StrawberryReleaseProps {
   showVideo?: boolean;
@@ -24,78 +18,98 @@ export function StrawberryRelease({
   const displayDateStr = "March 20, 2026";
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-bg-primary bg-pattern font-sans px-6 py-10 overflow-x-hidden overflow-y-auto relative m-0 max-sm:p-4">
-      <BurstAnimation />
-      <div className="max-w-[600px] w-full bg-white border-6 border-brand-red rounded-[32px] px-8 py-12 text-center shadow-[10px_10px_0px_var(--color-brand-red)] rotate-1 relative z-10 max-sm:px-4 max-sm:py-8 max-sm:pb-6 max-sm:border-4 max-sm:rounded-2xl max-sm:shadow-[6px_6px_0px_var(--color-brand-red)]">
-        <div className="absolute -top-6.5 left-7.5 px-5 py-2.5 rounded-xl border-3 border-brand-red font-extrabold text-base text-brand-red -rotate-5 shadow-[4px_4px_0px_var(--color-brand-red)] bg-orange-400 max-sm:-top-3 max-sm:left-3.5 max-sm:text-xs max-sm:px-3 max-sm:py-1.5 max-sm:border-2">
-          OUT NOW!
-        </div>
-
-        <div className="mb-6 relative inline-block animate-celebrate max-sm:mb-4">
-          <div className="w-[320px] h-[320px] bg-white border-8 border-brand-red rounded-3xl overflow-hidden shadow-[12px_12px_0px_var(--color-brand-red)] transition-all duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] relative max-sm:w-[160px] max-sm:h-[160px] max-sm:border-4 max-sm:shadow-[6px_6px_0px_var(--color-brand-red)]">
-            <Image
-              src="/images/strawberry-cover.jpg"
-              alt="Strawberry Album Cover"
-              fill
-              style={{ objectFit: "cover" }}
-              priority
-            />
+    <div className="relative w-full flex items-center justify-center px-6 py-12 max-sm:px-4 max-sm:py-8">
+      <div
+        className={`relative z-10 w-full transition-all duration-500 ease-in-out ${showVideo
+            ? "grid max-w-[1180px] grid-cols-1 items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]"
+            : "max-w-[540px]"
+          }`}
+      >
+        <div className="glass-panel relative flex flex-col items-center rounded-[34px] px-8 py-10 text-center max-sm:px-5 max-sm:py-8 lg:px-12 lg:py-10">
+          <div className="bg-brand-red absolute -top-4 left-8 rounded-full border border-white/85 px-5 py-2.5 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(255,79,168,0.18)] max-sm:-top-3 max-sm:left-6 max-sm:px-3 max-sm:py-1.5 max-sm:text-xs">
+            OUT NOW!
           </div>
-          <div className="absolute -bottom-3.5 -right-3.5 text-5xl filter drop-shadow-[3px_3px_0px_var(--color-brand-red)]">🍓</div>
-        </div>
 
-        <h1 className="text-[42px] font-black mb-1 text-brand-red leading-tight tracking-tight max-sm:text-2xl">STRAWBERRY</h1>
-        <p className="text-xl font-extrabold text-brand-pink mb-2 uppercase tracking-widest max-sm:text-sm">Naomi&apos;s Sophomore Album</p>
-        <p className="text-base font-bold text-brand-red mb-3 bg-bg-primary inline-block px-3 py-1 rounded-lg border-2 border-brand-red max-sm:text-xs">{displayDateStr}</p>
+          <p className="text-brand-red mb-2 text-xs font-black uppercase tracking-[0.38em] mt-2">
+            Strawberry
+          </p>
+          <h1 className="mb-2 text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-none tracking-[-0.08em] text-[#1f171d]">
+            Strawberry
+          </h1>
+          <p className="text-[#5f4e58] mb-6 max-w-[28rem] text-base font-semibold leading-relaxed">
+            Naomi&apos;s sophomore album is finally here
+          </p>
 
-        <div className="text-2xl font-black text-brand-red mb-5 animate-pop-in max-sm:text-lg max-sm:mb-3.5">IT&apos;S FINALLY HERE! 🎉</div>
+          <div className="animate-celebrate relative mb-6 inline-block will-change-transform">
+            <div className="border-white/90 shadow-[0_20px_48px_rgba(255,79,168,0.12)] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] relative h-[240px] w-[240px] overflow-hidden rounded-[30px] border bg-white transition-all duration-500 max-sm:h-[180px] max-sm:w-[180px]">
+              <Image
+                src="/images/strawberry-cover.jpg"
+                alt="Strawberry Album Cover"
+                fill
+                style={{ objectFit: "cover" }}
+                priority
+              />
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm border border-white/95 px-3 py-1 rounded-full text-xs font-black text-brand-red shadow-sm pointer-events-none whitespace-nowrap">
+                {displayDateStr}
+              </div>
+            </div>
+            <div className="filter drop-shadow-[2px_2px_0px_rgba(255,79,168,0.35)] absolute -bottom-2 -right-2 text-4xl select-none">
+              🍓
+            </div>
+          </div>
 
-        <div className="flex gap-4 justify-center items-center w-full max-sm:gap-2">
-          <a
-            href="https://lnk.site/strawberrythealbum"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 bg-brand-red text-white py-4 px-5 rounded-2xl text-xl font-black no-underline border-4 border-white shadow-[6px_6px_0px_var(--color-brand-pink)] transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] text-center max-w-[240px] block rotate-1 hover:-translate-y-1 hover:rotate-0 hover:scale-105 hover:shadow-[10px_10px_0px_var(--color-brand-pink)] max-sm:text-sm max-sm:py-2.5 max-sm:px-1 max-sm:border-2 max-sm:rounded-xl max-sm:max-w-none"
-          >
-            STREAM
-          </a>
+          <div className="text-brand-red animate-pop-in mb-6 text-lg font-black lg:text-xl">
+            IT&apos;S FINALLY HERE! 🎉
+          </div>
 
-          <a
-            href="https://releeze.com/en/collections/naomi-jon"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 bg-brand-red text-white py-4 px-5 rounded-2xl text-xl font-black no-underline border-4 border-white shadow-[6px_6px_0px_var(--color-brand-pink)] transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] text-center max-w-[240px] block -rotate-2 hover:-translate-y-1 hover:rotate-0 hover:scale-105 hover:shadow-[10px_10px_0px_var(--color-brand-pink)] max-sm:text-sm max-sm:py-2.5 max-sm:px-1 max-sm:border-2 max-sm:rounded-xl max-sm:max-w-none"
-          >
-            ORDER
-          </a>
+          <div className="flex w-full max-w-[400px] items-center justify-center gap-4 max-sm:gap-3">
+            <a
+              href="https://lnk.site/strawberrythealbum"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-brand-red border-white/80 shadow-[0_8px_0_rgba(255,79,168,0.28)] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:shadow-[0_12px_0_rgba(255,79,168,0.34)] block flex-1 rotate-1 rounded-full border py-3 px-5 text-center text-lg font-black text-white no-underline transition-all duration-200 hover:-translate-y-1 hover:rotate-0 hover:scale-105 active:scale-95 will-change-transform max-sm:py-2.5 max-sm:text-sm"
+            >
+              STREAM
+            </a>
+
+            <a
+              href="https://releeze.com/en/collections/naomi-jon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/88 border-white/90 shadow-[0_8px_0_rgba(255,79,168,0.12)] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:shadow-[0_12px_0_rgba(255,79,168,0.16)] text-[#1f171d] block flex-1 -rotate-2 rounded-full border py-3 px-5 text-center text-lg font-black no-underline transition-all duration-200 hover:-translate-y-1 hover:rotate-0 hover:scale-105 active:scale-95 will-change-transform max-sm:py-2.5 max-sm:text-sm"
+            >
+              ORDER
+            </a>
+          </div>
         </div>
 
         {showVideo && (
-          <div className="mt-8 w-full z-10">
+          <div className="z-10">
             <a
               href="https://www.youtube.com/watch?v=Bx4ksscVii4"
               target="_blank"
               rel="noopener noreferrer"
-              className="no-underline block group/video"
+              className="group/video block no-underline"
             >
-              <div className="relative w-full aspect-video bg-black border-[5px] border-brand-red rounded-[20px] overflow-hidden shadow-[10px_10px_0px_var(--color-brand-pink)] -rotate-[1.5deg] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] group-hover/video:rotate-0 group-hover/video:scale-105 group-hover/video:shadow-[15px_15px_0px_var(--color-brand-pink)] max-sm:border-3 max-sm:shadow-[6px_6px_0px_var(--color-brand-pink)] max-sm:rounded-xl">
+              <div className="glass-panel shadow-[0_26px_70px_rgba(255,79,168,0.12)] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] relative aspect-[4/3] w-full rotate-[1deg] overflow-hidden rounded-[34px] transition-all duration-300 group-hover/video:scale-[1.02] group-hover/video:rotate-0 will-change-transform">
                 <Image
                   src="https://img.youtube.com/vi/Bx4ksscVii4/maxresdefault.jpg"
                   alt="Strawberry Music Video Thumbnail"
                   fill
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover/video:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover/video:scale-110"
                   unoptimized
                 />
-                <div className="absolute bottom-3 right-3 bg-white text-brand-red px-3 py-1.5 rounded-lg font-black text-xs uppercase border-2 border-brand-red shadow-[3px_3px_0px_var(--color-brand-red)] z-5">Watch Music Video</div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-red/90 w-16 h-16 rounded-full flex items-center justify-center border-3 border-white shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-all duration-300 group-hover/video:bg-brand-red group-hover/video:scale-120 max-sm:w-12 max-sm:h-12">
-                  <div className="w-0 h-0 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent border-l-[20px] border-l-white ml-1.5 max-sm:border-t-8 max-sm:border-b-8 max-sm:border-l-[14px]" />
+                <div className="border-white/90 text-brand-red shadow-[0_8px_20px_rgba(255,79,168,0.12)] absolute bottom-3 right-3 z-[5] rounded-full border bg-white px-3 py-1.5 text-xs font-black uppercase">
+                  Watch Music Video
+                </div>
+                <div className="bg-brand-red/90 border-white/80 shadow-[0_8px_24px_rgba(255,79,168,0.26)] absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border transition-all duration-300 group-hover/video:bg-brand-red group-hover/video:scale-110 max-sm:h-12 max-sm:w-12">
+                  <div className="ml-1.5 h-0 w-0 border-t-[12px] border-b-[12px] border-l-[20px] border-t-transparent border-b-transparent border-l-white max-sm:border-t-8 max-sm:border-b-8 max-sm:border-l-[14px]" />
                 </div>
               </div>
             </a>
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }
-
