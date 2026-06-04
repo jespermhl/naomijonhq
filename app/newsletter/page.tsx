@@ -47,7 +47,7 @@ export default function NewsletterPage() {
             Newsletter
           </h1>
 
-          <p className="page-subtitle max-w-[380px] mb-8 pb-4">
+          <p className="page-subtitle max-w-95 mb-8 pb-4">
             Stay updated with new music, concert dates, and news from Naomi Jon.
           </p>
 

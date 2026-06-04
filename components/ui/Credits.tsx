@@ -14,7 +14,7 @@ export const Credits: React.FC = () => {
         className="text-brand-red no-underline border-b border-transparent transition-all duration-200 ease-in-out hover:border-brand-red hover:opacity-80"
       >
         Mahel Webdesign
-      </a>{" "}
+      </a>
     </div>
   );
 };
