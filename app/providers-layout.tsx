@@ -21,13 +21,13 @@ export function ClientLayout({ children }: ClientLayoutProps) {
   const shouldShowBurst = ALLOWED_PATHS.includes(pathname);
 
   return (
-    <div className="relative min-h-screen flex flex-col overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden">
       {shouldShowBurst && (
-        <div className="absolute top-0 left-0 z-0 pointer-events-none overflow-hidden h-screen w-screen">
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
           <BurstAnimation />
         </div>
       )}
-      <div className="relative z-10 flex flex-col flex-1">{children}</div>
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }

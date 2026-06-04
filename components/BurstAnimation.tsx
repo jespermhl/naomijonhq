@@ -8,10 +8,6 @@ interface ParticleStyle extends React.CSSProperties {
   "--tr": string;
 }
 
-/**
- * A client-side burst animation component that displays animated strawberry emojis.
- * Used for festive background effects.
- */
 export function BurstAnimation() {
   const [particles] = useState(() => {
     return Array.from({ length: 24 }).map((_, i) => {
@@ -28,7 +24,7 @@ export function BurstAnimation() {
 
   return (
     <div
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      className="absolute top-[50vh] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
       aria-hidden="true"
     >
       {particles.map((p, i) => (
