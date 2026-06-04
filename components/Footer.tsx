@@ -75,8 +75,59 @@ export default async function Footer() {
 
   return (
     <footer className="w-full px-5 py-8 mt-auto flex flex-col items-center gap-6 max-w-275 mx-auto">
-      <div className="flex flex-col items-center gap-4 w-full pt-6 border-t border-[#1f171d]/10 md:flex-row md:justify-between">
-        <div className="flex gap-5 order-2 md:order-0">
+      <div className="flex flex-col items-center gap-4 w-full md:flex-row md:justify-between md:border-t md:border-[#1f171d]/10 md:pt-6">
+        <ul className="flex flex-wrap justify-center gap-2 md:gap-4 list-none p-0 m-0 order-1 md:order-0 pb-4 md:pb-0 w-full md:w-auto">
+          <div className="flex justify-center gap-2 md:gap-4 w-full">
+            <li>
+              <a
+                href={WEBSITE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={socialIconButtonClasses}
+                aria-label="Visit Website"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-5 h-5 shrink-0"
+                  aria-hidden="true"
+                >
+                  {PLATFORM_ICONS.website}
+                </svg>
+              </a>
+            </li>
+            {socials.length > 0 &&
+              socials.map((social) => {
+                const platform = (social.platform || "other").toLowerCase();
+                const iconContent =
+                  PLATFORM_ICONS[platform] || PLATFORM_ICONS.other;
+
+                return (
+                  <li key={social._id}>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={socialIconButtonClasses}
+                      aria-label={`Visit our ${social.name}`}
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="w-5 h-5 shrink-0"
+                        aria-hidden="true"
+                      >
+                        {iconContent}
+                      </svg>
+                    </a>
+                  </li>
+                );
+              })}
+          </div>
+        </ul>
+
+        <div className="w-full border-t border-[#1f171d]/10 order-2 md:hidden" />
+        <div className="flex gap-5 order-3 md:order-0 pt-2 md:pt-0">
           <Link
             href="/imprint"
             className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
@@ -90,56 +141,7 @@ export default async function Footer() {
             Privacy Policy
           </Link>
         </div>
-
-        <ul className="flex flex-wrap justify-center gap-2 md:gap-4 list-none p-0 m-0 order-1 md:order-0">
-          <li>
-            <a
-              href={WEBSITE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={socialIconButtonClasses}
-              aria-label="Visit Website"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-5 h-5 shrink-0"
-                aria-hidden="true"
-              >
-                {PLATFORM_ICONS.website}
-              </svg>
-            </a>
-          </li>
-          {socials.length > 0 &&
-            socials.map((social) => {
-              const platform = (social.platform || "other").toLowerCase();
-              const iconContent =
-                PLATFORM_ICONS[platform] || PLATFORM_ICONS.other;
-
-              return (
-                <li key={social._id}>
-                  <a
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={socialIconButtonClasses}
-                    aria-label={`Visit our ${social.name}`}
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-5 h-5 shrink-0"
-                      aria-hidden="true"
-                    >
-                      {iconContent}
-                    </svg>
-                  </a>
-                </li>
-              );
-            })}
-        </ul>
-
-        <div className="text-[0.85rem] text-[#1f171d]/60 font-semibold flex items-center gap-1.5 [&_div]:mt-0 [&_a]:text-[#ff4fa8] [&_a]:font-extrabold hover:[&_a]:text-[#1f171d] [&_a]:no-underline [&_a]:transition-colors [&_a]:duration-200 order-3 md:order-none">
+        <div className="text-[0.85rem] text-[#1f171d]/60 font-semibold flex items-center gap-1.5 [&_div]:mt-0 [&_a]:text-[#ff4fa8] [&_a]:font-extrabold hover:[&_a]:text-[#1f171d] [&_a]:no-underline [&_a]:transition-colors [&_a]:duration-200 order-4 md:order-none">
           <Credits />
         </div>
       </div>
