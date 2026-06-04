@@ -91,7 +91,7 @@ export default async function Footer() {
           </Link>
         </div>
 
-        <ul className="flex flex-wrap justify-center gap-4 list-none p-0 m-0 order-1 md:order-0">
+        <ul className="flex flex-wrap justify-center gap-4 md:gap-2 list-none p-0 m-0 order-1 md:order-0">
           <li>
             <a
               href={WEBSITE_URL}
