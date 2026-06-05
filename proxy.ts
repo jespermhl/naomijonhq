@@ -8,7 +8,6 @@ type RedirectConfig = {
   noRedirect?: boolean;
 };
 
-// Fresh reads: short links must work as soon as they are published in Sanity (no CDN lag).
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
@@ -28,7 +27,6 @@ function isReservedAppPath(pathname: string): boolean {
   if (pathname === '/newsletter' || pathname.startsWith('/newsletter/')) {
     return true;
   }
-  // Only real app routes — not every path that begins with "/strawberry" (e.g. /strawberry-mv short links).
   if (
     pathname === '/strawberry' ||
     pathname.startsWith('/strawberry/') ||
@@ -45,16 +43,16 @@ function isReservedAppPath(pathname: string): boolean {
 export default async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Root always resolves to the Linktree hub.
-  if (pathname === '/') {
-    const hubUrl = new URL('/redirect', req.url);
-    hubUrl.searchParams.set('to', 'https://linktr.ee/naomijonhq');
-    return NextResponse.rewrite(hubUrl);
-  }
+  // 1. Prepare the modified headers cloning the request headers
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-current-path", pathname);
 
   // Skip paths that are handled directly by Next.js routes or contain file extensions
   if (isReservedAppPath(pathname) || pathname.includes('.')) {
-    return NextResponse.next();
+    // 2. Pass the headers to NextResponse.next()
+    return NextResponse.next({
+      request: { headers: requestHeaders }
+    });
   }
 
   let found: RedirectConfig | null = null;
@@ -66,19 +64,24 @@ export default async function proxy(req: NextRequest) {
   }
 
   if (found?.noRedirect === true) {
-    return NextResponse.next();
+    // 3. Pass the headers here as well if Sanity blocks the redirect
+    return NextResponse.next({
+      request: { headers: requestHeaders }
+    });
   }
 
   if (found?.destination) {
     const dest = new URL(found.destination, req.url).toString();
     const redirectUrl = new URL('/redirect', req.url);
     redirectUrl.searchParams.set('to', dest);
-    // Pass the source path so the redirect page can re-verify the destination against Sanity
     redirectUrl.searchParams.set('source', pathname);
     return NextResponse.redirect(redirectUrl, { status: found.permanent ? 301 : 302 });
   }
 
-  return NextResponse.next();
+  // 4. Pass the headers to the fallback next() call
+  return NextResponse.next({
+    request: { headers: requestHeaders }
+  });
 }
 
 export const config = {
