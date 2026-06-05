@@ -103,7 +103,7 @@ export function StrawberryRelease({
                 <div className="border-white/90 text-brand-red shadow-[0_8px_20px_rgba(255,79,168,0.12)] absolute bottom-3 right-3 z-5 rounded-full border bg-white px-3 py-1.5 text-xs font-black uppercase">
                   Watch Music Video
                 </div>
-                <div className="bg-brand-red/90 border-white/80 shadow-[0_8px_24px_rgba(255,79,168,0.26)] absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border transition-all duration-300 group-hover/video:bg-brand-red group-hover/video:scale-110 max-sm:h-12 max-sm:w-12">
+                <div className="bg-brand-red/90 border-white/80 shadow-[0_8px_24px_rgba(255,79,168,0.26)] absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border transition-all duration-300 group-hover/video:scale-110 max-sm:h-12 max-sm:w-12">
                   <div className="ml-1.5 h-0 w-0 border-t-12 border-b-12 border-l-20 border-t-transparent border-b-transparent border-l-white max-sm:border-t-8 max-sm:border-b-8 max-sm:border-l-14" />
                 </div>
               </div>
