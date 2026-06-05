@@ -8,7 +8,11 @@ interface ParticleStyle extends React.CSSProperties {
   "--tr": string;
 }
 
-export function BurstAnimation() {
+interface BurstAnimationProps {
+  emoji?: string;
+}
+
+export function BurstAnimation({ emoji = "🍓" }: BurstAnimationProps) {
   const [particles] = useState(() => {
     return Array.from({ length: 24 }).map((_, i) => {
       const angle = (i / 24) * 360;
@@ -40,7 +44,7 @@ export function BurstAnimation() {
             } as ParticleStyle
           }
         >
-          🍓
+          {emoji}
         </div>
       ))}
     </div>
