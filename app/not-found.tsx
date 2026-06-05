@@ -31,7 +31,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-block bg-brand-red text-white px-7 py-3.5 rounded-xl no-underline font-black text-base mt-5 border-[3px] border-black shadow-[4px_4px_0px_#000] transition-all duration-200 ease-in-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_#000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#000]"
+          className="bg-brand-red border-white/80 shadow-[0_8px_0_rgba(255,79,168,0.28)] ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:shadow-[0_12px_0_rgba(255,79,168,0.34)] block flex-1 rotate-1 rounded-full border py-3 px-5 text-center text-lg font-black text-white no-underline transition-all duration-200 hover:-translate-y-1 hover:rotate-0 hover:scale-105 active:scale-95 will-change-transform max-sm:py-2.5 max-sm:text-sm"
         >
           Back to Home Now
         </Link>
