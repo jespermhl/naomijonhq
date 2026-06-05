@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { client } from "../sanity/client";
-import { Credits } from "./ui/Credits";
+import LegalLinks from "./LegalLinks";
 
 const WEBSITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://naomijonhq.com";
@@ -123,26 +122,7 @@ export default async function Footer() {
           })}
       </ul>
 
-      <div className="flex flex-col items-center gap-4 w-full pt-6 border-t border-[#1f171d]/10 md:flex-row md:justify-between">
-        <div className="flex gap-5">
-          <Link
-            href="/privacy"
-            className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            href="/imprint"
-            className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
-          >
-            Imprint
-          </Link>
-        </div>
-
-        <div className="text-[0.85rem] text-[#1f171d]/60 font-semibold flex items-center gap-1.5 [&_div]:mt-0 [&_a]:text-[#ff4fa8] [&_a]:font-extrabold hover:[&_a]:text-[#1f171d] [&_a]:no-underline [&_a]:transition-colors [&_a]:duration-200">
-          <Credits />
-        </div>
-      </div>
+      <LegalLinks />
     </footer>
   );
 }
