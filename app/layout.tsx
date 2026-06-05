@@ -81,7 +81,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${bodyFont.variable} ${displayFont.variable} bg-pattern min-h-screen flex flex-col relative`}
+        className={`${bodyFont.variable} ${displayFont.variable} min-h-screen flex flex-col relative`}
       >
         <link
           rel="alternate"
@@ -89,7 +89,6 @@ export default function RootLayout({
           href="https://naomijonhq.com/oembed.json"
         />
 
-        {/* ClientLayout rendert die Animation sicher auf Client-Ebene */}
         <ClientLayout>
           <main className="relative z-10 flex-1 w-full flex flex-col justify-center min-h-screen">
             {children}

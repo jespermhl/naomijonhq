@@ -4,7 +4,7 @@ import { Modal } from "@/components/ui/Modal";
 export default function PrivacyModal() {
   return (
     <Modal>
-      <LegalLayout fileName="privacy.md" />
+      <LegalLayout fileName="privacy.md" showCardLayout={false} />
     </Modal>
   );
 }

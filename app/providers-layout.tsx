@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-// Dynamically import BurstAnimation purely on the client side
 const BurstAnimation = dynamic(
   () => import("@/components/BurstAnimation").then((m) => m.BurstAnimation),
   { ssr: false },

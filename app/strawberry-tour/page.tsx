@@ -61,14 +61,8 @@ export default async function ConcertsPage() {
         >
           <Sticker>IT&apos;S A WRAP!</Sticker>
 
-          {/* 
-            Forced Horizontal Flexbox:
-            - flex-col on mobile, but md:flex (and md:flex-row) forces side-by-side layout.
-            - md:items-start aligns the text cleanly next to the top-half of the image.
-          */}
           <div className="flex flex-col gap-8 md:flex-row md:items-start lg:gap-12">
 
-            {/* Left Photo & Stats Column */}
             <div className="relative w-full max-w-85 shrink-0 self-center md:self-start">
               <div className="absolute -inset-4 rounded-[36px] bg-[radial-gradient(circle_at_top_left,rgba(255,79,168,0.2),transparent_58%)] blur-2xl" />
               <div className="relative overflow-hidden rounded-[30px] border border-white/90 bg-white/85 shadow-[0_20px_50px_rgba(255,79,168,0.12)]">
