@@ -20,11 +20,10 @@ export function StrawberryRelease({
   return (
     <div className="relative w-full flex items-center justify-center px-6 py-12 max-sm:px-4 max-sm:py-8">
       <div
-        className={`relative z-10 w-full transition-all duration-500 ease-in-out ${
-          showVideo
-            ? "grid max-w-295 grid-cols-1 items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]"
-            : "max-w-135"
-        }`}
+        className={`relative z-10 w-full transition-all duration-500 ease-in-out ${showVideo
+          ? "grid max-w-295 grid-cols-1 items-center gap-8 lg:grid-cols-[1.05fr_0.95fr]"
+          : "max-w-135"
+          }`}
       >
         <div className="glass-panel relative flex flex-col items-center rounded-[34px] px-8 py-10 text-center max-sm:px-5 max-sm:py-8 lg:px-12 lg:py-10">
           <div className="bg-brand-red absolute -top-4 left-8 rounded-full border border-white/85 px-5 py-2.5 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(255,79,168,0.18)] max-sm:-top-3 max-sm:left-6 max-sm:px-3 max-sm:py-1.5 max-sm:text-xs">
@@ -37,6 +36,10 @@ export function StrawberryRelease({
           <h1 className="mb-2 text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-none tracking-[-0.08em] text-[#1f171d]">
             Strawberry
           </h1>
+
+          <p className="text-brand-red mb-4 text-xs font-black uppercase tracking-wider">
+            Released {displayDateStr}
+          </p>
           <p className="text-[#5f4e58] mb-6 max-w-md text-base font-semibold leading-relaxed">
             Naomi&apos;s sophomore album is finally here
           </p>
@@ -50,9 +53,6 @@ export function StrawberryRelease({
                 style={{ objectFit: "cover" }}
                 priority
               />
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-sm border border-white/95 px-3 py-1 rounded-full text-xs font-black text-brand-red shadow-sm pointer-events-none whitespace-nowrap">
-                {displayDateStr}
-              </div>
             </div>
             <div className="filter drop-shadow-[2px_2px_0px_rgba(255,79,168,0.35)] absolute -bottom-2 -right-2 text-4xl select-none">
               🍓
