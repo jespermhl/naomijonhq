@@ -6,7 +6,6 @@ import { PLATFORM_ICONS, getSocials } from "./SocialConfig";
 const WEBSITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://naomijonhq.com";
 
-// Forces the layout/footer to evaluate dynamically per request
 export const dynamic = "force-dynamic";
 
 export default async function Footer() {
