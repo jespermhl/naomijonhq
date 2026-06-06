@@ -40,6 +40,14 @@ function isReservedAppPath(pathname: string): boolean {
   return false;
 }
 
+async function fetchWithTimeout<T>(promise: Promise<T>, timeoutMs = 1500): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) =>
+      setTimeout(() => reject(new Error('Sanity fetch timeout')), timeoutMs)
+    )]);
+}
+
 export default async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -58,7 +66,10 @@ export default async function proxy(req: NextRequest) {
   let found: RedirectConfig | null = null;
   try {
     const query = `*[_type == "redirect" && source == $path][0]{destination, permanent, noRedirect}`;
-    found = await sanityClient.fetch(query, { path: pathname });
+    found = await fetchWithTimeout(
+      sanityClient.fetch<RedirectConfig | null>(query, { path: pathname }),
+      1500
+    );
   } catch (error) {
     console.error('Edge Redirect Sanity Fetch Error:', error);
   }
