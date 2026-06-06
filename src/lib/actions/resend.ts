@@ -21,10 +21,10 @@ const schema = z.object({
 });
 
 export async function sendEmailAction(formData: FormData) {
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const subject = formData.get("subject") as string;
-    const message = formData.get("message") as string;
+    const name = (formData.get("name") as string) || "";
+    const email = (formData.get("email") as string) || "";
+    const subject = (formData.get("subject") as string) || "";
+    const message = (formData.get("message") as string) || "";
 
     const parsed = schema.safeParse({
         name,
@@ -34,7 +34,8 @@ export async function sendEmailAction(formData: FormData) {
     });
 
     if (!parsed.success) {
-        return { success: false, error: parsed.error.message };
+        const errors = parsed.error.issues.map(issue => issue.message).join(", ");
+        return { success: false, error: errors };
     }
 
     try {
