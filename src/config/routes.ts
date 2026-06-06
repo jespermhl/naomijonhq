@@ -13,7 +13,7 @@ const DEFAULT_CONFIG: PageConfig = {
 }
 
 const PAGE_CONFIGS: Record<string, PageConfig> = {
-    "/": { ...DEFAULT_CONFIG, showSocials: false },
+    "/": { ...DEFAULT_CONFIG, showHeader: true, showSocials: false },
     "/strawberry": { ...DEFAULT_CONFIG, showBurst: true, showSocials: true },
     "/strawberry-album": { ...DEFAULT_CONFIG, showBurst: true, showSocials: true },
     "/strawberry-tour": { ...DEFAULT_CONFIG, showBurst: true, showSocials: true },
