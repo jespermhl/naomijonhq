@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { buildPageMetadata, buildPageViewport } from "@/src/lib/sanity/redirects";
-import { PropertyMetaTags } from "@/src/components/PropertyMetaTags";
-import { StrawberryRelease } from "@/src/components/StrawberryRelease";
+import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
+import { StrawberryRelease } from "@/components/StrawberryRelease";
 
 const SOURCE = "/strawberry";
 const DEFAULTS = {

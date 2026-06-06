@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
-import { buildPageMetadata, buildPageViewport } from "@/src/lib/sanity/redirects";
-import { PropertyMetaTags } from "@/src/components/PropertyMetaTags";
-import { Card } from "@/src/components/ui/Card";
+import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
+import { Card } from "@/components/ui/Card";
 import { RedirectContent } from "./RedirectContent";
 
 export async function generateMetadata({

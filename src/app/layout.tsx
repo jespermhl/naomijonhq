@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { buildPageMetadata, buildPageViewport } from "@/src/lib/sanity/redirects";
-import { NewsletterPromotion } from "@/src/app/_components/NewsletterPromotion";
-import Footer from "@/src/components/Footer";
-import { PropertyMetaTags } from "@/src/components/PropertyMetaTags";
+import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { NewsletterPromotion } from "@/app/_components/NewsletterPromotion";
+import Footer from "@/components/Footer";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
 
 const bodyFont = Space_Grotesk({

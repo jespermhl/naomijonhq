@@ -1,4 +1,4 @@
-import { client } from '@/src/sanity/client';
+import { client } from '@/sanity/client';
 
 /**
  * Represents a concert object fetched from Sanity CMS.

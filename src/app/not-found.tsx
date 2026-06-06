@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Card } from "@/src/components/ui/Card";
+import { Card } from "@/components/ui/Card";
 
 /**
  * Custom 404 handler that automatically redirects to the Home hub.

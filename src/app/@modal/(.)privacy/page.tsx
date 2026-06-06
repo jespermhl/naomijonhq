@@ -1,5 +1,5 @@
-import LegalLayout from "@/src/components/LegalLayout";
-import { Modal } from "@/src/components/ui/Modal";
+import LegalLayout from "@/components/LegalLayout";
+import { Modal } from "@/components/ui/Modal";
 
 export default function PrivacyModal() {
   return (

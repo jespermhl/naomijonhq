@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { subscribeToNewsletter } from "@/src/lib/actions/klaviyo";
+import { subscribeToNewsletter } from "@/lib/actions/klaviyo";
 import { Button } from "./ui/Button";
 
 export function NewsletterForm() {

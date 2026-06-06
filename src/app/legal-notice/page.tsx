@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import LegalLayout from "@/src/components/LegalLayout";
+import LegalLayout from "@/components/LegalLayout";
 
 export const metadata: Metadata = {
   title: "Legal Notice – Naomi Jon HQ",

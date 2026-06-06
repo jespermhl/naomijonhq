@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { buildPageMetadata, buildPageViewport } from "@/src/lib/sanity/redirects";
-import { PropertyMetaTags } from "@/src/components/PropertyMetaTags";
-import { Card } from "@/src/components/ui/Card";
-import { Sticker } from "@/src/components/ui/Sticker";
-import { NewsletterForm } from "@/src/components/NewsletterForm";
+import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
+import { Card } from "@/components/ui/Card";
+import { Sticker } from "@/components/ui/Sticker";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 const SOURCE = "/newsletter";
 const DEFAULTS = {

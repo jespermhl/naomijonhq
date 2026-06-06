@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import Markdown from "markdown-to-jsx";
-import { Card } from "@/src/components/ui/Card";
+import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 

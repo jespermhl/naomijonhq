@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { buildPageMetadata, buildPageViewport } from "@/src/lib/sanity/redirects";
-import { PropertyMetaTags } from "@/src/components/PropertyMetaTags";
+import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
+import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import Image from "next/image";
-import { Button } from "@/src/components/ui/Button";
-import { getSanityConcerts } from "@/src/lib/sanity/concerts";
-import { Card } from "@/src/components/ui/Card";
-import { Sticker } from "@/src/components/ui/Sticker";
-import { PastConcertItem } from "@/src/app/strawberry-tour/_components/PastConcertItem";
-import { formatDate } from "@/src/lib/utils/date";
+import { Button } from "@/components/ui/Button";
+import { getSanityConcerts } from "@/lib/sanity/concerts";
+import { Card } from "@/components/ui/Card";
+import { Sticker } from "@/components/ui/Sticker";
+import { PastConcertItem } from "@/app/strawberry-tour/_components/PastConcertItem";
+import { formatDate } from "@/lib/utils/date";
 
 interface Concert {
   id: string;

@@ -1,4 +1,4 @@
-import { getCustomOgTags } from "@/src/lib/sanity/redirects";
+import { getCustomOgTags } from "@/lib/sanity/redirects";
 
 interface PropertyMetaTagsProps {
   source: string;

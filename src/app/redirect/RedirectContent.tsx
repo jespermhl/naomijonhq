@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Card } from "@/src/components/ui/Card";
-import { client } from "@/src/sanity/client";
+import { Card } from "@/components/ui/Card";
+import { client } from "@/sanity/client";
 
 const STATIC_ALLOWED_HOSTS = [
   "naomijonhq.com",

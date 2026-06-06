@@ -1,7 +1,7 @@
-import NewsletterSection from "@/src/app/_components/NewsletterSection";
-import CommunitySocials from "@/src/app/_components/CommunitySocials";
-import Header from "@/src/components/Header";
-import HeroSection from "@/src/app/_components/HeroSection";
+import NewsletterSection from "@/app/_components/NewsletterSection";
+import CommunitySocials from "@/app/_components/CommunitySocials";
+import Header from "@/components/Header";
+import HeroSection from "@/app/_components/HeroSection";
 
 export default function DiscordLanding() {
 

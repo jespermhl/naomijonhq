@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
 const BurstAnimation = dynamic(
-  () => import("@/src/app/_components/BurstAnimation").then((m) => m.BurstAnimation),
+  () => import("@/app/_components/BurstAnimation").then((m) => m.BurstAnimation),
   { ssr: false },
 );
 
