@@ -9,7 +9,7 @@ export default async function CommunitySocials() {
         <section className="relative w-full px-6 py-20 max-sm:px-4 max-sm:py-12">
             <div className="mx-auto max-w-275 text-center">
                 <span className="text-brand-red mb-3 inline-block text-xs font-black uppercase tracking-[0.3em]">
-                    Don’t miss a thing
+                    Stay Connected
                 </span>
 
                 <h2 className="text-[#1f171d] mb-12 text-[clamp(2.2rem,5vw,3.8rem)] font-black uppercase leading-[1.05] tracking-tighter">
