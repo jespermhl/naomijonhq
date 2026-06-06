@@ -43,14 +43,15 @@ export interface SocialLink {
     platform?: string;
 }
 
-export async function getSocials(): Promise<SocialLink[]> {
-    const query = `*[_type == "social"] | order(order asc) {
+export async function getSocials(showEmail: boolean = true): Promise<SocialLink[]> {
+    const query = `*[_type == "social" ${showEmail ? '' : '&& name != "Mail"'}] | order(order asc) {
     _id,
     name,
     url,
     platform
   }`;
     try {
+        console.log(query);
         return await client.fetch<SocialLink[]>(
             query,
             {},

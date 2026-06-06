@@ -1,7 +1,7 @@
 import { PLATFORM_ICONS, getSocials } from "@/components/SocialConfig";
 
 export default async function CommunitySocials() {
-    const socials = await getSocials();
+    const socials = await getSocials(false);
 
     if (socials.length === 0) return null;
 
@@ -16,7 +16,7 @@ export default async function CommunitySocials() {
                     Follow the Socials
                 </h2>
 
-                <div className="grid grid-cols-2 gap-6 md:grid-cols-4 max-sm:gap-4 justify-center">
+                <div className="grid grid-cols-2 gap-6 md:grid-cols-3 max-sm:gap-4 justify-center">
                     {socials.map((social) => {
                         const platform = (social.platform || "other").toLowerCase();
                         const iconContent =
