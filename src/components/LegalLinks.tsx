@@ -1,9 +1,11 @@
-import { headers } from "next/headers";
 import Link from "next/link";
 
-export default async function LegalLinks() {
-    const headersList = await headers();
-    const pathname = headersList.get("x-current-path") || "/";
+interface LegalLinkProps {
+    currentPath: string | undefined;
+}
+
+export default function LegalLinks({ currentPath }: LegalLinkProps) {
+    const pathname = currentPath;
 
     const isOnLegalPage = pathname === "/legal-notice" || pathname === "/privacy-policy";
 
