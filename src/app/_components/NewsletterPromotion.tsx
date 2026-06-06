@@ -14,7 +14,7 @@ export function NewsletterPromotion() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname === "/newsletter") {
+    if (pathname === "/newsletter" || pathname === "/") {
       return;
     }
 
