@@ -16,7 +16,7 @@ export default function LegalLayout({
   fileName,
   showCardLayout = true,
 }: LegalLayoutProps) {
-  const filePath = path.join(process.cwd(), "content", fileName);
+  const filePath = path.join(process.cwd(), "src", "content", fileName);
   if (!fs.existsSync(filePath)) {
     notFound();
   }

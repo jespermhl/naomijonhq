@@ -33,7 +33,13 @@ function isReservedAppPath(pathname: string): boolean {
     pathname === '/strawberry-tour' ||
     pathname.startsWith('/strawberry-tour/') ||
     pathname === '/strawberry-album' ||
-    pathname.startsWith('/strawberry-album/')
+    pathname.startsWith('/strawberry-album/') ||
+    pathname === '/perfumes' ||
+    pathname.startsWith('/perfumes/') ||
+    pathname === '/legal-notice' ||
+    pathname.startsWith('/legal-notice/') ||
+    pathname === '/privacy' ||
+    pathname.startsWith('/privacy/')
   ) {
     return true;
   }

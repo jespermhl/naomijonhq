@@ -74,8 +74,8 @@ export default function RootLayout({
   children,
   modal,
 }: Readonly<{
-  children: ReactNode;
-  modal: ReactNode;
+  children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
