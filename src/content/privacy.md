@@ -8,26 +8,26 @@ Thank you for your interest in our website. Protecting your privacy is very impo
 
 The data controller in terms of the General Data Protection Regulation (GDPR) is:
 
-LF Digital  
-Owner: Luca Hoffmann  
-Münsterstraße 4  
-48249 Dülmen  
+LF Digital
+Owner: Luca Hoffmann
+Münsterstraße 4
+48249 Dülmen
 Deutschland
 
-E-Mail: [info@naomijonhq.com](mailto:info@naomijonhq.com)  
+E-Mail: [info@naomijonhq.com](mailto:info@naomijonhq.com)
 Telephone: [+49 15565 829954](tel:+4915565829954)
 
 ## 2. General Information and Mandatory Information
 
-**Data Protection**  
+**Data Protection**
 As the operator of this website, we take the protection of your personal data very seriously. We treat your personal data confidentially and in accordance with statutory data protection regulations and this Privacy Policy.
 
-**SSL/TLS Encryption**  
+**SSL/TLS Encryption**
 For security reasons and to protect the transmission of confidential content, such as inquiries or newsletter subscriptions you send to us, this website uses SSL or TLS encryption. You can recognize an encrypted connection by the fact that the address line of the browser changes from "http://" to "https://" and by the lock symbol in your browser address bar.
 
 ## 3. Data Collection on Our Website
 
-**a) Hosting via Vercel**  
+**a) Hosting via Vercel**
 We host our website at Vercel. The provider is Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
 
 When you visit our website, Vercel collects various data required to deliver the website stably and securely. This includes, among other things, your IP address, the date and time of access, the type of browser used, and the operating system.
@@ -40,7 +40,7 @@ For more information, please refer to Vercel's Privacy Policy at: [https://verce
 
 ## 4. Analytics Tools
 
-**a) Vemetric Analytics**  
+**a) Vemetric Analytics**
 To statistically evaluate visitor numbers and analyze user behavior, we use the privacy-friendly web analytics tool Vemetric on our website.
 
 Vemetric is designed to work completely without using cookies or any local storage on your end device. No permanent identification markers are stored. IP addresses are converted into an anonymous hash value immediately upon capture and cannot be merged with other data to identify individual users. Cross-website tracking does not take place.
@@ -49,7 +49,7 @@ The data is processed on the basis of our legitimate interest in measuring reach
 
 ## 5. Newsletter
 
-**a) Klaviyo**  
+**a) Klaviyo**
 If you subscribe to our newsletter, we use the data you enter (usually your email address) to send you regular updates.
 
 For sending and managing our newsletter, we use the service Klaviyo. The provider is Klaviyo, Inc., 125 Summer St, Floor 6, Boston, MA 02111, USA.
