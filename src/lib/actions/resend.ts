@@ -32,10 +32,10 @@ export async function sendEmailAction(formData: FormData) {
 
     try {
         await resend.emails.send({
-            from: "naomijonhq.com <contact-form@naomijonhq.com>",
+            from: `${name} <contact-form@mails.naomijonhq.com>`,
             replyTo: `${name} <${email}>`,
             to: [toEmail!],
-            subject: `${subject} - Message from naomijonhq.com`,
+            subject: `${subject} - Message from Contact Form`,
             text: `${message}`,
         });
         return { success: true };
