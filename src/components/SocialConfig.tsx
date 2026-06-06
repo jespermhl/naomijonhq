@@ -51,7 +51,6 @@ export async function getSocials(showEmail: boolean = true): Promise<SocialLink[
     platform
   }`;
     try {
-        console.log(query);
         return await client.fetch<SocialLink[]>(
             query,
             {},
