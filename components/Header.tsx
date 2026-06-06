@@ -23,7 +23,7 @@ export function Header() {
                     Naomi Jon HQ
                 </div>
 
-                <nav className="hidden gap-10 text-xs font-black uppercase tracking-[0.2em] text-[#5f4e58] md:flex items-center">
+                <nav className="hidden gap-10 text-xs font-black uppercase tracking-[0.2em] text-[`#5f4e58`] md:flex items-center">
                     {navLinks.map((link, index) => (
                         <a
                             key={index}
