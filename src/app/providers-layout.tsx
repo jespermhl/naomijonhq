@@ -15,7 +15,7 @@ interface ClientLayoutProps {
 }
 
 const BURST_ALLOWED_PATHS = ["/strawberry", "/strawberry-album", "/strawberry-tour"];
-const HEADER_ALLOWED_PATHS = ["/", "/legal-notice", "/privacy"];
+const HEADER_ALLOWED_PATHS = ["/", "/legal-notice", "/privacy", "/contact"];
 
 export function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
