@@ -6,7 +6,7 @@ import { Button } from "@/src/components/ui/Button";
 import { getSanityConcerts } from "@/src/lib/sanity/concerts";
 import { Card } from "@/src/components/ui/Card";
 import { Sticker } from "@/src/components/ui/Sticker";
-import { PastConcertItem } from "@/src/components/ui/PastConcertItem";
+import { PastConcertItem } from "@/src/app/strawberry-tour/_components/PastConcertItem";
 import { formatDate } from "@/src/lib/utils/date";
 
 interface Concert {

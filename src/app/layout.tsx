@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { buildPageMetadata, buildPageViewport } from "@/src/lib/sanity/redirects";
-import { NewsletterPromotion } from "@/src/components/NewsletterPromotion";
+import { NewsletterPromotion } from "@/src/app/_components/NewsletterPromotion";
 import Footer from "@/src/components/Footer";
 import { PropertyMetaTags } from "@/src/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
