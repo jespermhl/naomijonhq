@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ALL_PAGES } from "@/config/routes";
+import { getPageConfig } from "@/config/routes";
 import type { SocialLink } from "@/components/SocialConfig";
 
 const BurstAnimation = dynamic(
@@ -22,12 +22,7 @@ interface ClientLayoutProps {
 export function ClientLayout({ children, modal, socials }: ClientLayoutProps) {
   const pathname = usePathname();
 
-  const pageConfig = ALL_PAGES.find((p) => p.path === pathname) ?? {
-    showHeader: false,
-    showFooter: true,
-    showBurst: false,
-    showSocials: true,
-  };
+  const pageConfig = getPageConfig(pathname);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
