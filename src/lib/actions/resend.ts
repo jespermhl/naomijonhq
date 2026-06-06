@@ -3,14 +3,21 @@
 import { Resend } from "resend";
 import z from "zod";
 
+if (!process.env.RESEND_API_KEY) {
+    throw new Error("RESEND_API_KEY environment variable is required");
+}
+if (!process.env.TO_EMAIL) {
+    throw new Error("TO_EMAIL environment variable is required");
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 const toEmail = process.env.TO_EMAIL;
 
 const schema = z.object({
-    name: z.string().min(1, "Please enter your name"),
-    email: z.string().min(1, "Please enter your email").email("Invalid email address"),
-    subject: z.string().min(1, "Please enter a subject"),
-    message: z.string().min(1, "Please enter a message"),
+    name: z.string().min(1, { error: "Please enter your name" }),
+    email: z.email({ error: "Invalid email address" }),
+    subject: z.string().min(1, { error: "Please enter a subject" }),
+    message: z.string().min(1, { error: "Please enter a message" }),
 });
 
 export async function sendEmailAction(formData: FormData) {
@@ -34,7 +41,7 @@ export async function sendEmailAction(formData: FormData) {
         await resend.emails.send({
             from: `${name} <contact-form@mails.naomijonhq.com>`,
             replyTo: `${name} <${email}>`,
-            to: [toEmail!],
+            to: [toEmail],
             subject: `${subject} - Message from Contact Form`,
             text: `${message}`,
         });
