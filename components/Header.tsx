@@ -14,7 +14,6 @@ const defaultLinks: NavLink[] = [
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navLinks = defaultLinks;
 
     return (
         <header className="relative z-50 mx-auto mt-8 mb-6 w-full max-w-275 pt-4 max-sm:mb-4 max-sm:px-4 max-sm:pt-3">
@@ -24,7 +23,7 @@ export function Header() {
                 </div>
 
                 <nav className="hidden gap-10 text-xs font-black uppercase tracking-[0.2em] text-[`#5f4e58`] md:flex items-center">
-                    {navLinks.map((link, index) => (
+                    {defaultLinks.map((link, index) => (
                         <a
                             key={index}
                             href={link.href}
@@ -59,7 +58,7 @@ export function Header() {
                     }`}
             >
                 <nav className="flex flex-col gap-4 text-center text-sm font-black uppercase tracking-widest text-[#5f4e58]">
-                    {navLinks.map((link, index) => (
+                    {defaultLinks.map((link, index) => (
                         <a
                             key={index}
                             href={link.href}
