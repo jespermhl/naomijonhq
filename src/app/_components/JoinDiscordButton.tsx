@@ -11,7 +11,7 @@ export default function JoinDiscordButton({
         hover:shadow-[0_12px_0_rgba(255,79,168,0.34)]
         ease-[cubic-bezier(0.175,0.885,0.32,1.275)]
         block w-full rounded-full border px-6 py-4 
-        text-center text-md font-black text-white no-underline 
+        text-center text-md font-black !text-white no-underline 
         transition-all duration-200 
         hover:-translate-y-1 hover:scale-105 
         active:scale-95 will-change-transform
@@ -24,7 +24,7 @@ export default function JoinDiscordButton({
             rel="noopener noreferrer"
             className={`${buttonBaseStyles} ${className}`}
         >
-            JOIN THE DISCORD
+            Join the Discord
         </a>
     );
 }
