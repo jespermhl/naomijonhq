@@ -38,8 +38,8 @@ function isReservedAppPath(pathname: string): boolean {
     pathname.startsWith('/perfumes/') ||
     pathname === '/legal-notice' ||
     pathname.startsWith('/legal-notice/') ||
-    pathname === '/privacy' ||
-    pathname.startsWith('/privacy/')
+    pathname === '/privacy-policy' ||
+    pathname.startsWith('/privacy-policy/')
   ) {
     return true;
   }

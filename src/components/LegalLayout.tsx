@@ -6,7 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "./Header";
 
-type LegalFileName = "legal-notice.md" | "privacy.md";
+type LegalFileName = "legal-notice.md" | "privacy-policy.md";
 
 interface LegalLayoutProps {
   fileName: LegalFileName;

@@ -145,7 +145,7 @@ function ContactForm() {
                             </div>
 
                             <div className="text-sm text-[#1f171d] font-light tracking-wider text-center">
-                                By sending this contact form you agree to our <Link href="/privacy" className="text-[#ff4fa8] hover:underline">privacy policy</Link>.
+                                By sending this contact form you agree to our <Link href="/privacy-policy" className="text-[#ff4fa8] hover:underline">privacy policy</Link>.
                             </div>
 
                             <button

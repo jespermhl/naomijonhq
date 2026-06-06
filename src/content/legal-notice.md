@@ -32,7 +32,7 @@ The legal notices on this page, as well as all questions and disputes related to
 
 ## Privacy Notice
 
-You can find our privacy policy at: [/privacy](/privacy)
+You can find our privacy policy at: [/privacy-policy](/privacy-policy)
 
 ## Copyright Notice
 
