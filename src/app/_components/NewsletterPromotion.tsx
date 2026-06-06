@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Button } from "../../components/ui/Button";
+import { Button } from "@/components/ui/Button";
 
 /**
  * A floating promotion popup for the newsletter.
@@ -52,8 +52,8 @@ export function NewsletterPromotion() {
   return (
     <div
       className={`fixed inset-0 z-1000 flex items-center justify-center p-6 transition-all duration-500 ${isVisible
-          ? "bg-black/30 pointer-events-auto backdrop-blur-[6px]"
-          : "bg-transparent pointer-events-none"
+        ? "bg-black/30 pointer-events-auto backdrop-blur-[6px]"
+        : "bg-transparent pointer-events-none"
         }`}
       onClick={handleDismiss}
       aria-label="Close newsletter promotion"
@@ -62,8 +62,8 @@ export function NewsletterPromotion() {
       <div
         id="newsletter-promo"
         className={`glass-panel rounded-[30px] px-8 pt-10 pb-8 w-full max-w-100 relative flex flex-col items-center gap-4 text-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] max-sm:px-6 max-sm:py-8 max-sm:rounded-[26px] max-sm:max-w-full ${isVisible
-            ? "opacity-100 scale-100 translate-y-0"
-            : "opacity-0 scale-[0.85] translate-y-4"
+          ? "opacity-100 scale-100 translate-y-0"
+          : "opacity-0 scale-[0.85] translate-y-4"
           }`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"

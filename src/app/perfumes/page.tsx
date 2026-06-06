@@ -1,5 +1,5 @@
 import React from "react";
-import { client } from "../../sanity/client";
+import { client } from "@/sanity/client";
 import PerfumeCard from "./_components/PerfumeCard";
 import { Metadata } from "next";
 import type { SanityImageSource } from "@sanity/image-url";

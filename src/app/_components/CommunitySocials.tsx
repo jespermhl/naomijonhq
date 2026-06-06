@@ -1,4 +1,4 @@
-import { PLATFORM_ICONS, getSocials } from "../../components/SocialConfig";
+import { PLATFORM_ICONS, getSocials } from "@/components/SocialConfig";
 
 export default async function CommunitySocials() {
     const socials = await getSocials();

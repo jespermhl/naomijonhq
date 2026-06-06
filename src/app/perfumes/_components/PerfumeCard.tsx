@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { SanityImageSource } from "@sanity/image-url";
-import { urlFor } from "../../../sanity/imageUrl";
+import { urlFor } from "@/sanity/imageUrl";
 
 interface StoreLink {
   store: "dm" | "rossmann" | "amazon";
