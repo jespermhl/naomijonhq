@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { sendEmailAction } from "@/lib/actions/resend";
+import Link from "next/link";
 
 export default function ContactPage() {
     return (
@@ -45,7 +46,6 @@ function ContactForm() {
             <div className="mx-auto w-full max-w-275">
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
 
-                    {/* Left Column: Contact info */}
                     <div className="flex flex-col items-start space-y-8 lg:max-w-130 lg:sticky lg:top-8">
                         <div className="space-y-6">
                             <p className="text-brand-red text-xs font-black uppercase tracking-[0.38em]">
@@ -78,11 +78,9 @@ function ContactForm() {
                         </div>
                     </div>
 
-                    {/* Right Column: Form */}
                     <div className="w-full rounded-4xl border border-white/60 bg-white/25 p-10 backdrop-blur-md shadow-[0px_0px_48px_-10px_rgba(255,63,159,0.15)] max-sm:p-6">
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
 
-                            {/* Status Messages */}
                             {status && (
                                 <div className={`p-4 rounded-xl text-sm font-bold ${status.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                                     {status.message}
@@ -125,7 +123,7 @@ function ContactForm() {
                                 <input
                                     type="text"
                                     id="subject"
-                                    name="subject" /* CRITICAL: Matches formData.get("subject") */
+                                    name="subject"
                                     required
                                     className="w-full rounded-2xl border border-white/80 bg-white/40 px-5 py-3.5 text-[#1f171d] font-semibold shadow-sm backdrop-blur-sm placeholder-[#5f4e58]/40 outline-none transition-all focus:border-[#ff4fa8] focus:bg-white/60"
                                     placeholder="What's this about?"
@@ -138,12 +136,16 @@ function ContactForm() {
                                 </label>
                                 <textarea
                                     id="message"
-                                    name="message" /* CRITICAL: Matches formData.get("message") */
+                                    name="message"
                                     rows={5}
                                     required
                                     className="w-full resize-none rounded-2xl border border-white/80 bg-white/40 px-5 py-4 text-[#1f171d] font-semibold shadow-sm backdrop-blur-sm placeholder-[#5f4e58]/40 outline-none transition-all focus:border-[#ff4fa8] focus:bg-white/60"
                                     placeholder="Type your message here..."
                                 />
+                            </div>
+
+                            <div className="text-sm text-[#1f171d] font-light tracking-wider text-center">
+                                By sending this contact form you agree to our <Link href="/privacy" className="text-[#ff4fa8] hover:underline">privacy policy</Link>.
                             </div>
 
                             <button

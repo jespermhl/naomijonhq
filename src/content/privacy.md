@@ -4,6 +4,7 @@ Last Updated: June 2, 2026
 
 Thank you for your interest in our website. Protecting your privacy is very important to us. Below, we provide detailed information on how we handle your data.
 
+
 ## 1. Data Controller
 
 The data controller in terms of the General Data Protection Regulation (GDPR) is:
@@ -17,6 +18,7 @@ Deutschland
 E-Mail: [info@naomijonhq.com](mailto:info@naomijonhq.com)
 Telephone: [+49 15565 829954](tel:+4915565829954)
 
+
 ## 2. General Information and Mandatory Information
 
 **Data Protection**
@@ -24,6 +26,7 @@ As the operator of this website, we take the protection of your personal data ve
 
 **SSL/TLS Encryption**
 For security reasons and to protect the transmission of confidential content, such as inquiries or newsletter subscriptions you send to us, this website uses SSL or TLS encryption. You can recognize an encrypted connection by the fact that the address line of the browser changes from "http://" to "https://" and by the lock symbol in your browser address bar.
+
 
 ## 3. Data Collection on Our Website
 
@@ -38,6 +41,19 @@ We have entered into a Data Processing Addendum (DPA) with Vercel. Since Vercel 
 
 For more information, please refer to Vercel's Privacy Policy at: [https://vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy)
 
+
+**b) Contact via Contact Form and Resend**
+If you send us inquiries via our contact form, your details from the contact form, including the contact data you provided there, will be processed by us for the purpose of handling the inquiry and in the event of follow-up questions.
+
+For the technical processing and delivery of these emails, we use the service **Resend**. The provider is Resend, Inc., 2261 Market Street #5039, San Francisco, CA 94114, USA.
+
+When you submit the contact form, the data is transmitted to Resend's servers to facilitate the email delivery. The processing of this data is based on our legitimate interest in providing a functional and efficient communication channel for our users (Art. 6 (1) lit. f GDPR).
+
+We have entered into a Data Processing Addendum (DPA) with Resend. As Resend is a US-based company, your data may be processed on servers in the United States. We ensure the security of this data transfer through the use of the EU Commission's Standard Contractual Clauses (SCCs).
+
+For more information, please refer to Resend’s Privacy Policy at: [https://resend.com/legal/privacy](https://resend.com/legal/privacy)
+
+
 ## 4. Analytics Tools
 
 **a) Vemetric Analytics**
@@ -46,6 +62,7 @@ To statistically evaluate visitor numbers and analyze user behavior, we use the 
 Vemetric is designed to work completely without using cookies or any local storage on your end device. No permanent identification markers are stored. IP addresses are converted into an anonymous hash value immediately upon capture and cannot be merged with other data to identify individual users. Cross-website tracking does not take place.
 
 The data is processed on the basis of our legitimate interest in measuring reach and continuously optimizing our website in accordance with Art. 6 (1) lit. f GDPR.
+
 
 ## 5. Newsletter
 
@@ -62,6 +79,7 @@ We have entered into a Data Processing Addendum (DPA) with Klaviyo. The transfer
 
 For more information on data protection at Klaviyo, please visit: [https://www.klaviyo.com/privacy](https://www.klaviyo.com/privacy)
 
+
 ## 6. Your Rights as a Data Subject
 
 Under applicable legal regulations, you have the right at any time to:
@@ -74,6 +92,7 @@ Under applicable legal regulations, you have the right at any time to:
 - **Right to lodge a complaint (Art. 77 GDPR):** You have the right to lodge a complaint with a competent data protection supervisory authority regarding our processing of your data.
 
 For these matters, or if you have any other questions regarding data protection, you can contact us at any time using the address provided in the imprint or in this policy.
+
 
 ## 7. Right to Object (Art. 21 GDPR)
 
