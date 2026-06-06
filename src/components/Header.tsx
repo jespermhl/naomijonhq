@@ -10,7 +10,7 @@ interface NavLink {
 }
 
 const defaultLinks: NavLink[] = [
-    { label: "Contact", href: "mailto:info@naomijonhq.com" },
+    { label: "Contact", href: "/contact" },
     { label: "Links", href: "https://naomijonhq.com/links" },
 ];
 
