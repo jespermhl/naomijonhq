@@ -22,6 +22,7 @@ export async function GET() {
             members: data.approximate_member_count ?? 3672,
         });
     } catch (error) {
+        console.error("Failed to fetch Discord stats:", error);
         return NextResponse.json({
             online: 750,
             members: 3672,
