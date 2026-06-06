@@ -30,7 +30,7 @@ export default function Header() {
     }, [isMenuOpen]);
 
     return (
-        <header className="relative z-50 mx-auto mt-8 mb-6 w-full max-w-275 pt-4 max-sm:mb-4 max-sm:px-4 max-sm:pt-3">
+        <header className="relative z-50 mx-auto mt-4 mb-6 w-full max-w-275 pt-4 max-sm:mb-4 max-sm:px-4 max-sm:pt-3">
             <div className="flex h-18 items-center justify-between rounded-full border border-white/20 bg-white/10 px-8 py-3.5 backdrop-blur-md shadow-sm max-sm:px-5">
 
                 <Logo />
