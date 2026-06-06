@@ -8,7 +8,6 @@ interface StatsType {
 }
 
 export default function DiscordStats() {
-    // Lokaler State für die Discord-Statistiken mit Fallback-Werten
     const [stats, setStats] = useState<StatsType>({
         online: "750",
         members: "3.672",

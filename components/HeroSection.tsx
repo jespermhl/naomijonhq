@@ -11,27 +11,23 @@ export default function HeroSection() {
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
                     <div className="flex flex-col items-start space-y-6 lg:max-w-130">
                         <p className="text-brand-red text-xs font-black uppercase tracking-[0.38em]">
-                            The Official Fan HQ
+                            Connect Everywhere
                         </p>
                         <h2 className="text-[clamp(2.2rem,5vw,3.8rem)] font-black uppercase leading-[1.05] tracking-[-0.06em] text-[#1f171d]">
                             Naomi Jon HQ
                         </h2>
                         <p className="text-[#5f4e58] text-[clamp(1rem,1.2vw,1.15rem)] font-semibold leading-relaxed">
-                            The Official Hub for Naomi Jon fans
+                            Step inside the official home of the Broccoli fam
                         </p>
                         <div className="flex flex-col gap-3 font-semibold text-[#5f4e58] max-sm:text-sm">
                             <div className="flex items-center gap-2">
-                                <span className="text-brand-red">✦</span> The Best HQ for all
-                                things Naomi Jon
+                                <span className="text-brand-red">✦</span> Get updates on all things Naomi Jon
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-brand-red">✦</span> Meet other naomijon
-                                fans at the Naomi Jon HQ
+                                <span className="text-brand-red">✦</span> Connect with other members of the broccoli fam
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-brand-red">✦</span> Naomi Jon HQ is a
-                                server for fans of naomijon to connect and share their love
-                                for her content
+                                <span className="text-brand-red">✦</span> Join listening parties and be part of exclusive events
                             </div>
                         </div>
 
