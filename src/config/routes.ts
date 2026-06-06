@@ -1,17 +1,29 @@
 export interface PageConfig {
-    path: string;
     showHeader: boolean;
     showFooter: boolean;
     showBurst: boolean;
     showSocials: boolean;
 }
 
-export const ALL_PAGES: PageConfig[] = [
-    { path: "/", showHeader: true, showFooter: true, showBurst: false, showSocials: false },
-    { path: "/strawberry", showHeader: false, showFooter: false, showBurst: true, showSocials: true },
-    { path: "/strawberry-album", showHeader: false, showFooter: false, showBurst: true, showSocials: true },
-    { path: "/strawberry-tour", showHeader: false, showFooter: false, showBurst: true, showSocials: true },
-    { path: "/legal-notice", showHeader: true, showFooter: true, showBurst: false, showSocials: true },
-    { path: "/privacy-policy", showHeader: true, showFooter: true, showBurst: false, showSocials: true },
-    { path: "/contact", showHeader: true, showFooter: true, showBurst: false, showSocials: true },
-]
+const DEFAULT_CONFIG: PageConfig = {
+    showHeader: false,
+    showFooter: true,
+    showBurst: false,
+    showSocials: true
+}
+
+const PAGE_CONFIGS: Record<string, PageConfig> = {
+    "/": { ...DEFAULT_CONFIG, showSocials: false },
+    "/strawberry": { ...DEFAULT_CONFIG, showBurst: true, showSocials: true },
+    "/strawberry-album": { ...DEFAULT_CONFIG, showBurst: true, showSocials: true },
+    "/strawberry-tour": { ...DEFAULT_CONFIG, showBurst: true, showSocials: true },
+    "/legal-notice": { ...DEFAULT_CONFIG, showHeader: true },
+    "/privacy-policy": { ...DEFAULT_CONFIG, showHeader: true },
+    "/contact": { ...DEFAULT_CONFIG, showHeader: true }
+}
+
+export const getPageConfig = (pathname: string): PageConfig => {
+    if (PAGE_CONFIGS[pathname]) return PAGE_CONFIGS[pathname]
+
+    return DEFAULT_CONFIG
+}
