@@ -5,7 +5,7 @@ export default function NewsletterSection() {
         <section className="relative w-full border-t border-white/20 px-6 py-20 max-sm:px-4 max-sm:py-14">
             <div className="mx-auto max-w-2xl text-center">
                 <span className="text-brand-red mb-3 inline-block text-xs font-black uppercase tracking-[0.3em]">
-                    Keep your eyes peeled
+                    Don&apos;t miss out
                 </span>
 
                 <h2 className="text-[#1f171d] mb-4 text-[clamp(2rem,4vw,3.2rem)] font-black uppercase leading-[1.05] tracking-tighter">
