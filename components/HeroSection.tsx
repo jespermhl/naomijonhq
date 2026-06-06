@@ -35,7 +35,7 @@ export default function HeroSection() {
                             </div>
                         </div>
 
-                        <JoinDiscordButton href={inviteLink} className="max-sm:hidden" />
+                        <JoinDiscordButton href={inviteLink} className="max-md:hidden" />
                     </div>
 
                     <div className="flex w-full flex-col items-center">
@@ -61,7 +61,7 @@ export default function HeroSection() {
 
                         <JoinDiscordButton
                             href={inviteLink}
-                            className="max-sm:py-3 max-sm:text-sm md:hidden"
+                            className="max-sm:py-3 max-sm:text-sm md:hidden mt-6"
                         />
                     </div>
                 </div>
