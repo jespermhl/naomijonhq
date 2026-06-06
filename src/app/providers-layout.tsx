@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ALL_PAGES } from "@/config/routes";
+import type { SocialLink } from "@/components/SocialConfig";
 
 const BurstAnimation = dynamic(
   () => import("@/app/_components/BurstAnimation").then((m) => m.BurstAnimation),
@@ -14,9 +15,11 @@ const BurstAnimation = dynamic(
 
 interface ClientLayoutProps {
   children: ReactNode;
+  modal?: ReactNode;
+  socials: SocialLink[];
 }
 
-export function ClientLayout({ children }: ClientLayoutProps) {
+export function ClientLayout({ children, modal, socials }: ClientLayoutProps) {
   const pathname = usePathname();
 
   const pageConfig = ALL_PAGES.find((p) => p.path === pathname) ?? {
@@ -34,8 +37,11 @@ export function ClientLayout({ children }: ClientLayoutProps) {
         </div>
       )}
       {pageConfig.showHeader && <Header />}
-      <div className="relative z-10">{children}</div>
-      {pageConfig.showFooter && <Footer showSocials={pageConfig.showSocials} />}
+      <div className="relative z-10">
+        {children}
+        {modal}
+      </div>
+      {pageConfig.showFooter && <Footer showSocials={pageConfig.showSocials} socials={socials} currentPath={pathname} />}
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
 import { NewsletterPromotion } from "@/app/_components/NewsletterPromotion";
 import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
+import { getSocials } from "@/components/SocialConfig";
 
 const bodyFont = Space_Grotesk({
   subsets: ["latin"],
@@ -69,13 +70,15 @@ export async function generateViewport(): Promise<Viewport> {
   return buildPageViewport(SOURCE);
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   modal,
 }: Readonly<{
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
+  const socials = await getSocials();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -88,10 +91,9 @@ export default function RootLayout({
           href="https://naomijonhq.com/oembed.json"
         />
 
-        <ClientLayout>
+        <ClientLayout modal={modal} socials={socials}>
           <main className="relative z-10 flex-1 w-full flex flex-col justify-center min-h-screen">
             {children}
-            {modal}
           </main>
         </ClientLayout>
 
