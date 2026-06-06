@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { ALL_PAGES } from "@/config/routes";
 
 const BurstAnimation = dynamic(
   () => import("@/app/_components/BurstAnimation").then((m) => m.BurstAnimation),
@@ -14,23 +16,26 @@ interface ClientLayoutProps {
   children: ReactNode;
 }
 
-const BURST_ALLOWED_PATHS = ["/strawberry", "/strawberry-album", "/strawberry-tour"];
-const HEADER_ALLOWED_PATHS = ["/", "/legal-notice", "/privacy-policy", "/contact"];
-
 export function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
-  const shouldShowBurst = BURST_ALLOWED_PATHS.includes(pathname);
-  const shouldShowHeader = HEADER_ALLOWED_PATHS.includes(pathname);
+
+  const pageConfig = ALL_PAGES.find((p) => p.path === pathname) ?? {
+    showHeader: false,
+    showFooter: true,
+    showBurst: false,
+    showSocials: true,
+  };
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
-      {shouldShowBurst && (
+      {pageConfig.showBurst && (
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
           <BurstAnimation />
         </div>
       )}
-      {shouldShowHeader && <Header />}
+      {pageConfig.showHeader && <Header />}
       <div className="relative z-10">{children}</div>
+      {pageConfig.showFooter && <Footer showSocials={pageConfig.showSocials} />}
     </div>
   );
 }

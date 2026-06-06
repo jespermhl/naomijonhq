@@ -4,7 +4,6 @@ import { Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
 import { NewsletterPromotion } from "@/app/_components/NewsletterPromotion";
-import Footer from "@/components/Footer";
 import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
 
@@ -94,7 +93,6 @@ export default function RootLayout({
             {children}
             {modal}
           </main>
-          <Footer />
         </ClientLayout>
 
         <PropertyMetaTags source={SOURCE} />
