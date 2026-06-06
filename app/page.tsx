@@ -93,7 +93,7 @@ export default function DiscordLanding() {
                     <div className="mx-auto max-w-275">
                         <div className="relative mx-auto w-full max-w-2xl overflow-hidden rounded-[34px] border border-white/60 bg-white/30 p-10 text-center backdrop-blur-md shadow-[0px_0px_48px_-10px_rgba(255,63,159,0.15)] max-sm:p-6">
                             <span className="text-brand-red mb-3 inline-block text-xs font-black uppercase tracking-[0.3em]">
-                                Don't miss a thing
+                                Don&apos;t miss a thing
                             </span>
 
                             <h2 className="text-[#1f171d] mb-4 text-[clamp(2rem,4vw,3.2rem)] font-black uppercase leading-[1.05] tracking-tighter">
