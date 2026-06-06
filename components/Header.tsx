@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface NavLink {
     label: string;
@@ -14,6 +14,19 @@ const defaultLinks: NavLink[] = [
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    useEffect(() => {
+        if (!isMenuOpen) return;
+
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("keydown", handleEscape);
+        return () => document.removeEventListener("keydown", handleEscape);
+    }, [isMenuOpen]);
 
     return (
         <header className="relative z-50 mx-auto mt-8 mb-6 w-full max-w-275 pt-4 max-sm:mb-4 max-sm:px-4 max-sm:pt-3">
