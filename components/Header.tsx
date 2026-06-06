@@ -12,7 +12,7 @@ const defaultLinks: NavLink[] = [
     { label: "Links", href: "https://naomijonhq.com/links" },
 ];
 
-export function Header() {
+export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
