@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Logo from "./Logo";
+import Link from "next/link";
 
 interface NavLink {
     label: string;
@@ -33,7 +34,9 @@ export default function Header() {
         <header className="relative z-50 mx-auto mt-4 mb-6 w-full max-w-275 pt-4 max-sm:mb-4 max-sm:px-4 max-sm:pt-3">
             <div className="flex h-18 items-center justify-between rounded-full border border-white/20 bg-white/10 px-8 py-3.5 backdrop-blur-md shadow-sm max-sm:px-5">
 
-                <Logo />
+                <Link href="/">
+                    <Logo />
+                </Link>
 
                 <nav className="hidden gap-10 text-xs font-black uppercase tracking-[0.2em] text-[`#5f4e58`] md:flex items-center">
                     {defaultLinks.map((link, index) => (

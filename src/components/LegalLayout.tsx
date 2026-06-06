@@ -4,6 +4,7 @@ import Markdown from "markdown-to-jsx";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Header from "./Header";
 
 type LegalFileName = "legal-notice.md" | "privacy.md";
 
@@ -97,14 +98,16 @@ export default function LegalLayout({
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-5 py-15 max-sm:py-10">
-      <Card
-        maxWidth="800px"
-        className="px-10 py-15 text-left max-sm:px-5 max-sm:py-10"
-        rotated={false}
-      >
-        {markdownContent}
-      </Card>
-    </main>
+    <>
+      <main className="flex min-h-screen items-center justify-center px-5 py-15 max-sm:py-10">
+        <Card
+          maxWidth="800px"
+          className="px-10 py-15 text-left max-sm:px-5 max-sm:py-10"
+          rotated={false}
+        >
+          {markdownContent}
+        </Card>
+      </main>
+    </>
   );
 }

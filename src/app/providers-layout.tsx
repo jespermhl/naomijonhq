@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import Header from "@/components/Header";
 
 const BurstAnimation = dynamic(
   () => import("@/app/_components/BurstAnimation").then((m) => m.BurstAnimation),
@@ -13,11 +14,13 @@ interface ClientLayoutProps {
   children: ReactNode;
 }
 
-const ALLOWED_PATHS = ["/strawberry", "/strawberry-album", "/strawberry-tour"];
+const BURST_ALLOWED_PATHS = ["/strawberry", "/strawberry-album", "/strawberry-tour"];
+const HEADER_ALLOWED_PATHS = ["/", "/legal-notice", "/privacy"];
 
 export function ClientLayout({ children }: ClientLayoutProps) {
   const pathname = usePathname();
-  const shouldShowBurst = ALLOWED_PATHS.includes(pathname);
+  const shouldShowBurst = BURST_ALLOWED_PATHS.includes(pathname);
+  const shouldShowHeader = HEADER_ALLOWED_PATHS.includes(pathname);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
@@ -26,6 +29,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
           <BurstAnimation />
         </div>
       )}
+      {shouldShowHeader && <Header />}
       <div className="relative z-10">{children}</div>
     </div>
   );
