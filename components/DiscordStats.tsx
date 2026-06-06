@@ -11,7 +11,7 @@ export function DiscordStats() {
     // Lokaler State für die Discord-Statistiken mit Fallback-Werten
     const [stats, setStats] = useState<StatsType>({
         online: "750",
-        members: "3.752",
+        members: "3.672",
     });
 
     useEffect(() => {
