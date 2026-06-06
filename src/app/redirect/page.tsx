@@ -37,7 +37,7 @@ export default async function RedirectPage({
       <Suspense
         fallback={
           <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
-            <Card maxWidth="500px" rotated={false} className="w-full max-w-[500px] flex flex-col items-center p-8 text-center">
+            <Card maxWidth="500px" rotated={false} className="w-full max-w-125 flex flex-col items-center p-8 text-center">
               <div className="text-5xl animate-bounce mb-6">🍓</div>
               <h1 className="text-2xl font-extrabold tracking-tight text-neutral-800 uppercase">
                 Loading...
