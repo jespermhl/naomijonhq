@@ -31,10 +31,16 @@ export async function POST(req: Request) {
     const signature = req.headers.get(SIGNATURE_HEADER_NAME);
     const body = await req.text();
 
-    const isValid = isValidSignature(
+    const secret = process.env.SYNC_SECRET;
+    if (!secret) {
+        console.error('SYNC_SECRET environment variable is not configured');
+        return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 });
+    }
+
+    const isValid = await isValidSignature(
         body,
         signature || "",
-        process.env.SYNC_SECRET || ""
+        secret
     );
 
     if (!isValid) {
