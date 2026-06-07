@@ -27,14 +27,18 @@ const DEFAULTS = {
     "The official Naomi Jon HQ. Get details on Strawberry, the tour archive, perfume links, newsletter updates, and more.",
 };
 
-const headersInstance = await headers();
-const host = headersInstance.get('host') || 'naomijonhq.com';
+async function getBaseUrl() {
+  const headersInstance = await headers();
+  const host = headersInstance.get('host') || 'naomijonhq.com';
 
-const baseUrl = host.startsWith('www.') ? `https://${host.substring(4)}` : `https://${host}`;
+  const baseUrl = host.startsWith('www.') ? `https://${host.substring(4)}` : `https://${host}`;
+  return baseUrl;
+}
 
 export async function generateMetadata(): Promise<Metadata> {
 
   const meta = await buildPageMetadata(SOURCE, DEFAULTS);
+  const baseUrl = await getBaseUrl();
 
   return {
     ...meta,
@@ -84,6 +88,7 @@ export default async function RootLayout({
   modal: React.ReactNode;
 }>) {
   const socials = await getSocials();
+  const baseUrl = await getBaseUrl();
 
   return (
     <html lang="en" suppressHydrationWarning>
