@@ -12,6 +12,7 @@
   "dependencies": {
     "@sanity/client": "^7.14.0",
     "@sanity/image-url": "^2.1.1",
+    "@upstash/redis": "^1.38.0",
     "@vemetric/node": "^0.2.0",
     "@vemetric/web": "^0.6.1",
     "markdown-to-jsx": "^9.8.1",
