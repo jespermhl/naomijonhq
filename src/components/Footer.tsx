@@ -3,9 +3,6 @@ import LegalLinks from "./LegalLinks";
 import { PLATFORM_ICONS } from "./SocialConfig";
 import type { SocialLink } from "./SocialConfig";
 
-const WEBSITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://naomijonhq.com";
-
 export const dynamic = "force-dynamic";
 
 interface FooterProps {
@@ -13,9 +10,10 @@ interface FooterProps {
   currentPath: string;
   socials: SocialLink[];
   showWebsite?: boolean;
+  baseUrl: string;
 }
 
-export default function Footer({ showSocials = true, currentPath, socials, showWebsite = true }: FooterProps) {
+export default function Footer({ showSocials = true, currentPath, socials, showWebsite = true, baseUrl }: FooterProps) {
   const socialIconButtonClasses =
     "flex items-center justify-center w-8 h-8 p-0 rounded-full bg-white/80 border border-white/85 text-[#1f171d]/80 no-underline transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 hover:bg-[#ff4fa8] hover:border-[#ff4fa8] hover:text-white hover:shadow-[0_10px_20px_rgba(255,79,168,0.18)] focus-visible:-translate-y-1 focus-visible:bg-[#ff4fa8] focus-visible:border-[#ff4fa8] focus-visible:text-white";
 
@@ -29,7 +27,7 @@ export default function Footer({ showSocials = true, currentPath, socials, showW
               showWebsite && (
                 <li>
                   <a
-                    href={WEBSITE_URL}
+                    href={baseUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={socialIconButtonClasses}

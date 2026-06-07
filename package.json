@@ -14,6 +14,7 @@
     "@sanity/client": "^7.14.0",
     "@sanity/image-url": "^2.1.1",
     "@sanity/webhook": "^4.0.4",
+    "@t3-oss/env-nextjs": "^0.13.11",
     "@upstash/redis": "^1.38.0",
     "@vemetric/node": "^0.2.0",
     "@vemetric/web": "^0.6.1",

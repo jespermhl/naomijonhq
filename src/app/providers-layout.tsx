@@ -15,11 +15,12 @@ const BurstAnimation = dynamic(
 
 interface ClientLayoutProps {
   children: ReactNode;
+  baseUrl: string;
   modal?: ReactNode;
   socials: SocialLink[];
 }
 
-export function ClientLayout({ children, modal, socials }: ClientLayoutProps) {
+export function ClientLayout({ children, modal, socials, baseUrl }: ClientLayoutProps) {
   const pathname = usePathname();
 
   const pageConfig = getPageConfig(pathname);
@@ -36,7 +37,7 @@ export function ClientLayout({ children, modal, socials }: ClientLayoutProps) {
         {children}
         {modal}
       </div>
-      {pageConfig.showFooter && <Footer showSocials={pageConfig.showSocials} socials={socials} currentPath={pathname} showWebsite={pageConfig.showWebsite} />}
+      {pageConfig.showFooter && <Footer showSocials={pageConfig.showSocials} socials={socials} currentPath={pathname} showWebsite={pageConfig.showWebsite} baseUrl={baseUrl} />}
     </div>
   );
 }

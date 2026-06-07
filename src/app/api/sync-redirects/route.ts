@@ -2,12 +2,13 @@ import { NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
 import { createClient } from '@sanity/client';
 import { isValidSignature, SIGNATURE_HEADER_NAME } from '@sanity/webhook';
+import { env } from '@/env.mjs';
 
 // Initialize clients outside the function to reuse them across requests (Pro Tip)
 const redis = Redis.fromEnv();
 const client = createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    dataset: env.NEXT_PUBLIC_SANITY_DATASET,
     apiVersion: '2025-02-19',
     useCdn: false,
 });
@@ -31,7 +32,7 @@ export async function POST(req: Request) {
     const signature = req.headers.get(SIGNATURE_HEADER_NAME);
     const body = await req.text();
 
-    const secret = process.env.SYNC_SECRET;
+    const secret = env.SYNC_SECRET;
     if (!secret) {
         console.error('SYNC_SECRET environment variable is not configured');
         return NextResponse.json({ error: "Server misconfiguration" }, { status: 500 });

@@ -2,16 +2,17 @@
 
 import { Resend } from "resend";
 import z from "zod";
+import { env } from "@/env.mjs";
 
-if (!process.env.RESEND_API_KEY) {
+if (!env.RESEND_API_KEY) {
     throw new Error("RESEND_API_KEY environment variable is required");
 }
-if (!process.env.TO_EMAIL) {
+if (!env.TO_EMAIL) {
     throw new Error("TO_EMAIL environment variable is required");
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const toEmail = process.env.TO_EMAIL;
+const resend = new Resend(env.RESEND_API_KEY);
+const toEmail = env.TO_EMAIL;
 
 const schema = z.object({
     name: z.string().min(1, { error: "Please enter your name" }),

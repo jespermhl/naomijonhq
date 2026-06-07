@@ -1,5 +1,7 @@
 "use server";
 
+import { env } from "@/env.mjs";
+
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
@@ -17,8 +19,8 @@ function isValidEmail(email: string): boolean {
  * @returns An object indicating success or failure.
  */
 export async function subscribeToNewsletter(email: string) {
-  const apiKey = process.env.KLAVIYO_PRIVATE_API_KEY;
-  const listId = process.env.KLAVIYO_LIST_ID;
+  const apiKey = env.KLAVIYO_PRIVATE_API_KEY;
+  const listId = env.KLAVIYO_LIST_ID;
 
   if (!apiKey || !listId) {
     console.error("Configuration Error: Klaviyo API key or List ID missing.");
