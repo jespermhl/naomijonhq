@@ -14,6 +14,9 @@ importers:
       '@sanity/image-url':
         specifier: ^2.1.1
         version: 2.1.1
+      '@sanity/webhook':
+        specifier: ^4.0.4
+        version: 4.0.4
       '@upstash/redis':
         specifier: ^1.38.0
         version: 1.38.0
@@ -504,6 +507,10 @@ packages:
 
   '@sanity/signed-urls@2.0.4':
     resolution: {integrity: sha512-wH7L9iOxQDVTa7COVEXoknalNgjpqxLJoOcZYQa3D/2JVEQOGUm82RgFVgZkKoclhQ8Y8dBby+KPkFoIDoUc1g==}
+
+  '@sanity/webhook@4.0.4':
+    resolution: {integrity: sha512-c8LmzR5Wx93zJ10ohhp0XlmPrTNSFyvPcLbNY/sN45Wj5VOngz4FbBMbX9j64sSQLt+676U6OhiVfjs1yw3YCw==}
+    engines: {node: '>=20.0.0'}
 
   '@shikijs/engine-oniguruma@3.23.0':
     resolution: {integrity: sha512-1nWINwKXxKKLqPibT5f4pAFLej9oZzQTsby8942OTlsJzOBZ0MWKiwzMsd+jhzu8YPCHAswGnnN1YtQfirL35g==}
@@ -2682,6 +2689,8 @@ snapshots:
     dependencies:
       '@noble/ed25519': 3.1.0
       '@noble/hashes': 2.2.0
+
+  '@sanity/webhook@4.0.4': {}
 
   '@shikijs/engine-oniguruma@3.23.0':
     dependencies:
