@@ -30,7 +30,7 @@ export interface DiscordStats {
  *
  * @example
  * ```ts
- * const res = await fetch('/api/discord-stats');
+ * const res = await fetch('/api/discord');
  * const stats = await res.json();
  * console.log(stats.online, stats.members);
  * ```
