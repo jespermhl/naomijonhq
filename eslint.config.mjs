@@ -8,7 +8,7 @@ const eslintConfig = defineConfig([
   ...nextTs,
   {
     plugins: {
-      tsdoc: tsdoc,
+      tsdoc,
     },
     rules: {
       "tsdoc/syntax": "warn",
