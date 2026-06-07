@@ -36,7 +36,7 @@ export function ClientLayout({ children, modal, socials }: ClientLayoutProps) {
         {children}
         {modal}
       </div>
-      {pageConfig.showFooter && <Footer showSocials={pageConfig.showSocials} socials={socials} currentPath={pathname} />}
+      {pageConfig.showFooter && <Footer showSocials={pageConfig.showSocials} socials={socials} currentPath={pathname} showWebsite={pageConfig.showWebsite} />}
     </div>
   );
 }
