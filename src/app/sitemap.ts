@@ -1,7 +1,8 @@
+import { env } from '@/env.mjs'
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://naomijonhq.com'
+  const baseUrl = env.NEXT_PUBLIC_SITE_URL || 'https://naomijonhq.com'
 
   const routes = [
     '',

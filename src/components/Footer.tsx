@@ -2,9 +2,10 @@ import { Credits } from "./ui/Credits";
 import LegalLinks from "./LegalLinks";
 import { PLATFORM_ICONS } from "./SocialConfig";
 import type { SocialLink } from "./SocialConfig";
+import { env } from "@/env.mjs";
 
 const WEBSITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://naomijonhq.com";
+  env.NEXT_PUBLIC_SITE_URL || "https://naomijonhq.com";
 
 export const dynamic = "force-dynamic";
 
