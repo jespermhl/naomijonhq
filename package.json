@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "docs": "typedoc --out docs src"
   },
   "dependencies": {
     "@sanity/client": "^7.14.0",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/webhook": "^4.0.4",
     "@upstash/redis": "^1.38.0",
     "@vemetric/node": "^0.2.0",
     "@vemetric/web": "^0.6.1",
@@ -29,8 +31,10 @@
     "@types/react-dom": "^19.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
+    "eslint-plugin-tsdoc": "^0.5.2",
     "postcss": "^8.5.15",
     "tailwindcss": "^4.3.0",
+    "typedoc": "^0.28.19",
     "typescript": "^5"
   }
 }
