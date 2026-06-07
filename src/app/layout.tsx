@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import type { ReactNode } from "react";
 import { Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
@@ -7,6 +6,7 @@ import { NewsletterPromotion } from "@/app/_components/NewsletterPromotion";
 import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
 import { getSocials } from "@/components/SocialConfig";
+import { headers } from "next/headers";
 
 const bodyFont = Space_Grotesk({
   subsets: ["latin"],
@@ -27,12 +27,18 @@ const DEFAULTS = {
     "The official Naomi Jon HQ. Get details on Strawberry, the tour archive, perfume links, newsletter updates, and more.",
 };
 
+const headersInstance = await headers();
+const host = headersInstance.get('host') || 'naomijonhq.com';
+
+const baseUrl = host.startsWith('www.') ? `https://${host.substring(4)}` : `https://${host}`;
+
 export async function generateMetadata(): Promise<Metadata> {
+
   const meta = await buildPageMetadata(SOURCE, DEFAULTS);
 
   return {
     ...meta,
-    metadataBase: new URL("https://naomijonhq.com"),
+    metadataBase: new URL(baseUrl),
     title: {
       default: "Naomi Jon HQ",
       template: "%s | Naomi Jon HQ",
@@ -91,7 +97,7 @@ export default async function RootLayout({
           href="https://naomijonhq.com/oembed.json"
         />
 
-        <ClientLayout modal={modal} socials={socials}>
+        <ClientLayout modal={modal} socials={socials} baseUrl={baseUrl}>
           <main className="relative z-10 flex-1 w-full flex flex-col justify-center min-h-screen">
             {children}
           </main>
