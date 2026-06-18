@@ -1,7 +1,8 @@
 import { createClient } from "@sanity/client";
 import { cache } from "react";
 import type { Metadata, Viewport } from "next";
-import { env } from "@/env.mjs"
+import { env } from "@/env.mjs";
+import { logger } from "@/lib/logger";
 
 const client = createClient({
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -53,10 +54,7 @@ const getRedirectMeta = cache(async (source: string): Promise<RedirectMeta> => {
     );
     return result ?? {};
   } catch (error) {
-    console.error(
-      `[getRedirectMeta] Failed to fetch meta for "${source}":`,
-      error,
-    );
+    logger.error(`Failed to fetch meta for "${source}":`, error);
     return {};
   }
 });

@@ -152,34 +152,34 @@ export function RedirectContent() {
         }
       `}</style>
 
-      <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
+      <main className="flex min-h-screen flex-col items-center justify-center px-6 py-20">
         <Card
-          className="w-full flex flex-col items-center text-center p-8 md:p-12 shadow-xl border border-neutral-100 bg-white"
+          className="flex w-full flex-col items-center border border-neutral-100 bg-white p-8 text-center shadow-xl md:p-12"
           maxWidth="500px"
           rotated={false}
         >
-          <div className="text-6xl md:text-7xl animate-wobble-strawberry select-none mb-8 drop-shadow-lg">
+          <div className="animate-wobble-strawberry mb-8 text-6xl drop-shadow-lg select-none md:text-7xl">
             🍓
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 mb-3 uppercase leading-tight">
+          <h1 className="mb-3 text-3xl leading-tight font-extrabold tracking-tight text-neutral-900 uppercase md:text-4xl">
             {isValidating ? "Verifying..." : "Redirecting..."}
           </h1>
 
-          <p className="text-sm md:text-base font-semibold text-neutral-500 max-w-[320px] mb-8 leading-snug">
+          <p className="mb-8 max-w-[320px] text-sm leading-snug font-semibold text-neutral-500 md:text-base">
             {isValidating
               ? "Checking destination safety..."
               : "Taking you to your destination. Hold on!"}
           </p>
 
-          <div className="flex items-center gap-1.5 h-10 select-none">
-            <span className="text-5xl font-extrabold text-rose-500 animate-dot-pulse-1">
+          <div className="flex h-10 items-center gap-1.5 select-none">
+            <span className="animate-dot-pulse-1 text-5xl font-extrabold text-rose-500">
               .
             </span>
-            <span className="text-5xl font-extrabold text-rose-500 animate-dot-pulse-2">
+            <span className="animate-dot-pulse-2 text-5xl font-extrabold text-rose-500">
               .
             </span>
-            <span className="text-5xl font-extrabold text-rose-500 animate-dot-pulse-3">
+            <span className="animate-dot-pulse-3 text-5xl font-extrabold text-rose-500">
               .
             </span>
           </div>

@@ -29,25 +29,25 @@ export default function NewsletterPage() {
     <>
       <PropertyMetaTags source={SOURCE} />
 
-      <main className="min-h-screen flex flex-col items-center justify-center px-4 py-9 sm:px-6 sm:py-20">
+      <main className="flex min-h-screen flex-col items-center justify-center px-4 py-9 sm:px-6 sm:py-20">
         <Card
-          className="w-full max-w-140 flex flex-col items-center text-center p-5 py-12 xs:px-8 sm:p-[60px_46px]"
+          className="xs:px-8 flex w-full max-w-140 flex-col items-center p-5 py-12 text-center sm:p-[60px_46px]"
           maxWidth="560px"
           rotated={false}
         >
           <Sticker rotate="-3deg">HEY!</Sticker>
 
-          <div className="text-[92px] leading-none animate-wobble-strawberry select-none mb-7 filter drop-shadow mt-4">
+          <div className="animate-wobble-strawberry mt-4 mb-7 text-[92px] leading-none drop-shadow filter select-none">
             🍓
           </div>
 
-          <h1 className="page-title leading-tight mb-4">
+          <h1 className="page-title mb-4 leading-tight">
             Naomi&nbsp;Jon&nbsp;HQ
             <br />
             Newsletter
           </h1>
 
-          <p className="page-subtitle max-w-95 mb-8 pb-4">
+          <p className="page-subtitle mb-8 max-w-95 pb-4">
             Stay updated with new music, concert dates, and news from Naomi Jon.
           </p>
 

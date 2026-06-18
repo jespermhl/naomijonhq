@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/Button";
  */
 export function NewsletterPromotion() {
   const [isVisible, setIsVisible] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -22,8 +21,6 @@ export function NewsletterPromotion() {
     if (dismissed) {
       return;
     }
-
-    setHasMounted(true);
 
     const timer = window.setTimeout(() => {
       setIsVisible(true);
@@ -37,46 +34,47 @@ export function NewsletterPromotion() {
     localStorage.setItem("newsletter-promo-dismissed", "true");
   };
 
-  if (!hasMounted || pathname === "/newsletter") {
-    return null;
-  }
-
-  const isCurrentlyDismissed =
+  const isDismissed =
     typeof window !== "undefined" &&
     localStorage.getItem("newsletter-promo-dismissed") === "true";
 
-  if (isCurrentlyDismissed && !isVisible) {
+  if (pathname === "/newsletter" || pathname === "/") {
+    return null;
+  }
+
+  if (isDismissed && !isVisible) {
     return null;
   }
 
   return (
     <div
-      className={`fixed inset-0 z-1000 flex items-center justify-center p-6 transition-all duration-500 ${isVisible
-        ? "bg-black/30 pointer-events-auto backdrop-blur-[6px]"
-        : "bg-transparent pointer-events-none"
-        }`}
+      className={`fixed inset-0 z-1000 flex items-center justify-center p-6 transition-all duration-500 ${
+        isVisible
+          ? "pointer-events-auto bg-black/30 backdrop-blur-[6px]"
+          : "pointer-events-none bg-transparent"
+      }`}
       onClick={handleDismiss}
-      aria-label="Close newsletter promotion"
       role="presentation"
     >
       <div
         id="newsletter-promo"
-        className={`glass-panel rounded-[30px] px-8 pt-10 pb-8 w-full max-w-100 relative flex flex-col items-center gap-4 text-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] max-sm:px-6 max-sm:py-8 max-sm:rounded-[26px] max-sm:max-w-full ${isVisible
-          ? "opacity-100 scale-100 translate-y-0"
-          : "opacity-0 scale-[0.85] translate-y-4"
-          }`}
-        onClick={(e) => e.stopPropagation()}
         role="dialog"
-        aria-label="Newsletter Promotion"
         aria-modal="true"
+        aria-label="Newsletter signup"
+        className={`glass-panel relative flex w-full max-w-100 flex-col items-center gap-4 rounded-[30px] px-8 pt-10 pb-8 text-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] max-sm:max-w-full max-sm:rounded-[26px] max-sm:px-6 max-sm:py-8 ${
+          isVisible
+            ? "translate-y-0 scale-100 opacity-100"
+            : "translate-y-4 scale-[0.85] opacity-0"
+        }`}
+        onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={handleDismiss}
-          className="absolute -top-3 -right-3 w-8 h-8 bg-white border border-pink-100 rounded-full text-brand-red flex items-center justify-center transition-transform duration-200 hover:scale-110 active:scale-95 shadow-md cursor-pointer"
+          className="text-brand-red absolute -top-3 -right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-pink-100 bg-white shadow-md transition-transform duration-200 hover:scale-110 active:scale-95"
           aria-label="Close promotion"
         >
           <svg
-            className="w-4 h-4 stroke-current stroke-[2.5]"
+            className="h-4 w-4 stroke-current stroke-[2.5]"
             viewBox="0 0 24 24"
             fill="none"
             strokeLinecap="round"
@@ -88,10 +86,10 @@ export function NewsletterPromotion() {
         </button>
 
         <div className="flex flex-col gap-2">
-          <h3 className="text-2xl font-black text-brand-red m-0 max-sm:text-xl">
+          <h3 className="text-brand-red m-0 text-2xl font-black max-sm:text-xl">
             Don&apos;t miss out!
           </h3>
-          <p className="text-[15px] text-text-dark font-semibold leading-relaxed m-0 max-sm:text-[14px]">
+          <p className="text-text-dark m-0 text-[15px] leading-relaxed font-semibold max-sm:text-[14px]">
             Get the latest updates on all things Naomi Jon, directly into your
             inbox.
           </p>
@@ -99,7 +97,7 @@ export function NewsletterPromotion() {
 
         <Button
           href="/newsletter"
-          className="w-full mt-2"
+          className="mt-2 w-full"
           rotate="0deg"
           onClick={() => {
             localStorage.setItem("newsletter-promo-dismissed", "true");

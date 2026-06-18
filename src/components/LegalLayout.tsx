@@ -4,8 +4,6 @@ import Markdown from "markdown-to-jsx";
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "./Header";
-
 type LegalFileName = "legal-notice.md" | "privacy-policy.md";
 
 interface LegalLayoutProps {
@@ -13,7 +11,7 @@ interface LegalLayoutProps {
   showCardLayout?: boolean;
 }
 
-export default function LegalLayout({
+export function LegalLayout({
   fileName,
   showCardLayout = true,
 }: LegalLayoutProps) {
@@ -37,14 +35,14 @@ export default function LegalLayout({
             },
             h2: {
               component: ({ children }) => (
-                <h2 className="text-brand-red mb-2 mt-7 text-xl font-black">
+                <h2 className="text-brand-red mt-7 mb-2 text-xl font-black">
                   {children}
                 </h2>
               ),
             },
             p: {
               component: ({ children }) => (
-                <p className="text-text-dark mb-4 text-base font-semibold leading-relaxed whitespace-pre-line">
+                <p className="text-text-dark mb-4 text-base leading-relaxed font-semibold whitespace-pre-line">
                   {children}
                 </p>
               ),
@@ -58,7 +56,7 @@ export default function LegalLayout({
             },
             li: {
               component: ({ children }) => (
-                <li className="text-text-dark text-base font-semibold leading-relaxed">
+                <li className="text-text-dark text-base leading-relaxed font-semibold">
                   {children}
                 </li>
               ),
@@ -87,14 +85,10 @@ export default function LegalLayout({
         {fileContent}
       </Markdown>
     </article>
-  )
+  );
 
   if (!showCardLayout) {
-    return (
-      <div className="p-4">
-        {markdownContent}
-      </div>
-    )
+    return <div className="p-4">{markdownContent}</div>;
   }
 
   return (

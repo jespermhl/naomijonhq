@@ -1,24 +1,28 @@
 /**
  * Extracts year, month, and day parts from a date string or Date object in the specified timezone.
  * Defaults to "Europe/Berlin".
- * 
+ *
  * @param date - The target date string or Date object.
  * @param timeZone - The IANA timezone identifier.
  * @returns An object containing the month (short), zero-padded day, year, and numeric components.
  */
-export function getDateParts(date: string | Date, timeZone: string = "Europe/Berlin") {
+export function getDateParts(
+  date: string | Date,
+  timeZone: string = "Europe/Berlin",
+) {
   const d = typeof date === "string" ? new Date(date) : date;
-  
+
   const formatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "numeric",
     day: "numeric",
     timeZone,
   });
-  
+
   const parts = formatter.formatToParts(d);
-  const getPart = (type: string) => parts.find(p => p.type === type)?.value || "0";
-  
+  const getPart = (type: string) =>
+    parts.find((p) => p.type === type)?.value || "0";
+
   const year = parseInt(getPart("year"), 10);
   const monthNum = parseInt(getPart("month"), 10);
   const dayNum = parseInt(getPart("day"), 10);
@@ -26,16 +30,18 @@ export function getDateParts(date: string | Date, timeZone: string = "Europe/Ber
   const monthName = new Intl.DateTimeFormat("en-US", {
     month: "short",
     timeZone,
-  }).format(d).toUpperCase();
+  })
+    .format(d)
+    .toUpperCase();
 
   const dayStr = dayNum.toString().padStart(2, "0");
 
-  return { 
-    month: monthName, 
-    day: dayStr, 
-    year, 
-    monthNum, 
-    dayNum 
+  return {
+    month: monthName,
+    day: dayStr,
+    year,
+    monthNum,
+    dayNum,
   };
 }
 
@@ -50,8 +56,16 @@ export function calculateDaysUntil(dateStr: string): number {
   const targetParts = getDateParts(dateStr, "Europe/Berlin");
   const nowParts = getDateParts(new Date(), "Europe/Berlin");
 
-  const targetUtc = Date.UTC(targetParts.year, targetParts.monthNum - 1, targetParts.dayNum);
-  const nowUtc = Date.UTC(nowParts.year, nowParts.monthNum - 1, nowParts.dayNum);
+  const targetUtc = Date.UTC(
+    targetParts.year,
+    targetParts.monthNum - 1,
+    targetParts.dayNum,
+  );
+  const nowUtc = Date.UTC(
+    nowParts.year,
+    nowParts.monthNum - 1,
+    nowParts.dayNum,
+  );
 
   const diff = targetUtc - nowUtc;
   return Math.round(diff / (1000 * 60 * 60 * 24));

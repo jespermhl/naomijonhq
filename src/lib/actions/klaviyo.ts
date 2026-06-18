@@ -1,5 +1,6 @@
 "use server";
 
+import { logger } from "@/lib/logger";
 import { env } from "@/env.mjs";
 
 function normalizeEmail(email: string): string {
@@ -14,7 +15,7 @@ function isValidEmail(email: string): boolean {
 /**
  * Subscribes a user to the Klaviyo newsletter list.
  * Uses the Bulk Subscribe Profiles endpoint as per Klaviyo API v2026-04-15.
- * 
+ *
  * @param email - The email address to subscribe.
  * @returns An object indicating success or failure.
  */
@@ -23,8 +24,11 @@ export async function subscribeToNewsletter(email: string) {
   const listId = env.KLAVIYO_LIST_ID;
 
   if (!apiKey || !listId) {
-    console.error("Configuration Error: Klaviyo API key or List ID missing.");
-    return { success: false, error: "Configuration Error. Please contact support." };
+    logger.error("Configuration Error: Klaviyo API key or List ID missing.");
+    return {
+      success: false,
+      error: "Configuration Error. Please contact support.",
+    };
   }
 
   const normalizedEmail = normalizeEmail(email);
@@ -34,57 +38,66 @@ export async function subscribeToNewsletter(email: string) {
   }
 
   try {
-    const response = await fetch("https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs", {
-      method: "POST",
-      headers: {
-        "revision": "2026-04-15",
-        "accept": "application/vnd.api+json",
-        "content-type": "application/vnd.api+json",
-        "Authorization": `Klaviyo-API-Key ${apiKey}`
-      },
-      body: JSON.stringify({
-        data: {
-          type: "profile-subscription-bulk-create-job",
-          attributes: {
-            custom_source: "Newsletter Signup Form",
-            profiles: {
-              data: [
-                {
-                  type: "profile",
-                  attributes: {
-                    email: normalizedEmail,
-                    subscriptions: {
-                      email: {
-                        marketing: {
-                          consent: "SUBSCRIBED"
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
+    const response = await fetch(
+      "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
+      {
+        method: "POST",
+        headers: {
+          revision: "2026-04-15",
+          accept: "application/vnd.api+json",
+          "content-type": "application/vnd.api+json",
+          Authorization: `Klaviyo-API-Key ${apiKey}`,
+        },
+        body: JSON.stringify({
+          data: {
+            type: "profile-subscription-bulk-create-job",
+            attributes: {
+              custom_source: "Newsletter Signup Form",
+              profiles: {
+                data: [
+                  {
+                    type: "profile",
+                    attributes: {
+                      email: normalizedEmail,
+                      subscriptions: {
+                        email: {
+                          marketing: {
+                            consent: "SUBSCRIBED",
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            relationships: {
+              list: {
+                data: {
+                  type: "list",
+                  id: listId,
+                },
+              },
+            },
           },
-          relationships: {
-            list: {
-              data: {
-                type: "list",
-                id: listId
-              }
-            }
-          }
-        }
-      })
-    });
+        }),
+      },
+    );
 
     if (!response.ok) {
-      console.error(`Klaviyo API error: status ${response.status}`);
-      return { success: false, error: "Failed to subscribe to newsletter. Please try again later." };
+      logger.error(`Klaviyo API error: status ${response.status}`);
+      return {
+        success: false,
+        error: "Failed to subscribe to newsletter. Please try again later.",
+      };
     }
 
     return { success: true };
   } catch {
-    console.error("Klaviyo subscription exception occurred.");
-    return { success: false, error: "An unexpected error occurred. Please try again later." };
+    logger.error("Klaviyo subscription exception occurred.");
+    return {
+      success: false,
+      error: "An unexpected error occurred. Please try again later.",
+    };
   }
 }

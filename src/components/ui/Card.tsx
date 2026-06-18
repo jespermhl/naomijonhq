@@ -39,11 +39,7 @@ export const Card: React.FC<CardProps> = ({
     "w-full max-w-[900px] glass-panel rounded-[34px] px-12 py-16 text-text-dark relative overflow-visible max-sm:px-5 max-sm:py-12 max-sm:rounded-[26px] max-sm:!transform-none";
 
   return (
-    <div
-      id={id}
-      className={`${baseClass} ${className}`}
-      style={inlineStyles}
-    >
+    <div id={id} className={`${baseClass} ${className}`} style={inlineStyles}>
       {children}
     </div>
   );

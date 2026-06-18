@@ -1,28 +1,64 @@
 "use client";
 
-import { useEffect, useRef, ComponentRef } from "react";
+import { useEffect, useRef, useCallback, ComponentRef } from "react";
 import { useRouter } from "next/navigation";
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-
   const dialogRef = useRef<ComponentRef<"dialog">>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  const onDismiss = useCallback(() => {
+    router.back();
+  }, [router]);
 
   useEffect(() => {
+    previousFocusRef.current = document.activeElement as HTMLElement;
+
     const dialog = dialogRef.current;
     if (dialog && !dialog.open) {
       dialog.showModal();
     }
 
     document.body.style.overflow = "hidden";
+
     return () => {
       document.body.style.overflow = "";
+      previousFocusRef.current?.focus();
     };
   }, []);
 
-  function onDismiss() {
-    router.back();
-  }
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    dialog.addEventListener("keydown", handleKeyDown);
+    return () => dialog.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
     if (e.target === dialogRef.current) {
@@ -35,17 +71,17 @@ export function Modal({ children }: { children: React.ReactNode }) {
       ref={dialogRef}
       onClose={onDismiss}
       onClick={handleBackdropClick}
-      className="fixed inset-0 z-50 m-auto backdrop:bg-black/60 p-0 border-none bg-transparent overflow-visible focus:outline-none w-full h-full md:h-auto md:max-w-4xl"
+      className="fixed inset-0 z-50 m-auto h-full w-full overflow-visible border-none bg-transparent p-0 backdrop:bg-black/60 focus:outline-none md:h-auto md:max-w-4xl"
     >
-      <div className="relative flex flex-col w-full h-full md:h-auto md:max-h-[85vh] bg-white rounded-4xl transform-gpu overflow-hidden shadow-2xl animate-pop-in">
+      <div className="animate-pop-in relative flex h-full w-full transform-gpu flex-col overflow-hidden rounded-4xl bg-white shadow-2xl md:h-auto md:max-h-[85vh]">
         <button
           onClick={onDismiss}
-          className="absolute right-6 top-6 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-[#ff4fa8] text-white font-black hover:bg-[#1f171d] transition-colors shadow-lg cursor-pointer"
+          className="bg-brand-red hover:bg-text-dark absolute top-6 right-6 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full font-black text-white shadow-lg transition-colors"
           aria-label="Close modal"
         >
           ✕
         </button>
-        <div className="w-full h-full overflow-y-auto px-6 pb-10 pt-24 md:p-10 select-text">
+        <div className="h-full w-full overflow-y-auto px-6 pt-24 pb-10 select-text md:p-10">
           {children}
         </div>
       </div>

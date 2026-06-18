@@ -28,13 +28,13 @@ export function BurstAnimation({ emoji = "🍓" }: BurstAnimationProps) {
 
   return (
     <div
-      className="absolute top-[50vh] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      className="pointer-events-none absolute top-[50vh] left-1/2 -translate-x-1/2 -translate-y-1/2"
       aria-hidden="true"
     >
       {particles.map((p, i) => (
         <div
           key={i}
-          className="absolute text-[40px] animate-burst select-none"
+          className="animate-burst absolute text-[40px] select-none"
           style={
             {
               "--tx": `${p.tx}px`,

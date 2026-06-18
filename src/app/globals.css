@@ -7,11 +7,11 @@
 
 @theme {
   --color-bg-primary: #fff9fb;
-  --color-brand-red: #ff3f9f;
+  --color-brand-red: #ff4fa8;
   --color-brand-pink: #ffb7d4;
-  --color-text-dark: #22181f;
+  --color-text-dark: #1f171d;
   --color-text-light: #ffffff;
-  --color-text-muted: #7a6671;
+  --color-text-muted: #5f4e58;
 
   --color-card-bg: rgba(255, 255, 255, 0.8);
   --color-footer-bg: rgba(255, 255, 255, 0.72);
@@ -207,4 +207,19 @@ a {
 
 .animate-burst {
   animation: burst 4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -11,13 +11,15 @@ interface ButtonCustomProps {
 }
 
 /** Props specifically for link-style buttons. */
-interface AnchorButtonProps extends ButtonCustomProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface AnchorButtonProps
+  extends ButtonCustomProps, React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /** Required href renders the component as an <a> tag. */
   href: string;
 }
 
 /** Props specifically for native button elements. */
-interface NativeButtonProps extends ButtonCustomProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface NativeButtonProps
+  extends ButtonCustomProps, React.ButtonHTMLAttributes<HTMLButtonElement> {
   /** Ensures href is not allowed on a native button. */
   href?: never;
 }
@@ -52,15 +54,23 @@ export const Button: React.FC<ButtonProps> = ({
 
   // Pattern match for href to determine if it's an anchor or button
   if ("href" in props && props.href !== undefined) {
-    const isExternal = props.href.startsWith("http://") || 
-                     props.href.startsWith("https://") || 
-                     props.href.startsWith("//");
-    
-    const { target, rel, href, style: userStyle, ...anchorProps } = props as AnchorButtonProps;
+    const isExternal =
+      props.href.startsWith("http://") ||
+      props.href.startsWith("https://") ||
+      props.href.startsWith("//");
+
+    const {
+      target,
+      rel,
+      href,
+      style: userStyle,
+      ...anchorProps
+    } = props as AnchorButtonProps;
     const mergedStyles = { ...inlineStyles, ...(userStyle || {}) };
-    
+
     const resolvedTarget = target ?? (isExternal ? "_blank" : undefined);
-    const resolvedRel = rel ?? (resolvedTarget === "_blank" ? "noopener noreferrer" : undefined);
+    const resolvedRel =
+      rel ?? (resolvedTarget === "_blank" ? "noopener noreferrer" : undefined);
 
     return (
       <a

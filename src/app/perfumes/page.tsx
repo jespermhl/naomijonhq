@@ -49,22 +49,20 @@ export default async function PerfumesPage() {
       <div className="mx-auto max-w-275 px-5 py-14 pb-18">
         <h1 className="page-title">
           Perfumes{" "}
-          <span className="inline-block animate-sparkle-wobble">✨</span>
+          <span className="animate-sparkle-wobble inline-block">✨</span>
         </h1>
         <p className="page-subtitle">
           Discover all the amazing perfumes by Naomi Jon.
         </p>
 
         {perfumes.length > 0 ? (
-          <div className="mt-10 grid grid-cols-1 gap-8 justify-items-stretch sm:grid-cols-2">
+          <div className="mt-10 grid grid-cols-1 justify-items-stretch gap-8 sm:grid-cols-2">
             {perfumes.map((perfume) => (
               <PerfumeCard key={perfume._id} perfume={perfume} />
             ))}
           </div>
         ) : (
-          <div
-            className="mx-auto mt-10 max-w-2xl px-6 py-14 text-center rounded-[28px] border border-white/85 bg-white/74 font-bold text-[1.05rem] text-text-dark shadow-[0_24px_60px_rgba(255,79,168,0.1)] backdrop-blur-sm"
-          >
+          <div className="text-text-dark mx-auto mt-10 max-w-2xl rounded-[28px] border border-white/85 bg-white/74 px-6 py-14 text-center text-[1.05rem] font-bold shadow-[0_24px_60px_rgba(255,79,168,0.1)] backdrop-blur-sm">
             <p>New perfumes dropping soon! Stay tuned.</p>
           </div>
         )}
