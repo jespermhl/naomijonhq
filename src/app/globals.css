@@ -109,8 +109,10 @@ body {
   color: #ffffff;
 }
 
-a {
-  color: inherit;
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 @layer utilities {

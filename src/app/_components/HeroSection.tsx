@@ -59,7 +59,7 @@ export function HeroSection() {
               href={inviteLink}
               rotate="0deg"
               size="large"
-              className="mt-6 max-sm:py-3 max-sm:text-sm"
+              className="mt-6 w-full max-sm:py-3 max-sm:text-sm text-white!"
             >
               Join the Discord
             </Button>

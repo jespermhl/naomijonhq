@@ -30,13 +30,10 @@ export function ClientLayout({
   const pathname = usePathname();
   const pageConfig = getPageConfig(pathname);
 
-  // isModalTrueOpen: Zeigt an, ob ein Modal im DOM ist
   const isModalTrueOpen = !!modal;
-
-  // isBlockingModal: Verhindert, dass das Modal auf der echten Seite gerendert wird
   const isLegalPage =
     pathname === "/legal-notice" || pathname === "/privacy-policy";
-  const showModal = isModalTrueOpen && !isLegalPage;
+  const showModal = isModalTrueOpen;
 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
@@ -52,11 +49,11 @@ export function ClientLayout({
       </div>
       {pageConfig.showFooter && (
         <Footer
-          showSocials={pageConfig.showSocials}
+          showSocials={isModalTrueOpen && isLegalPage ? false : pageConfig.showSocials}
           socials={socials}
           currentPath={pathname}
           isModalOpen={isModalTrueOpen}
-          showWebsite={pageConfig.showWebsite}
+          showWebsite={isModalTrueOpen && isLegalPage ? false : pageConfig.showWebsite}
           baseUrl={baseUrl}
         />
       )}
