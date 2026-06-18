@@ -19,47 +19,49 @@ describe("logger", () => {
 
   it("respects NODE_ENV for info level", async () => {
     const originalEnv = process.env.NODE_ENV;
+    try {
+      process.env.NODE_ENV = "development";
+      vi.resetModules();
+      const { logger: devLogger } = await import("@/lib/logger");
+      const spy = vi.spyOn(console, "log").mockImplementation(() => {});
+      devLogger.info("dev message");
+      expect(spy).toHaveBeenCalled();
 
-    process.env.NODE_ENV = "development";
-    vi.resetModules();
-    const { logger: devLogger } = await import("@/lib/logger");
-    const spy = vi.spyOn(console, "log").mockImplementation(() => {});
-    devLogger.info("dev message");
-    expect(spy).toHaveBeenCalled();
+      spy.mockRestore();
 
-    spy.mockRestore();
-
-    process.env.NODE_ENV = "production";
-    vi.resetModules();
-    const { logger: prodLogger } = await import("@/lib/logger");
-    const spy2 = vi.spyOn(console, "log").mockImplementation(() => {});
-    prodLogger.info("prod message");
-    expect(spy2).not.toHaveBeenCalled();
-
-    process.env.NODE_ENV = originalEnv;
-    vi.resetModules();
+      process.env.NODE_ENV = "production";
+      vi.resetModules();
+      const { logger: prodLogger } = await import("@/lib/logger");
+      const spy2 = vi.spyOn(console, "log").mockImplementation(() => {});
+      prodLogger.info("prod message");
+      expect(spy2).not.toHaveBeenCalled();
+    } finally {
+      process.env.NODE_ENV = originalEnv;
+      vi.resetModules();
+    }
   });
 
   it("respects NODE_ENV for warn level", async () => {
     const originalEnv = process.env.NODE_ENV;
+    try {
+      process.env.NODE_ENV = "development";
+      vi.resetModules();
+      const { logger: devLogger } = await import("@/lib/logger");
+      const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
+      devLogger.warn("dev warning");
+      expect(spy).toHaveBeenCalled();
 
-    process.env.NODE_ENV = "development";
-    vi.resetModules();
-    const { logger: devLogger } = await import("@/lib/logger");
-    const spy = vi.spyOn(console, "warn").mockImplementation(() => {});
-    devLogger.warn("dev warning");
-    expect(spy).toHaveBeenCalled();
+      spy.mockRestore();
 
-    spy.mockRestore();
-
-    process.env.NODE_ENV = "production";
-    vi.resetModules();
-    const { logger: prodLogger } = await import("@/lib/logger");
-    const spy2 = vi.spyOn(console, "warn").mockImplementation(() => {});
-    prodLogger.warn("prod warning");
-    expect(spy2).not.toHaveBeenCalled();
-
-    process.env.NODE_ENV = originalEnv;
-    vi.resetModules();
+      process.env.NODE_ENV = "production";
+      vi.resetModules();
+      const { logger: prodLogger } = await import("@/lib/logger");
+      const spy2 = vi.spyOn(console, "warn").mockImplementation(() => {});
+      prodLogger.warn("prod warning");
+      expect(spy2).not.toHaveBeenCalled();
+    } finally {
+      process.env.NODE_ENV = originalEnv;
+      vi.resetModules();
+    }
   });
 });

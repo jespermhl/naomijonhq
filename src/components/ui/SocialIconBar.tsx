@@ -8,7 +8,7 @@ interface SocialIconBarProps {
 }
 
 const iconButtonClass =
-  "flex items-center justify-center w-8 h-8 p-0 rounded-full bg-white/80 border border-white/85 text--text-dark/80 no-underline transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 hover:bg--brand-red hover:border--brand-red hover:text-white hover:shadow-[0_10px_20px_rgba(255,79,168,0.18)] focus-visible:-translate-y-1 focus-visible:bg--brand-red focus-visible:border--brand-red focus-visible:text-white";
+  "flex items-center justify-center w-8 h-8 p-0 rounded-full bg-white/80 border border-white/85 text-text-dark/80 no-underline transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 hover:bg-brand-red hover:border-brand-red hover:text-white hover:shadow-[0_10px_20px_rgba(255,79,168,0.18)] focus-visible:-translate-y-1 focus-visible:bg-brand-red focus-visible:border-brand-red focus-visible:text-white";
 
 export function SocialIconBar({
   socials,

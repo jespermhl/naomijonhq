@@ -19,13 +19,13 @@ export function HeroSection() {
             <p className="text-brand-red text-xs font-black tracking-[0.38em] uppercase">
               ALL THINGS NAOMI
             </p>
-            <h2 className="text--text-dark text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-[-0.06em] uppercase">
+            <h2 className="text-text-dark text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-[-0.06em] uppercase">
               Naomi Jon HQ
             </h2>
-            <p className="text--text-muted text-[clamp(1rem,1.2vw,1.15rem)] leading-relaxed font-semibold">
+            <p className="text-text-muted text-[clamp(1rem,1.2vw,1.15rem)] leading-relaxed font-semibold">
               Stay connected with everything Naomi Jon
             </p>
-            <div className="text--text-muted flex flex-col gap-3 font-semibold max-sm:text-sm">
+            <div className="text-text-muted flex flex-col gap-3 font-semibold max-sm:text-sm">
               {bulletPoints.map((bulletPoint, index) => (
                 <div key={index} className="flex items-center gap-2">
                   <span className="text-brand-red">✦</span> {bulletPoint.text}

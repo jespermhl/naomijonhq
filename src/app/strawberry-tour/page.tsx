@@ -39,10 +39,12 @@ const DEFAULTS = {
     "The Strawberry Tour is a wrap! Relive the memories and stream the album now.",
 };
 
-export const generateMetadata = (): Promise<Metadata> =>
-  buildPageMetadata(SOURCE, DEFAULTS);
-export const generateViewport = (): Promise<Viewport> =>
-  buildPageViewport(SOURCE);
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata(SOURCE, DEFAULTS);
+}
+export async function generateViewport(): Promise<Viewport> {
+  return buildPageViewport(SOURCE);
+}
 export const revalidate = 3600;
 
 export default async function ConcertsPage() {
@@ -107,7 +109,7 @@ export default async function ConcertsPage() {
             {/* Right Information Column */}
             <div className="flex-1 space-y-5 pt-2 max-md:flex max-md:flex-col max-md:items-center max-md:text-center">
               <div className="space-y-3">
-                <p className="inline-flex rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.24em] text-[#c73d84] uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <p className="inline-flex rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.24em] text-strawberry-accent uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
                   Tour Archive
                 </p>
                 <h1 className="page-title text-3xl leading-tight font-black tracking-tight sm:text-4xl md:text-5xl lg:text-[54px]">
@@ -123,7 +125,7 @@ export default async function ConcertsPage() {
                 <div className="text-text-dark/70 rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.22em] uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
                   All dates played
                 </div>
-                <div className="rounded-full border border-white/90 bg-[#fff2f8] px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.22em] text-[#b61e6b] uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <div className="rounded-full border border-white/90 bg-[#fff2f8] px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.22em] text-strawberry-pink uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
                   Streaming now
                 </div>
               </div>

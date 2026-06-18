@@ -23,7 +23,7 @@ export function LegalLinks({ currentPath, isModalOpen }: LegalLinkProps) {
             href={path}
             // Default prefetching is the most stable for modals
             prefetch={true}
-            className="text--text-dark hover:text--brand-red text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out"
+            className="text-text-dark hover:text-brand-red text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out"
           >
             {label}
           </Link>

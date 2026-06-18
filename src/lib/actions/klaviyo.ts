@@ -12,13 +12,8 @@ function isValidEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
-/**
- * Subscribes a user to the Klaviyo newsletter list.
- * Uses the Bulk Subscribe Profiles endpoint as per Klaviyo API v2026-04-15.
- *
- * @param email - The email address to subscribe.
- * @returns An object indicating success or failure.
- */
+const FETCH_TIMEOUT_MS = 15_000;
+
 export async function subscribeToNewsletter(email: string) {
   const apiKey = env.KLAVIYO_PRIVATE_API_KEY;
   const listId = env.KLAVIYO_LIST_ID;
@@ -38,9 +33,13 @@ export async function subscribeToNewsletter(email: string) {
   }
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
     const response = await fetch(
       "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
       {
+        signal: controller.signal,
         method: "POST",
         headers: {
           revision: "2026-04-15",
@@ -84,6 +83,8 @@ export async function subscribeToNewsletter(email: string) {
       },
     );
 
+    clearTimeout(timeoutId);
+
     if (!response.ok) {
       logger.error(`Klaviyo API error: status ${response.status}`);
       return {
@@ -93,8 +94,8 @@ export async function subscribeToNewsletter(email: string) {
     }
 
     return { success: true };
-  } catch {
-    logger.error("Klaviyo subscription exception occurred.");
+  } catch (error) {
+    logger.error("Klaviyo subscription exception occurred:", error);
     return {
       success: false,
       error: "An unexpected error occurred. Please try again later.",

@@ -37,7 +37,7 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-10 text-xs font-black tracking-[0.2em] text-[`#5f4e58`] uppercase md:flex">
+        <nav className="hidden items-center gap-10 text-xs font-black tracking-[0.2em] text-[#5f4e58] uppercase md:flex">
           {defaultLinks.map((link, index) => (
             <a
               key={index}
@@ -71,6 +71,7 @@ export function Header() {
       <div
         id="mobile-menu"
         role="menu"
+        aria-hidden={!isMenuOpen}
         className={`absolute top-22 right-6 left-6 z-50 origin-top rounded-2xl border border-white/20 bg-white/95 p-6 shadow-xl transition-all duration-300 ease-in-out md:hidden ${
           isMenuOpen
             ? "pointer-events-auto scale-100 opacity-100"

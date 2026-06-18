@@ -19,7 +19,7 @@ export function SectionHeading({
         {eyebrow}
       </span>
       <h2
-        className={`text--text-dark mb-12 text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-tighter uppercase ${titleClassName}`}
+        className={`text-text-dark mb-12 text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-tighter uppercase ${titleClassName}`}
       >
         {title}
       </h2>

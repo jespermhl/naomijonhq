@@ -31,7 +31,7 @@ export default function NewsletterPage() {
 
       <main className="flex min-h-screen flex-col items-center justify-center px-4 py-9 sm:px-6 sm:py-20">
         <Card
-          className="xs:px-8 flex w-full max-w-140 flex-col items-center p-5 py-12 text-center sm:p-[60px_46px]"
+          className="flex w-full max-w-140 flex-col items-center p-5 py-12 text-center sm:p-[60px_46px]"
           maxWidth="560px"
           rotated={false}
         >

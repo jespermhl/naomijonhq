@@ -22,6 +22,9 @@
   --color-rossmann: #e30613;
   --color-amazon: #ffffff;
 
+  --color-strawberry-accent: #c73d84;
+  --color-strawberry-pink: #b61e6b;
+
   --animate-wobble: wobble 4s ease-in-out infinite;
   --animate-float-badge: float-badge 3s ease-in-out infinite;
   --animate-celebrate: celebrate 5s ease-in-out infinite;

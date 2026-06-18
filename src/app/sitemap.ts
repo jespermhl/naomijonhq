@@ -18,8 +18,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/strawberry-album",
     "/strawberry-tour",
     "/newsletter",
-    "/imprint",
+    "/legal-notice",
     "/privacy-policy",
+    "/contact",
+    "/redirect",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

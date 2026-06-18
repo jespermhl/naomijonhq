@@ -32,14 +32,14 @@ export function StrawberryRelease({
           <p className="text-brand-red mt-2 mb-2 text-xs font-black tracking-[0.38em] uppercase">
             The Album
           </p>
-          <h1 className="text--text-dark mb-2 text-[clamp(2.5rem,6vw,4.5rem)] leading-none font-black tracking-[-0.08em] uppercase">
+          <h1 className="text-text-dark mb-2 text-[clamp(2.5rem,6vw,4.5rem)] leading-none font-black tracking-[-0.08em] uppercase">
             Strawberry
           </h1>
 
           <p className="text-brand-red mb-4 text-xs font-black tracking-wider uppercase">
             Released {displayDateStr}
           </p>
-          <p className="text--text-muted mb-6 max-w-md text-base leading-relaxed font-semibold">
+          <p className="text-text-muted mb-6 max-w-md text-base leading-relaxed font-semibold">
             Naomi&apos;s sophomore album is finally here
           </p>
 
@@ -76,7 +76,7 @@ export function StrawberryRelease({
               href="https://releeze.com/en/collections/naomi-jon"
               target="_blank"
               rel="noopener noreferrer"
-              className="text--text-dark block flex-1 -rotate-2 rounded-full border border-white/90 bg-white/88 px-5 py-3 text-center text-lg font-black no-underline shadow-[0_8px_0_rgba(255,79,168,0.12)] transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:shadow-[0_12px_0_rgba(255,79,168,0.16)] active:scale-95 max-sm:py-2.5 max-sm:text-sm"
+              className="text-text-dark block flex-1 -rotate-2 rounded-full border border-white/90 bg-white/88 px-5 py-3 text-center text-lg font-black no-underline shadow-[0_8px_0_rgba(255,79,168,0.12)] transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:shadow-[0_12px_0_rgba(255,79,168,0.16)] active:scale-95 max-sm:py-2.5 max-sm:text-sm"
             >
               ORDER
             </a>
