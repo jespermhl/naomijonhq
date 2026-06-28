@@ -36,9 +36,13 @@ export default async function RedirectPage({
       {source && <PropertyMetaTags source={source} />}
       <Suspense
         fallback={
-          <main className="min-h-screen flex flex-col items-center justify-center px-6 py-20">
-            <Card maxWidth="500px" rotated={false} className="w-full max-w-125 flex flex-col items-center p-8 text-center">
-              <div className="text-5xl animate-bounce mb-6">🍓</div>
+          <main className="flex min-h-screen flex-col items-center justify-center px-6 py-20">
+            <Card
+              maxWidth="500px"
+              rotated={false}
+              className="flex w-full max-w-125 flex-col items-center p-8 text-center"
+            >
+              <div className="mb-6 animate-bounce text-5xl">🍓</div>
               <h1 className="text-2xl font-extrabold tracking-tight text-neutral-800 uppercase">
                 Loading...
               </h1>

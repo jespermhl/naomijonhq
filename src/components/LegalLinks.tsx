@@ -1,51 +1,34 @@
 import Link from "next/link";
 
 interface LegalLinkProps {
-    currentPath: string | undefined;
+  currentPath: string;
+  isModalOpen: boolean;
 }
 
-export default function LegalLinks({ currentPath }: LegalLinkProps) {
-    const pathname = currentPath;
+export function LegalLinks({ currentPath, isModalOpen }: LegalLinkProps) {
+  const links = [
+    { path: "/legal-notice", label: "Legal Notice" },
+    { path: "/privacy-policy", label: "Privacy Policy" },
+  ];
 
-    const isOnLegalPage = pathname === "/legal-notice" || pathname === "/privacy-policy";
+  return (
+    <div className="order-3 flex gap-5 pt-2 md:order-0 md:pt-0">
+      {links.map(({ path, label }) => {
+        // On the actual legal page, hide that link from footer, but show it when a modal is open
+        if (!isModalOpen && currentPath === path) return null;
 
-    return (
-        <div className="flex gap-5 order-3 md:order-0 pt-2 md:pt-0">
-            {pathname !== "/legal-notice" && (
-                isOnLegalPage ? (
-                    <a
-                        href="/legal-notice"
-                        className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
-                    >
-                        Legal Notice
-                    </a>
-                ) : (
-                    <Link
-                        href="/legal-notice"
-                        className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
-                    >
-                        Legal Notice
-                    </Link>
-                )
-            )}
-
-            {pathname !== "/privacy-policy" && (
-                isOnLegalPage ? (
-                    <a
-                        href="/privacy-policy"
-                        className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
-                    >
-                        Privacy Policy
-                    </a>
-                ) : (
-                    <Link
-                        href="/privacy-policy"
-                        className="text-[#1f171d] text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out hover:text-[#ff4fa8]"
-                    >
-                        Privacy Policy
-                    </Link>
-                )
-            )}
-        </div>
-    );
+        return (
+          <Link
+            key={path}
+            href={path}
+            // Default prefetching is the most stable for modals
+            prefetch={true}
+            className="text-text-dark hover:text-brand-red text-[0.85rem] font-bold no-underline transition-colors duration-200 ease-in-out"
+          >
+            {label}
+          </Link>
+        );
+      })}
+    </div>
+  );
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { subscribeToNewsletter } from "@/lib/actions/klaviyo";
+import { logger } from "@/lib/logger";
 import { Button } from "./ui/Button";
 
 export function NewsletterForm() {
@@ -32,7 +33,7 @@ export function NewsletterForm() {
         });
       }
     } catch (err) {
-      console.error("Subscription error:", err);
+      logger.error("Subscription error:", err);
       setState({ status: "error", message: "An unexpected error occurred." });
     }
   }
@@ -46,7 +47,7 @@ export function NewsletterForm() {
           role="status"
           aria-live="polite"
         >
-          <p className="text-base font-extrabold leading-relaxed text-text-dark">
+          <p className="text-text-dark text-base leading-relaxed font-extrabold">
             {message}
           </p>
         </div>
@@ -62,15 +63,17 @@ export function NewsletterForm() {
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "loading"}
               required
-              className="w-full rounded-full border border-white/80 bg-white/92 px-6 py-3.5 font-sans text-base font-bold text-text-dark placeholder-[#b58a9d] outline-none shadow-[0_10px_25px_rgba(255,79,168,0.1)] transition-all duration-200 focus:-translate-y-0.5 focus:shadow-[0_14px_32px_rgba(255,79,168,0.14)] focus-visible:outline-2 focus-visible:outline-brand-red focus-visible:outline-offset-2"
+              className="text-text-dark focus-visible:outline-brand-red w-full rounded-full border border-white/80 bg-white/92 px-6 py-3.5 font-sans text-base font-bold placeholder-[#b58a9d] shadow-[0_10px_25px_rgba(255,79,168,0.1)] transition-all duration-200 outline-none focus:-translate-y-0.5 focus:shadow-[0_14px_32px_rgba(255,79,168,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2"
               aria-label="Email address for newsletter"
-              aria-describedby={status === "error" ? "newsletter-error" : undefined}
+              aria-describedby={
+                status === "error" ? "newsletter-error" : undefined
+              }
               aria-invalid={status === "error"}
             />
             {status === "error" && (
               <p
                 id="newsletter-error"
-                className="mt-1.5 pl-1 text-left text-xs font-black text-brand-red"
+                className="text-brand-red mt-1.5 pl-1 text-left text-xs font-black"
                 role="status"
                 aria-live="assertive"
               >
@@ -89,9 +92,9 @@ export function NewsletterForm() {
             {status === "loading" ? "Joining..." : "Join the Newsletter"}
           </Button>
 
-          <p className="mt-1 text-center text-[10.5px] font-semibold leading-relaxed text-text-muted/80">
-            By signing up, you agree to receive marketing emails from Naomi Jon HQ.
-            You can unsubscribe at any time.
+          <p className="text-text-muted/80 mt-1 text-center text-[10.5px] leading-relaxed font-semibold">
+            By signing up, you agree to receive marketing emails from Naomi Jon
+            HQ. You can unsubscribe at any time.
           </p>
         </form>
       )}
