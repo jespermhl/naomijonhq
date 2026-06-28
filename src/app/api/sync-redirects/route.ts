@@ -44,11 +44,13 @@ export async function POST(req: Request) {
     const existingKeys = await redis.keys("redirect:*");
 
     const pipeline = redis.pipeline();
+    let removedCount = 0;
 
     for (const key of existingKeys) {
       const source = key.replace("redirect:", "");
       if (!currentSources.has(source)) {
         pipeline.del(key);
+        removedCount++;
       }
     }
 
@@ -63,7 +65,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       message: "Sync completed successfully",
       count: redirects.length,
-      removed: existingKeys.length - currentSources.size,
+      removed: removedCount,
     });
   } catch (error) {
     logger.error("Failed to sync redirects:", error);

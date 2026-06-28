@@ -72,6 +72,7 @@ export function Header() {
         id="mobile-menu"
         role="menu"
         aria-hidden={!isMenuOpen}
+        inert={!isMenuOpen ? true : undefined}
         className={`absolute top-22 right-6 left-6 z-50 origin-top rounded-2xl border border-white/20 bg-white/95 p-6 shadow-xl transition-all duration-300 ease-in-out md:hidden ${
           isMenuOpen
             ? "pointer-events-auto scale-100 opacity-100"

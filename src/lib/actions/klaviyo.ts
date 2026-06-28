@@ -32,9 +32,10 @@ export async function subscribeToNewsletter(email: string) {
     return { success: false, error: "Please provide a valid email address." };
   }
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
 
     const response = await fetch(
       "https://a.klaviyo.com/api/profile-subscription-bulk-create-jobs",
@@ -83,8 +84,6 @@ export async function subscribeToNewsletter(email: string) {
       },
     );
 
-    clearTimeout(timeoutId);
-
     if (!response.ok) {
       logger.error(`Klaviyo API error: status ${response.status}`);
       return {
@@ -100,5 +99,7 @@ export async function subscribeToNewsletter(email: string) {
       success: false,
       error: "An unexpected error occurred. Please try again later.",
     };
+  } finally {
+    clearTimeout(timeoutId);
   }
 }

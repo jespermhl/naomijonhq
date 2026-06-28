@@ -4,8 +4,9 @@ import { MetadataRoute } from "next";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const headersInstance = await headers();
-  const host =
+  const rawHost =
     headersInstance.get("host") || env.NEXT_PUBLIC_SITE_URL || "naomijonhq.com";
+  const host = rawHost.replace(/^https?:\/\//, "").replace(/\/.*$/, "");
 
   const baseUrl = host.startsWith("www.")
     ? `https://${host.substring(4)}`
