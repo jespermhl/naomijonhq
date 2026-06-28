@@ -24,17 +24,17 @@ export const PastConcertItem: React.FC<PastConcertItemProps> = ({
 
       <div className="relative flex items-center gap-5 max-sm:items-start max-sm:gap-4">
         <div className="flex min-w-28 flex-col items-center justify-center rounded-[20px] border border-[#ffd5e5] bg-white/95 px-4 py-4 shadow-[0_10px_24px_rgba(255,79,168,0.1)] max-sm:min-w-23 max-sm:rounded-2xl max-sm:px-3 max-sm:py-3">
-          <span className="text-[0.68rem] font-black tracking-[0.34em] text-[#c73d84] uppercase max-sm:text-[0.6rem]">
+          <span className="text-[0.68rem] font-black tracking-[0.16em] text-[#c73d84] uppercase max-sm:text-[0.6rem]">
             Date
           </span>
-          <span className="text-brand-red mt-2 text-center text-[0.86rem] leading-none font-black tracking-[0.28em] uppercase max-sm:text-[0.72rem] max-sm:tracking-[0.24em]">
+          <span className="text-brand-red mt-2 text-center text-[0.86rem] leading-none font-black tracking-[0.12em] uppercase max-sm:text-[0.72rem] max-sm:tracking-[0.08em]">
             {date}
           </span>
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-start gap-x-3 gap-y-2">
-            <span className="text-[0.72rem] font-black tracking-[0.28em] text-[#c73d84] uppercase">
+            <span className="text-[0.72rem] font-black tracking-[0.14em] text-[#c73d84] uppercase">
               Played
             </span>
           </div>
@@ -46,7 +46,7 @@ export const PastConcertItem: React.FC<PastConcertItemProps> = ({
           </p>
         </div>
 
-        <div className="shrink-0 self-center rounded-full border border-[#ffd5e5] bg-[#fff2f8] px-4 py-2 text-[0.72rem] font-black tracking-[0.24em] text-[#b61e6b] uppercase shadow-[0_8px_18px_rgba(255,79,168,0.08)] max-sm:hidden">
+        <div className="shrink-0 self-center rounded-full border border-[#ffd5e5] bg-[#fff2f8] px-4 py-2 text-[0.72rem] font-black tracking-[0.1em] text-[#b61e6b] uppercase shadow-[0_8px_18px_rgba(255,79,168,0.08)] max-sm:hidden">
           Archive
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import Link from "next/link";
 
@@ -16,6 +17,12 @@ const defaultLinks: NavLink[] = [
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href.startsWith("http")) return false;
+    return pathname === href;
+  };
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -42,7 +49,12 @@ export function Header() {
             <a
               key={index}
               href={link.href}
-              className="hover:text-brand-red transition-colors"
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={`transition-colors ${
+                isActive(link.href)
+                  ? "text-brand-red"
+                  : "text-[#5f4e58] hover:text-brand-red"
+              }`}
             >
               {link.label}
             </a>
@@ -84,8 +96,13 @@ export function Header() {
             <a
               key={index}
               href={link.href}
+              aria-current={isActive(link.href) ? "page" : undefined}
               onClick={() => setIsMenuOpen(false)}
-              className="hover:text-brand-red border-b border-gray-100 py-2 transition-colors last:border-0"
+              className={`border-b border-gray-100 py-2 transition-colors last:border-0 ${
+                isActive(link.href)
+                  ? "text-brand-red"
+                  : "hover:text-brand-red"
+              }`}
             >
               {link.label}
             </a>

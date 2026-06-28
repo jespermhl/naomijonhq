@@ -7,8 +7,10 @@
 
 @theme {
   --color-bg-primary: #fff9fb;
-  --color-brand-red: #ff4fa8;
+  --color-brand-red: #d32f7c;
   --color-brand-pink: #ffb7d4;
+  --color-brand-error: #dc2626;
+  --color-brand-info: #2563eb;
   --color-text-dark: #1f171d;
   --color-text-light: #ffffff;
   --color-text-muted: #5f4e58;
@@ -24,6 +26,8 @@
 
   --color-strawberry-accent: #c73d84;
   --color-strawberry-pink: #b61e6b;
+
+  --animate-fade-in: fade-in 0.3s ease-out;
 
   --animate-wobble: wobble 4s ease-in-out infinite;
   --animate-float-badge: float-badge 3s ease-in-out infinite;
@@ -87,6 +91,17 @@
       opacity: 1;
     }
   }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 html {
@@ -107,6 +122,18 @@ body {
 ::selection {
   background: var(--color-brand-red);
   color: #ffffff;
+}
+
+@layer base {
+  :root {
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.375rem;
+    --fs-2xl: 1.75rem;
+    --fs-display: clamp(2.3rem, 5vw, 4rem);
+  }
 }
 
 @layer base {

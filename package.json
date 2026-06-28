@@ -22,6 +22,7 @@
     "@upstash/redis": "^1.38.0",
     "@vemetric/node": "^0.2.0",
     "@vemetric/web": "^0.6.1",
+    "framer-motion": "^12.42.0",
     "markdown-to-jsx": "^9.8.1",
     "next": "16.1.1",
     "react": "19.2.3",

@@ -98,7 +98,7 @@ export default async function ConcertsPage() {
                     <div className="text-brand-red text-xl font-black tracking-tighter sm:text-2xl">
                       {value}
                     </div>
-                    <div className="text-text-dark/65 mt-0.5 text-[0.6rem] font-black tracking-[0.18em] uppercase sm:text-[0.65rem]">
+                    <div className="text-text-dark/65 mt-1 text-[0.6rem] font-black tracking-[0.18em] uppercase sm:text-[0.65rem]">
                       {label}
                     </div>
                   </div>
@@ -109,7 +109,7 @@ export default async function ConcertsPage() {
             {/* Right Information Column */}
             <div className="flex-1 space-y-5 pt-2 max-md:flex max-md:flex-col max-md:items-center max-md:text-center">
               <div className="space-y-3">
-                <p className="inline-flex rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.24em] text-strawberry-accent uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <p className="inline-flex rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.12em] text-strawberry-accent uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
                   Tour Archive
                 </p>
                 <h1 className="page-title text-3xl leading-tight font-black tracking-tight sm:text-4xl md:text-5xl lg:text-[54px]">
@@ -122,10 +122,10 @@ export default async function ConcertsPage() {
               </div>
 
               <div className="flex flex-wrap gap-2 max-md:justify-center">
-                <div className="text-text-dark/70 rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.22em] uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <div className="text-text-dark/70 rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.12em] uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
                   All dates played
                 </div>
-                <div className="rounded-full border border-white/90 bg-[#fff2f8] px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.22em] text-strawberry-pink uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <div className="rounded-full border border-white/90 bg-[#fff2f8] px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.12em] text-strawberry-pink uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
                   Streaming now
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default async function ConcertsPage() {
 
           {/* Concerts List Section */}
           {concerts.length > 0 && (
-            <section className="mt-10 rounded-[28px] border border-white/75 bg-white/58 p-4 shadow-[0_15px_40px_rgba(255,79,168,0.08)] sm:p-6 lg:mt-12">
+            <section className="mt-10 rounded-[28px] border border-white/75 bg-white/58 p-5 shadow-[0_15px_40px_rgba(255,79,168,0.08)] sm:p-6 lg:mt-12">
               <h2 className="text-text-dark text-xl font-black tracking-[-0.04em] sm:text-2xl">
                 Tour Dates
               </h2>

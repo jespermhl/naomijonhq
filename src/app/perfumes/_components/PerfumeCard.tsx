@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { SanityImageSource } from "@sanity/image-url";
 import { urlFor } from "@/sanity/imageUrl";
+import { Tooltip } from "@/components/ui/Tooltip";
 
 interface StoreLink {
   store: "dm" | "rossmann" | "amazon";
@@ -47,9 +48,14 @@ function isHttpOrHttpsUrl(url: string): boolean {
 
 export default function PerfumeCard({ perfume }: PerfumeCardProps) {
   const [showLinks, setShowLinks] = useState(false);
+  const [failedIcons, setFailedIcons] = useState<Set<string>>(new Set());
 
   const toggleLinks = () => {
     setShowLinks(!showLinks);
+  };
+
+  const handleIconError = (store: string) => {
+    setFailedIcons((prev) => new Set(prev).add(store));
   };
 
   const imageUrl = perfume.image ? urlFor(perfume.image).url() : "";
@@ -84,7 +90,7 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
             />
           )
         ) : (
-          <div className="to-brand-pink/10 text-text-muted/60 flex h-full w-full items-center justify-center bg-linear-to-br from-white text-lg font-bold">
+          <div className="to-brand-pink/10 flex h-full w-full items-center justify-center bg-linear-to-br from-white text-lg font-bold text-text-muted">
             No Image
           </div>
         )}
@@ -163,35 +169,36 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
         {perfume.storeLinks && perfume.storeLinks.length > 0 && (
           <div className="flex items-center gap-2">
             {perfume.storeLinks.map((link) => (
-              <button
-                type="button"
-                key={link._key}
-                className="hover:outline-brand-red flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full text-base text-white shadow-[0_8px_16px_var(--color-brand-pink-shadow,rgba(255,79,168,0.12))] transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.15] hover:rotate-5 hover:outline-2 hover:outline-offset-2"
-                style={{
-                  backgroundColor: STORE_COLORS[link.store] || "#333",
-                  border:
-                    link.store === "amazon" ? "1px solid #e2e8f0" : "none",
-                }}
-                title={`Available at ${link.store}`}
-                aria-label={`Open store links for ${link.store}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  toggleLinks();
-                }}
-              >
-                {STORE_ICONS[link.store] ? (
-                  <Image
-                    src={STORE_ICONS[link.store]}
-                    alt={link.store}
-                    width={20}
-                    height={20}
-                    style={{ objectFit: "contain" }}
-                  />
-                ) : (
-                  "🛒"
-                )}
-              </button>
+              <Tooltip key={link._key} label={link.store}>
+                <button
+                  type="button"
+                  className="hover:outline-brand-red flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full text-base text-white shadow-[0_8px_16px_var(--color-brand-pink-shadow,rgba(255,79,168,0.12))] transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.15] hover:rotate-5 hover:outline-2 hover:outline-offset-2"
+                  style={{
+                    backgroundColor: STORE_COLORS[link.store] || "#333",
+                    border:
+                      link.store === "amazon" ? "1px solid #e2e8f0" : "none",
+                  }}
+                  aria-label={`Open store links for ${link.store}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleLinks();
+                  }}
+                >
+                  {STORE_ICONS[link.store] && !failedIcons.has(link.store) ? (
+                    <Image
+                      src={STORE_ICONS[link.store]}
+                      alt={link.store}
+                      width={24}
+                      height={24}
+                      style={{ objectFit: "contain" }}
+                      onError={() => handleIconError(link.store)}
+                    />
+                  ) : (
+                    <span aria-hidden="true">🛒</span>
+                  )}
+                </button>
+              </Tooltip>
             ))}
           </div>
         )}

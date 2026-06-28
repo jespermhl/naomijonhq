@@ -44,14 +44,20 @@ export function NewsletterPromotion() {
 
   return (
     <div
-      className={`fixed inset-0 z-1000 flex items-center justify-center p-6 transition-all duration-500 ${
-        isVisible
-          ? "pointer-events-auto bg-black/30 backdrop-blur-[6px]"
-          : "pointer-events-none bg-transparent"
+      className={`fixed inset-0 z-1000 flex items-center justify-center p-6 ${
+        isVisible ? "pointer-events-auto" : "pointer-events-none"
       }`}
       onClick={handleDismiss}
       role="presentation"
     >
+      <div
+        className={`absolute inset-0 transition-all duration-500 ${
+          isVisible
+            ? "bg-black/30 opacity-100 backdrop-blur-[6px]"
+            : "bg-transparent opacity-0"
+        }`}
+      />
+
       {isVisible && (
         <div
           id="newsletter-promo"

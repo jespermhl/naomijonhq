@@ -14,7 +14,7 @@ export function SectionHeading({
   return (
     <>
       <span
-        className={`text-brand-red mb-3 inline-block text-xs font-black tracking-[0.3em] uppercase ${className}`}
+        className={`text-brand-red mb-3 inline-block text-xs font-black tracking-[0.16em] uppercase ${className}`}
       >
         {eyebrow}
       </span>

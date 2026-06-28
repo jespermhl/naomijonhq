@@ -2,7 +2,39 @@
 
 import { useState } from "react";
 import { sendEmailAction } from "@/lib/actions/resend";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
+
+type FieldErrors = {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+};
+
+function validateField(name: string, value: string): string | undefined {
+  switch (name) {
+    case "name":
+      if (!value.trim()) return "Name is required";
+      if (value.trim().length < 2) return "Name must be at least 2 characters";
+      return undefined;
+    case "email":
+      if (!value.trim()) return "Email is required";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()))
+        return "Please enter a valid email address";
+      return undefined;
+    case "subject":
+      if (!value.trim()) return "Subject is required";
+      return undefined;
+    case "message":
+      if (!value.trim()) return "Message is required";
+      if (value.trim().length < 10)
+        return "Message must be at least 10 characters";
+      return undefined;
+    default:
+      return undefined;
+  }
+}
 
 export default function ContactPage() {
   return (
@@ -16,6 +48,7 @@ export default function ContactPage() {
 
 function ContactForm() {
   const [isPending, setIsPending] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<{
     success?: boolean;
     message?: string;
@@ -29,19 +62,56 @@ function ContactForm() {
     },
   ];
 
+  function validateForm(formData: FormData): FieldErrors {
+    const errors: FieldErrors = {};
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
+
+    const nameErr = validateField("name", name);
+    if (nameErr) errors.name = nameErr;
+
+    const emailErr = validateField("email", email);
+    if (emailErr) errors.email = emailErr;
+
+    const subjectErr = validateField("subject", subject);
+    if (subjectErr) errors.subject = subjectErr;
+
+    const messageErr = validateField("message", message);
+    if (messageErr) errors.message = messageErr;
+
+    return errors;
+  }
+
+  function handleBlur(
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
+    const { name, value } = e.target;
+    const error = validateField(name, value);
+    setFieldErrors((prev) => ({ ...prev, [name]: error }));
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsPending(true);
     setStatus(null);
 
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
+
+    const errors = validateForm(formData);
+    setFieldErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
+
+    setIsPending(true);
 
     const result = await sendEmailAction(formData);
 
     setIsPending(false);
     if (result.success) {
       setStatus({ success: true, message: "Message sent successfully!" });
+      setFieldErrors({});
       formElement.reset();
     } else {
       setStatus({
@@ -51,13 +121,21 @@ function ContactForm() {
     }
   }
 
+  function inputClass(error?: string) {
+    return `w-full rounded-2xl border px-5 py-3.5 font-semibold shadow-sm backdrop-blur-sm transition-all outline-none ${
+      error
+        ? "border-brand-error/60 bg-red-50/60 focus:border-brand-error"
+        : "border-white/80 bg-white/40 focus:border-brand-red focus:bg-white/60"
+    } text-text-dark placeholder-text-muted/40`;
+  }
+
   return (
     <section className="flex min-h-[calc(100vh-140px)] w-full items-center px-6 pt-12 pb-20 max-sm:px-4 max-sm:pt-6 max-sm:pb-12">
       <div className="mx-auto w-full max-w-275">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div className="flex flex-col items-start space-y-8 lg:sticky lg:top-8 lg:max-w-130">
             <div className="space-y-6">
-              <p className="text-brand-red text-xs font-black tracking-[0.38em] uppercase">
+              <p className="text-brand-red text-xs font-black tracking-[0.18em] uppercase">
                 Get In Touch
               </p>
               <h2 className="text-text-dark text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-[-0.06em] uppercase">
@@ -92,7 +170,11 @@ function ContactForm() {
             <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
               {status && (
                 <div
-                  className={`rounded-xl p-4 text-sm font-bold ${status.success ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}
+                  className={`rounded-xl border p-4 text-sm font-bold ${
+                    status.success
+                      ? "border-green-200 bg-green-50 text-green-700"
+                      : "border-brand-error/30 bg-red-50 text-brand-error"
+                  }`}
                 >
                   {status.message}
                 </div>
@@ -111,9 +193,24 @@ function ContactForm() {
                     id="name"
                     name="name"
                     required
-                    className="text-text-dark placeholder-text-muted/40 focus:border-brand-red w-full rounded-2xl border border-white/80 bg-white/40 px-5 py-3.5 font-semibold shadow-sm backdrop-blur-sm transition-all outline-none focus:bg-white/60"
+                    className={inputClass(fieldErrors.name)}
                     placeholder="Jane Doe"
+                    onBlur={handleBlur}
+                    aria-invalid={!!fieldErrors.name}
+                    aria-describedby={
+                      fieldErrors.name ? "name-error" : undefined
+                    }
                   />
+                  {fieldErrors.name && (
+                    <p
+                      id="name-error"
+                      className="text-xs font-black text-brand-error"
+                      role="status"
+                      aria-live="assertive"
+                    >
+                      {fieldErrors.name}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col space-y-2">
                   <label
@@ -127,9 +224,24 @@ function ContactForm() {
                     id="email"
                     name="email"
                     required
-                    className="text-text-dark placeholder-text-muted/40 focus:border-brand-red w-full rounded-2xl border border-white/80 bg-white/40 px-5 py-3.5 font-semibold shadow-sm backdrop-blur-sm transition-all outline-none focus:bg-white/60"
+                    className={inputClass(fieldErrors.email)}
                     placeholder="jane@example.com"
+                    onBlur={handleBlur}
+                    aria-invalid={!!fieldErrors.email}
+                    aria-describedby={
+                      fieldErrors.email ? "email-error" : undefined
+                    }
                   />
+                  {fieldErrors.email && (
+                    <p
+                      id="email-error"
+                      className="text-xs font-black text-brand-error"
+                      role="status"
+                      aria-live="assertive"
+                    >
+                      {fieldErrors.email}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -145,9 +257,24 @@ function ContactForm() {
                   id="subject"
                   name="subject"
                   required
-                  className="text-text-dark placeholder-text-muted/40 focus:border-brand-red w-full rounded-2xl border border-white/80 bg-white/40 px-5 py-3.5 font-semibold shadow-sm backdrop-blur-sm transition-all outline-none focus:bg-white/60"
+                  className={inputClass(fieldErrors.subject)}
                   placeholder="What's this about?"
+                  onBlur={handleBlur}
+                  aria-invalid={!!fieldErrors.subject}
+                  aria-describedby={
+                    fieldErrors.subject ? "subject-error" : undefined
+                  }
                 />
+                {fieldErrors.subject && (
+                  <p
+                    id="subject-error"
+                    className="text-xs font-black text-brand-error"
+                    role="status"
+                    aria-live="assertive"
+                  >
+                    {fieldErrors.subject}
+                  </p>
+                )}
               </div>
 
               <div className="flex flex-col space-y-2">
@@ -162,9 +289,24 @@ function ContactForm() {
                   name="message"
                   rows={5}
                   required
-                  className="text-text-dark placeholder-text-muted/40 focus:border-brand-red w-full resize-none rounded-2xl border border-white/80 bg-white/40 px-5 py-4 font-semibold shadow-sm backdrop-blur-sm transition-all outline-none focus:bg-white/60"
+                  className={`${inputClass(fieldErrors.message)} resize-none py-4`}
                   placeholder="Type your message here..."
+                  onBlur={handleBlur}
+                  aria-invalid={!!fieldErrors.message}
+                  aria-describedby={
+                    fieldErrors.message ? "message-error" : undefined
+                  }
                 />
+                {fieldErrors.message && (
+                  <p
+                    id="message-error"
+                    className="text-xs font-black text-brand-error"
+                    role="status"
+                    aria-live="assertive"
+                  >
+                    {fieldErrors.message}
+                  </p>
+                )}
               </div>
 
               <div className="text-text-dark text-center text-sm font-light tracking-wider">
@@ -178,13 +320,40 @@ function ContactForm() {
                 .
               </div>
 
-              <button
+              <Button
                 type="submit"
                 disabled={isPending}
-                className="group bg-text-dark hover:bg-brand-red relative inline-flex w-full items-center justify-center rounded-2xl px-8 py-4 text-center text-sm font-black tracking-widest text-white uppercase shadow-lg transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 hover:shadow-[0px_8px_24px_-4px_rgba(255,63,159,0.4)] active:translate-y-0 disabled:pointer-events-none disabled:opacity-50"
+                size="large"
+                className="w-full"
+                rotate="0deg"
               >
-                {isPending ? "Sending..." : "Send Message"}
-              </button>
+                {isPending ? (
+                  <span className="inline-flex items-center gap-2">
+                    <svg
+                      className="h-4 w-4 animate-spin"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      />
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  "Send Message"
+                )}
+              </Button>
             </form>
           </div>
         </div>

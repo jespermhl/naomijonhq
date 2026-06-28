@@ -16,7 +16,7 @@ export function HeroSection() {
       <div className="mx-auto w-full max-w-275">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="flex flex-col items-start space-y-6 lg:max-w-130">
-            <p className="text-brand-red text-xs font-black tracking-[0.38em] uppercase">
+            <p className="text-brand-red text-xs font-black tracking-[0.18em] uppercase">
               ALL THINGS NAOMI
             </p>
             <h2 className="text-text-dark text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-[-0.06em] uppercase">
@@ -43,6 +43,8 @@ export function HeroSection() {
                 className="object-cover opacity-70"
                 priority
               />
+
+              <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/40" />
 
               <div className="absolute inset-0 flex flex-col justify-between p-6 max-sm:p-4">
                 <div className="text-left">

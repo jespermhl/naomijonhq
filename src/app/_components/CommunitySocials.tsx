@@ -12,7 +12,7 @@ export async function CommunitySocials() {
       <div className="mx-auto max-w-275 text-center">
         <SectionHeading eyebrow="Stay Connected" title="Follow the Socials" />
 
-        <div className="grid grid-cols-2 justify-center gap-6 max-sm:gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 justify-center gap-6 max-sm:gap-4 sm:grid-cols-2 md:grid-cols-3">
           {socials.map((social) => (
             <SocialLinkCard key={social._id} social={social} />
           ))}

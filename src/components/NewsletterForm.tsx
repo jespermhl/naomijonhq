@@ -43,7 +43,7 @@ export function NewsletterForm() {
       {status === "success" ? (
         <div
           id="newsletter-success"
-          className="w-full rounded-3xl border border-white/80 bg-white/70 px-6 py-6 text-center font-sans shadow-[0_12px_30px_rgba(255,79,168,0.06)] backdrop-blur-md transition-all duration-300"
+          className="animate-pop-in w-full rounded-3xl border border-white/80 bg-white/70 px-6 py-6 text-center font-sans shadow-[0_12px_30px_rgba(211,47,124,0.06)] backdrop-blur-md transition-all duration-300"
           role="status"
           aria-live="polite"
         >
@@ -73,7 +73,7 @@ export function NewsletterForm() {
             {status === "error" && (
               <p
                 id="newsletter-error"
-                className="text-brand-red mt-1.5 pl-1 text-left text-xs font-black"
+                className="mt-1.5 pl-1 text-left text-xs font-black text-brand-error"
                 role="status"
                 aria-live="assertive"
               >
@@ -89,10 +89,35 @@ export function NewsletterForm() {
             rotate="0deg"
             size="large"
           >
-            {status === "loading" ? "Joining..." : "Join the Newsletter"}
+            {status === "loading" ? (
+              <span className="inline-flex items-center gap-2">
+                <svg
+                  className="h-4 w-4 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  />
+                </svg>
+                Joining...
+              </span>
+            ) : (
+              "Join the Newsletter"
+            )}
           </Button>
 
-          <p className="text-text-muted/80 mt-1 text-center text-[10.5px] leading-relaxed font-semibold">
+          <p className="text-text-muted/80 mt-1 text-center text-xs leading-relaxed font-semibold">
             By signing up, you agree to receive marketing emails from Naomi Jon
             HQ. You can unsubscribe at any time.
           </p>

@@ -203,12 +203,13 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
                           <Image
                             src={STORE_ICONS[link.store]}
                             alt={link.store}
-                            width={28}
-                            height={28}
+                            width={24}
+                            height={24}
                             className="object-contain"
+                            unoptimized
                           />
                         ) : (
-                          "🛒"
+                          <span aria-hidden="true">🛒</span>
                         )}
                       </span>
 
