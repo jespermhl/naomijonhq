@@ -7,14 +7,13 @@ interface TooltipProps {
 
 export function Tooltip({ children, label }: TooltipProps) {
   return (
-    <div className="group/tooltip relative inline-flex">
-      {children}
+    <div className="relative inline-flex">
       <span
-        role="tooltip"
-        className="pointer-events-none absolute -top-2 left-1/2 z-50 -translate-x-1/2 -translate-y-full whitespace-nowrap rounded-full bg-slate-950/80 px-3 py-1.5 text-[0.7rem] font-black tracking-wider text-white uppercase opacity-0 shadow-sm backdrop-blur-sm transition-all duration-150 group-hover/tooltip:opacity-100"
+        className="pointer-events-none absolute -top-8 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-full bg-text-dark/95 px-2.5 py-1.5 text-[0.7rem] font-bold tracking-wide text-white uppercase shadow-md opacity-0 transition-all duration-150 before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2 before:border-8 before:border-t-bg-text-dark/95 before:border-transparent"
       >
         {label}
       </span>
+      {children}
     </div>
   );
 }
