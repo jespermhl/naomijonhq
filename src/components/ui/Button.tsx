@@ -45,7 +45,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseClass =
-    "inline-flex items-center justify-center rounded-full border-2 border-white/78 bg-brand-red text-white font-black no-underline cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_10px_0_rgba(211,47,124,0.24)] hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_14px_0_rgba(211,47,124,0.3)] active:translate-y-1 active:scale-[0.98] active:shadow-[0_6px_0_rgba(211,47,124,0.2)] disabled:opacity-45 disabled:pointer-events-none disabled:shadow-none disabled:scale-100 disabled:translate-y-0 max-sm:w-auto max-sm:px-4 max-sm:py-2.5 max-sm:text-[13px] max-sm:min-w-[90px] max-sm:!transform-none";
+    "inline-flex items-center justify-center rounded-full border-2 border-white/78 bg-brand-red text-white font-black no-underline cursor-pointer transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[0_10px_0_rgba(255,79,168,0.24)] hover:-translate-y-1 hover:scale-[1.02] hover:shadow-[0_14px_0_rgba(255,79,168,0.3)] active:translate-y-1 active:scale-[0.98] active:shadow-[0_6px_0_rgba(255,79,168,0.2)] disabled:opacity-45 disabled:pointer-events-none disabled:shadow-none disabled:scale-100 disabled:translate-y-0 max-sm:w-auto max-sm:px-4 max-sm:py-2.5 max-sm:text-[13px] max-sm:min-w-[90px] max-sm:!transform-none";
   const combinedClassName = `${baseClass} ${SIZE_CLASSES[size]} ${className}`;
 
   const inlineStyles = {
