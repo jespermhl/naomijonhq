@@ -15,24 +15,32 @@ export const fetchSocials = async (): Promise<SocialLink[]> => {
 
   const url = `${baseUrl}/api/socials?fields=id,title,slug,url`;
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${apiToken}`,
-      "Content-Type": "application/json",
-    },
-    next: { tags: ["socials"] },
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
 
-  if (!response.ok) {
-    throw new Error(`Strapi socials fetch failed: ${response.status}`);
+  try {
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        Authorization: `Bearer ${apiToken}`,
+        "Content-Type": "application/json",
+      },
+      next: { tags: ["socials"] },
+    });
+
+    if (!response.ok) return [];
+
+    const data = await response.json();
+
+    return data.data.map((item: any) => ({
+      id: item.id,
+      title: item.title,
+      slug: item.slug,
+      url: item.url,
+    }));
+  } catch {
+    return [];
+  } finally {
+    clearTimeout(timeout);
   }
-
-  const data = await response.json();
-
-  return data.data.map((item: any) => ({
-    id: item.id,
-    title: item.title,
-    slug: item.slug,
-    url: item.url,
-  }));
 };

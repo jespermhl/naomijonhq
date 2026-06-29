@@ -1,6 +1,7 @@
 import { createHmac } from "node:crypto";
 import { NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
+import { env } from "@/env.mjs";
 import { logger } from "@/lib/logger";
 
 function isValidSignature(signature: string, body: string, secret: string): boolean {
@@ -9,14 +10,17 @@ function isValidSignature(signature: string, body: string, secret: string): bool
 }
 
 export async function POST(req: Request) {
+  const secret = env.STRAPI_WEBHOOK_SECRET;
+
+  if (!secret) {
+    return NextResponse.json({ error: "Webhook secret not configured" }, { status: 500 });
+  }
+
   const signature = req.headers.get("x-strapi-webhook-signature") || "";
   const body = await req.text();
-  const secret = process.env.STRAPI_WEBHOOK_SECRET;
 
-  if (secret) {
-    if (!isValidSignature(signature, body, secret)) {
-      return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
-    }
+  if (!isValidSignature(signature, body, secret)) {
+    return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
   try {
