@@ -20,7 +20,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    revalidateTag("socials");
+    revalidateTag("socials", "max");
     logger.info("Strapi webhook: revalidated socials cache");
     return NextResponse.json({ revalidated: true });
   } catch (error) {
