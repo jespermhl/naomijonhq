@@ -186,24 +186,24 @@ body {
 }
 
 @keyframes burst {
-  0% {
-    transform: translate(0, 0) scale(0) rotate(0deg);
-    opacity: 0;
-  }
+   0% {
+     transform: translate(0, 0) scale(0) rotate(0deg);
+     opacity: 0;
+   }
 
-  10% {
-    opacity: 1;
-  }
+   20% {
+     opacity: 1;
+   }
 
-  90% {
-    opacity: 1;
-  }
+   80% {
+     opacity: 1;
+   }
 
-  100% {
-    transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--tr));
-    opacity: 0;
-  }
-}
+   100% {
+     transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--tr));
+     opacity: 0;
+   }
+ }
 
 @keyframes wobble-strawberry {
 
