@@ -13,7 +13,7 @@ export const fetchSocials = async (): Promise<SocialLink[]> => {
 
   if (!apiToken || !baseUrl) return [];
 
-  const url = `${baseUrl}/api/socials?fields=id,title,slug,url`;
+  const url = `${baseUrl}/api/footer-config?populate=*`;
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
@@ -30,9 +30,10 @@ export const fetchSocials = async (): Promise<SocialLink[]> => {
 
     if (!response.ok) return [];
 
-    const data = await response.json();
+    const json = await response.json();
+    const socials = json.data?.Socials ?? [];
 
-    return data.data.map((item: any) => ({
+    return socials.map((item: any) => ({
       id: item.id,
       title: item.title,
       slug: item.slug,
