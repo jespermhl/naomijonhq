@@ -167,7 +167,7 @@ function ContactForm() {
           </div>
 
           <div className="w-full rounded-4xl border border-white/60 bg-white/25 p-10 shadow-[0px_0px_48px_-10px_rgba(255,63,159,0.15)] backdrop-blur-md max-sm:p-6">
-            <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-6" noValidate>
               {status && (
                 <div
                   className={`rounded-xl border p-4 text-sm font-bold ${
@@ -200,6 +200,7 @@ function ContactForm() {
                     aria-describedby={
                       fieldErrors.name ? "name-error" : undefined
                     }
+                    title=""
                   />
                   {fieldErrors.name && (
                     <p
@@ -231,6 +232,7 @@ function ContactForm() {
                     aria-describedby={
                       fieldErrors.email ? "email-error" : undefined
                     }
+                    title=""
                   />
                   {fieldErrors.email && (
                     <p
@@ -264,6 +266,7 @@ function ContactForm() {
                   aria-describedby={
                     fieldErrors.subject ? "subject-error" : undefined
                   }
+                  title=""
                 />
                 {fieldErrors.subject && (
                   <p
@@ -296,6 +299,7 @@ function ContactForm() {
                   aria-describedby={
                     fieldErrors.message ? "message-error" : undefined
                   }
+                  title=""
                 />
                 {fieldErrors.message && (
                   <p

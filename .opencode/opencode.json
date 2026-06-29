@@ -1,0 +1,6 @@
+{
+  "plugin": [
+    "ponytail",
+    "@dietrichgebert/ponytail"
+  ]
+}
