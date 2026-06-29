@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { getPageConfig } from "@/config/routes";
-import type { SocialLink } from "@/components/SocialConfig";
+import { SocialLink } from "@/lib/strapi/socials";
 
 const BurstAnimation = dynamic(
   () =>
