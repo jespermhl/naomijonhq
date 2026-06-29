@@ -8,11 +8,16 @@ export interface SocialLink {
 }
 
 export const fetchSocials = async (): Promise<SocialLink[]> => {
-  const url = `${env.NEXT_PUBLIC_STRAPI_URL}/api/socials?fields=id,title,slug,url`;
+  const apiToken = env.STRAPI_API_TOKEN;
+  const baseUrl = env.NEXT_PUBLIC_STRAPI_URL;
+
+  if (!apiToken || !baseUrl) return [];
+
+  const url = `${baseUrl}/api/socials?fields=id,title,slug,url`;
 
   const response = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${env.STRAPI_API_TOKEN}`,
+      Authorization: `Bearer ${apiToken}`,
       "Content-Type": "application/json",
     },
     next: { tags: ["socials"] },

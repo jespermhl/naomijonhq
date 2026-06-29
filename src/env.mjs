@@ -21,9 +21,9 @@ export const env = createEnv({
         // SANITY/REDIS SYNC
         SYNC_SECRET: z.string().min(1),
 
-        // STRAPI
-        STRAPI_API_TOKEN: z.string().min(1),
-        STRAPI_WEBHOOK_SECRET: z.string().min(1),
+        // STRAPI (optional during migration)
+        STRAPI_API_TOKEN: z.string().optional(),
+        STRAPI_WEBHOOK_SECRET: z.string().optional(),
     },
     client: {
         // SANITY
@@ -36,8 +36,8 @@ export const env = createEnv({
         // SITE URL
         NEXT_PUBLIC_SITE_URL: z.url(),
 
-        // STRAPI
-        NEXT_PUBLIC_STRAPI_URL: z.url(),
+        // STRAPI (optional during migration)
+        NEXT_PUBLIC_STRAPI_URL: z.string().url().optional(),
     },
     runtimeEnv: {
         NEXT_PUBLIC_SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
