@@ -1,9 +1,9 @@
-import { getSocials } from "@/components/SocialConfig";
+import { fetchSocials } from "@/lib/strapi/socials";
 import { SocialLinkCard } from "@/components/ui/SocialLinkCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export async function CommunitySocials() {
-  const socials = await getSocials(false);
+  const socials = await fetchSocials();
 
   if (socials.length === 0) return null;
 
@@ -14,7 +14,7 @@ export async function CommunitySocials() {
 
         <div className="grid grid-cols-1 justify-center gap-6 max-sm:gap-4 sm:grid-cols-2 md:grid-cols-3">
           {socials.map((social) => (
-            <SocialLinkCard key={social._id} social={social} />
+            <SocialLinkCard key={social.id} social={social} />
           ))}
         </div>
       </div>

@@ -6,7 +6,7 @@ import { NewsletterPromotion } from "@/app/_components/NewsletterPromotion";
 import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { getSocials } from "@/components/SocialConfig";
+import { fetchSocials } from "@/lib/strapi/socials";
 import { headers } from "next/headers";
 
 const bodyFont = Space_Grotesk({
@@ -89,7 +89,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
-  const socials = await getSocials();
+  const socials = await fetchSocials();
   const baseUrl = await getBaseUrl();
 
   return (
@@ -100,7 +100,7 @@ export default async function RootLayout({
       >
         <a
           href="#main-content"
-          className="bg-brand-red fixed top-0 left-0 z-[9999] -translate-y-full rounded-br-lg px-4 py-2 text-sm font-black text-white transition-transform focus:translate-y-0"
+          className="bg-brand-red fixed top-0 left-0 z-9999 -translate-y-full rounded-br-lg px-4 py-2 text-sm font-black text-white transition-transform focus:translate-y-0"
         >
           Skip to main content
         </a>

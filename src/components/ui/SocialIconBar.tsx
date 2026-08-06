@@ -1,5 +1,5 @@
 import { PLATFORM_ICONS } from "@/components/SocialConfig";
-import type { SocialLink } from "@/components/SocialConfig";
+import { SocialLink } from "@/lib/strapi/socials";
 
 interface SocialIconBarProps {
   socials: SocialLink[];
@@ -39,17 +39,16 @@ export function SocialIconBar({
       )}
       {socials.length > 0 &&
         socials.map((social) => {
-          const platform = (social.platform || "other").toLowerCase();
-          const iconContent = PLATFORM_ICONS[platform] || PLATFORM_ICONS.other;
+          const iconContent = PLATFORM_ICONS[social.slug] || PLATFORM_ICONS.other;
 
           return (
-            <li key={social._id}>
+            <li key={social.id}>
               <a
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={iconButtonClass}
-                aria-label={`Visit our ${social.name}`}
+                aria-label={`Visit our ${social.title}`}
               >
                 <svg
                   viewBox="0 0 24 24"

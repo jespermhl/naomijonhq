@@ -44,17 +44,16 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-10 text-xs font-black tracking-[0.2em] text-[#5f4e58] uppercase md:flex">
+        <nav className="hidden items-center gap-10 text-xs font-black tracking-[0.2em] text-text-muted uppercase md:flex">
           {defaultLinks.map((link, index) => (
             <a
               key={index}
               href={link.href}
               aria-current={isActive(link.href) ? "page" : undefined}
-              className={`transition-colors ${
-                isActive(link.href)
+              className={`transition-colors ${isActive(link.href)
                   ? "text-brand-red"
-                  : "text-[#5f4e58] hover:text-brand-red"
-              }`}
+                  : "text-text-muted hover:text-brand-red"
+                }`}
             >
               {link.label}
             </a>
@@ -85,11 +84,10 @@ export function Header() {
         role="menu"
         aria-hidden={!isMenuOpen}
         inert={!isMenuOpen ? true : undefined}
-        className={`absolute top-22 right-6 left-6 z-50 origin-top rounded-2xl border border-white/20 bg-white/95 p-6 shadow-xl transition-all duration-300 ease-in-out md:hidden ${
-          isMenuOpen
+        className={`absolute top-22 right-6 left-6 z-50 origin-top rounded-2xl border border-white/20 bg-white/95 p-6 shadow-xl transition-all duration-300 ease-in-out md:hidden ${isMenuOpen
             ? "pointer-events-auto scale-100 opacity-100"
             : "pointer-events-none scale-95 opacity-0"
-        }`}
+          }`}
       >
         <nav className="flex flex-col gap-4 text-center text-sm font-black tracking-widest text-text-muted uppercase">
           {defaultLinks.map((link, index) => (
@@ -98,11 +96,10 @@ export function Header() {
               href={link.href}
               aria-current={isActive(link.href) ? "page" : undefined}
               onClick={() => setIsMenuOpen(false)}
-              className={`border-b border-gray-100 py-2 transition-colors last:border-0 ${
-                isActive(link.href)
+              className={`border-b border-gray-100 py-2 transition-colors last:border-0 ${isActive(link.href)
                   ? "text-brand-red"
                   : "hover:text-brand-red"
-              }`}
+                }`}
             >
               {link.label}
             </a>

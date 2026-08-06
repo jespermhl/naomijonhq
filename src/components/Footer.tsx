@@ -1,7 +1,7 @@
 import { Credits } from "./ui/Credits";
 import { LegalLinks } from "./LegalLinks";
 import { SocialIconBar } from "./ui/SocialIconBar";
-import type { SocialLink } from "./SocialConfig";
+import { SocialLink } from "@/lib/strapi/socials";
 
 export const dynamic = "force-dynamic";
 

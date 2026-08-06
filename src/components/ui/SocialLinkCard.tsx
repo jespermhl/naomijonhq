@@ -1,5 +1,5 @@
 import { PLATFORM_ICONS } from "@/components/SocialConfig";
-import type { SocialLink } from "@/components/SocialConfig";
+import type { SocialLink } from "@/lib/strapi/socials";
 
 interface SocialLinkCardProps {
   social: SocialLink;
@@ -17,8 +17,7 @@ function isValidUrl(url: string): boolean {
 }
 
 export function SocialLinkCard({ social }: SocialLinkCardProps) {
-  const platform = (social.platform || "other").toLowerCase();
-  const iconContent = PLATFORM_ICONS[platform] || PLATFORM_ICONS.other;
+  const iconContent = PLATFORM_ICONS[social.slug] || PLATFORM_ICONS.other;
 
   if (!isValidUrl(social.url)) {
     return null;
@@ -59,7 +58,7 @@ export function SocialLinkCard({ social }: SocialLinkCardProps) {
       </div>
 
       <span className="text-text-dark block text-base font-black tracking-tight uppercase">
-        {social.name}
+        {social.title}
       </span>
     </a>
   );
