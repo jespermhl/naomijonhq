@@ -64,12 +64,12 @@ export function NewsletterPromotion() {
           role="dialog"
           aria-modal="true"
           aria-label="Newsletter signup"
-          className="glass-panel relative flex w-full max-w-100 flex-col items-center gap-4 rounded-[30px] px-8 pt-10 pb-8 text-center max-sm:max-w-full max-sm:rounded-[26px] max-sm:px-6 max-sm:py-8"
+          className="glass-panel relative flex w-full max-w-100 flex-col items-center gap-4 rounded-card px-8 pt-10 pb-8 text-center max-sm:max-w-full max-sm:rounded-card-sm max-sm:px-6 max-sm:py-8"
           onClick={(e) => e.stopPropagation()}
         >
           <button
             onClick={handleDismiss}
-            className="text-brand-red absolute -top-3 -right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-pink-100 bg-white shadow-md transition-transform duration-200 hover:scale-110 active:scale-95"
+            className="text-brand-red absolute -top-3 -right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-border-glass bg-bg-surface shadow-float-sm transition-transform duration-200 hover:scale-110 active:scale-95"
             aria-label="Close promotion"
           >
             <svg

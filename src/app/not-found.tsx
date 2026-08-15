@@ -39,7 +39,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="bg-brand-red block flex-1 rotate-1 rounded-full border border-white/80 px-5 py-3 text-center text-lg font-black text-white! no-underline shadow-[0_8px_0_rgba(255,79,168,0.28)] transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:shadow-[0_12px_0_rgba(255,79,168,0.34)] active:scale-95 max-sm:py-2.5 max-sm:text-sm"
+          className="bg-brand-btn block flex-1 rotate-1 rounded-full border border-border-glass px-5 py-3 text-center text-lg font-black text-on-brand! no-underline shadow-button transition-all duration-200 ease-spring will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:shadow-button-hover active:scale-95 max-sm:py-2.5 max-sm:text-sm"
         >
           Back to Home Now
         </Link>

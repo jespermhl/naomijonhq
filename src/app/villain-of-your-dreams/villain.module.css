@@ -1,0 +1,37 @@
+.scene {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 38%,
+      rgba(220, 216, 240, 0.34) 0%,
+      rgba(154, 146, 187, 0.16) 42%,
+      transparent 68%
+    ),
+    linear-gradient(
+      180deg,
+      #0b0a10 0%,
+      #16141e 22%,
+      #1e1b28 42%,
+      #252238 60%,
+      #302c42 80%,
+      #3b3650 100%
+    );
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.title {
+  font-family: var(--font-horror);
+  color: #e9e5f5;
+  text-shadow:
+    0 1px 0 #ffffff,
+    0 2px 0 #c5bedd,
+    0 4px 18px rgba(0, 0, 0, 0.55);
+  letter-spacing: 0.04em;
+}

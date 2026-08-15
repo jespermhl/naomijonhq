@@ -26,12 +26,12 @@ export const Sticker: React.FC<StickerProps> = ({
 
   const stickerClasses = [
     "absolute -top-4.5 right-5",
-    "bg-[rgba(255,255,255,0.82)]",
+    "bg-bg-glass",
     "px-4.5 py-2.5 rounded-[999px]",
     "border border-solid",
     "font-extrabold text-text-dark",
     "transform-[rotate(var(--rotate,5deg))]",
-    "[box-shadow:0_10px_30px_rgba(255,79,168,0.14)]",
+    "shadow-float",
     "z-10",
   ].join(" ");
 

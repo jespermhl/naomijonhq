@@ -43,7 +43,7 @@ export function NewsletterForm() {
       {status === "success" ? (
         <div
           id="newsletter-success"
-          className="animate-pop-in w-full rounded-3xl border border-white/80 bg-white/70 px-6 py-6 text-center font-sans shadow-[0_12px_30px_rgba(211,47,124,0.06)] backdrop-blur-md transition-all duration-300"
+          className="animate-pop-in w-full rounded-panel border border-border-glass bg-bg-glass px-6 py-6 text-center font-sans shadow-card backdrop-blur-md transition-all duration-300"
           role="status"
           aria-live="polite"
         >
@@ -63,7 +63,7 @@ export function NewsletterForm() {
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "loading"}
               required
-              className="text-text-dark focus-visible:outline-brand-red w-full rounded-full border border-white/80 bg-white/92 px-6 py-3.5 font-sans text-base font-bold placeholder-[#b58a9d] shadow-[0_10px_25px_rgba(255,79,168,0.1)] transition-all duration-200 outline-none focus:-translate-y-0.5 focus:shadow-[0_14px_32px_rgba(255,79,168,0.14)] focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="text-text-dark focus-visible:outline-brand-red w-full rounded-full border border-border-glass bg-bg-glass-strong px-6 py-3.5 font-sans text-base font-bold placeholder-text-faint shadow-input transition-all duration-200 outline-none focus:-translate-y-0.5 focus:shadow-input-focus focus-visible:outline-2 focus-visible:outline-offset-2"
               aria-label="Email address for newsletter"
               aria-describedby={
                 status === "error" ? "newsletter-error" : undefined

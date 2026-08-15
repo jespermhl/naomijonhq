@@ -71,8 +71,8 @@ export default async function ConcertsPage() {
 
           <div className="flex flex-col gap-8 md:flex-row md:items-start lg:gap-12">
             <div className="relative w-full max-w-85 shrink-0 self-center md:self-start">
-              <div className="absolute -inset-4 rounded-[36px] bg-[radial-gradient(circle_at_top_left,rgba(255,79,168,0.2),transparent_58%)] blur-2xl" />
-              <div className="relative overflow-hidden rounded-[30px] border border-white/90 bg-white/85 shadow-[0_20px_50px_rgba(255,79,168,0.12)]">
+              <div className="absolute -inset-4 rounded-[36px] bg-[radial-gradient(circle_at_top_left,var(--drop-brand-soft),transparent_58%)] blur-2xl" />
+              <div className="relative overflow-hidden rounded-card border border-border-glass bg-bg-glass shadow-float">
                 <div className="aspect-square">
                   <Image
                     src="/images/strawberry-tour.png"
@@ -84,7 +84,7 @@ export default async function ConcertsPage() {
                   />
                 </div>
               </div>
-              <div className="absolute -right-4 -bottom-4 text-5xl drop-shadow-[4px_4px_0px_rgba(255,79,168,0.28)] filter max-sm:text-[40px]">
+              <div className="absolute -right-4 -bottom-4 text-5xl drop-shadow-[4px_4px_0px_var(--drop-brand-soft)] filter max-sm:text-[40px]">
                 🍓
               </div>
 
@@ -93,7 +93,7 @@ export default async function ConcertsPage() {
                 {stats.map(({ label, value }) => (
                   <div
                     key={label}
-                    className="rounded-[20px] border border-white/90 bg-white/80 px-2 py-2.5 text-center shadow-[0_10px_24px_rgba(255,79,168,0.08)]"
+                    className="rounded-panel border border-border-glass bg-bg-glass px-2 py-2.5 text-center shadow-float-sm"
                   >
                     <div className="text-brand-red text-xl font-black tracking-tighter sm:text-2xl">
                       {value}
@@ -109,7 +109,7 @@ export default async function ConcertsPage() {
             {/* Right Information Column */}
             <div className="flex-1 space-y-5 pt-2 max-md:flex max-md:flex-col max-md:items-center max-md:text-center">
               <div className="space-y-3">
-                <p className="inline-flex rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.12em] text-strawberry-accent uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <p className="inline-flex rounded-full border border-border-glass bg-bg-glass px-3.5 py-1.5 text-eyebrow font-black tracking-[0.12em] text-strawberry-accent uppercase shadow-float-sm">
                   Tour Archive
                 </p>
                 <h1 className="page-title text-3xl leading-tight font-black tracking-tight sm:text-4xl md:text-5xl lg:text-[54px]">
@@ -122,10 +122,10 @@ export default async function ConcertsPage() {
               </div>
 
               <div className="flex flex-wrap gap-2 max-md:justify-center">
-                <div className="text-text-dark/70 rounded-full border border-white/90 bg-white/75 px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.12em] uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <div className="text-text-dark/70 rounded-full border border-border-glass bg-bg-glass px-3.5 py-1.5 text-eyebrow font-black tracking-[0.12em] uppercase shadow-float-sm">
                   All dates played
                 </div>
-                <div className="rounded-full border border-white/90 bg-[#fff2f8] px-3.5 py-1.5 text-[0.68rem] font-black tracking-[0.12em] text-strawberry-pink uppercase shadow-[0_8px_20px_rgba(255,79,168,0.08)]">
+                <div className="rounded-full border border-border-glass bg-bg-pink-tint px-3.5 py-1.5 text-eyebrow font-black tracking-[0.12em] text-strawberry-pink uppercase shadow-float-sm">
                   Streaming now
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default async function ConcertsPage() {
 
           {/* Concerts List Section */}
           {concerts.length > 0 && (
-            <section className="mt-10 rounded-[28px] border border-white/75 bg-white/58 p-5 shadow-[0_15px_40px_rgba(255,79,168,0.08)] sm:p-6 lg:mt-12">
+            <section className="mt-10 rounded-card-sm border border-border-glass-soft bg-bg-glass-soft p-5 shadow-float-sm sm:p-6 lg:mt-12">
               <h2 className="text-text-dark text-xl font-black tracking-[-0.04em] sm:text-2xl">
                 Tour Dates
               </h2>

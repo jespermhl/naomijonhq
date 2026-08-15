@@ -61,14 +61,14 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
   const imageUrl = perfume.image ? urlFor(perfume.image).url() : "";
 
   return (
-    <div className="glass-panel group/card relative mx-auto flex w-full max-w-95 flex-col overflow-hidden rounded-[30px] transition-all duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)] hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_30px_70px_var(--color-brand-pink-shadow,rgba(255,79,168,0.12))]">
+    <div className="glass-panel group/card relative mx-auto flex w-full max-w-95 flex-col overflow-hidden rounded-card transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:shadow-card-hover">
       {" "}
       {perfume.isNew && (
-        <div className="bg-brand-red animate-float-badge absolute top-4 left-4 z-30 rounded-full border border-white/80 px-4 py-1.5 text-[0.85rem] font-extrabold tracking-wider text-white shadow-[0_10px_20px_rgba(255,79,168,0.24)]">
+        <div className="bg-brand-btn animate-float-badge absolute top-4 left-4 z-30 rounded-full border border-border-glass px-4 py-1.5 text-[0.85rem] font-extrabold tracking-wider text-on-brand shadow-float">
           NEW
         </div>
       )}
-      <div className="relative aspect-11/10 w-full cursor-pointer overflow-hidden bg-white/70">
+      <div className="relative aspect-11/10 w-full cursor-pointer overflow-hidden bg-white">
         {imageUrl ? (
           perfume.slug ? (
             <Link href={`/perfumes/${perfume.slug}`}>
@@ -96,14 +96,14 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
         )}
 
         <div
-          className={`absolute inset-0 z-20 flex items-center justify-center bg-white/35 backdrop-blur-md transition-opacity duration-300 ${showLinks ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+          className={`absolute inset-0 z-20 flex items-center justify-center bg-bg-glass-soft backdrop-blur-md transition-opacity duration-300 ${showLinks ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
         >
           <div
-            className={`glass-panel relative w-[85%] max-w-75 rounded-[22px] p-6 transition-transform duration-400 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${showLinks ? "translate-y-0" : "translate-y-5"}`}
+            className={`glass-panel relative w-[85%] max-w-75 rounded-card-sm p-6 transition-transform duration-400 ease-spring ${showLinks ? "translate-y-0" : "translate-y-5"}`}
           >
             <button
               type="button"
-              className="text-text-muted hover:text-brand-red focus-visible:text-brand-red focus-visible:outline-brand-red absolute top-2.5 right-3.5 cursor-pointer rounded-full border border-white/85 bg-white/80 p-1 text-2xl leading-none focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="text-text-muted hover:text-brand-red focus-visible:text-brand-red focus-visible:outline-brand-red absolute top-2.5 right-3.5 cursor-pointer rounded-full border border-border-glass bg-bg-glass p-1 text-2xl leading-none focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2"
               onClick={(e) => {
                 e.stopPropagation();
                 toggleLinks();
@@ -124,13 +124,13 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-dark hover:bg-brand-red hover:border-brand-red focus-visible:bg-brand-red focus-visible:border-brand-red focus-visible:outline-brand-red group/price flex items-center justify-between rounded-full border border-white/90 bg-white/80 px-4 py-3 font-bold no-underline transition-all duration-200 hover:translate-x-1 hover:text-white focus-visible:translate-x-1 focus-visible:text-white focus-visible:outline-2 focus-visible:outline-offset-2"
+                      className="text-text-dark hover:bg-brand-btn hover:border-brand-btn focus-visible:bg-brand-btn focus-visible:border-brand-btn focus-visible:outline-brand-red group/price flex items-center justify-between rounded-full border border-border-glass bg-bg-glass px-4 py-3 font-bold no-underline transition-all duration-200 hover:translate-x-1 hover:text-on-brand focus-visible:translate-x-1 focus-visible:text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2"
                     >
                       <span className="text-[0.95rem] tracking-wider">
                         {link.store.toUpperCase()}
                       </span>
                       {link.price && (
-                        <span className="rounded-full bg-white/70 px-2 py-0.5 text-[0.9rem] opacity-90 transition-colors group-hover/price:bg-white/20 group-hover/price:text-white">
+                        <span className="rounded-full bg-bg-glass px-2 py-0.5 text-[0.9rem] opacity-90 transition-colors group-hover/price:bg-bg-glass-soft group-hover/price:text-on-brand">
                           {link.price}
                         </span>
                       )}
@@ -141,7 +141,7 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between gap-3 border-t border-white/90 bg-white/80 p-4 px-5">
+      <div className="flex items-center justify-between gap-3 border-t border-border-glass bg-bg-glass p-4 px-5">
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="flex items-center">
             {perfume.slug ? (
@@ -172,7 +172,7 @@ export default function PerfumeCard({ perfume }: PerfumeCardProps) {
               <Tooltip key={link._key} label={link.store}>
                 <button
                   type="button"
-                  className="hover:outline-brand-red flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full text-base text-white shadow-[0_8px_16px_var(--color-brand-pink-shadow,rgba(255,79,168,0.12))] transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] hover:scale-[1.15] hover:rotate-5 hover:outline-2 hover:outline-offset-2"
+                  className="hover:outline-brand-red flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full text-base text-white shadow-float-sm transition-transform duration-200 ease-spring hover:scale-[1.15] hover:rotate-5 hover:outline-2 hover:outline-offset-2"
                   style={{
                     backgroundColor: STORE_COLORS[link.store] || "#333",
                     border:

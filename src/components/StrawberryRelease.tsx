@@ -24,15 +24,15 @@ export function StrawberryRelease({
             : "max-w-135"
         }`}
       >
-        <div className="glass-panel relative flex flex-col items-center rounded-[34px] px-8 py-10 text-center max-sm:px-5 max-sm:py-8 lg:px-12 lg:py-10">
-          <div className="bg-brand-red absolute -top-4 left-8 rounded-full border border-white/85 px-5 py-2.5 text-sm font-extrabold text-white shadow-[0_10px_24px_rgba(255,79,168,0.18)] max-sm:-top-3 max-sm:left-6 max-sm:px-3 max-sm:py-1.5 max-sm:text-xs">
+        <div className="glass-panel relative flex flex-col items-center rounded-card px-8 py-10 text-center max-sm:px-5 max-sm:py-8 max-sm:rounded-card-sm lg:px-12 lg:py-10">
+          <div className="bg-brand-btn absolute -top-4 left-8 rounded-full border border-border-glass px-5 py-2.5 text-sm font-extrabold text-on-brand shadow-float max-sm:-top-3 max-sm:left-6 max-sm:px-3 max-sm:py-1.5 max-sm:text-xs">
             OUT NOW!
           </div>
 
           <p className="text-brand-red mt-2 mb-2 text-xs font-black tracking-[0.38em] uppercase">
             The Album
           </p>
-          <h1 className="text-text-dark mb-2 text-[clamp(2.5rem,6vw,4.5rem)] leading-none font-black tracking-[-0.08em] uppercase">
+          <h1 className="text-text-dark mb-2 text-display-xl leading-none font-black tracking-[-0.08em] uppercase">
             Strawberry
           </h1>
 
@@ -44,7 +44,7 @@ export function StrawberryRelease({
           </p>
 
           <div className="animate-celebrate relative mb-6 inline-block will-change-transform">
-            <div className="relative h-60 w-60 overflow-hidden rounded-[30px] border border-white/90 bg-white shadow-[0_20px_48px_rgba(255,79,168,0.12)] transition-all duration-500 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] max-sm:h-45 max-sm:w-45">
+            <div className="relative h-60 w-60 overflow-hidden rounded-card-sm border border-border-glass bg-bg-surface shadow-float transition-all duration-500 ease-spring max-sm:h-45 max-sm:w-45">
               <Image
                 src="/images/strawberry-cover.jpg"
                 alt="Strawberry Album Cover"
@@ -53,7 +53,7 @@ export function StrawberryRelease({
                 priority
               />
             </div>
-            <div className="absolute -right-2 -bottom-2 text-4xl drop-shadow-[2px_2px_0px_rgba(255,79,168,0.35)] filter select-none">
+            <div className="absolute -right-2 -bottom-2 text-4xl drop-shadow-[2px_2px_0px_var(--drop-brand-soft)] filter select-none">
               🍓
             </div>
           </div>
@@ -76,7 +76,7 @@ export function StrawberryRelease({
               href="https://releeze.com/en/collections/naomi-jon"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-dark block flex-1 -rotate-2 rounded-full border border-white/90 bg-white/88 px-5 py-3 text-center text-lg font-black no-underline shadow-[0_8px_0_rgba(255,79,168,0.12)] transition-all duration-200 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:shadow-[0_12px_0_rgba(255,79,168,0.16)] active:scale-95 max-sm:py-2.5 max-sm:text-sm"
+              className="text-text-dark block flex-1 -rotate-2 rounded-full border border-border-glass bg-bg-glass-strong px-5 py-3 text-center text-lg font-black no-underline shadow-float transition-all duration-200 ease-spring will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:bg-bg-surface active:scale-95 max-sm:py-2.5 max-sm:text-sm"
             >
               ORDER
             </a>
@@ -91,7 +91,7 @@ export function StrawberryRelease({
               rel="noopener noreferrer"
               className="group/video block no-underline"
             >
-              <div className="glass-panel relative aspect-4/3 w-full rotate-1 overflow-hidden rounded-[34px] shadow-[0_26px_70px_rgba(255,79,168,0.12)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] will-change-transform group-hover/video:scale-[1.02] group-hover/video:rotate-0">
+              <div className="glass-panel relative aspect-4/3 w-full rotate-1 overflow-hidden rounded-card shadow-float transition-all duration-300 ease-spring will-change-transform group-hover/video:scale-[1.02] group-hover/video:rotate-0">
                 <Image
                   src="https://img.youtube.com/vi/Bx4ksscVii4/maxresdefault.jpg"
                   alt="Strawberry Music Video Thumbnail"
@@ -99,11 +99,11 @@ export function StrawberryRelease({
                   className="h-full w-full object-cover transition-transform duration-500 group-hover/video:scale-110"
                   unoptimized
                 />
-                <div className="text-brand-red absolute right-3 bottom-3 z-5 rounded-full border border-white/90 bg-white px-3 py-1.5 text-xs font-black uppercase shadow-[0_8px_20px_rgba(255,79,168,0.12)]">
+                <div className="text-brand-red absolute right-3 bottom-3 z-5 rounded-full border border-border-glass bg-bg-surface px-3 py-1.5 text-xs font-black uppercase shadow-float">
                   Watch Music Video
                 </div>
-                <div className="bg-brand-red/90 absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 shadow-[0_8px_24px_rgba(255,79,168,0.26)] transition-all duration-300 group-hover/video:scale-110 max-sm:h-12 max-sm:w-12">
-                  <div className="ml-1.5 h-0 w-0 border-t-12 border-b-12 border-l-20 border-t-transparent border-b-transparent border-l-white max-sm:border-t-8 max-sm:border-b-8 max-sm:border-l-14" />
+                <div className="bg-brand-btn/90 absolute top-1/2 left-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-border-glass shadow-float-sm transition-all duration-300 group-hover/video:scale-110 max-sm:h-12 max-sm:w-12">
+                  <div className="border-l-on-brand ml-1.5 h-0 w-0 border-t-12 border-b-12 border-l-20 border-t-transparent border-b-transparent max-sm:border-t-8 max-sm:border-b-8 max-sm:border-l-14" />
                 </div>
               </div>
             </a>

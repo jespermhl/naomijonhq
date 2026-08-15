@@ -122,10 +122,10 @@ function ContactForm() {
   }
 
   function inputClass(error?: string) {
-    return `w-full rounded-2xl border px-5 py-3.5 font-semibold shadow-sm backdrop-blur-sm transition-all outline-none ${
+    return `w-full rounded-card-sm border px-5 py-3.5 font-semibold shadow-nav backdrop-blur-sm transition-all outline-none ${
       error
         ? "border-brand-error/60 bg-red-50/60 focus:border-brand-error"
-        : "border-white/80 bg-white/40 focus:border-brand-red focus:bg-white/60"
+        : "border-border-glass bg-bg-glass-soft focus:border-brand-red focus:bg-bg-glass"
     } text-text-dark placeholder-text-muted/40`;
   }
 
@@ -138,10 +138,10 @@ function ContactForm() {
               <p className="text-brand-red text-xs font-black tracking-[0.18em] uppercase">
                 Get In Touch
               </p>
-              <h2 className="text-text-dark text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-[-0.06em] uppercase">
+              <h2 className="text-text-dark text-display-lg leading-[1.05] font-black tracking-[-0.06em] uppercase">
                 Say Hello
               </h2>
-              <p className="text-text-muted text-[clamp(1rem,1.2vw,1.15rem)] leading-relaxed font-semibold">
+              <p className="text-text-muted text-body-lg leading-relaxed font-semibold">
                 Questions, collaborations, or inquiries? <br />
                 We&apos;d love to hear from you.
               </p>
@@ -166,7 +166,7 @@ function ContactForm() {
             </div>
           </div>
 
-          <div className="w-full rounded-4xl border border-white/60 bg-white/25 p-10 shadow-[0px_0px_48px_-10px_rgba(255,63,159,0.15)] backdrop-blur-md max-sm:p-6">
+          <div className="w-full rounded-card border border-border-glass-soft bg-bg-glass-soft p-10 shadow-glow-soft backdrop-blur-md max-sm:p-6">
             <form onSubmit={handleSubmit} className="flex flex-col space-y-6" noValidate>
               {status && (
                 <div
