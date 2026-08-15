@@ -29,7 +29,7 @@ export function SocialLinkCard({ social }: SocialLinkCardProps) {
       href={social.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex flex-col items-center justify-center rounded-4xl border border-white/60 bg-white/25 p-8 shadow-[0px_0px_24px_-8px_rgba(255,63,159,0.1)] backdrop-blur-md transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-2 hover:bg-white/40 hover:shadow-[0px_12px_32px_-8px_rgba(255,63,159,0.25)]"
+      className="group relative flex flex-col items-center justify-center rounded-card border border-border-glass-soft bg-bg-glass-soft p-8 shadow-glow-soft backdrop-blur-md transition-all duration-300 ease-spring hover:-translate-y-2 hover:bg-bg-glass hover:shadow-float"
     >
       <div className="group-hover:text-brand-red text-text-muted/30 absolute top-6 right-6 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
         <svg
@@ -47,7 +47,7 @@ export function SocialLinkCard({ social }: SocialLinkCardProps) {
         </svg>
       </div>
 
-      <div className="bg-text-dark/5 text-text-dark group-hover:bg-brand-red mb-5 flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:text-white">
+      <div className="bg-text-dark/5 text-text-dark group-hover:bg-brand-btn mb-5 flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 group-hover:text-on-brand">
         <svg
           viewBox="0 0 24 24"
           fill="currentColor"

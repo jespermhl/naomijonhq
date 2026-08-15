@@ -73,10 +73,10 @@ export function Modal({ children }: { children: React.ReactNode }) {
       onClick={handleBackdropClick}
       className="fixed inset-0 z-50 m-auto h-full w-full overflow-visible border-none bg-transparent p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm focus:outline-none md:h-auto md:max-w-4xl"
     >
-      <div className="animate-pop-in relative flex h-full w-full transform-gpu flex-col overflow-hidden rounded-4xl bg-white shadow-2xl md:h-auto md:max-h-[85vh]">
+      <div className="animate-pop-in relative flex h-full w-full transform-gpu flex-col overflow-hidden rounded-card bg-bg-surface shadow-modal md:h-auto md:max-h-[85vh]">
         <button
           onClick={onDismiss}
-          className="bg-brand-red hover:bg-text-dark absolute top-6 right-6 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full font-black text-white shadow-lg transition-colors"
+          className="bg-brand-btn hover:bg-brand-btn/80 absolute top-6 right-6 z-50 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full font-black text-on-brand shadow-float-sm transition-colors"
           aria-label="Close modal"
         >
           ✕

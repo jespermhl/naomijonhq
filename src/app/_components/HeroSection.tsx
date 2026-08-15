@@ -19,10 +19,10 @@ export function HeroSection() {
             <p className="text-brand-red text-xs font-black tracking-[0.18em] uppercase">
               ALL THINGS NAOMI
             </p>
-            <h2 className="text-text-dark text-[clamp(2.2rem,5vw,3.8rem)] leading-[1.05] font-black tracking-[-0.06em] uppercase">
+            <h2 className="text-text-dark text-display-lg leading-[1.05] font-black tracking-[-0.06em] uppercase">
               Naomi Jon HQ
             </h2>
-            <p className="text-text-muted text-[clamp(1rem,1.2vw,1.15rem)] leading-relaxed font-semibold">
+            <p className="text-text-muted text-body-lg leading-relaxed font-semibold">
               Stay connected with everything Naomi Jon
             </p>
             <div className="text-text-muted flex flex-col gap-3 font-semibold max-sm:text-sm">
@@ -35,7 +35,7 @@ export function HeroSection() {
           </div>
 
           <div className="flex w-full flex-col items-center">
-            <div className="relative aspect-[2.2/1] w-full overflow-hidden rounded-[34px] border border-white/90 shadow-[0px_0px_48px_-10px_rgba(255,63,159,0.5)]">
+            <div className="relative aspect-[2.2/1] w-full overflow-hidden rounded-card border border-border-glass shadow-glow">
               <Image
                 src="/images/splash.png"
                 alt="Naomi Jon Splash BG"
@@ -48,7 +48,7 @@ export function HeroSection() {
 
               <div className="absolute inset-0 flex flex-col justify-between p-6 max-sm:p-4">
                 <div className="text-left">
-                  <span className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-black tracking-wide text-white capitalize drop-shadow-[2.5px_2.5px_0px_rgba(255,79,168,0.7)] select-none">
+                  <span className="text-display-sm font-black tracking-wide text-white capitalize drop-shadow-[2.5px_2.5px_0px_var(--drop-brand-strong)] select-none">
                     Naomi Jon
                   </span>
                 </div>
@@ -61,7 +61,7 @@ export function HeroSection() {
               href={inviteLink}
               rotate="0deg"
               size="large"
-              className="mt-6 w-full max-sm:py-3 max-sm:text-sm text-white!"
+              className="mt-6 w-full max-sm:py-3 max-sm:text-sm"
             >
               Join the Discord
             </Button>

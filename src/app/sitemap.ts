@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/strawberry",
     "/strawberry-album",
     "/strawberry-tour",
+    "/villain-of-your-dreams",
     "/newsletter",
     "/legal-notice",
     "/privacy-policy",

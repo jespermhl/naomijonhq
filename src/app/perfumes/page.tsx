@@ -62,7 +62,7 @@ export default async function PerfumesPage() {
             ))}
           </div>
         ) : (
-          <div className="text-text-dark mx-auto mt-10 max-w-2xl rounded-[28px] border border-white/85 bg-white/74 px-6 py-14 text-center text-[1.05rem] font-bold shadow-[0_24px_60px_rgba(255,79,168,0.1)] backdrop-blur-sm">
+          <div className="text-text-dark mx-auto mt-10 max-w-2xl rounded-card-sm border border-border-glass bg-bg-glass px-6 py-14 text-center text-body-lg font-bold shadow-card backdrop-blur-sm">
             <p>New perfumes dropping soon! Stay tuned.</p>
           </div>
         )}

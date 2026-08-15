@@ -7,6 +7,7 @@ import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { getSocials } from "@/components/SocialConfig";
+import { DEFAULT_THEME, PAGE_THEMES } from "@/config/theme";
 import { headers } from "next/headers";
 
 const bodyFont = Space_Grotesk({
@@ -94,13 +95,20 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `var t=${JSON.stringify(PAGE_THEMES)},d=${JSON.stringify(DEFAULT_THEME)};document.documentElement.dataset.theme=t[location.pathname]||d;`,
+          }}
+        />
+      </head>
       <body
         suppressHydrationWarning
         className={`${bodyFont.variable} ${displayFont.variable} relative flex min-h-screen flex-col`}
       >
         <a
           href="#main-content"
-          className="bg-brand-red fixed top-0 left-0 z-[9999] -translate-y-full rounded-br-lg px-4 py-2 text-sm font-black text-white transition-transform focus:translate-y-0"
+          className="bg-brand-btn fixed top-0 left-0 z-[9999] -translate-y-full rounded-br-lg px-4 py-2 text-sm font-black text-on-brand transition-transform focus:translate-y-0"
         >
           Skip to main content
         </a>

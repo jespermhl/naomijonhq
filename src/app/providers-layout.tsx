@@ -2,11 +2,12 @@
 
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { getPageConfig } from "@/config/routes";
+import { DEFAULT_THEME, PAGE_THEMES } from "@/config/theme";
 import type { SocialLink } from "@/components/SocialConfig";
 
 const BurstAnimation = dynamic(
@@ -30,6 +31,10 @@ export function ClientLayout({
 }: ClientLayoutProps) {
   const pathname = usePathname();
   const pageConfig = getPageConfig(pathname);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = PAGE_THEMES[pathname] ?? DEFAULT_THEME;
+  }, [pathname]);
 
   const isModalTrueOpen = !!modal;
   const isLegalPage =

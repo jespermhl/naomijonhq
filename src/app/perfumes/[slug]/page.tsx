@@ -95,9 +95,9 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
         ← Back to all perfumes
       </Link>
 
-      <div className="grid grid-cols-1 gap-8 rounded-[30px] border border-white/85 bg-white/74 p-6 shadow-[0_24px_60px_var(--color-brand-pink-shadow,rgba(255,79,168,0.1))] backdrop-blur-xl md:gap-12 md:p-10 lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-8 rounded-card border border-border-glass bg-bg-glass p-6 shadow-card backdrop-blur-xl md:gap-12 md:p-10 lg:grid-cols-12">
         <div className="flex flex-col gap-8 lg:col-span-6">
-          <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-2xl border border-neutral-100 bg-neutral-50/50 p-6">
+          <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-card-sm border border-border-glass-soft bg-white p-6">
             {imageUrl ? (
               <div className="relative h-full max-h-95 w-full max-w-95">
                 <Image
@@ -117,13 +117,13 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
           </div>
 
           {(perfume.topNotes || perfume.heartNotes || perfume.baseNotes) && (
-            <div className="rounded-2xl border border-white/80 bg-white/40 p-6 md:p-8">
+            <div className="rounded-card-sm border border-border-glass-soft bg-bg-glass-soft p-6 md:p-8">
               <h2 className="text-text-dark mb-5 text-xl font-black tracking-wide uppercase">
                 Fragrance Notes
               </h2>
               <div className="flex flex-col gap-4">
                 {perfume.topNotes && (
-                  <div className="flex flex-col gap-1 border-b border-white/60 pb-3 last:border-0 last:pb-0">
+                  <div className="flex flex-col gap-1 border-b border-border-glass-soft pb-3 last:border-0 last:pb-0">
                     <span className="text-brand-red font-display text-xs font-black tracking-widest uppercase">
                       Top Notes
                     </span>
@@ -133,7 +133,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
                   </div>
                 )}
                 {perfume.heartNotes && (
-                  <div className="flex flex-col gap-1 border-b border-white/60 pb-3 last:border-0 last:pb-0">
+                  <div className="flex flex-col gap-1 border-b border-border-glass-soft pb-3 last:border-0 last:pb-0">
                     <span className="text-brand-red font-display text-xs font-black tracking-widest uppercase">
                       Heart Notes
                     </span>
@@ -143,7 +143,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
                   </div>
                 )}
                 {perfume.baseNotes && (
-                  <div className="flex flex-col gap-1 border-b border-white/60 pb-3 last:border-0 last:pb-0">
+                  <div className="flex flex-col gap-1 border-b border-border-glass-soft pb-3 last:border-0 last:pb-0">
                     <span className="text-brand-red font-display text-xs font-black tracking-widest uppercase">
                       Base Notes
                     </span>
@@ -170,7 +170,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
             )}
           </div>
 
-          <div className="bg-brand-red/5 border-brand-red/10 flex flex-col gap-5 rounded-2xl border p-6">
+          <div className="bg-brand-red/5 border-brand-red/10 flex flex-col gap-5 rounded-card-sm border p-6">
             <h2 className="text-text-dark text-base leading-snug font-black md:text-lg">
               Get it now at your favorite store{storeLinkCount > 1 ? "s" : ""}:
             </h2>
@@ -182,7 +182,7 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-4 rounded-2xl border bg-white/90 p-3 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-md"
+                      className="group flex items-center gap-4 rounded-card-sm border bg-bg-glass-strong p-3 transition-all duration-200 ease-in-out hover:-translate-y-0.5 hover:shadow-float-sm"
                       style={{
                         borderColor:
                           STORE_BORDER_COLORS[link.store] ||

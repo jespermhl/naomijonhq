@@ -39,12 +39,12 @@ export function Header() {
 
   return (
     <header className="relative z-50 mx-auto mt-4 mb-6 w-full max-w-275 pt-4 max-sm:mb-4 max-sm:px-4 max-sm:pt-3">
-      <div className="flex h-18 items-center justify-between rounded-full border border-white/20 bg-white/10 px-8 py-3.5 shadow-sm backdrop-blur-md max-sm:px-5">
+      <div className="flex h-18 items-center justify-between rounded-full border border-border-glass-soft bg-bg-glass-soft px-8 py-3.5 shadow-nav backdrop-blur-md max-sm:px-5">
         <Link href="/">
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-10 text-xs font-black tracking-[0.2em] text-[#5f4e58] uppercase md:flex">
+        <nav className="hidden items-center gap-10 text-xs font-black tracking-[0.2em] text-text-muted uppercase md:flex">
           {defaultLinks.map((link, index) => (
             <a
               key={index}
@@ -53,7 +53,7 @@ export function Header() {
               className={`transition-colors ${
                 isActive(link.href)
                   ? "text-brand-red"
-                  : "text-[#5f4e58] hover:text-brand-red"
+                  : "text-text-muted hover:text-brand-red"
               }`}
             >
               {link.label}
@@ -85,7 +85,7 @@ export function Header() {
         role="menu"
         aria-hidden={!isMenuOpen}
         inert={!isMenuOpen ? true : undefined}
-        className={`absolute top-22 right-6 left-6 z-50 origin-top rounded-2xl border border-white/20 bg-white/95 p-6 shadow-xl transition-all duration-300 ease-in-out md:hidden ${
+        className={`absolute top-22 right-6 left-6 z-50 origin-top rounded-2xl border border-border-glass bg-bg-glass-strong p-6 shadow-modal transition-all duration-300 ease-in-out md:hidden ${
           isMenuOpen
             ? "pointer-events-auto scale-100 opacity-100"
             : "pointer-events-none scale-95 opacity-0"
