@@ -93,15 +93,6 @@ export default function VillainAnniversaryPage() {
               >
                 STREAM
               </a>
-
-              <a
-                href="https://releeze.com/en/products/naomi-jon-villain-of-your-dreams-ltd-album-box"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-villain-ink block w-full -rotate-2 rounded-full border border-villain-lilac/70 bg-villain-text/90 px-5 py-3 text-center text-lg font-black no-underline shadow-villain-btn transition-all duration-200 ease-spring will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:bg-white active:scale-95 sm:w-auto sm:flex-1 max-sm:py-2.5 max-sm:text-sm"
-              >
-                ORDER
-              </a>
             </div>
           </div>
         </div>
