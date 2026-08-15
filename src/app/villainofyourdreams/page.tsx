@@ -5,7 +5,7 @@ import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { VillainCountdown } from "./_components/Countdown";
 import styles from "./villain.module.css";
 
-const SOURCE = "/villain-of-your-dreams";
+const SOURCE = "/villainofyourdreams";
 const DEFAULTS = {
   title: "Villain Of Your Dreams - 2 Year Anniversary",
   description:

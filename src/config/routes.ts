@@ -28,7 +28,7 @@ const PAGE_CONFIGS: Record<string, PageConfig> = {
     showSocials: true,
   },
   "/strawberry-tour": { ...DEFAULT_CONFIG, showBurst: true, showSocials: true },
-  "/villain-of-your-dreams": { ...DEFAULT_CONFIG, showSocials: true },
+  "/villainofyourdreams": { ...DEFAULT_CONFIG, showSocials: true },
   "/legal-notice": { ...DEFAULT_CONFIG, showHeader: true },
   "/privacy-policy": { ...DEFAULT_CONFIG, showHeader: true },
   "/contact": { ...DEFAULT_CONFIG, showHeader: true, showWebsite: false },

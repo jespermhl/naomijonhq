@@ -71,15 +71,6 @@ export function StrawberryRelease({
             >
               STREAM
             </Button>
-
-            <a
-              href="https://releeze.com/en/collections/naomi-jon"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-dark block flex-1 -rotate-2 rounded-full border border-border-glass bg-bg-glass-strong px-5 py-3 text-center text-lg font-black no-underline shadow-float transition-all duration-200 ease-spring will-change-transform hover:-translate-y-1 hover:scale-105 hover:rotate-0 hover:bg-bg-surface active:scale-95 max-sm:py-2.5 max-sm:text-sm"
-            >
-              ORDER
-            </a>
           </div>
         </div>
 
