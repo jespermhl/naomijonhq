@@ -9,12 +9,19 @@ function pad(n: number): string {
 }
 
 export function VillainCountdown() {
-  const [now, setNow] = useState(() => Date.now());
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
+    // ponytail: one-time mount init, setState-in-effect is the intended pattern here
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setNow(Date.now());
     const id = window.setInterval(() => setNow(Date.now()), 1000);
     return () => window.clearInterval(id);
   }, []);
+
+  if (now === null) {
+    return null;
+  }
 
   const diff = TARGET - now;
 

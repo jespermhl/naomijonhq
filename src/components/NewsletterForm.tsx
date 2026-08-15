@@ -63,7 +63,7 @@ export function NewsletterForm() {
               onChange={(e) => setEmail(e.target.value)}
               disabled={status === "loading"}
               required
-              className="text-text-dark focus-visible:outline-brand-red w-full rounded-full border border-border-glass bg-bg-glass-strong px-6 py-3.5 font-sans text-base font-bold placeholder-text-faint shadow-input transition-all duration-200 outline-none focus:-translate-y-0.5 focus:shadow-input-focus focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="text-text-dark focus-visible:outline-brand-red w-full rounded-full border border-border-glass bg-bg-glass-strong px-6 py-3.5 font-sans text-base font-bold placeholder-text-faint shadow-input transition-all duration-200 outline-none focus:-translate-y-0.5 focus:shadow-input-focus focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2"
               aria-label="Email address for newsletter"
               aria-describedby={
                 status === "error" ? "newsletter-error" : undefined
