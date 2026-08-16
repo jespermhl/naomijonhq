@@ -1,4 +1,4 @@
-import PerfumeCard from "@/app/perfumes/_components/PerfumeCard";
+import PerfumeCard from "@/app/(site)/perfumes/_components/PerfumeCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getPerfumes } from "@/lib/sanity/perfumes";
 import type { SiteSection } from "@/lib/sanity/sites";

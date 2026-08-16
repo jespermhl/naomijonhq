@@ -1,8 +1,8 @@
 import { getSite } from "@/lib/sanity/sites";
 import { SiteRenderer } from "@/components/site/SiteRenderer";
-import { NewsletterSection } from "@/app/_components/NewsletterSection";
-import { CommunitySocials } from "@/app/_components/CommunitySocials";
-import { HeroSection } from "@/app/_components/HeroSection";
+import { NewsletterSection } from "@/app/(site)/_components/NewsletterSection";
+import { CommunitySocials } from "@/app/(site)/_components/CommunitySocials";
+import { HeroSection } from "@/app/(site)/_components/HeroSection";
 
 export default async function HomePage() {
   const site = await getSite("/");

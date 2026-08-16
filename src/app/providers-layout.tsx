@@ -13,7 +13,7 @@ import type { SocialLink } from "@/components/SocialConfig";
 
 const BurstAnimation = dynamic(
   () =>
-    import("@/app/_components/BurstAnimation").then((m) => m.BurstAnimation),
+    import("@/app/(site)/_components/BurstAnimation").then((m) => m.BurstAnimation),
   { ssr: false },
 );
 

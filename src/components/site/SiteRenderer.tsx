@@ -15,7 +15,7 @@ import { SitePerfumeGrid } from "./sections/SitePerfumeGrid";
 const RENDERERS: Record<SiteSection["_type"], ComponentType<{ section: SiteSection }>> = {
   hero: SiteHero,
   richText: SiteRichText,
-  image: SiteImage,
+  imageBlock: SiteImage,
   links: SiteLinks,
   socials: SiteSocials,
   newsletter: SiteNewsletter,

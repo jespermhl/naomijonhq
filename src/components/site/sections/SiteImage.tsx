@@ -3,7 +3,7 @@ import { urlFor } from "@/sanity/imageUrl";
 import type { SiteSection } from "@/lib/sanity/sites";
 
 export function SiteImage({ section }: { section: SiteSection }) {
-  if (section._type !== "image") return null;
+  if (section._type !== "imageBlock") return null;
 
   const imageUrl = section.image ? urlFor(section.image).width(1400).url() : null;
   if (!imageUrl) return null;

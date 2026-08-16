@@ -24,14 +24,16 @@ export type SiteSection =
       eyebrow?: string;
       title: string;
       subtitle?: string;
+      bullets?: string[];
       image?: SanityImageSource | null;
       imageAlt?: string;
+      showDiscordStats?: boolean;
       buttonLabel?: string;
       buttonHref?: string;
     }
   | { _type: "richText"; _key: string; heading?: string; body?: string }
   | {
-      _type: "image";
+      _type: "imageBlock";
       _key: string;
       image?: SanityImageSource | null;
       alt?: string;

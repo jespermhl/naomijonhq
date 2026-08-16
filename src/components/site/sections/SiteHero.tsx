@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { DiscordStats } from "@/app/(site)/_components/DiscordStats";
 import { urlFor } from "@/sanity/imageUrl";
 import type { SiteSection } from "@/lib/sanity/sites";
 
@@ -28,7 +29,16 @@ export function SiteHero({ section }: { section: SiteSection }) {
                 {section.subtitle}
               </p>
             )}
-            {section.buttonLabel && section.buttonHref && (
+            {section.bullets && section.bullets.length > 0 && (
+              <div className="text-text-muted flex flex-col gap-3 font-semibold max-sm:text-sm">
+                {section.bullets.map((bullet, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <span className="text-brand-red">✦</span> {bullet}
+                  </div>
+                ))}
+              </div>
+            )}
+            {!imageUrl && section.buttonLabel && section.buttonHref && (
               <Button href={section.buttonHref} rotate="0deg" size="large">
                 {section.buttonLabel}
               </Button>
@@ -36,14 +46,33 @@ export function SiteHero({ section }: { section: SiteSection }) {
           </div>
 
           {imageUrl && (
-            <div className="relative aspect-[2.2/1] w-full overflow-hidden rounded-card border border-border-glass shadow-glow">
-              <Image
-                src={imageUrl}
-                alt={section.imageAlt ?? ""}
-                fill
-                className="object-cover opacity-90"
-                priority
-              />
+            <div className="flex w-full flex-col items-center">
+              <div className="relative aspect-[2.2/1] w-full overflow-hidden rounded-card border border-border-glass shadow-glow">
+                <Image
+                  src={imageUrl}
+                  alt={section.imageAlt ?? ""}
+                  fill
+                  className="object-cover opacity-70"
+                  priority
+                />
+
+                <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/40" />
+
+                <div className="absolute inset-0 flex flex-col justify-end p-6 max-sm:p-4">
+                  {section.showDiscordStats && <DiscordStats />}
+                </div>
+              </div>
+
+              {section.buttonLabel && section.buttonHref && (
+                <Button
+                  href={section.buttonHref}
+                  rotate="0deg"
+                  size="large"
+                  className="mt-6 w-full max-sm:py-3 max-sm:text-sm"
+                >
+                  {section.buttonLabel}
+                </Button>
+              )}
             </div>
           )}
         </div>

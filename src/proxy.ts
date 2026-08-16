@@ -13,6 +13,7 @@ type RedirectConfig = {
 function isReservedAppPath(pathname: string): boolean {
   if (
     pathname.startsWith('/admin') ||
+    pathname.startsWith('/studio') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/redirect')
