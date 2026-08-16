@@ -28,7 +28,7 @@ export default defineConfig({
                   .documentId('siteSettings'),
               ),
             S.divider(),
-            ...S.documentTypeListItems(),
+            ...S.documentTypeListItems().filter((item) => item.getId() !== 'siteSettings'),
           ]),
     }),
     visionTool(),
