@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { getPageConfig } from "@/config/routes";
-import { DEFAULT_THEME, PAGE_THEMES } from "@/config/theme";
+import { PAGE_THEMES } from "@/config/theme";
 import type { SocialLink } from "@/components/SocialConfig";
 
 const BurstAnimation = dynamic(
@@ -21,6 +21,7 @@ interface ClientLayoutProps {
   baseUrl: string;
   modal?: ReactNode;
   socials: SocialLink[];
+  defaultTheme: string;
 }
 
 export function ClientLayout({
@@ -28,13 +29,15 @@ export function ClientLayout({
   modal,
   socials,
   baseUrl,
+  defaultTheme,
 }: ClientLayoutProps) {
   const pathname = usePathname();
   const pageConfig = getPageConfig(pathname);
 
   useEffect(() => {
-    document.documentElement.dataset.theme = PAGE_THEMES[pathname] ?? DEFAULT_THEME;
-  }, [pathname]);
+    document.documentElement.dataset.theme =
+      PAGE_THEMES[pathname] ?? defaultTheme;
+  }, [pathname, defaultTheme]);
 
   const isModalTrueOpen = !!modal;
   const isLegalPage =

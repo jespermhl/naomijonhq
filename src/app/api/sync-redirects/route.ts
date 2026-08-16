@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server";
+import { revalidateTag } from "next/cache";
 import { Redis } from "@upstash/redis";
-import { createClient } from "@sanity/client";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import { env } from "@/env.mjs";
 import { logger } from "@/lib/logger";
+import { client } from "@/sanity/client";
+import { CACHE_TAGS, tagForSanityType } from "@/lib/cache-tags";
 
 const redis = Redis.fromEnv();
-const client = createClient({
-  projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: "2025-02-19",
-  useCdn: false,
-});
+const cdnOffClient = client.withConfig({ useCdn: false });
 
 export async function POST(req: Request) {
   const signature = req.headers.get(SIGNATURE_HEADER_NAME);
@@ -32,13 +29,34 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
   }
 
+  let docType: string | undefined;
   try {
-    const redirects = await client.fetch(
+    docType = (JSON.parse(body) as { _type?: string })._type;
+  } catch {
+    docType = undefined;
+  }
+
+  const tag = tagForSanityType(docType);
+  if (tag) {
+    revalidateTag(tag, { expire: 60 });
+  }
+
+  if (docType !== "redirect") {
+    return NextResponse.json({
+      message: "Revalidated",
+      revalidated: tag ?? null,
+    });
+  }
+
+  try {
+    const redirects = await cdnOffClient.fetch<{ source?: string }[]>(
       `*[_type == "redirect"]{source, destination, permanent, noRedirect}`,
+      {},
+      { next: { tags: [CACHE_TAGS.redirect] } },
     );
 
     const currentSources = new Set(
-      redirects.map((r: { source?: string }) => r.source).filter(Boolean),
+      redirects.map((r) => r.source).filter(Boolean),
     );
 
     const existingKeys = await redis.keys("redirect:*");
@@ -66,6 +84,7 @@ export async function POST(req: Request) {
       message: "Sync completed successfully",
       count: redirects.length,
       removed: removedCount,
+      revalidated: tag ?? null,
     });
   } catch (error) {
     logger.error("Failed to sync redirects:", error);

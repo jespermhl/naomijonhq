@@ -1,5 +1,6 @@
 import { logger } from "@/lib/logger";
 import { client } from "@/sanity/client";
+import { CACHE_TAGS } from "@/lib/cache-tags";
 
 /**
  * Represents a concert object fetched from Sanity CMS.
@@ -28,7 +29,7 @@ export async function getSanityConcerts(): Promise<SanityConcert[]> {
       query,
       {},
       {
-        next: { revalidate: 60 }, // Cache for 1 minute
+        next: { revalidate: 60, tags: [CACHE_TAGS.concert] }, // Cache for 1 minute
       },
     );
     return events;

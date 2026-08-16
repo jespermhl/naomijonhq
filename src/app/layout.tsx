@@ -7,7 +7,9 @@ import { PropertyMetaTags } from "@/components/PropertyMetaTags";
 import { ClientLayout } from "./providers-layout";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { getSocials } from "@/components/SocialConfig";
-import { DEFAULT_THEME, PAGE_THEMES } from "@/config/theme";
+import { PAGE_THEMES } from "@/config/theme";
+import { getDefaultTheme, getThemes } from "@/lib/sanity/themes";
+import { themesToCss } from "@/lib/theme-css";
 import { headers } from "next/headers";
 
 const bodyFont = Space_Grotesk({
@@ -92,14 +94,19 @@ export default async function RootLayout({
 }>) {
   const socials = await getSocials();
   const baseUrl = await getBaseUrl();
+  const [themes, defaultTheme] = await Promise.all([getThemes(), getDefaultTheme()]);
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `var t=${JSON.stringify(PAGE_THEMES)},d=${JSON.stringify(DEFAULT_THEME)};document.documentElement.dataset.theme=t[location.pathname]||d;`,
+            __html: `var t=${JSON.stringify(PAGE_THEMES)},d=${JSON.stringify(defaultTheme)};document.documentElement.dataset.theme=t[location.pathname]||d;`,
           }}
+        />
+        <style
+          id="cms-themes"
+          dangerouslySetInnerHTML={{ __html: themesToCss(themes) }}
         />
       </head>
       <body
@@ -120,7 +127,12 @@ export default async function RootLayout({
         />
 
         <ErrorBoundary>
-          <ClientLayout modal={modal} socials={socials} baseUrl={baseUrl}>
+          <ClientLayout
+            modal={modal}
+            socials={socials}
+            baseUrl={baseUrl}
+            defaultTheme={defaultTheme}
+          >
             <main id="main-content" className="relative z-10 flex-1 w-full flex flex-col justify-center min-h-screen">
               {children}
             </main>

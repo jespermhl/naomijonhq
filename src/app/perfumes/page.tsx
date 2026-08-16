@@ -1,5 +1,6 @@
 import React from "react";
 import { client } from "@/sanity/client";
+import { CACHE_TAGS } from "@/lib/cache-tags";
 import PerfumeCard from "./_components/PerfumeCard";
 import { Metadata } from "next";
 import type { SanityImageSource } from "@sanity/image-url";
@@ -38,7 +39,9 @@ async function getPerfumes(): Promise<Perfume[]> {
     isNew,
     heartNotes
   }`;
-  return client.fetch<Perfume[]>(query);
+  return client.fetch<Perfume[]>(query, {}, {
+    next: { revalidate: 60, tags: [CACHE_TAGS.perfume] },
+  });
 }
 
 export default async function PerfumesPage() {

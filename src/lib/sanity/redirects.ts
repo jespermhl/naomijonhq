@@ -1,15 +1,8 @@
-import { createClient } from "@sanity/client";
 import { cache } from "react";
 import type { Metadata, Viewport } from "next";
-import { env } from "@/env.mjs";
+import { client } from "@/sanity/client";
 import { logger } from "@/lib/logger";
-
-const client = createClient({
-  projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: "2024-01-13",
-  useCdn: true,
-});
+import { CACHE_TAGS } from "@/lib/cache-tags";
 
 const DEFAULT_THEME_COLOR = "#a54c88";
 
@@ -50,7 +43,7 @@ const getRedirectMeta = cache(async (source: string): Promise<RedirectMeta> => {
         customMeta
       }`,
       { source },
-      { next: { revalidate: 60 } },
+      { next: { revalidate: 60, tags: [CACHE_TAGS.redirect] } },
     );
     return result ?? {};
   } catch (error) {

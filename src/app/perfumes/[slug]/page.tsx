@@ -1,5 +1,6 @@
 import { client } from "@/sanity/client";
 import { urlFor } from "@/sanity/imageUrl";
+import { CACHE_TAGS } from "@/lib/cache-tags";
 import type { SanityImageSource } from "@sanity/image-url";
 import Image from "next/image";
 import Link from "next/link";
@@ -52,6 +53,7 @@ export async function generateMetadata(props: PerfumeProps): Promise<Metadata> {
   const perfume = await client.fetch(
     `*[_type == "perfume" && slug.current == $slug][0]{title, description}`,
     { slug },
+    { next: { revalidate: 60, tags: [CACHE_TAGS.perfume] } },
   );
 
   if (!perfume) {
@@ -77,7 +79,9 @@ export default async function PerfumeDetailPage(props: PerfumeProps) {
     storeLinks
   }`;
 
-  const perfume: Perfume | null = await client.fetch(query, { slug });
+  const perfume: Perfume | null = await client.fetch(query, { slug }, {
+    next: { revalidate: 60, tags: [CACHE_TAGS.perfume] },
+  });
 
   if (!perfume) {
     notFound();

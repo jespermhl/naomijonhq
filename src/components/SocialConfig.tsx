@@ -1,5 +1,6 @@
-import { client } from "../sanity/client";
+import { client } from "@/sanity/client";
 import { logger } from "@/lib/logger";
+import { CACHE_TAGS } from "@/lib/cache-tags";
 
 export const PLATFORM_ICONS: Record<string, React.ReactNode> = {
   instagram: (
@@ -57,7 +58,7 @@ export async function getSocials(
     return await client.fetch<SocialLink[]>(
       query,
       {},
-      { next: { revalidate: 60 } },
+      { next: { revalidate: 60, tags: [CACHE_TAGS.social] } },
     );
   } catch (error) {
     logger.error("Failed to fetch socials:", error);
