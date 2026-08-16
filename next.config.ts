@@ -4,6 +4,15 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
+  async redirects() {
+    return [
+      {
+        source: "/admin",
+        destination: "/studio",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
