@@ -7,6 +7,7 @@ const THEME_ROUTES: Array<[string, string]> = [
   ["/strawberry", "strawberry"],
   ["/strawberry-album", "strawberry"],
   ["/villainofyourdreams", "villain"],
+  ["/shop", "strawberry"],
 ];
 
 test.describe("cms theme wiring", () => {
