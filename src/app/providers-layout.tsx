@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { getPageConfig } from "@/config/routes";
 import { PAGE_THEMES } from "@/config/theme";
+import { getCmsTheme } from "@/lib/site-theme";
 import type { SocialLink } from "@/components/SocialConfig";
 
 const BurstAnimation = dynamic(
@@ -36,7 +37,7 @@ export function ClientLayout({
 
   useEffect(() => {
     document.documentElement.dataset.theme =
-      PAGE_THEMES[pathname] ?? defaultTheme;
+      PAGE_THEMES[pathname] ?? getCmsTheme() ?? defaultTheme;
   }, [pathname, defaultTheme]);
 
   const isModalTrueOpen = !!modal;

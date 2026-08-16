@@ -1,9 +1,7 @@
 import React from "react";
-import { client } from "@/sanity/client";
-import { CACHE_TAGS } from "@/lib/cache-tags";
 import PerfumeCard from "./_components/PerfumeCard";
 import { Metadata } from "next";
-import type { SanityImageSource } from "@sanity/image-url";
+import { getPerfumes } from "@/lib/sanity/perfumes";
 
 export const metadata: Metadata = {
   title: "Naomi Jon Perfumes",
@@ -11,38 +9,6 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 60;
-
-interface Perfume {
-  _id: string;
-  title: string;
-  slug: string;
-  image?: SanityImageSource | null;
-  storeLinks: StoreLink[];
-  isNew?: boolean;
-  heartNotes?: string;
-}
-
-interface StoreLink {
-  store: "dm" | "rossmann" | "amazon";
-  url: string;
-  price?: string;
-  _key: string;
-}
-
-async function getPerfumes(): Promise<Perfume[]> {
-  const query = `*[_type == "perfume"] | order(order asc) {
-    _id,
-    title,
-    "slug": slug.current,
-    image,
-    storeLinks,
-    isNew,
-    heartNotes
-  }`;
-  return client.fetch<Perfume[]>(query, {}, {
-    next: { revalidate: 60, tags: [CACHE_TAGS.perfume] },
-  });
-}
 
 export default async function PerfumesPage() {
   const perfumes = await getPerfumes();

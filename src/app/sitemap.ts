@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { env } from "@/env.mjs";
 import { MetadataRoute } from "next";
+import { getSiteSlugs } from "@/lib/sanity/sites";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const headersInstance = await headers();
@@ -31,5 +32,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === "" ? 1.0 : 0.8,
   }));
 
-  return routes;
+  const siteSlugs = await getSiteSlugs();
+  const cmsRoutes = siteSlugs.map((slug) => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "daily" as const,
+    priority: 0.7,
+  }));
+
+  return [...routes, ...cmsRoutes];
 }
