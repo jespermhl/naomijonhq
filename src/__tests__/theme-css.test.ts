@@ -2,40 +2,68 @@ import { describe, expect, it } from "vitest";
 import { themeToCss, themesToCss } from "@/lib/theme-css";
 import type { ThemeDoc } from "@/lib/sanity/themes";
 
-const theme: ThemeDoc = {
+const villain: ThemeDoc = {
   _id: "a",
   name: "Villain",
   slug: "villain",
-  bgBase1: "#0b0a10",
-  brandRed: "#d6c9ff",
-  bgGlass: "rgba(28, 25, 36, 0.8)",
+  brand: "#d6c9ff",
+  bg: "#0b0a10",
+  surface: "#1c1924",
+  accent: "#9a92bb",
+  muted: "#565170",
 };
 
 describe("themeToCss", () => {
-  it("maps known fields to their CSS custom properties", () => {
-    const css = themeToCss(theme);
-    expect(css).toContain(':root[data-theme="villain"] {');
-    expect(css).toContain("--bg-base-1: #0b0a10;");
+  it("derives all 30 CSS vars from 5 seeds", () => {
+    const css = themeToCss(villain);
+    expect(css).toContain(':root[data-theme="villain"]');
     expect(css).toContain("--color-brand-red: #d6c9ff;");
-    expect(css).toContain("--color-bg-glass: rgba(28, 25, 36, 0.8);");
+    expect(css).toContain("--bg-base-1: #0b0a10;");
+    expect(css).toContain("--color-bg-surface: #1c1924;");
+    expect(css).toContain("--color-brand-pink-deep: #9a92bb;");
   });
 
-  it("omits unset fields", () => {
-    const css = themeToCss(theme);
-    expect(css).not.toContain("--color-text-dark");
-    expect(css).not.toContain("--theme-color");
+  it("applies optional overrides", () => {
+    const withOverride: ThemeDoc = { ...villain, brandBtn: "#ff0000" };
+    const css = themeToCss(withOverride);
+    expect(css).toContain("--color-brand-btn: #ff0000;");
   });
 
-  it("returns an empty string when no fields are set", () => {
-    expect(themeToCss({ _id: "b", name: "Empty", slug: "empty" })).toBe("");
+  it("returns empty string when seeds are missing", () => {
+    const partial: ThemeDoc = {
+      _id: "c",
+      name: "Partial",
+      slug: "partial",
+      brand: "#ff0000",
+      bg: "#ffffff",
+      surface: "#f0f0f0",
+      accent: "#000000",
+      muted: "#888888",
+    };
+    // Has all seeds — should produce output
+    expect(themeToCss(partial)).toContain(':root[data-theme="partial"]');
+  });
+
+  it("returns empty string when no seeds are set", () => {
+    const empty: ThemeDoc = {
+      _id: "d",
+      name: "Empty",
+      slug: "empty",
+      brand: "",
+      bg: "",
+      surface: "",
+      accent: "",
+      muted: "",
+    };
+    expect(themeToCss(empty)).toBe("");
   });
 });
 
 describe("themesToCss", () => {
   it("joins multiple themes and filters empty ones", () => {
     const css = themesToCss([
-      theme,
-      { _id: "c", name: "Empty", slug: "empty" },
+      villain,
+      { _id: "e", name: "Empty", slug: "empty", brand: "", bg: "", surface: "", accent: "", muted: "" },
     ]);
     expect(css).toContain(':root[data-theme="villain"]');
     expect(css).not.toContain("empty");

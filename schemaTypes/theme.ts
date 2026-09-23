@@ -1,35 +1,31 @@
 import type {Rule} from 'sanity'
 
-const GROUPS = {
-  backgrounds: 'Backgrounds',
-  brand: 'Brand',
-  surfaces: 'Surfaces',
-  text: 'Text',
-  borders: 'Borders',
-  extras: 'Extras',
-}
-
-const color = (name: string, title: string, group: string) => ({
+const color = (name: string, title: string, opts?: {required?: boolean; group?: string}) => ({
   name,
   type: 'string' as const,
   title,
-  group,
-  validation: (Rule: Rule) =>
-    Rule.custom((value: string) => {
+  group: opts?.group,
+  validation: (Rule: Rule) => {
+    const r = Rule.custom((value: string) => {
       if (!value) return true
       const hex = /^#[0-9a-fA-F]{3,8}$/
       const rgb = /^rgba?\([\d\s,./%]+\)$/
       return hex.test(value.trim()) || rgb.test(value.trim())
         ? true
         : 'Use a hex color (e.g. #ff4fa8) or rgba() value.'
-    }),
+    })
+    return opts?.required ? r.required() : r
+  },
 })
 
 export const theme = {
   name: 'theme',
   type: 'document',
   title: 'Themes',
-  groups: Object.values(GROUPS).map((title) => ({name: title, title})),
+  groups: [
+    {name: 'seeds', title: 'Seed Colors'},
+    {name: 'overrides', title: 'Overrides'},
+  ],
   fields: [
     {
       name: 'name',
@@ -45,47 +41,53 @@ export const theme = {
       options: {source: 'name', maxLength: 40},
       validation: (Rule: Rule) => Rule.required(),
     },
+    {
+      name: 'brand',
+      type: 'string',
+      title: 'Brand',
+      description: 'Main accent color used for links, buttons, highlights.',
+      group: 'seeds',
+      validation: (Rule: Rule) => Rule.required(),
+    },
+    {
+      name: 'bg',
+      type: 'string',
+      title: 'Background',
+      description: 'Base background color (body, page).',
+      group: 'seeds',
+      validation: (Rule: Rule) => Rule.required(),
+    },
+    {
+      name: 'surface',
+      type: 'string',
+      title: 'Surface',
+      description: 'Card and panel background color.',
+      group: 'seeds',
+      validation: (Rule: Rule) => Rule.required(),
+    },
+    {
+      name: 'accent',
+      type: 'string',
+      title: 'Accent',
+      description: 'Secondary/deep accent for hover states and highlights.',
+      group: 'seeds',
+      validation: (Rule: Rule) => Rule.required(),
+    },
+    {
+      name: 'muted',
+      type: 'string',
+      title: 'Muted',
+      description: 'Muted variant for buttons and borders.',
+      group: 'seeds',
+      validation: (Rule: Rule) => Rule.required(),
+    },
     ...Object.entries({
-      bgBase1: 'Base Background 1 (body gradient top)',
-      bgBase2: 'Base Background 2 (body gradient middle)',
-      bgBase3: 'Base Background 3 (body gradient bottom)',
-      bgGlowA: 'Glow A (radial, top-left)',
-      bgGlowB: 'Glow B (radial, top-right)',
-    }).map(([name, title]) => color(name, title, GROUPS.backgrounds)),
-    ...Object.entries({
-      brandRed: 'Brand Red (accent / links / selection)',
-      brandRedDark: 'Brand Red Dark (hover)',
       brandBtn: 'Button Background',
-      brandPink: 'Brand Pink (soft accents)',
-      brandPinkDeep: 'Brand Pink Deep',
-      brandPinkMid: 'Brand Pink Mid',
-      onBrand: 'On-Brand Text (text on brand buttons)',
-    }).map(([name, title]) => color(name, title, GROUPS.brand)),
-    ...Object.entries({
-      bgPrimary: 'Primary Background',
-      bgSurface: 'Surface Background (cards)',
-      bgGlass: 'Glass Background',
-      bgGlassStrong: 'Glass Strong Background',
-      bgGlassSoft: 'Glass Soft Background',
-      bgPinkTint: 'Pink Tint Background',
-      bgFooter: 'Footer Background',
-    }).map(([name, title]) => color(name, title, GROUPS.surfaces)),
-    ...Object.entries({
-      textDark: 'Text Dark (primary text)',
-      textMuted: 'Text Muted (secondary text)',
-      textFaint: 'Text Faint (placeholder text)',
+      onBrand: 'On-Brand Text',
       onTextDark: 'On-Dark Text',
-    }).map(([name, title]) => color(name, title, GROUPS.text)),
-    ...Object.entries({
-      borderGlass: 'Border Glass',
-      borderGlassSoft: 'Border Glass Soft',
-      borderPink: 'Border Pink',
-      borderSubtle: 'Border Subtle',
-    }).map(([name, title]) => color(name, title, GROUPS.borders)),
-    ...Object.entries({
-      dropBrandStrong: 'Drop Shadow Brand Strong',
-      dropBrandSoft: 'Drop Shadow Brand Soft',
+      bgGlowA: 'Glow A',
+      bgGlowB: 'Glow B',
       themeColor: 'Theme Color (browser bar)',
-    }).map(([name, title]) => color(name, title, GROUPS.extras)),
+    }).map(([name, title]) => color(name, title, {group: 'overrides'})),
   ],
 }
