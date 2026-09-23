@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { buildPageMetadata, buildPageViewport } from "@/lib/sanity/redirects";
 import { NewsletterPromotion } from "@/app/(site)/_components/NewsletterPromotion";
@@ -11,18 +10,6 @@ import { PAGE_THEMES } from "@/config/theme";
 import { getDefaultTheme, getThemes } from "@/lib/sanity/themes";
 import { themesToCss } from "@/lib/theme-css";
 import { headers } from "next/headers";
-
-const bodyFont = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
-});
-
-const displayFont = Sora({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["600", "700", "800"],
-});
 
 const SOURCE = "/";
 const DEFAULTS = {
@@ -111,7 +98,7 @@ export default async function RootLayout({
       </head>
       <body
         suppressHydrationWarning
-        className={`${bodyFont.variable} ${displayFont.variable} relative flex min-h-screen flex-col`}
+        className="relative flex min-h-screen flex-col"
       >
         <a
           href="#main-content"
