@@ -38,7 +38,9 @@ export async function POST(req: Request) {
 
   const tag = tagForSanityType(docType);
   if (tag) {
-    revalidateTag(tag, { expire: 60 });
+    // expire: 0 = purge immediately (no stale-while-revalidate window),
+    // so the next render reflects the publish. These are small queries.
+    revalidateTag(tag, { expire: 0 });
   }
 
   if (docType !== "redirect") {

@@ -4,6 +4,9 @@ import { logger } from "@/lib/logger";
 import { CACHE_TAGS } from "@/lib/cache-tags";
 import { DEFAULT_THEME } from "@/config/theme";
 
+// Design tokens must be published-fresh; Sanity's CDN can lag a publish by ~60s.
+const cdnOffClient = client.withConfig({ useCdn: false });
+
 /**
  * A CMS theme document. Five seed colors drive derivation of all 30 CSS
  * variables; optional override fields replace specific derived values.
@@ -42,7 +45,7 @@ const THEME_FIELDS = `
  */
 export const getThemes = cache(async (): Promise<ThemeDoc[]> => {
   try {
-    return await client.fetch<ThemeDoc[]>(
+    return await cdnOffClient.fetch<ThemeDoc[]>(
       `*[_type == "theme"]{${THEME_FIELDS}}`,
       {},
       { next: { revalidate: 60, tags: [CACHE_TAGS.theme] } },
@@ -59,7 +62,7 @@ export const getThemes = cache(async (): Promise<ThemeDoc[]> => {
  */
 export const getDefaultTheme = cache(async (): Promise<string> => {
   try {
-    const settings = await client.fetch<{ defaultThemeSlug?: string } | null>(
+    const settings = await cdnOffClient.fetch<{ defaultThemeSlug?: string } | null>(
       `*[_type == "siteSettings"][0]{ "defaultThemeSlug": defaultTheme->slug.current }`,
       {},
       { next: { revalidate: 60, tags: [CACHE_TAGS.site] } },
