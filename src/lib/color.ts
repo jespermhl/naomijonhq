@@ -23,6 +23,16 @@ export function parseColor(input: string): RGB | null {
   return null;
 }
 
+/**
+ * Normalizes any supported color to the `#rrggbb` form a native
+ * `<input type="color">` requires. Unparseable input falls back to black.
+ */
+export function toHex6(color?: string | null): string {
+  const c = color ? parseColor(color) : null
+  if (!c) return "#000000";
+  return toHex(c[0], c[1], c[2]);
+}
+
 function toHex(r: number, g: number, b: number): string {
   const h = (n: number) => Math.max(0, Math.min(255, Math.round(n))).toString(16).padStart(2, "0");
   return `#${h(r)}${h(g)}${h(b)}`;

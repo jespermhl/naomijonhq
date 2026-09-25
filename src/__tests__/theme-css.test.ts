@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { themeToCss, themesToCss } from "@/lib/theme-css";
+import { themeToCss, themesToCss, CSS_VARS } from "@/lib/theme-css";
 import type { ThemeDoc } from "@/lib/sanity/themes";
 
 const villain: ThemeDoc = {
@@ -27,6 +27,21 @@ describe("themeToCss", () => {
     const withOverride: ThemeDoc = { ...villain, brandBtn: "#ff0000" };
     const css = themeToCss(withOverride);
     expect(css).toContain("--color-brand-btn: #ff0000;");
+  });
+
+  it("derives shadows from the brand seed so they follow the palette", () => {
+    // villain is a dark theme -> deep brand alpha, not the static pink in globals.css
+    expect(themeToCss(villain)).toContain(
+      "--shadow-button-value: 0 10px 0 rgba(214, 201, 255, 0.35);",
+    );
+    expect(themeToCss(villain)).toContain(
+      "--shadow-glow-value: 0 0 60px -10px rgba(214, 201, 255, 0.45);",
+    );
+    // Every shadow the @theme block indents through must be emitted
+    const css = themeToCss(villain);
+    for (const key of Object.keys(CSS_VARS).filter((k) => k.startsWith("shadow"))) {
+      expect(css).toContain(`${CSS_VARS[key]}:`);
+    }
   });
 
   it("returns empty string when seeds are missing", () => {

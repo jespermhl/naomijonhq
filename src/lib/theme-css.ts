@@ -3,7 +3,7 @@ import { mix, withAlpha, darken, lighten, isLight } from "@/lib/color";
 
 /**
  * All CSS custom properties a theme can set.
- * Keys match ThemeDoc field names; values are the CSS variable names.
+ * Keys match ThemeDoc field names where one exists; values are the CSS variable names.
  */
 export const CSS_VARS: Record<string, string> = {
   bgBase1: "--bg-base-1",
@@ -18,13 +18,11 @@ export const CSS_VARS: Record<string, string> = {
   brandPinkDeep: "--color-brand-pink-deep",
   brandPinkMid: "--color-brand-pink-mid",
   onBrand: "--color-on-brand",
-  bgPrimary: "--color-bg-primary",
   bgSurface: "--color-bg-surface",
   bgGlass: "--color-bg-glass",
   bgGlassStrong: "--color-bg-glass-strong",
   bgGlassSoft: "--color-bg-glass-soft",
   bgPinkTint: "--color-bg-pink-tint",
-  bgFooter: "--color-bg-footer",
   textDark: "--color-text-dark",
   textMuted: "--color-text-muted",
   textFaint: "--color-text-faint",
@@ -36,6 +34,19 @@ export const CSS_VARS: Record<string, string> = {
   dropBrandStrong: "--drop-brand-strong",
   dropBrandSoft: "--drop-brand-soft",
   themeColor: "--theme-color",
+  // Shadows are consumed via the `--shadow-*: var(--shadow-*-value)` indirection
+  // in the @theme block, so the theme has to emit the -value layer.
+  shadowCardValue: "--shadow-card-value",
+  shadowCardHoverValue: "--shadow-card-hover-value",
+  shadowFloatValue: "--shadow-float-value",
+  shadowFloatSmValue: "--shadow-float-sm-value",
+  shadowGlowValue: "--shadow-glow-value",
+  shadowGlowSoftValue: "--shadow-glow-soft-value",
+  shadowInputValue: "--shadow-input-value",
+  shadowInputFocusValue: "--shadow-input-focus-value",
+  shadowButtonValue: "--shadow-button-value",
+  shadowButtonHoverValue: "--shadow-button-hover-value",
+  shadowButtonActiveValue: "--shadow-button-active-value",
 };
 
 /** Fields the Sanity editor can set as overrides. */
@@ -49,7 +60,40 @@ const OVERRIDE_KEYS = new Set([
 ]);
 
 /**
- * Derive all 30 CSS variables from 5 seed colors, then apply any overrides.
+ * Shadow alphas, keyed by the light/dark branch. Light themes get a faint brand
+ * tint, dark themes a deeper one. Blur/offset geometry is fixed and matches the
+ * static defaults in globals.css.
+ */
+const SHADOW_ALPHA: Record<string, [number, number]> = {
+  card: [0.08, 0.35],
+  cardHover: [0.12, 0.45],
+  float: [0.12, 0.4],
+  floatSm: [0.1, 0.3],
+  glow: [0.5, 0.45],
+  glowSoft: [0.1, 0.4],
+  input: [0.1, 0.4],
+  inputFocus: [0.14, 0.5],
+  button: [0.24, 0.35],
+  buttonHover: [0.3, 0.45],
+  buttonActive: [0.2, 0.3],
+};
+
+const SHADOW_GEOMETRY: Record<string, string> = {
+  card: "0 26px 70px {a}, 0 10px 24px {b}",
+  cardHover: "0 30px 70px {a}",
+  float: "0 20px 48px {a}",
+  floatSm: "0 10px 24px {a}",
+  glow: "0 0 60px -10px {a}",
+  glowSoft: "0 0 24px -8px {a}",
+  input: "0 10px 25px {a}",
+  inputFocus: "0 14px 32px {a}",
+  button: "0 10px 0 {a}",
+  buttonHover: "0 14px 0 {a}",
+  buttonActive: "0 6px 0 {a}",
+};
+
+/**
+ * Derive all CSS variables from 5 seed colors, then apply any overrides.
  */
 function deriveAll(theme: ThemeDoc): Record<string, string> {
   const brand = theme.brand!;
@@ -77,13 +121,11 @@ function deriveAll(theme: ThemeDoc): Record<string, string> {
     onBrand: light ? "#ffffff" : lighten(brand, 0.7),
 
     // Surfaces
-    bgPrimary: bg,
     bgSurface: surface,
     bgGlass: withAlpha(surface, 0.8),
     bgGlassStrong: withAlpha(surface, 0.94),
     bgGlassSoft: withAlpha(brand, 0.15),
     bgPinkTint: light ? mix(bg, brand, 0.08) : mix(surface, brand, 0.15),
-    bgFooter: withAlpha(bg, 0.72),
 
     // Text
     textDark: light ? darken(bg, 0.85) : lighten(brand, 0.75),
@@ -102,6 +144,13 @@ function deriveAll(theme: ThemeDoc): Record<string, string> {
     dropBrandSoft: withAlpha(brand, 0.35),
     themeColor: bg,
   };
+
+  for (const [name, template] of Object.entries(SHADOW_GEOMETRY)) {
+    const [l, d] = SHADOW_ALPHA[name];
+    derived[`shadow${name[0].toUpperCase()}${name.slice(1)}Value`] = template
+      .replace("{a}", withAlpha(brand, light ? l : d))
+      .replace("{b}", withAlpha("#000000", light ? 0.04 : 0.3));
+  }
 
   // Apply optional overrides from the CMS document
   for (const key of OVERRIDE_KEYS) {

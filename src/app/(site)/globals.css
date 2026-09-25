@@ -95,13 +95,11 @@
   --color-brand-pink-mid: #8b84a6;
 
   --color-on-brand: #e9e5f5;
-  --color-bg-primary: #0b0a10;
   --color-bg-surface: #1c1924;
   --color-bg-glass: rgba(28, 25, 36, 0.8);
   --color-bg-glass-strong: rgba(28, 25, 36, 0.94);
   --color-bg-glass-soft: rgba(154, 146, 187, 0.14);
   --color-bg-pink-tint: #3b3650;
-  --color-bg-footer: rgba(11, 10, 16, 0.72);
 
   --color-text-dark: #e9e5f5;
   --color-text-muted: #c9c3e0;
@@ -144,13 +142,11 @@
   --color-brand-error: #dc2626;
   --color-brand-info: #2563eb;
 
-  --color-bg-primary: #fff9fb;
   --color-bg-surface: #ffffff;
   --color-bg-glass: rgba(255, 255, 255, 0.8);
   --color-bg-glass-strong: rgba(255, 255, 255, 0.94);
   --color-bg-glass-soft: rgba(255, 255, 255, 0.4);
   --color-bg-pink-tint: #fff2f8;
-  --color-bg-footer: rgba(255, 255, 255, 0.72);
 
   --color-text-dark: #1f171d;
   --color-text-muted: #5f4e58;
