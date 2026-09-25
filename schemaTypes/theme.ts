@@ -1,10 +1,17 @@
 import type {Rule} from 'sanity'
+import ColorInput from './ColorInput'
 
-const color = (name: string, title: string, opts?: {required?: boolean; group?: string}) => ({
+const color = (
+  name: string,
+  title: string,
+  opts?: {required?: boolean; group?: string; description?: string},
+) => ({
   name,
   type: 'string' as const,
   title,
   group: opts?.group,
+  description: opts?.description,
+  components: {input: ColorInput},
   validation: (Rule: Rule) => {
     const r = Rule.custom((value: string) => {
       if (!value) return true
@@ -41,46 +48,31 @@ export const theme = {
       options: {source: 'name', maxLength: 40},
       validation: (Rule: Rule) => Rule.required(),
     },
-    {
-      name: 'brand',
-      type: 'string',
-      title: 'Brand',
+    color('brand', 'Brand', {
+      required: true,
+      group: 'seeds',
       description: 'Main accent color used for links, buttons, highlights.',
+    }),
+    color('bg', 'Background', {
+      required: true,
       group: 'seeds',
-      validation: (Rule: Rule) => Rule.required(),
-    },
-    {
-      name: 'bg',
-      type: 'string',
-      title: 'Background',
       description: 'Base background color (body, page).',
+    }),
+    color('surface', 'Surface', {
+      required: true,
       group: 'seeds',
-      validation: (Rule: Rule) => Rule.required(),
-    },
-    {
-      name: 'surface',
-      type: 'string',
-      title: 'Surface',
       description: 'Card and panel background color.',
+    }),
+    color('accent', 'Accent', {
+      required: true,
       group: 'seeds',
-      validation: (Rule: Rule) => Rule.required(),
-    },
-    {
-      name: 'accent',
-      type: 'string',
-      title: 'Accent',
       description: 'Secondary/deep accent for hover states and highlights.',
+    }),
+    color('muted', 'Muted', {
+      required: true,
       group: 'seeds',
-      validation: (Rule: Rule) => Rule.required(),
-    },
-    {
-      name: 'muted',
-      type: 'string',
-      title: 'Muted',
       description: 'Muted variant for buttons and borders.',
-      group: 'seeds',
-      validation: (Rule: Rule) => Rule.required(),
-    },
+    }),
     ...Object.entries({
       brandBtn: 'Button Background',
       onBrand: 'On-Brand Text',

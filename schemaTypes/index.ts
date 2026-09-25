@@ -1,4 +1,5 @@
 import { type Rule } from 'sanity'
+import ColorInput from './ColorInput'
 import { theme } from './theme'
 import { siteSettings } from './siteSettings'
 import { site } from './site'
@@ -28,6 +29,7 @@ export const schemaTypes = [
                 type: "string",
                 title: "Theme Color",
                 initialValue: "#a54c88",
+                components: { input: ColorInput },
             },
             {
                 name: "theme",
